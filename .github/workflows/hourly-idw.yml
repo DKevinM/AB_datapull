@@ -23,5 +23,6 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add data/PM25_idw.csv
-          git commit -m "Update PM25 IDW grid"
+          git add data/PM25_grid.geojson
+          git commit -m "Update PM25 IDW grid (CSV + GeoJSON)"
           git push
