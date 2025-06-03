@@ -32,6 +32,15 @@ jobs:
         run: |
           python fetch_last6h.py
 
+
+      - name: List workspace & data/ contents  # ← diagnostic step
+        run: |
+          echo "=== WORKSPACE ROOT ==="
+          ls -al .
+          echo "=== data/ DIRECTORY ==="
+          ls -al data || echo "data/ does not exist"
+
+          
       # 5. Commit the updated CSV back into the repo (if it changed)
       - name: Commit updated CSV
         run: |
