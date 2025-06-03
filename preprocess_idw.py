@@ -16,7 +16,7 @@ gdf = gpd.GeoDataFrame(latest_df, geometry=gpd.points_from_xy(latest_df.Lon, lat
 gdf = gdf.to_crs("EPSG:3401")
 
 # Load airshed boundary
-airshed = gpd.read_file("data/airshed_boundary.shp").to_crs(gdf.crs)
+airshed = gpd.read_file("data/ACA_Boundary_2022.shp").to_crs(gdf.crs)
 
 # Create grid
 xmin, ymin, xmax, ymax = airshed.total_bounds
