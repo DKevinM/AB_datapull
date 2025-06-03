@@ -2,6 +2,7 @@ name: Fetch Last 6h Data
 
 # Schedule to run once every day at 04:00 UTC (which is 10:00 PM MST or whatever you prefer)
 on:
+  workflow_dispatch:   
   schedule:
     - cron:  '0 4 * * *'
 
