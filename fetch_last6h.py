@@ -98,7 +98,7 @@ if __name__ == "__main__":
     output_folder = Path("data")
     output_folder.mkdir(exist_ok=True)
 
-    combined_path = output_folder / "_last6h.csv"
+    combined_path = output_folder / "last6h.csv"
     print(f">>> Attempting to write CSV to: {combined_path}")
     combined_df.to_csv(combined_path, index=False)
     print(f">>> Finished writing CSV ({len(combined_df)} rows) → {combined_path}")
