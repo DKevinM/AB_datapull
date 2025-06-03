@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
     combined_path = output_folder / "last6h.csv"
     print(f">>> Attempting to write CSV to: {combined_path}")
-    combined_df.to_csv(combined_path, index=False)
+    combined_df.to_csv("data/last6h.csv", index=False)
     print(f">>> Finished writing CSV ({len(combined_df)} rows) {combined_path}")
     # NEW: show exactly what’s in data/
     print(">>> Contents of data/ after writing:")
