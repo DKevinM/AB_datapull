@@ -5,7 +5,7 @@ import numpy as np
 
 # Load station data
 df = pd.read_csv("data/last6h.csv")
-df = df.dropna(subset=["AQHI", "Lon", "Lat", "ReadingDate"])
+df = df.dropna(subset=["Fine Particulate Matter", "Lon", "Lat", "ReadingDate"])
 df["ReadingDate"] = pd.to_datetime(df["ReadingDate"])
 
 # Get latest reading per station
@@ -47,9 +47,9 @@ z = np.sum(weights * values[idxs], axis=1) / np.sum(weights, axis=1)
 # Optional: assign timestamp from *nearest* station (idxs[:, 0])
 nearest_ts = timestamps[idxs[:, 0]]
 
-grid_gdf["AQHI_IDW"] = z
+grid_gdf["PM25_IDW"] = z
 grid_gdf["NearestReading"] = nearest_ts
 
 # Save
-grid_gdf.to_file("data/aqhi_grid.geojson", driver="GeoJSON")
-grid_gdf[["x", "y", "AQHI_IDW", "NearestReading"]].to_csv("data/aqhi_idw.csv", index=False)
+grid_gdf.to_file("data/PM25_grid.geojson", driver="GeoJSON")
+grid_gdf[["x", "y", "PM25_IDW", "NearestReading"]].to_csv("data/PM25_idw.csv", index=False)
