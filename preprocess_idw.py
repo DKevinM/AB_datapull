@@ -5,15 +5,17 @@ import numpy as np
 
 # Load station data
 df = pd.read_csv("data/last6h.csv")
-df = df.dropna(subset=["Fine Particulate Matter", "Lon", "Lat", "ReadingDate"])
+df = df[df["ParameterName"] == "Fine Particulate Matter"]
 df["ReadingDate"] = pd.to_datetime(df["ReadingDate"])
 
 # Get latest reading per station
 latest_df = df.sort_values("ReadingDate").groupby("StationName").tail(1)
+# Drop rows with missing info
+latest_df = latest_df.dropna(subset=["Value", "Latitude", "Longitude"])
 
 # Convert to GeoDataFrame
-gdf = gpd.GeoDataFrame(latest_df, geometry=gpd.points_from_xy(latest_df.Lon, latest_df.Lat), crs="EPSG:4326")
-gdf = gdf.to_crs("EPSG:3401")
+gdf = gpd.GeoDataFrame(latest_df, geometry=gpd.points_from_xy(latest_df.Longitude, latest_df.Latitude), crs="EPSG:4326")
+gdf = gdf.to_crs("EPSG:3401")  # Alberta projection
 
 # Load airshed boundary
 airshed = gpd.read_file("data/ACA_Boundary_2022.shp").to_crs(gdf.crs)
@@ -27,19 +29,16 @@ grid_x, grid_y = np.meshgrid(
 grid_points = np.c_[grid_x.ravel(), grid_y.ravel()]
 grid_df = pd.DataFrame(grid_points, columns=["x", "y"])
 grid_gdf = gpd.GeoDataFrame(grid_df, geometry=gpd.points_from_xy(grid_df.x, grid_df.y), crs=gdf.crs)
-
-# Filter by airshed
 grid_gdf = grid_gdf[grid_gdf.geometry.within(airshed.unary_union)]
 
 # IDW interpolation
 xy = np.array(list(zip(gdf.geometry.x, gdf.geometry.y)))
-values = gdf["AQHI"].values
+values = gdf["Value"].astype(float).values
 timestamps = gdf["ReadingDate"].astype(str).values
 xi = np.array(list(zip(grid_gdf.geometry.x, grid_gdf.geometry.y)))
 
 tree = cKDTree(xy)
 dists, idxs = tree.query(xi, k=6, p=2)
-
 weights = 1 / np.power(dists, 2)
 weights[np.isinf(weights)] = 0
 z = np.sum(weights * values[idxs], axis=1) / np.sum(weights, axis=1)
