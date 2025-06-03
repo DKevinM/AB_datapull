@@ -28,14 +28,14 @@ print(f"Fetched {len(stations_df)} stations.")
 # 2. Define fetch_data_last24h(station_name)
 # ───────────────────────────────────────────────────────────────
 
-def fetch_data_last24h(station_name: str) -> pd.DataFrame:
+def fetch_last6h(station_name: str) -> pd.DataFrame:
     """
-    Pulls the last 24 hours of measurements for the given station_name
+    Pulls the last 6 hours of measurements for the given station_name
     from StationMeasurements. Returns a DataFrame with columns:
     StationName, ParameterName, ReadingDate, Value.
     """
     now = datetime.utcnow()
-    start = now - timedelta(hours=24)
+    start = now - timedelta(hours=6)
     # Format: YYYY-MM-DDTHH:MM:SS-06:00  (Alberta is UTC-6)
     start_str = start.strftime("%Y-%m-%dT%H:%M:%S-06:00")
     
@@ -68,11 +68,11 @@ combined_rows = []
 
 for idx, row in stations_df.iterrows():
     station = row["Name"]
-    df = fetch_data_last24h(station)
+    df = fetch_last6h(station)
     if not df.empty:
         combined_rows.append(df)
     else:
-        print(f"No data in the last 24h for {station!r}.")
+        print(f"No data in the last 6h for {station!r}.")
 
 if combined_rows:
     combined_df = pd.concat(combined_rows, ignore_index=True)
@@ -86,7 +86,7 @@ else:
 output_folder = Path("data")
 output_folder.mkdir(exist_ok=True)
 
-combined_path = output_folder / "combined_last24h.csv"
+combined_path = output_folder / "_last6h.csv"
 combined_df.to_csv(combined_path, index=False)
 
 print(f"\nWrote combined data ({len(combined_df)} rows) to {combined_path}")
