@@ -15,7 +15,7 @@ latest_df = latest_df.dropna(subset=["Value", "Latitude", "Longitude"])
 
 # Convert to GeoDataFrame
 gdf = gpd.GeoDataFrame(latest_df, geometry=gpd.points_from_xy(latest_df.Longitude, latest_df.Latitude), crs="EPSG:4326")
-gdf = gdf.to_crs("EPSG:3401")  # Alberta projection
+# gdf = gdf.to_crs("EPSG:3401")  # Alberta projection
 
 # Load airshed boundary
 airshed = gpd.read_file("data/ACA_Boundary_2022.shp").to_crs(gdf.crs)
@@ -23,11 +23,11 @@ airshed = gpd.read_file("data/ACA_Boundary_2022.shp").to_crs(gdf.crs)
 # Create grid
 xmin, ymin, xmax, ymax = airshed.total_bounds
 grid_x, grid_y = np.meshgrid(
-    np.arange(xmin, xmax, 1000),
-    np.arange(ymin, ymax, 1000)
+    np.arange(xmin, xmax, 0.005),
+    np.arange(ymin, ymax, 0.005)
 )
 grid_points = np.c_[grid_x.ravel(), grid_y.ravel()]
-grid_df = pd.DataFrame(grid_points, columns=["x", "y"])
+grid_df = pd.DataFrame(grid_points, columns=["lon", "lat"])
 grid_gdf = gpd.GeoDataFrame(grid_df, geometry=gpd.points_from_xy(grid_df.x, grid_df.y), crs=gdf.crs)
 grid_gdf = grid_gdf[grid_gdf.geometry.within(airshed.unary_union)]
 
@@ -42,13 +42,13 @@ dists, idxs = tree.query(xi, k=6, p=2)
 weights = 1 / np.power(dists, 2)
 weights[np.isinf(weights)] = 0
 z = np.sum(weights * values[idxs], axis=1) / np.sum(weights, axis=1)
-
-# Optional: assign timestamp from *nearest* station (idxs[:, 0])
 nearest_ts = timestamps[idxs[:, 0]]
 
 grid_gdf["PM25_IDW"] = z
 grid_gdf["NearestReading"] = nearest_ts
 
-# Save
+# Save as CSV for Shiny
+grid_gdf[["lon", "lat", "PM25_IDW", "NearestReading"]].to_csv("data/PM25_idw.csv", index=False)
+
+# Optionally save GeoJSON
 grid_gdf.to_file("data/PM25_grid.geojson", driver="GeoJSON")
-grid_gdf[["x", "y", "PM25_IDW", "NearestReading"]].to_csv("data/PM25_idw.csv", index=False)
