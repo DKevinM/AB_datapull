@@ -2,14 +2,15 @@ import requests
 import pandas as pd
 from pathlib import Path
 from datetime import datetime, timedelta
+import os
 
 # ───────────────────────────────────────────────────────────────
-# 1. Fetch the full station list (names only)
+# 1. Fetch the full station list
 # ───────────────────────────────────────────────────────────────
 
 STATIONS_ODATA_URL = (
     "https://data.environment.alberta.ca/EdwServices/aqhi/odata/Stations"
-    "?$select=Name"
+    "?$select=Name,Latitude,Longitude"
 )
 
 def fetch_station_list():
@@ -20,31 +21,18 @@ def fetch_station_list():
     return df[["Name", "Latitude", "Longitude"]]
 
 
-stations_df = fetch_station_list()
-print(f"Fetched {len(stations_df)} stations.")
-
-
-def make_safe_filename(name: str) -> str:
-    safe = (
-        name
-        .replace("’", "")   # remove fancy apostrophes
-        .replace("'", "")    # remove straight apostrophes
-        .replace("/", "-")   # replace any forward slash with dash
-        .replace(" ", "_")   # spaces → underscores
-    )
-    return safe
-
-
 # ───────────────────────────────────────────────────────────────
 # 2. Define fetch_data_last24h(station_name)
 # ───────────────────────────────────────────────────────────────
 
-def fetch_last6h(station_name) -> pd.DataFrame:
+def fetch_last6h(station_name: str) -> pd.DataFrame:
     now = datetime.utcnow()
     start = now - timedelta(hours=6)
     # Format: YYYY-MM-DDTHH:MM:SS-06:00  (Alberta is UTC-6)
     start_str = start.strftime('%Y-%m-%dT%H:%M:%S-06:00')
-       
+
+    safe_name = station_name.replace("'", "''").replace("’", "''")
+    
     url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationMeasurements"
     params = {
         "$format": "json",
@@ -62,63 +50,55 @@ def fetch_last6h(station_name) -> pd.DataFrame:
         print(f"Failed to fetch data for {station_name!r}: {e}")
         return pd.DataFrame()
 
+# ───────────────────────────────────────────────────────────────
 
+if __name__ == "__main__":
+    # 3a. Fetch station list with raw names
+    stations_df = fetch_station_list()
+    print(f">>> Fetched {len(stations_df)} stations (raw names).")
 
+    combined_rows = []
 
-OUT_BASE = Path("data") / "stations"
-OUT_BASE.mkdir(parents=True, exist_ok=True)
+    for _, row in stations_df.iterrows():
+        name = row["Name"]          # ← raw station name, possibly with apostrophes
+        lat  = row["Latitude"]
+        lon  = row["Longitude"]
 
-summary_rows = []
+        df = fetch_last6h(name)
 
-for idx, row in stations_df.iterrows():
-    station = row["Name"]
-    lat = row["Latitude"]
-    lon = row["Longitude"]
+        if not df.empty:
+            # 3b. Attach Latitude and Longitude to each measurement row
+            df["Latitude"]  = lat
+            df["Longitude"] = lon
 
-    df = fetch_data(station)
-
-    safe_fn = make_safe_filename(station)
-    out_path = OUT_BASE / f"{safe_fn}.csv"
-
-    if not df.empty:
-        df.to_csv(out_path, index=False)
-        # Get the latest ReadingDate in this DataFrame
-        latest = pd.to_datetime(df["ReadingDate"], errors="coerce").max()
-        print(f"Wrote {len(df)} rows → {out_path}  (last: {latest})")
-        summary_rows.append({
-            "StationName": station,
-            "Latitude": lat,
-            "Longitude": lon,
-            "LastReading": latest
-        })
-    else:
-        if out_path.exists():
-            print(f"No new data for {station!r}; keeping existing {out_path}.")
-            # Optionally, read the existing CSV’s last date:
-            try:
-                old = pd.read_csv(out_path, parse_dates=["ReadingDate"])
-                old_max = old["ReadingDate"].max() if "ReadingDate" in old.columns else pd.NaT
-            except Exception:
-                old_max = pd.NaT
-            summary_rows.append({
-                "StationName": station,
-                "Latitude": lat,
-                "Longitude": lon,
-                "LastReading": old_max
-            })
+            combined_rows.append(df)
+            print(f">>> Pulled {len(df)} rows for {name!r}.")
         else:
-            print(f"No data at all for {station!r}. No file created.")
-            summary_rows.append({
-                "StationName": station,
-                "Latitude": lat,
-                "Longitude": lon,
-                "LastReading": pd.NaT
-            })
+            print(f">>> No data in last 6h for {name!r}.")
+
+    # 3c. Concatenate into a single DataFrame (with the exact columns)
+    if combined_rows:
+        combined_df = pd.concat(combined_rows, ignore_index=True)
+    else:
+        combined_df = pd.DataFrame(
+            columns=["StationName", "ParameterName", "ReadingDate", "Value", "Latitude", "Longitude"]
+        )
 
 
-if summary_rows:
-    summary_df = pd.DataFrame(summary_rows)
-    summary_out = Path("data") / "stations_summary.csv"
-    summary_df.to_csv(summary_out, index=False)
-    print(f"\nWrote summary → {summary_out}")
 
+    # 3d. Debug prints
+    cwd = os.getcwd()
+    print(f">>> Current working directory: {cwd}")
+    print(f">>> Total rows in combined_df: {len(combined_df)}")
+    if not combined_df.empty:
+        print(">>> Sample rows:")
+        print(combined_df.head().to_string(index=False))
+
+    # 3e. Write exactly one CSV to data/_last6h.csv
+    output_folder = Path("data")
+    output_folder.mkdir(exist_ok=True)
+
+    combined_path = output_folder / "_last6h.csv"
+    print(f">>> Attempting to write CSV to: {combined_path}")
+    combined_df.to_csv(combined_path, index=False)
+    print(f">>> Finished writing CSV ({len(combined_df)} rows) → {combined_path}")
