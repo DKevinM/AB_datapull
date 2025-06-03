@@ -83,10 +83,18 @@ else:
 # 4. Write the combined DataFrame to a single CSV
 # ───────────────────────────────────────────────────────────────
 
+import os
+cwd = os.getcwd()
+print(f">>> Current working directory: {cwd}")
+print(f">>> Total rows in combined_df: {len(combined_df)}")
+
+
 output_folder = Path("data")
 output_folder.mkdir(exist_ok=True)
 
 combined_path = output_folder / "_last6h.csv"
+print(f">>> Attempting to write CSV to: {combined_path}")
 combined_df.to_csv(combined_path, index=False)
 
 print(f"\nWrote combined data ({len(combined_df)} rows) to {combined_path}")
+print(f">>> Finished writing CSV to: {combined_path}")
