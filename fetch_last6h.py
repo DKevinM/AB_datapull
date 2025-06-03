@@ -28,24 +28,16 @@ print(f"Fetched {len(stations_df)} stations.")
 # 2. Define fetch_data_last24h(station_name)
 # ───────────────────────────────────────────────────────────────
 
-def fetch_last6h(station_name: str) -> pd.DataFrame:
-    """
-    Pulls the last 6 hours of measurements for the given station_name
-    from StationMeasurements. Returns a DataFrame with columns:
-    StationName, ParameterName, ReadingDate, Value.
-    """
+def fetch_last6h(station) -> pd.DataFrame:
     now = datetime.utcnow()
     start = now - timedelta(hours=6)
     # Format: YYYY-MM-DDTHH:MM:SS-06:00  (Alberta is UTC-6)
-    start_str = start.strftime("%Y-%m-%dT%H:%M:%S-06:00")
-    
-    # Escape single quotes for OData
-    safe_name = station_name.replace("'", "''").replace("’", "''")
-    
+    start_str = start.strftime('%Y-%m-%dT%H:%M:%S-06:00')
+       
     url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationMeasurements"
     params = {
         "$format": "json",
-        "$filter": f"StationName eq '{safe_name}' AND ReadingDate gt {start_str}",
+        "$filter": f"StationName eq '{station}' AND ReadingDate gt {start_str}",
         "$orderby": "ReadingDate desc",
         "$select": "StationName,ParameterName,ReadingDate,Value"
     }
@@ -56,7 +48,7 @@ def fetch_last6h(station_name: str) -> pd.DataFrame:
         data = r.json().get("value", [])
         return pd.DataFrame(data)
     except Exception as e:
-        print(f"  → Failed to fetch data for {station_name!r}: {e}")
+        print(f"Failed to fetch data for {station}: {e}")
         return pd.DataFrame()
 
 
@@ -64,11 +56,13 @@ def fetch_last6h(station_name: str) -> pd.DataFrame:
 # 3. Loop over all stations, fetch & combine into one DataFrame
 # ───────────────────────────────────────────────────────────────
 
-combined_rows = []
+Path("data").mkdir(exist_ok=True)
+summary = []
 
 for idx, row in stations_df.iterrows():
     station = row["Name"]
     df = fetch_last6h(station)
+    clean_name = stn["StationName"].replace("’", "").replace("'", "").replace(" ", "_")
     if not df.empty:
         combined_rows.append(df)
     else:
