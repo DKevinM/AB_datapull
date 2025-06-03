@@ -36,6 +36,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/combined_last24h.csv
-          git diff --quiet --exit-code || git commit -m "chore: update combined_last24h.csv"
-          git push origin HEAD:main
+          git add data/_last6h.csv
+          git diff --quiet --exit-code || git commit -m "chore: update _last6h.csv"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
