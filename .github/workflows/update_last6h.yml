@@ -28,6 +28,16 @@ jobs:
       - name: Run fetch_last6h.py
         run: python fetch_last6h.py
 
+      - name: Debug: list everything under repo root
+        run: |
+          echo "=== WORKSPACE ROOT ==="
+          ls -R .
+      
+      - name: Debug: list data/ directory
+        run: |
+          echo "=== data/ DIRECTORY ==="
+          ls -al data || echo "data/ does not exist"
+
       - name: Commit updated CSV
         run: |
           git config user.name "github-actions[bot]"
