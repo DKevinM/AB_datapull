@@ -33,5 +33,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add data/_last6h.csv
-          git diff --cached --quiet || git commit -m "Data update (Python hourly)"
+          git diff --quiet --exit-code || git commit -m "chore: update _last6h.csv"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
