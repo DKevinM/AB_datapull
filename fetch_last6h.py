@@ -94,11 +94,15 @@ if __name__ == "__main__":
         print(">>> Sample rows:")
         print(combined_df.head().to_string(index=False))
 
-    # 3e. Write exactly one CSV to data/_last6h.csv
+    # 3e. Write exactly one CSV to data/last6h.csv
     output_folder = Path("data")
     output_folder.mkdir(exist_ok=True)
 
     combined_path = output_folder / "last6h.csv"
     print(f">>> Attempting to write CSV to: {combined_path}")
     combined_df.to_csv(combined_path, index=False)
-    print(f">>> Finished writing CSV ({len(combined_df)} rows) → {combined_path}")
+    print(f">>> Finished writing CSV ({len(combined_df)} rows) {combined_path}")
+    # NEW: show exactly what’s in data/
+    print(">>> Contents of data/ after writing:")
+    for p in Path("data").iterdir():
+        print("    ", p, "(exists)" if p.exists() else "(missing)")
