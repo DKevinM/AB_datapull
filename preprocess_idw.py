@@ -28,7 +28,7 @@ grid_x, grid_y = np.meshgrid(
 )
 grid_points = np.c_[grid_x.ravel(), grid_y.ravel()]
 grid_df = pd.DataFrame(grid_points, columns=["lon", "lat"])
-grid_gdf = gpd.GeoDataFrame(grid_df, geometry=gpd.points_from_xy(grid_df.x, grid_df.y), crs=gdf.crs)
+grid_gdf = gpd.GeoDataFrame(grid_df, geometry=gpd.points_from_xy(grid_df.lon, grid_df.lat), crs=gdf.crs)
 grid_gdf = grid_gdf[grid_gdf.geometry.within(airshed.unary_union)]
 
 # IDW interpolation
