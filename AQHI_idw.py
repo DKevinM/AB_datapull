@@ -5,7 +5,7 @@ import numpy as np
 
 # Load station data
 df = pd.read_csv("data/last6h.csv")
-df = df[df["ParameterName"] == "Fine Particulate Matter"]
+df = df[df["ParameterName"] == NULL]
 df["ReadingDate"] = pd.to_datetime(df["ReadingDate"])
 
 # Get latest reading per station
@@ -44,11 +44,11 @@ weights[np.isinf(weights)] = 0
 z = np.sum(weights * values[idxs], axis=1) / np.sum(weights, axis=1)
 nearest_ts = timestamps[idxs[:, 0]]
 
-grid_gdf["PM25_IDW"] = z
+grid_gdf["AQHI_IDW"] = z
 grid_gdf["NearestReading"] = nearest_ts
 
 # Save as CSV for Shiny
-grid_gdf[["lon", "lat", "PM25_IDW", "NearestReading"]].to_csv("data/PM25_idw.csv", index=False)
+grid_gdf[["lon", "lat", "AQHI_IDW", "NearestReading"]].to_csv("data/AQHI_idw.csv", index=False)
 
 # Optionally save GeoJSON
-grid_gdf.to_file("data/PM25_grid.geojson", driver="GeoJSON")
+grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
