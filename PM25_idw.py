@@ -31,6 +31,7 @@ grid_df = pd.DataFrame(grid_points, columns=["lon", "lat"])
 grid_gdf = gpd.GeoDataFrame(grid_df, geometry=gpd.points_from_xy(grid_df.lon, grid_df.lat), crs=gdf.crs)
 grid_gdf = grid_gdf[grid_gdf.geometry.within(airshed.unary_union)]
 
+
 # IDW interpolation
 xy = np.array(list(zip(gdf.geometry.x, gdf.geometry.y)))
 values = gdf["Value"].astype(float).values
@@ -47,8 +48,21 @@ nearest_ts = timestamps[idxs[:, 0]]
 grid_gdf["PM25_IDW"] = z
 grid_gdf["NearestReading"] = nearest_ts
 
+
+from shapely.geometry import box
+# Define grid cell size (same as used above)
+cell_size = 0.005
+half = cell_size / 2
+# Convert each point into a square polygon
+grid_gdf["geometry"] = grid_gdf.apply(
+    lambda row: box(row["lon"] - half, row["lat"] - half, row["lon"] + half, row["lat"] + half),
+    axis=1
+)
+
+
 # Save as CSV for Shiny
 grid_gdf[["lon", "lat", "PM25_IDW", "NearestReading"]].to_csv("data/PM25_idw.csv", index=False)
 
 # Optionally save GeoJSON
 grid_gdf.to_file("data/PM25_grid.geojson", driver="GeoJSON")
+
