@@ -7,7 +7,6 @@ import numpy as np
 df = pd.read_csv("data/last6h.csv")
 df = df[df["ParameterName"].isna() | (df["ParameterName"] == "")]
 df["ReadingDate"] = pd.to_datetime(df["ReadingDate"])
-df["ReadingDate"] = df["ReadingDate"].dt.tz_convert("America/Edmonton")
 
 # Get latest reading per station
 latest_df = df.sort_values("ReadingDate").groupby("StationName").tail(1)
@@ -24,8 +23,8 @@ airshed = gpd.read_file("data/Alberta.shp").to_crs(gdf.crs)
 # Create grid
 xmin, ymin, xmax, ymax = airshed.total_bounds
 grid_x, grid_y = np.meshgrid(
-    np.arange(xmin, xmax, 0.1),
-    np.arange(ymin, ymax, 0.1)
+    np.arange(xmin, xmax, 0.05),
+    np.arange(ymin, ymax, 0.05)
 )
 grid_points = np.c_[grid_x.ravel(), grid_y.ravel()]
 grid_df = pd.DataFrame(grid_points, columns=["lon", "lat"])
