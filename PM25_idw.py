@@ -18,13 +18,13 @@ gdf = gpd.GeoDataFrame(latest_df, geometry=gpd.points_from_xy(latest_df.Longitud
 # gdf = gdf.to_crs("EPSG:3401")  # Alberta projection
 
 # Load airshed boundary
-airshed = gpd.read_file("data/ACA_Boundary_2022.shp").to_crs(gdf.crs)
+airshed = gpd.read_file("data/Alberta.shp").to_crs(gdf.crs)
 
 # Create grid
 xmin, ymin, xmax, ymax = airshed.total_bounds
 grid_x, grid_y = np.meshgrid(
-    np.arange(xmin, xmax, 0.005),
-    np.arange(ymin, ymax, 0.005)
+    np.arange(xmin, xmax, 0.05),
+    np.arange(ymin, ymax, 0.05)
 )
 grid_points = np.c_[grid_x.ravel(), grid_y.ravel()]
 grid_df = pd.DataFrame(grid_points, columns=["lon", "lat"])
@@ -47,17 +47,6 @@ nearest_ts = timestamps[idxs[:, 0]]
 
 grid_gdf["PM25_IDW"] = z
 grid_gdf["NearestReading"] = nearest_ts
-
-
-from shapely.geometry import box
-# Define grid cell size (same as used above)
-cell_size = 0.005
-half = cell_size / 2
-# Convert each point into a square polygon
-grid_gdf["geometry"] = grid_gdf.apply(
-    lambda row: box(row["lon"] - half, row["lat"] - half, row["lon"] + half, row["lat"] + half),
-    axis=1
-)
 
 
 # Save as CSV for Shiny
