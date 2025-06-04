@@ -5,7 +5,7 @@ import numpy as np
 
 # Load station data
 df = pd.read_csv("data/last6h.csv")
-df = df[df["ParameterName"] == NULL]
+df = df[df["ParameterName"].isna() | (df["ParameterName"] == "")]
 df["ReadingDate"] = pd.to_datetime(df["ReadingDate"])
 
 # Get latest reading per station
