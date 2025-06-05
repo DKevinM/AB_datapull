@@ -36,3 +36,11 @@ jobs:
           git add data/AQHI_grid.geojson
           git commit -m "Update AQHI IDW grid (CSV + GeoJSON)"
           git push
+                # 5) Commit & push the generated HTML back to the repo
+      - name: Commit and Push HTML
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add AQHI_contour_with_stations.html
+          git commit -m "Update AQHI_contour_with_stations.html"
+          git push
