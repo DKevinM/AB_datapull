@@ -62,8 +62,8 @@ grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
 
 contour_gdf = gpd.read_file("data/AQHI_grid.geojson")
 
-center_lat = latest_df["lat"].mean()
-center_lon = latest_df["lon"].mean()
+center_lat = latest_df["Latitude"].mean()
+center_lon = latest_df["Longitude"].mean()
 
 m = folium.Map(location=[center_lat, center_lon], zoom_start=10, tiles="CartoDB positron")
 
@@ -93,7 +93,7 @@ pal.add_to(m)
 # 4b) Add station points exactly as before
 for idx, row in latest_df.iterrows():
     folium.CircleMarker(
-        location=[row["lat"], row["lon"]],
+        location=[row["Latitude"], row["Longitude"]],
         radius=5,
         color="black",
         fill=True,
