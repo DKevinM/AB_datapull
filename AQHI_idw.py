@@ -59,10 +59,11 @@ grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
 
 
 
-
 contour_gdf = gpd.read_file("data/AQHI_grid.geojson")
-time_str = latest_df["ReadingDate"].astype(str).iloc[0]
-
+for col in ["NearestReading", "ReadingDate"]:
+    if col in contour_gdf.columns:
+        contour_gdf = contour_gdf.drop(columns=[col])
+        
 center_lat = latest_df["Latitude"].mean()
 center_lon = latest_df["Longitude"].mean()
 
