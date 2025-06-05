@@ -61,7 +61,7 @@ grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
 
 
 contour_gdf = gpd.read_file("data/AQHI_grid.geojson")
-time_str = latest_df["NearestReading"].astype(str).iloc[0]
+time_str = latest_df["ReadingDate"].astype(str).iloc[0]
 
 center_lat = latest_df["Latitude"].mean()
 center_lon = latest_df["Longitude"].mean()
@@ -106,7 +106,7 @@ for idx, row in latest_df.iterrows():
         popup=folium.Popup(
             f"{row['StationName']}<br>"
             f"AQHI: {row['Value']}<br>"
-            f"Time: {row['NearestReading']}",
+            f"Time: {row['ReadingDate']}",
             parse_html=True
         )
     ).add_to(m)
