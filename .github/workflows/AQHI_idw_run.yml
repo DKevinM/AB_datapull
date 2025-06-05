@@ -20,9 +20,12 @@ jobs:
           pip install \
             pandas \
             geopandas \
+            spipy \
             numpy \
             folium \
-            branca 
+            branca \
+            shapely \
+            matplotlib
       - name: Run preprocessing
         run: python AQHI_idw.py
       - name: Commit & push
