@@ -61,9 +61,12 @@ grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
 
 
 contour_gdf = gpd.read_file("data/AQHI_grid.geojson")
+time_str = latest_df["NearestReading"].astype(str).iloc[0]
 
 center_lat = latest_df["Latitude"].mean()
 center_lon = latest_df["Longitude"].mean()
+
+
 
 m = folium.Map(location=[center_lat, center_lon], zoom_start=10, tiles="CartoDB positron")
 
@@ -71,7 +74,7 @@ m = folium.Map(location=[center_lat, center_lon], zoom_start=10, tiles="CartoDB 
 zmin = contour_gdf["AQHI_IDW"].min()
 zmax = contour_gdf["AQHI_IDW"].max()
 pal = bcm.linear.YlOrRd_09.scale(zmin, zmax)
-pal.caption = "AQHI IDW Contours"
+pal.caption = f"AQHI IDW Contours (as of {time_str})"
 
 folium.GeoJson(
     contour_gdf,
@@ -89,6 +92,7 @@ folium.GeoJson(
     )
 ).add_to(m)
 pal.add_to(m)
+
 
 # 4b) Add station points exactly as before
 for idx, row in latest_df.iterrows():
