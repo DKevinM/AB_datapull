@@ -1,11 +1,8 @@
 import pandas as pd
 import geopandas as gpd
-from scipy.spatial import cKDTree
 import numpy as np
 import folium
 import branca.colormap as bcm
-from shapely.geometry import LineString
-from matplotlib import pyplot as plt
 
 # Load station data
 df = pd.read_csv("data/last6h.csv")
@@ -59,41 +56,76 @@ grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
 
 
 
+
+
 contour_gdf = gpd.read_file("data/AQHI_grid.geojson")
 for col in ["NearestReading", "ReadingDate"]:
     if col in contour_gdf.columns:
         contour_gdf = contour_gdf.drop(columns=[col])
         
+def bucket_aqhi(val):
+    if pd.isna(val):
+        return "NA"
+    x = float(val)
+    return "10+" if x >= 10 else str(int(np.floor(x)))
+
+contour_gdf["AQHI_cat"] = contour_gdf["AQHI_IDW"].apply(bucket_aqhi)
+
+category_to_numeric = {str(i): float(i) for i in range(1, 11)}
+category_to_numeric["10+"] = 11.0
+
+contour_gdf["AQHI_num"] = contour_gdf["AQHI_cat"].map(category_to_numeric)
+
+# 3) Build a categorical palette: 1→10 and "10+" exactly match your R-style colors
+palette = [
+    "#01cbff",  # 1
+    "#0099cb",  # 2
+    "#016797",  # 3
+    "#fffe03",  # 4
+    "#ffcb00",  # 5
+    "#ff9835",  # 6
+    "#fd6866",  # 7
+    "#fe0002",  # 8
+    "#cc0001",  # 9
+    "#9a0100",  # 10
+    "#640100",  # 10+
+]
+
+step_col = bcm.StepColormap(
+    colors=palette,
+    index=[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0],
+    vmin=1.0,
+    vmax=11.0
+)
+
+if "Timestamp" in latest_df.columns and pd.api.types.is_datetime64_any_dtype(
+    latest_df["Timestamp"]
+):
+    latest_df["Timestamp"] = latest_df["Timestamp"].astype(str)
+time_str = latest_df["Timestamp"].iloc[0] if "Timestamp" in latest_df.columns else "unknown"
+step_col.caption = f"AQHI Category (station time: {time_str})"
+
+
+
+
 center_lat = latest_df["Latitude"].mean()
 center_lon = latest_df["Longitude"].mean()
 
-
-
 m = folium.Map(location=[center_lat, center_lon], zoom_start=10, tiles="CartoDB positron")
 
-# 4a) Add contours—color by “AQHI_IDW”
-zmin = contour_gdf["AQHI_IDW"].min()
-zmax = contour_gdf["AQHI_IDW"].max()
-pal = bcm.linear.YlOrRd_09.scale(zmin, zmax)
-pal.caption = f"AQHI IDW Contours"
-
-folium.GeoJson(
-    contour_gdf,
-    style_function=lambda feature: {
-        "color": pal(feature["properties"]["AQHI_IDW"]),
-        "weight": 2,
-        "opacity": 0.7
-    },
-    tooltip=folium.features.GeoJsonTooltip(
-        fields=["AQHI_IDW"],
-        aliases=["AQHI Level"],
-        localize=True,
-        labels=True,
-        sticky=False
-    )
+folium.Choropleth(
+    geo_data=contour_gdf.to_json(),
+    data=contour_gdf,
+    columns=["AQHI_num", "AQHI_num"],
+    key_on="feature.properties.AQHI_num",
+    fill_color=step_col,
+    fill_opacity=0.7,
+    line_opacity=0.2,
+    legend_name=step_col.caption,
+    highlight=True,
+    nan_fill_color="gray",
+    nan_fill_opacity=0.3,
 ).add_to(m)
-pal.add_to(m)
-
 
 # 4b) Add station points exactly as before
 for idx, row in latest_df.iterrows():
