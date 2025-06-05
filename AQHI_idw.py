@@ -2,6 +2,10 @@ import pandas as pd
 import geopandas as gpd
 from scipy.spatial import cKDTree
 import numpy as np
+import folium
+import branca.colormap as bcm
+from shapely.geometry import LineString
+from matplotlib import pyplot as plt
 
 # Load station data
 df = pd.read_csv("data/last6h.csv")
@@ -52,3 +56,56 @@ grid_gdf[["lon", "lat", "AQHI_IDW", "NearestReading"]].to_csv("data/AQHI_idw.csv
 
 # Optionally save GeoJSON
 grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
+
+
+
+
+contour_gdf = gpd.read_file("data/AQHI_grid.geojson")
+
+center_lat = latest_df["lat"].mean()
+center_lon = latest_df["lon"].mean()
+
+m = folium.Map(location=[center_lat, center_lon], zoom_start=10, tiles="CartoDB positron")
+
+# 4a) Add contours—color by “AQHI_IDW”
+zmin = contour_gdf["AQHI_IDW"].min()
+zmax = contour_gdf["AQHI_IDW"].max()
+pal = bcm.linear.YlOrRd_09.scale(zmin, zmax)
+pal.caption = "AQHI IDW Contours"
+
+folium.GeoJson(
+    contour_gdf,
+    style_function=lambda feature: {
+        "color": pal(feature["properties"]["AQHI_IDW"]),
+        "weight": 2,
+        "opacity": 0.7
+    },
+    tooltip=folium.features.GeoJsonTooltip(
+        fields=["AQHI_IDW"],
+        aliases=["AQHI Level"],
+        localize=True,
+        labels=True,
+        sticky=False
+    )
+).add_to(m)
+pal.add_to(m)
+
+# 4b) Add station points exactly as before
+for idx, row in latest_df.iterrows():
+    folium.CircleMarker(
+        location=[row["lat"], row["lon"]],
+        radius=5,
+        color="black",
+        fill=True,
+        fill_color="black",
+        fill_opacity=0.8,
+        popup=folium.Popup(
+            f"{row['StationName']}<br>"
+            f"AQHI: {row['Value']}<br>"
+            f"Time: {row['NearestReading']}",
+            parse_html=True
+        )
+    ).add_to(m)
+
+# 5) Save:
+m.save("AQHI_contour_with_stations.html")
