@@ -117,19 +117,24 @@ center_lon = latest_df["Longitude"].mean()
 
 m = folium.Map(location=[center_lat, center_lon], zoom_start=10, tiles="CartoDB positron")
 
-folium.Choropleth(
-    geo_data=contour_gdf.to_json(),
-    data=contour_gdf,
-    columns=["AQHI_num", "AQHI_num"],
-    key_on="feature.properties.AQHI_num",
-    fill_color=step_col,
-    fill_opacity=0.7,
-    line_opacity=0.2,
-    legend_name=step_col.caption,
-    highlight=True,
-    nan_fill_color="gray",
-    nan_fill_opacity=0.3,
+folium.GeoJson(
+    data=contour_gdf.to_json(),
+    style_function=lambda feature: {
+        "fillColor": step_col(feature["properties"]["AQHI_num"]),
+        "color":   "#444444",    # polygon border color
+        "weight":  0.5,          # border width
+        "fillOpacity": 0.7,
+    },
+    tooltip=folium.GeoJsonTooltip(
+        fields=["AQHI_IDW", "AQHI_cat"],
+        aliases=["AQHI raw",   "Category"],
+        localize=True,
+        labels=True,
+        sticky=False
+    )
 ).add_to(m)
+step_col.add_to(m)
+
 
 # 4b) Add station points exactly as before
 for idx, row in latest_df.iterrows():
