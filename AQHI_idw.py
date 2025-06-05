@@ -75,7 +75,7 @@ m = folium.Map(location=[center_lat, center_lon], zoom_start=10, tiles="CartoDB 
 zmin = contour_gdf["AQHI_IDW"].min()
 zmax = contour_gdf["AQHI_IDW"].max()
 pal = bcm.linear.YlOrRd_09.scale(zmin, zmax)
-pal.caption = f"AQHI IDW Contours (as of {time_str})"
+pal.caption = f"AQHI IDW Contours"
 
 folium.GeoJson(
     contour_gdf,
