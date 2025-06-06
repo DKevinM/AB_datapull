@@ -5,6 +5,7 @@ import folium
 import branca.colormap as bcm
 from shapely.geometry import Polygon, Point, MultiPolygon
 from scipy.spatial import cKDTree  
+from matplotlib import pyplot as plt
 
 
 # Load station data
@@ -58,125 +59,125 @@ grid_gdf[["lon", "lat", "AQHI_IDW", "NearestReading"]].to_csv("data/AQHI_idw.csv
 grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
 
 
+xs = np.sort(grid_gdf["lon"].unique())
+ys = np.sort(grid_gdf["lat"].unique())
 
-working_gdf = grid_gdf.copy()
+df_sorted = grid_gdf.sort_values(["lat", "lon"])
+z_vals = df_sorted["AQHI_IDW"].values
+Z = z_vals.reshape(len(ys), len(xs))
+X, Y = np.meshgrid(xs, ys)
 
-# 2. Fix geometry if needed (ensure all are proper points)
-if not all(working_gdf.geometry.geom_type == 'Point'):
-    # Convert to points if geometry contains other types
-    working_gdf['geometry'] = working_gdf.geometry.centroid
-    
+vmin = np.nanmin(Z)
+vmax = np.nanmax(Z)
 
-# 2. Hexagon creation function
-def create_hexagon(center_x, center_y, size):
-    """Create a hexagon polygon around a center point"""
-    angles = np.linspace(0, 2*np.pi, 7)[:-1]  # 6 points for hexagon
-    return Polygon([(center_x + size*np.cos(a), center_y + size*np.sin(a)) for a in angles])
+levels = list(np.arange(0, 11, 1))  # [0,1,2,…,10]
 
-# 3. Convert points to hexbins if needed
-# Set hexbin size (adjust based on your coordinate system)
-hex_size = 0.02  # Degrees for geographic CRS, meters for projected
+fig, ax = plt.subplots(figsize=(1,1))  # size doesn’t matter; we’ll close immediately
+CF = ax.contourf(
+    X, Y, Z,
+    levels=levels,
+    extend="max",          # “>10” goes into the final band
+    cmap="YlOrRd"          # colormap (we’ll ignore it when building Shapely polygons)
+)
+plt.close(fig)
 
-# Create spatial index for efficient point queries
-points = np.array([[p.x, p.y] for p in working_gdf.geometry])
-tree = cKDTree(points)
 
-# Create sampling grid
-x_min, y_min = points.min(axis=0)
-x_max, y_max = points.max(axis=0)
 
-x_coords = np.arange(x_min, x_max, hex_size * 1.5)
-y_coords = np.arange(y_min, y_max, hex_size * 1.5)
+records = []
+for idx, level_value in enumerate(CF.levels):
+    # CF.collections[idx] contains all patches where Z is between 
+    # levels[idx] and levels[idx+1], except for the top band (extend="max").
+    collection = CF.collections[idx]
+    for path in collection.get_paths():
+        # Each "path" is essentially a closed polygon outline in screen coords,
+        # but `.vertices` returns an Nx2 array of (x,y) in data coordinates.
+        coords = path.vertices
+        if coords.shape[0] < 3:
+            continue  # skip if fewer than 3 points (not a polygon)
+        poly = Polygon(coords)
+        records.append({
+            "geometry": poly,
+            "AQHI_min": levels[idx],
+            "AQHI_max": levels[idx + 1] if idx + 1 < len(levels) else np.inf,
+            # We’ll label the top band (idx == 10) as "10+"
+            "AQHI_cat": f"{levels[idx]}–{levels[idx+1]}" if idx < len(levels)-1 else "10+"
+        })
 
-# Generate hexbins
-hexagons = []
-aqhi_values = []
+contour_poly_gdf = gpd.GeoDataFrame(records, crs="EPSG:4326")
 
-for x in x_coords:
-    for y in y_coords:
-        # Find points within hexbin radius
-        point_indices = tree.query_ball_point([x, y], hex_size)
-        
-        if point_indices:  # Only create hexbins with data
-            avg_aqhi = working_gdf.iloc[point_indices]['AQHI_IDW'].mean()
-            hexagon = create_hexagon(x, y, hex_size)
-            hexagons.append(hexagon)
-            aqhi_values.append(avg_aqhi)
-
-# Create new GeoDataFrame with hexbins
-hexbin_gdf = gpd.GeoDataFrame(
-    {'geometry': hexagons, 'AQHI_IDW': aqhi_values},
-    crs=working_gdf.crs
+contour_cat = contour_poly_gdf.dissolve(by="AQHI_cat", as_index=False)
+contour_cat["geometry"] = contour_cat["geometry"].simplify(
+    tolerance=0.001, preserve_topology=True
 )
 
-# 4. Categorize AQHI values
-def bucket_aqhi(val):
-    if pd.isna(val):
-        return "NA"
-    x = float(val)
-    return "10+" if x >= 10 else str(int(np.floor(x)))
-
-hexbin_gdf["AQHI_cat"] = hexbin_gdf["AQHI_IDW"].apply(bucket_aqhi)
-category_to_numeric = {str(i): float(i) for i in range(1, 11)}
-category_to_numeric["10+"] = 11.0
-hexbin_gdf["AQHI_num"] = hexbin_gdf["AQHI_cat"].map(category_to_numeric)
-
-# 5. Create color scale
 palette = [
     "#01cbff", "#0099cb", "#016797", "#fffe03", "#ffcb00",
     "#ff9835", "#fd6866", "#fe0002", "#cc0001", "#9a0100", "#640100"
 ]
+# Build a StepColormap for values 0–1→1, 1–2→2, …, 9–10→10, 10+→11
+# We'll attach these numeric "bucket codes" into the GeoDataFrame next.
+
+# 5a) Assign a numeric “bucket code” to each category exactly as above:
+def cat_to_num(cat):
+    if cat == "10+":
+        return 11.0
+    # else cat is a string "X–Y"; split on “–” and take the lower bound as float
+    lower = float(cat.split("–")[0])
+    return lower
+
+contour_cat["bucket"] = contour_cat["AQHI_cat"].map(cat_to_num)
 
 step_col = bcm.StepColormap(
     colors=palette,
-    index=[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0],
-    vmin=1.0,
-    vmax=11.0
+    index=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0],
+    vmin=0.0,
+    vmax=11.0,
 )
+# Note: we included a “0.0” starting index so that “0–1” maps to the first color.
+step_col.caption = "AQHI Bands (0–1, 1–2, …, 9–10, 10+)"
 
 
-# 6. Simplify geometries for performance
-hexbin_gdf['geometry'] = hexbin_gdf['geometry'].simplify(0.005, preserve_topology=True)
+center_lat = contour_cat.geometry.centroid.y.mean()
+center_lon = contour_cat.geometry.centroid.x.mean()
 
-# 7. Create the map
-center_lat = latest_df["Latitude"].mean()
-center_lon = latest_df["Longitude"].mean()
-m = folium.Map(
-    location=[center_lat, center_lon],
-    zoom_start=10,
-    tiles="CartoDB positron",
-    control_scale=True
-)
+m = folium.Map(location=[center_lat, center_lon], zoom_start=10, tiles="CartoDB positron")
 
-# 8. Add choropleth layer
+# 6b) Draw each category’s polygon(s) via GeoJson + style_function
 folium.GeoJson(
-    hexbin_gdf,
+    data=contour_cat.to_json(),
     style_function=lambda feature: {
-        'fillColor': step_col(feature['properties']['AQHI_num']),
-        'color': 'rgba(0,0,0,0.3)',
-        'weight': 0.5,
-        'fillOpacity': 0.7
+        "fillColor": step_col(feature["properties"]["bucket"]),
+        "color":     "black",
+        "weight":    1,
+        "fillOpacity": 0.7,
     },
     tooltip=folium.GeoJsonTooltip(
-        fields=['AQHI_cat', 'AQHI_IDW'],
-        aliases=['Category', 'Value'],
-        style=("font-size: 12px;")
+        fields=["AQHI_cat"],
+        aliases=["Band"],
+        localize=True
     )
 ).add_to(m)
 
-# 9. Add station markers
-for idx, row in latest_df.iterrows():
+# 6c) Add the discrete legend
+step_col.add_to(m)
+
+# 6d) Overlay station points (LATEST_STATIONS must have ['Latitude','Longitude','StationName','Value','Timestamp'])
+for _, row in latest_df.iterrows():
+    ts = str(row["Timestamp"])
+    popup_html = (
+        f"<b>{row['StationName']}</b><br>"
+        f"AQHI: {row['Value']}<br>"
+        f"Time: {ts}"
+    )
     folium.CircleMarker(
         location=[row["Latitude"], row["Longitude"]],
-        radius=5,
-        color='black',
+        radius=4,
+        color="black",
         fill=True,
-        fill_color='white',
-        fill_opacity=1,
-        weight=1,
-        popup=f"<b>{row['StationName']}</b><br>AQHI: {row['Value']}"
+        fill_color="white",
+        fill_opacity=0.8,
+        popup=folium.Popup(popup_html, parse_html=True),
     ).add_to(m)
 
-# 10. Add colorbar and save
-step_col.add_to(m)
+# 6e) Save the HTML
 m.save("aqhi_map.html")
