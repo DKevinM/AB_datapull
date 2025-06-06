@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AQHI Isopleths Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+    }
+    .legend {
+      background: white;
+      padding: 10px;
+      border: 2px solid grey;
+      font-size: 14px;
+      line-height: 18px;
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+
+// Set up the Leaflet map
+var map = L.map('map').setView([55, -115], 6);
+
+// Add base layer
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+// AQHI color scale
+var colorMap = {
+  1: "#01cbff", 2: "#0099cb", 3: "#016797", 4: "#fffe03", 5: "#ffcb00",
+  6: "#ff9835", 7: "#fd6866", 8: "#fe0002", 9: "#cc0001", 10: "#9a0100", 11: "#640100"
+};
+
+// Load the GeoJSON file
+fetch('data/aqhi_map.geojson') // or use './aqhi_map.geojson' if in same folder
+  .then(res => res.json())
+  .then(data => {
+    L.geoJSON(data, {
+      style: function (feature) {
+        return {
+          fillColor: colorMap[feature.properties.AQHI] || "#D3D3D3",
+          color: "#333",
+          weight: 0.5,
+          fillOpacity: 0.6
+        };
+      },
+      onEachFeature: function (feature, layer) {
+        var val = feature.properties.AQHI;
+        layer.bindTooltip("AQHI: " + (val === 11 ? "10+" : val));
+      }
+    }).addTo(map);
+  });
+
+// Add legend
+var legend = L.control({position: 'bottomleft'});
+legend.onAdd = function () {
+  var div = L.DomUtil.create('div', 'legend');
+  div.innerHTML = "<b>AQHI Legend</b><br>";
+  for (var i = 1; i <= 11; i++) {
+    var label = i === 11 ? "10+" : i;
+    div.innerHTML +=
+      '<i style="background:' + colorMap[i] + ';width:20px;height:10px;display:inline-block;margin-right:5px;"></i> ' +
+      label + '<br>';
+  }
+  return div;
+};
+legend.addTo(map);
+</script>
+</body>
+</html>
