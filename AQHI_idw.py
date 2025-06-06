@@ -102,9 +102,9 @@ plt.close(fig)
 
 records = []
 for idx, level_value in enumerate(CF.levels):
-    # CF.collections[idx] contains all patches where Z is between 
-    # levels[idx] and levels[idx+1], except for the top band (extend="max").
-    collection = CF.collections[idx]
+    CF = plt.contourf(X, Y, Z, levels=10)
+    for collection in CF.collections:
+    desired_collection = CF.collections[idx]
     for path in collection.get_paths():
         # Each "path" is essentially a closed polygon outline in screen coords,
         # but `.vertices` returns an Nx2 array of (x,y) in data coordinates.
