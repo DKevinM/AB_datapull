@@ -59,27 +59,43 @@ grid_gdf[["lon", "lat", "AQHI_IDW", "NearestReading"]].to_csv("data/AQHI_idw.csv
 grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
 
 
-xs = np.sort(grid_gdf["lon"].unique())
-ys = np.sort(grid_gdf["lat"].unique())
 
-df_sorted = grid_gdf.sort_values(["lat", "lon"])
-z_vals = df_sorted["AQHI_IDW"].values
-Z = z_vals.reshape(len(ys), len(xs))
-X, Y = np.meshgrid(xs, ys)
 
-vmin = np.nanmin(Z)
-vmax = np.nanmax(Z)
 
-levels = list(np.arange(0, 11, 1))  # [0,1,2,…,10]
+# 1a) Extract arrays of (lon, lat) and their AQHI values
+points = np.vstack((grid_gdf["lon"].values, grid_gdf["lat"].values)).T
+values = grid_gdf["AQHI_IDW"].values
 
-fig, ax = plt.subplots(figsize=(1,1))  # size doesn’t matter; we’ll close immediately
+# 1b) Decide on a regular mesh resolution
+nx = 200  # number of columns
+ny = 220  # number of rows
+
+
+# 1c) Build 1D arrays of coordinates from min→max
+xi = np.linspace(grid_gdf["lon"].min(), grid_gdf["lon"].max(), nx)
+yi = np.linspace(grid_gdf["lat"].min(), grid_gdf["lat"].max(), ny)
+
+# 1d) Create 2D meshgrid (XI, YI) for interpolation
+XI, YI = np.meshgrid(xi, yi)
+
+# 1e) Interpolate using ‘linear’ (or 'nearest', 'cubic' if you prefer)
+ZI = griddata(points, values, (XI, YI), method="linear")
+
+
+# 2a) Choose break‐points. Here: bands [0–1,1–2,…,9–10,10+].
+levels = list(range(0, 11))  # [0,1,2,...,10]
+# extend='max' ensures ≥10 falls into the last band
+
+fig, ax = plt.subplots()
 CF = ax.contourf(
-    X, Y, Z,
+    XI, YI, ZI,
     levels=levels,
-    extend="max",          # “>10” goes into the final band
-    cmap="YlOrRd"          # colormap (we’ll ignore it when building Shapely polygons)
+    extend="max",          # bottom: below 0 if needed; top: ≥10
+    cmap="YlOrRd"
 )
 plt.close(fig)
+
+
 
 
 
@@ -95,17 +111,31 @@ for idx, level_value in enumerate(CF.levels):
         if coords.shape[0] < 3:
             continue  # skip if fewer than 3 points (not a polygon)
         poly = Polygon(coords)
+        # Label the category
+        if idx < len(levels)-1:
+            cat = f"{levels[idx]}–{levels[idx+1]}"
+        else:
+            cat = "10+"
         records.append({
             "geometry": poly,
             "AQHI_min": levels[idx],
-            "AQHI_max": levels[idx + 1] if idx + 1 < len(levels) else np.inf,
-            # We’ll label the top band (idx == 10) as "10+"
-            "AQHI_cat": f"{levels[idx]}–{levels[idx+1]}" if idx < len(levels)-1 else "10+"
+            "AQHI_max": float("inf") if idx == len(levels)-1 else levels[idx+1],
+            "AQHI_cat": cat
         })
 
 contour_poly_gdf = gpd.GeoDataFrame(records, crs="EPSG:4326")
 
+
+
+
 contour_cat = contour_poly_gdf.dissolve(by="AQHI_cat", as_index=False)
+# Re‐create a numeric “bucket” for each cat so we can map to colors:
+def cat_to_num(cat):
+    return 11.0 if cat == "10+" else float(cat.split("–")[0])
+
+contour_cat["bucket"] = contour_cat["AQHI_cat"].map(cat_to_num)
+
+# (Optional) Simplify geometry to drop tiny vertices 
 contour_cat["geometry"] = contour_cat["geometry"].simplify(
     tolerance=0.001, preserve_topology=True
 )
@@ -137,10 +167,15 @@ step_col = bcm.StepColormap(
 step_col.caption = "AQHI Bands (0–1, 1–2, …, 9–10, 10+)"
 
 
+# Center the map
 center_lat = contour_cat.geometry.centroid.y.mean()
 center_lon = contour_cat.geometry.centroid.x.mean()
+m = folium.Map(
+    location=[center_lat, center_lon],
+    zoom_start=10,
+    tiles="CartoDB positron"
+)
 
-m = folium.Map(location=[center_lat, center_lon], zoom_start=10, tiles="CartoDB positron")
 
 # 6b) Draw each category’s polygon(s) via GeoJson + style_function
 folium.GeoJson(
@@ -154,12 +189,15 @@ folium.GeoJson(
     tooltip=folium.GeoJsonTooltip(
         fields=["AQHI_cat"],
         aliases=["Band"],
-        localize=True
+        localize=True,
+        labels=True
     )
 ).add_to(m)
 
 # 6c) Add the discrete legend
 step_col.add_to(m)
+
+
 
 # 6d) Overlay station points (LATEST_STATIONS must have ['Latitude','Longitude','StationName','Value','Timestamp'])
 for _, row in latest_df.iterrows():
