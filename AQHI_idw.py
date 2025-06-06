@@ -1,12 +1,8 @@
 import pandas as pd
 import geopandas as gpd
 import numpy as np
-import folium
-import branca.colormap as bcm
-from shapely.geometry import Polygon, Point, MultiPolygon
+from shapely.geometry import Polygon
 from scipy.spatial import cKDTree  
-from matplotlib import pyplot as plt
-from scipy.interpolate import griddata
 
 
 # Load station data
@@ -56,52 +52,5 @@ grid_gdf["NearestReading"] = nearest_ts
 # Save as CSV for Shiny
 grid_gdf[["lon", "lat", "AQHI_IDW", "NearestReading"]].to_csv("data/AQHI_idw.csv", index=False)
 
-# Pivot directly without reload
-pivot = grid_gdf.pivot(index="lat", columns="lon", values="AQHI_IDW")
-
-
-# Create pivot table (reshape to grid)
-pivot = df.pivot(index="lat", columns="lon", values="AQHI_IDW")
-X = pivot.columns.values
-Y = pivot.index.values
-Z = pivot.values
-
-# AQHI Levels and Color Palette
-aqhi_levels = list(range(1, 12))  # AQHI 1 to 11
-palette = [
-    "#01cbff", "#0099cb", "#016797", "#fffe03", "#ffcb00",
-    "#ff9835", "#fd6866", "#fe0002", "#cc0001", "#9a0100", "#640100"
-]
-cmap = mcolors.ListedColormap(palette)
-norm = mcolors.BoundaryNorm(boundaries=list(range(1, 13)), ncolors=len(palette))
-
-# Plot filled contours
-fig, ax = plt.subplots(figsize=(8, 6))
-cs = ax.contourf(X, Y, Z, levels=aqhi_levels + [12], cmap=cmap, norm=norm)
-plt.close(fig)  # prevent it from displaying
-
-# Extract polygons from contour set
-contour_polys = []
-for level, collection in zip(cs.levels, cs.collections):
-    for path in collection.get_paths():
-        for poly_coords in path.to_polygons():
-            if len(poly_coords) < 3:
-                continue
-            poly = Polygon(poly_coords)
-            if poly.is_valid:
-                contour_polys.append({"geometry": poly, "AQHI": int(level)})
-
-# Create GeoDataFrame
-gdf = gpd.GeoDataFrame(contour_polys, crs="EPSG:4326")
-
-# Load airshed boundary and ensure CRS matches
-airshed = gpd.read_file("data/Alberta.shp").to_crs(gdf.crs)
-
-# Clip contours to Alberta boundary
-airshed_union = unary_union(airshed.geometry)
-gdf_clipped = gdf[gdf.geometry.intersects(airshed_union)].copy()
-gdf_clipped["geometry"] = gdf_clipped.geometry.intersection(airshed_union)
-
 # Save to GeoJSON for Leaflet
-gdf_clipped.to_file("data/aqhi_map.geojson", driver="GeoJSON")
-
+grid_gdf.to_file("data/aqhi_map.geojson", driver="GeoJSON")
