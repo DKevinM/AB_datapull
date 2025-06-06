@@ -22,10 +22,7 @@ jobs:
             geopandas \
             scipy \
             numpy \
-            folium \
-            branca \
-            shapely \
-            matplotlib
+            shapely 
       - name: Run preprocessing
         run: python AQHI_idw.py
       - name: Commit & push
@@ -35,12 +32,4 @@ jobs:
           git add data/AQHI_idw.csv
           git add data/AQHI_grid.geojson
           git commit -m "Update AQHI IDW grid (CSV + GeoJSON)"
-          git push
-          
-      - name: Commit and Push HTML
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/aqhi_map.geojson
-          git commit -m "Update data/aqhi_map.geojson"
           git push
