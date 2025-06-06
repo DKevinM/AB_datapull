@@ -1,11 +1,9 @@
 import pandas as pd
 import geopandas as gpd
-from scipy.spatial import cKDTree
 import numpy as np
 import folium
 import branca.colormap as bcm
 from shapely.geometry import Polygon
-from matplotlib import pyplot as plt
 
 
 # Load station data
@@ -34,7 +32,7 @@ grid_x, grid_y = np.meshgrid(
 grid_points = np.c_[grid_x.ravel(), grid_y.ravel()]
 grid_df = pd.DataFrame(grid_points, columns=["lon", "lat"])
 grid_gdf = gpd.GeoDataFrame(grid_df, geometry=gpd.points_from_xy(grid_df.lon, grid_df.lat), crs=gdf.crs)
-grid_gdf = grid_gdf[grid_gdf.geometry.within(airshed.unary_union)]
+grid_gdf = grid_gdf[grid_gdf.geometry.within(airshed.union_all())]
 
 # IDW interpolation
 xy = np.array(list(zip(gdf.geometry.x, gdf.geometry.y)))
@@ -61,43 +59,33 @@ grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
 
 
 
-contour_gdf = gpd.read_file("data/AQHI_grid.geojson")
-for col in ["NearestReading", "ReadingDate"]:
-    if col in contour_gdf.columns:
-        contour_gdf = contour_gdf.drop(columns=[col])
-        
-if all(contour_gdf.geometry.geom_type == 'Point'):
-    print("Converting points to hexbins...")
-    # Create hexbin grid from points
-    from sklearn.neighbors import DistanceMetric
-    from scipy.spatial import Voronoi
-    
-    # Create hexbin grid
-    x = contour_gdf.geometry.x
-    y = contour_gdf.geometry.y
-    values = contour_gdf['AQHI_IDW']
+grid_gdf = grid_gdf[grid_gdf.geometry.within(airshed.union_all())]
 
-    # Create hexbin polygons
-    hex_size = 0.02  # Adjust based on your coordinate system
+# 2. Hexagon creation function
+def create_hexagon(center_x, center_y, size):
+    """Create a hexagon polygon around a center point"""
+    angles = np.linspace(0, 2*np.pi, 7)[:-1]  # 6 points for hexagon
+    return Polygon([(center_x + size*np.cos(a), center_y + size*np.sin(a)) for a in angles])
+
+# 3. Convert points to hexbins if needed
+if all(contour_gdf.geometry.geom_type == 'Point'):
+    print("Creating hexbin grid...")
+    hex_size = 0.02  # Adjust this based on your coordinate system
     hexagons = []
-    for xi, yi, val in zip(x, y, values):
-        hexagon = Polygon([
-            (xi, yi + hex_size),
-            (xi + hex_size*np.sqrt(3)/2, yi + hex_size/2),
-            (xi + hex_size*np.sqrt(3)/2, yi - hex_size/2),
-            (xi, yi - hex_size),
-            (xi - hex_size*np.sqrt(3)/2, yi - hex_size/2),
-            (xi - hex_size*np.sqrt(3)/2, yi + hex_size/2)
-        ])
+    aqhi_values = []
+    
+    for idx, row in contour_gdf.iterrows():
+        point = row.geometry
+        hexagon = create_hexagon(point.x, point.y, hex_size)
         hexagons.append(hexagon)
+        aqhi_values.append(row['AQHI_IDW'])
     
     contour_gdf = gpd.GeoDataFrame({
         'geometry': hexagons,
-        'AQHI_IDW': values
+        'AQHI_IDW': aqhi_values
     }, crs=contour_gdf.crs)
 
-        
-# 2. Categorize AQHI values
+# 4. Categorize AQHI values
 def bucket_aqhi(val):
     if pd.isna(val):
         return "NA"
@@ -109,7 +97,7 @@ category_to_numeric = {str(i): float(i) for i in range(1, 11)}
 category_to_numeric["10+"] = 11.0
 contour_gdf["AQHI_num"] = contour_gdf["AQHI_cat"].map(category_to_numeric)
 
-# 3. Create optimized color scale
+# 5. Create color scale
 palette = [
     "#01cbff", "#0099cb", "#016797", "#fffe03", "#ffcb00",
     "#ff9835", "#fd6866", "#fe0002", "#cc0001", "#9a0100", "#640100"
@@ -122,11 +110,10 @@ step_col = bcm.StepColormap(
     vmax=11.0
 )
 
-
-# 4. Simplify geometries for mobile performance
+# 6. Simplify geometries for mobile performance
 contour_gdf['geometry'] = contour_gdf['geometry'].simplify(0.005, preserve_topology=True)
 
-# 5. Create optimized map
+# 7. Create optimized map
 center_lat = latest_df["Latitude"].mean()
 center_lon = latest_df["Longitude"].mean()
 m = folium.Map(
@@ -136,12 +123,12 @@ m = folium.Map(
     control_scale=True
 )
 
-# 6. Add choropleth with simplified GeoJSON
-choropleth = folium.GeoJson(
+# 8. Add choropleth
+folium.GeoJson(
     contour_gdf.__geo_interface__,
     style_function=lambda feature: {
         'fillColor': step_col(feature['properties']['AQHI_num']),
-        'color': 'rgba(0,0,0,0.3)',  # Semi-transparent borders
+        'color': 'rgba(0,0,0,0.3)',
         'weight': 0.5,
         'fillOpacity': 0.7
     },
@@ -152,29 +139,19 @@ choropleth = folium.GeoJson(
     )
 ).add_to(m)
 
-
-# 7. Add stations as lightweight markers
+# 9. Add stations
 for idx, row in latest_df.iterrows():
     folium.CircleMarker(
         location=[row["Latitude"], row["Longitude"]],
-        radius=3,  # Smaller for mobile
+        radius=3,
         color='black',
         fill=True,
         fill_color='white',
         fill_opacity=1,
         weight=1,
-        popup=folium.Popup(
-            f"<b>{row['StationName']}</b><br>AQHI: {row['Value']}",
-            max_width=200
-        )
+        popup=f"<b>{row['StationName']}</b><br>AQHI: {row['Value']}"
     ).add_to(m)
 
-# 8. Add colorbar and save
-step_col.caption = 'AQHI Category'
+# 10. Add colorbar and save
 step_col.add_to(m)
-
-# Save with optimized settings
-m.save("mobile_aqhi_map.html", 
-       width='100%', 
-       height='100%',
-       pretty=True)
+m.save("mobile_aqhi_map.html")
