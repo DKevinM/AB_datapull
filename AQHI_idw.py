@@ -102,27 +102,15 @@ plt.close(fig)
 
 records = []
 for idx, level_value in enumerate(CF.levels):
-    CF = plt.contourf(XI, YI, Z, levels=10)
-    for idx in range(len(CF.collections)):
-        desired_collection = CF.collections[idx]
+    collection = CF.collections[idx]
+    # do something with `collection` and `level_value`, e.g.:
     for path in collection.get_paths():
-        # Each "path" is essentially a closed polygon outline in screen coords,
-        # but `.vertices` returns an Nx2 array of (x,y) in data coordinates.
-        coords = path.vertices
-        if coords.shape[0] < 3:
-            continue  # skip if fewer than 3 points (not a polygon)
-        poly = Polygon(coords)
-        # Label the category
-        if idx < len(levels)-1:
-            cat = f"{levels[idx]}–{levels[idx+1]}"
-        else:
-            cat = "10+"
-        records.append({
-            "geometry": poly,
-            "AQHI_min": levels[idx],
-            "AQHI_max": float("inf") if idx == len(levels)-1 else levels[idx+1],
-            "AQHI_cat": cat
-        })
+        polygon = path.to_polygons()
+        if polygon:  # Avoid empty paths
+            records.append({
+                "level": level_value,
+                "polygon": polygon
+            })
 
 contour_poly_gdf = gpd.GeoDataFrame(records, crs="EPSG:4326")
 
