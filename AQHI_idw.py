@@ -3,7 +3,7 @@ import geopandas as gpd
 import numpy as np
 import folium
 import branca.colormap as bcm
-from shapely.geometry import Polygon, Point
+from shapely.geometry import Polygon, Point, MultiPolygon
 from scipy.spatial import cKDTree  
 
 
@@ -59,8 +59,13 @@ grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
 
 
 
+working_gdf = grid_gdf.copy()
 
-grid_gdf = grid_gdf[grid_gdf.geometry.within(airshed.union_all())]
+# 2. Fix geometry if needed (ensure all are proper points)
+if not all(working_gdf.geometry.geom_type == 'Point'):
+    # Convert to points if geometry contains other types
+    working_gdf['geometry'] = working_gdf.geometry.centroid
+    
 
 # 2. Hexagon creation function
 def create_hexagon(center_x, center_y, size):
@@ -69,22 +74,40 @@ def create_hexagon(center_x, center_y, size):
     return Polygon([(center_x + size*np.cos(a), center_y + size*np.sin(a)) for a in angles])
 
 # 3. Convert points to hexbins if needed
-if all(contour_gdf.geometry.geom_type == 'Point'):
-    print("Creating hexbin grid...")
-    hex_size = 0.02  # Adjust this based on your coordinate system
-    hexagons = []
-    aqhi_values = []
-    
-    for idx, row in contour_gdf.iterrows():
-        point = row.geometry
-        hexagon = create_hexagon(point.x, point.y, hex_size)
-        hexagons.append(hexagon)
-        aqhi_values.append(row['AQHI_IDW'])
-    
-    contour_gdf = gpd.GeoDataFrame({
-        'geometry': hexagons,
-        'AQHI_IDW': aqhi_values
-    }, crs=contour_gdf.crs)
+# Set hexbin size (adjust based on your coordinate system)
+hex_size = 0.02  # Degrees for geographic CRS, meters for projected
+
+# Create spatial index for efficient point queries
+points = np.array([[p.x, p.y] for p in working_gdf.geometry])
+tree = cKDTree(points)
+
+# Create sampling grid
+x_min, y_min = points.min(axis=0)
+x_max, y_max = points.max(axis=0)
+
+x_coords = np.arange(x_min, x_max, hex_size * 1.5)
+y_coords = np.arange(y_min, y_max, hex_size * 1.5)
+
+# Generate hexbins
+hexagons = []
+aqhi_values = []
+
+for x in x_coords:
+    for y in y_coords:
+        # Find points within hexbin radius
+        point_indices = tree.query_ball_point([x, y], hex_size)
+        
+        if point_indices:  # Only create hexbins with data
+            avg_aqhi = working_gdf.iloc[point_indices]['AQHI_IDW'].mean()
+            hexagon = create_hexagon(x, y, hex_size)
+            hexagons.append(hexagon)
+            aqhi_values.append(avg_aqhi)
+
+# Create new GeoDataFrame with hexbins
+hexbin_gdf = gpd.GeoDataFrame(
+    {'geometry': hexagons, 'AQHI_IDW': aqhi_values},
+    crs=working_gdf.crs
+)
 
 # 4. Categorize AQHI values
 def bucket_aqhi(val):
@@ -93,10 +116,10 @@ def bucket_aqhi(val):
     x = float(val)
     return "10+" if x >= 10 else str(int(np.floor(x)))
 
-contour_gdf["AQHI_cat"] = contour_gdf["AQHI_IDW"].apply(bucket_aqhi)
+hexbin_gdf["AQHI_cat"] = hexbin_gdf["AQHI_IDW"].apply(bucket_aqhi)
 category_to_numeric = {str(i): float(i) for i in range(1, 11)}
 category_to_numeric["10+"] = 11.0
-contour_gdf["AQHI_num"] = contour_gdf["AQHI_cat"].map(category_to_numeric)
+hexbin_gdf["AQHI_num"] = hexbin_gdf["AQHI_cat"].map(category_to_numeric)
 
 # 5. Create color scale
 palette = [
@@ -111,22 +134,23 @@ step_col = bcm.StepColormap(
     vmax=11.0
 )
 
-# 6. Simplify geometries for mobile performance
-contour_gdf['geometry'] = contour_gdf['geometry'].simplify(0.005, preserve_topology=True)
 
-# 7. Create optimized map
+# 6. Simplify geometries for performance
+hexbin_gdf['geometry'] = hexbin_gdf['geometry'].simplify(0.005, preserve_topology=True)
+
+# 7. Create the map
 center_lat = latest_df["Latitude"].mean()
 center_lon = latest_df["Longitude"].mean()
 m = folium.Map(
-    location=[center_lat, center_lon], 
-    zoom_start=10, 
+    location=[center_lat, center_lon],
+    zoom_start=10,
     tiles="CartoDB positron",
     control_scale=True
 )
 
-# 8. Add choropleth
+# 8. Add choropleth layer
 folium.GeoJson(
-    contour_gdf.__geo_interface__,
+    hexbin_gdf,
     style_function=lambda feature: {
         'fillColor': step_col(feature['properties']['AQHI_num']),
         'color': 'rgba(0,0,0,0.3)',
@@ -134,17 +158,17 @@ folium.GeoJson(
         'fillOpacity': 0.7
     },
     tooltip=folium.GeoJsonTooltip(
-        fields=['AQHI_cat'],
-        aliases=['AQHI Category'],
+        fields=['AQHI_cat', 'AQHI_IDW'],
+        aliases=['Category', 'Value'],
         style=("font-size: 12px;")
     )
 ).add_to(m)
 
-# 9. Add stations
+# 9. Add station markers
 for idx, row in latest_df.iterrows():
     folium.CircleMarker(
         location=[row["Latitude"], row["Longitude"]],
-        radius=3,
+        radius=5,
         color='black',
         fill=True,
         fill_color='white',
@@ -155,4 +179,4 @@ for idx, row in latest_df.iterrows():
 
 # 10. Add colorbar and save
 step_col.add_to(m)
-m.save("mobile_aqhi_map.html")
+m.save("aqhi_map.html")
