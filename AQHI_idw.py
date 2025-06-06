@@ -102,7 +102,7 @@ plt.close(fig)
 
 records = []
 for idx, level_value in enumerate(CF.levels):
-    CF = plt.contourf(X, Y, Z, levels=10)
+    CF = plt.contourf(XI, YI, Z, levels=10)
     for idx in range(len(CF.collections)):
         desired_collection = CF.collections[idx]
     for path in collection.get_paths():
