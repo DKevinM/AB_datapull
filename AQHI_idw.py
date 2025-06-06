@@ -90,6 +90,8 @@ plt.close(fig)
 
 records = []
 for idx, level_value in enumerate(CF.levels):
+    print("CF type:", type(CF))
+    print("CF attributes:", dir(CF))
     collection = CF.collections[idx]
     for path in collection.get_paths():
         polygon = path.to_polygons()
