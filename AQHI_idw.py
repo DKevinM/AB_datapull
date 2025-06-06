@@ -56,144 +56,52 @@ grid_gdf["NearestReading"] = nearest_ts
 # Save as CSV for Shiny
 grid_gdf[["lon", "lat", "AQHI_IDW", "NearestReading"]].to_csv("data/AQHI_idw.csv", index=False)
 
-# Optionally save GeoJSON
-grid_gdf.to_file("data/AQHI_grid.geojson", driver="GeoJSON")
+# Pivot directly without reload
+pivot = grid_gdf.pivot(index="lat", columns="lon", values="AQHI_IDW")
 
 
+# Create pivot table (reshape to grid)
+pivot = df.pivot(index="lat", columns="lon", values="AQHI_IDW")
+X = pivot.columns.values
+Y = pivot.index.values
+Z = pivot.values
 
-
-
-# 1a) Extract arrays of (lon, lat) and their AQHI values
-points = np.vstack((grid_gdf["lon"].values, grid_gdf["lat"].values)).T
-values = grid_gdf["AQHI_IDW"].values
-
-# 1b) Decide on a regular mesh resolution
-nx = 200  # number of columns
-ny = 220  # number of rows
-
-
-# 1c) Build 1D arrays of coordinates from min→max
-xi = np.linspace(grid_gdf["lon"].min(), grid_gdf["lon"].max(), nx)
-yi = np.linspace(grid_gdf["lat"].min(), grid_gdf["lat"].max(), ny)
-
-# 1d) Create 2D meshgrid (XI, YI) for interpolation
-XI, YI = np.meshgrid(xi, yi)
-ZI = griddata(points, values, (XI, YI), method="linear")
-
-fig, ax = plt.subplots()
-CF = ax.contourf(XI, YI, ZI, levels=range(0, 11), extend="max", cmap="YlOrRd")
-plt.close(fig)
-
-
-
-
-
-records = []
-for idx, level_value in enumerate(CF.levels):
-    print("CF type:", type(CF))
-    print("CF attributes:", dir(CF))
-    collection = CF.collections[idx]
-    for path in collection.get_paths():
-        polygon = path.to_polygons()
-        if polygon:  # Avoid empty paths
-            records.append({
-                "level": level_value,
-                "polygon": polygon
-            })
-
-contour_poly_gdf = gpd.GeoDataFrame(records, crs="EPSG:4326")
-
-
-
-
-contour_cat = contour_poly_gdf.dissolve(by="AQHI_cat", as_index=False)
-# Re‐create a numeric “bucket” for each cat so we can map to colors:
-def cat_to_num(cat):
-    return 11.0 if cat == "10+" else float(cat.split("–")[0])
-
-contour_cat["bucket"] = contour_cat["AQHI_cat"].map(cat_to_num)
-
-# (Optional) Simplify geometry to drop tiny vertices 
-contour_cat["geometry"] = contour_cat["geometry"].simplify(
-    tolerance=0.001, preserve_topology=True
-)
-
+# AQHI Levels and Color Palette
+aqhi_levels = list(range(1, 12))  # AQHI 1 to 11
 palette = [
     "#01cbff", "#0099cb", "#016797", "#fffe03", "#ffcb00",
     "#ff9835", "#fd6866", "#fe0002", "#cc0001", "#9a0100", "#640100"
 ]
-# Build a StepColormap for values 0–1→1, 1–2→2, …, 9–10→10, 10+→11
-# We'll attach these numeric "bucket codes" into the GeoDataFrame next.
+cmap = mcolors.ListedColormap(palette)
+norm = mcolors.BoundaryNorm(boundaries=list(range(1, 13)), ncolors=len(palette))
 
-# 5a) Assign a numeric “bucket code” to each category exactly as above:
-def cat_to_num(cat):
-    if cat == "10+":
-        return 11.0
-    # else cat is a string "X–Y"; split on “–” and take the lower bound as float
-    lower = float(cat.split("–")[0])
-    return lower
+# Plot filled contours
+fig, ax = plt.subplots(figsize=(8, 6))
+cs = ax.contourf(X, Y, Z, levels=aqhi_levels + [12], cmap=cmap, norm=norm)
+plt.close(fig)  # prevent it from displaying
 
-contour_cat["bucket"] = contour_cat["AQHI_cat"].map(cat_to_num)
+# Extract polygons from contour set
+contour_polys = []
+for level, collection in zip(cs.levels, cs.collections):
+    for path in collection.get_paths():
+        for poly_coords in path.to_polygons():
+            if len(poly_coords) < 3:
+                continue
+            poly = Polygon(poly_coords)
+            if poly.is_valid:
+                contour_polys.append({"geometry": poly, "AQHI": int(level)})
 
-step_col = bcm.StepColormap(
-    colors=palette,
-    index=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0],
-    vmin=0.0,
-    vmax=11.0,
-)
-# Note: we included a “0.0” starting index so that “0–1” maps to the first color.
-step_col.caption = "AQHI Bands (0–1, 1–2, …, 9–10, 10+)"
+# Create GeoDataFrame
+gdf = gpd.GeoDataFrame(contour_polys, crs="EPSG:4326")
 
+# Load airshed boundary and ensure CRS matches
+airshed = gpd.read_file("data/Alberta.shp").to_crs(gdf.crs)
 
-# Center the map
-center_lat = contour_cat.geometry.centroid.y.mean()
-center_lon = contour_cat.geometry.centroid.x.mean()
-m = folium.Map(
-    location=[center_lat, center_lon],
-    zoom_start=10,
-    tiles="CartoDB positron"
-)
+# Clip contours to Alberta boundary
+airshed_union = unary_union(airshed.geometry)
+gdf_clipped = gdf[gdf.geometry.intersects(airshed_union)].copy()
+gdf_clipped["geometry"] = gdf_clipped.geometry.intersection(airshed_union)
 
+# Save to GeoJSON for Leaflet
+gdf_clipped.to_file("data/aqhi_map.geojson", driver="GeoJSON")
 
-# 6b) Draw each category’s polygon(s) via GeoJson + style_function
-folium.GeoJson(
-    data=contour_cat.to_json(),
-    style_function=lambda feature: {
-        "fillColor": step_col(feature["properties"]["bucket"]),
-        "color":     "black",
-        "weight":    1,
-        "fillOpacity": 0.7,
-    },
-    tooltip=folium.GeoJsonTooltip(
-        fields=["AQHI_cat"],
-        aliases=["Band"],
-        localize=True,
-        labels=True
-    )
-).add_to(m)
-
-# 6c) Add the discrete legend
-step_col.add_to(m)
-
-
-
-# 6d) Overlay station points (LATEST_STATIONS must have ['Latitude','Longitude','StationName','Value','Timestamp'])
-for _, row in latest_df.iterrows():
-    ts = str(row["Timestamp"])
-    popup_html = (
-        f"<b>{row['StationName']}</b><br>"
-        f"AQHI: {row['Value']}<br>"
-        f"Time: {ts}"
-    )
-    folium.CircleMarker(
-        location=[row["Latitude"], row["Longitude"]],
-        radius=4,
-        color="black",
-        fill=True,
-        fill_color="white",
-        fill_opacity=0.8,
-        popup=folium.Popup(popup_html, parse_html=True),
-    ).add_to(m)
-
-# 6e) Save the HTML
-m.save("aqhi_map.html")
