@@ -103,8 +103,8 @@ plt.close(fig)
 records = []
 for idx, level_value in enumerate(CF.levels):
     CF = plt.contourf(X, Y, Z, levels=10)
-    for collection in CF.collections:
-    desired_collection = CF.collections[idx]
+    for idx in range(len(CF.collections)):
+        desired_collection = CF.collections[idx]
     for path in collection.get_paths():
         # Each "path" is essentially a closed polygon outline in screen coords,
         # but `.vertices` returns an Nx2 array of (x,y) in data coordinates.
