@@ -78,22 +78,10 @@ yi = np.linspace(grid_gdf["lat"].min(), grid_gdf["lat"].max(), ny)
 
 # 1d) Create 2D meshgrid (XI, YI) for interpolation
 XI, YI = np.meshgrid(xi, yi)
-
-# 1e) Interpolate using ‘linear’ (or 'nearest', 'cubic' if you prefer)
 ZI = griddata(points, values, (XI, YI), method="linear")
 
-
-# 2a) Choose break‐points. Here: bands [0–1,1–2,…,9–10,10+].
-levels = list(range(0, 11))  # [0,1,2,...,10]
-# extend='max' ensures ≥10 falls into the last band
-
 fig, ax = plt.subplots()
-CF = ax.contourf(
-    XI, YI, ZI,
-    levels=levels,
-    extend="max",          # bottom: below 0 if needed; top: ≥10
-    cmap="YlOrRd"
-)
+CF = ax.contourf(XI, YI, ZI, levels=range(0, 11), extend="max", cmap="YlOrRd")
 plt.close(fig)
 
 
@@ -103,7 +91,6 @@ plt.close(fig)
 records = []
 for idx, level_value in enumerate(CF.levels):
     collection = CF.collections[idx]
-    # do something with `collection` and `level_value`, e.g.:
     for path in collection.get_paths():
         polygon = path.to_polygons()
         if polygon:  # Avoid empty paths
