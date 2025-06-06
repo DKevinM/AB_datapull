@@ -6,6 +6,7 @@ import branca.colormap as bcm
 from shapely.geometry import Polygon, Point, MultiPolygon
 from scipy.spatial import cKDTree  
 from matplotlib import pyplot as plt
+from scipy.interpolate import griddata
 
 
 # Load station data
