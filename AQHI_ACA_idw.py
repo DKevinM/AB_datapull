@@ -53,4 +53,4 @@ grid_gdf["NearestReading"] = nearest_ts
 grid_gdf[["lon", "lat", "AQHI_IDW", "NearestReading"]].to_csv("data/AQHI_ACA_idw.csv", index=False)
 
 # Save to GeoJSON for Leaflet
-grid_gdf.to_file("data/aqhi_ACA_map.geojson", driver="GeoJSON")
+grid_gdf.to_file("data/AQHI_ACA_grid.geojson", driver="GeoJSON")
