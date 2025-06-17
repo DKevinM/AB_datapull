@@ -31,7 +31,7 @@ def fetch_last6h(station_name: str) -> pd.DataFrame:
     # Format: YYYY-MM-DDTHH:MM:SS-06:00  (Alberta is UTC-6)
     start_str = start.strftime('%Y-%m-%dT%H:%M:%S-06:00')
 
-    safe_name = station_name.replace("'", "''").replace("’", "''")
+    safe_name = station_name.replace("’", "''").replace("’", "''")
     
     url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationMeasurements"
     params = {
