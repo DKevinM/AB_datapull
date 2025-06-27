@@ -64,7 +64,7 @@ if __name__ == "__main__":
         lat  = row["Latitude"]
         lon  = row["Longitude"]
 
-        df = fetch_last6h(name)
+        df = fetch_last30d(name)
 
         if not df.empty:
             # 3b. Attach Latitude and Longitude to each measurement row
@@ -74,7 +74,7 @@ if __name__ == "__main__":
             combined_rows.append(df)
             print(f">>> Pulled {len(df)} rows for {name!r}.")
         else:
-            print(f">>> No data in last 6h for {name!r}.")
+            print(f">>> No data in last 30d for {name!r}.")
 
     # 3c. Concatenate into a single DataFrame (with the exact columns)
     if combined_rows:
@@ -94,7 +94,7 @@ if __name__ == "__main__":
         print(">>> Sample rows:")
         print(combined_df.head().to_string(index=False))
 
-    # 3e. Write exactly one CSV to data/last6h.csv
+    # 3e. Write exactly one CSV to data/last30d.csv
     output_folder = Path("data")
     output_folder.mkdir(exist_ok=True)
 
