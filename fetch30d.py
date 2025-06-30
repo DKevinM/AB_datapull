@@ -27,7 +27,7 @@ def fetch_station_list():
 
 def fetch_last30d(station_name: str) -> pd.DataFrame:
     now = datetime.utcnow()
-    start = now - timedelta(days=30)
+    start = now - timedelta(days=15)
     # Format: YYYY-MM-DDTHH:MM:SS-06:00  (Alberta is UTC-6)
     start_str = start.strftime('%Y-%m-%dT%H:%M:%S-06:00')
 
