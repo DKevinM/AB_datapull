@@ -85,12 +85,41 @@ def create_table_if_needed(engine):
         ReadingDate TIMESTAMP,
         Value FLOAT,
         Latitude FLOAT,
-        Longitude FLOAT
+        Longitude FLOAT,
+        PRIMARY KEY (StationName, ParameterName, ReadingDate)
     );
     """
     with engine.begin() as conn:
         conn.execute(sql)
+        
+# ─────────────────────────────────────────────
+# 5b. Efficient upsert via temp table
+# ─────────────────────────────────────────────
 
+def upsert_to_main_table(df, engine):
+    with engine.begin() as conn:
+        # 1. Create the temp table
+        conn.execute("""
+            CREATE TEMP TABLE temp_aqhi_data (
+                StationName TEXT,
+                ParameterName TEXT,
+                ReadingDate TIMESTAMP,
+                Value FLOAT,
+                Latitude FLOAT,
+                Longitude FLOAT
+            );
+        """)
+
+        # 2. Load data into temp table
+        df.to_sql("temp_aqhi_data", engine, if_exists="append", index=False, method='multi')
+
+        # 3. Insert from temp into main with deduplication
+        conn.execute("""
+            INSERT INTO aqhi_data (StationName, ParameterName, ReadingDate, Value, Latitude, Longitude)
+            SELECT StationName, ParameterName, ReadingDate, Value, Latitude, Longitude
+            FROM temp_aqhi_data
+            ON CONFLICT DO NOTHING;
+        """)
 
 # ─────────────────────────────────────────────
 # 6. Run the whole pipeline
@@ -128,8 +157,8 @@ def main():
     engine = get_engine()
     create_table_if_needed(engine)
 
-    cleaned.to_sql("aqhi_data", engine, if_exists="append", index=False)
-    print(">>> Data inserted into database successfully.")
+    upsert_to_main_table(cleaned, engine)  # ← this is the new line
+    print(">>> Data inserted into database (deduplicated).")
 
 
 if __name__ == "__main__":
