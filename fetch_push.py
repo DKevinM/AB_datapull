@@ -116,7 +116,7 @@ def upsert_to_main_table(df, engine):
             INSERT INTO aqhi_data (StationName, ParameterName, ReadingDate, Value, Latitude, Longitude)
             SELECT StationName, ParameterName, ReadingDate, Value, Latitude, Longitude
             FROM temp_aqhi_data
-            ON CONFLICT DO NOTHING;
+            ON CONFLICT (StationName, ParameterName, ReadingDate) DO NOTHING;
         """))
 
 # ─────────────────────────────────────────────
