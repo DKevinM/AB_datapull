@@ -97,7 +97,7 @@ def create_table_if_needed(engine):
 def upsert_to_main_table(df, engine):
     with engine.begin() as conn:
         # 1. Create the temp table
-        conn.execute("""
+        conn.execute(text("""
             CREATE TEMP TABLE temp_aqhi_data (
                 StationName TEXT,
                 ParameterName TEXT,
@@ -106,18 +106,18 @@ def upsert_to_main_table(df, engine):
                 Latitude FLOAT,
                 Longitude FLOAT
             );
-        """)
+        """))
 
         # 2. Load data into temp table
         df.to_sql("temp_aqhi_data", engine, if_exists="append", index=False, method='multi')
 
         # 3. Insert from temp into main with deduplication
-        conn.execute("""
+        conn.execute(text("""
             INSERT INTO aqhi_data (StationName, ParameterName, ReadingDate, Value, Latitude, Longitude)
             SELECT StationName, ParameterName, ReadingDate, Value, Latitude, Longitude
             FROM temp_aqhi_data
             ON CONFLICT DO NOTHING;
-        """)
+        """))
 
 # ─────────────────────────────────────────────
 # 6. Run the whole pipeline
