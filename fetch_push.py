@@ -96,28 +96,26 @@ def create_table_if_needed(engine):
 
 def upsert_to_main_table(df, engine):
     with engine.begin() as conn:
-        # 1. Create the temp table
-        conn.execute(text("""
-            CREATE TEMP TABLE temp_aqhi_data (
-                StationName TEXT,
-                ParameterName TEXT,
-                ReadingDate TIMESTAMP,
-                Value FLOAT,
-                Latitude FLOAT,
-                Longitude FLOAT
-            );
-        """))
+        inserted = 0
+        for _, row in df.iterrows():
+            row_dict = row.to_dict()
 
-        # 2. Load data into temp table
-        df.to_sql("temp_aqhi_data", con=conn, if_exists="append", index=False, method='multi')
+            # Ensure ParameterName is not null
+            if not row_dict.get("ParameterName"):
+                row_dict["ParameterName"] = "AQHI"
 
-        # 3. Insert from temp into main with deduplication
-        conn.execute(text("""
-            INSERT INTO aqhi_data (StationName, ParameterName, ReadingDate, Value, Latitude, Longitude)
-            SELECT StationName, ParameterName, ReadingDate, Value, Latitude, Longitude
-            FROM temp_aqhi_data
-            ON CONFLICT (StationName, ParameterName, ReadingDate) DO NOTHING;
-        """))
+            try:
+                conn.execute(text("""
+                    INSERT INTO aqhi_data (StationName, ParameterName, ReadingDate, Value, Latitude, Longitude)
+                    VALUES (:StationName, :ParameterName, :ReadingDate, :Value, :Latitude, :Longitude)
+                    ON CONFLICT (StationName, ParameterName, ReadingDate) DO NOTHING
+                """), row_dict)
+                inserted += 1
+            except Exception as e:
+                print(f"❌ Failed to insert row: {row_dict} → {e}")
+
+        print(f">>> Inserted {inserted} rows successfully.")
+
 
 # ─────────────────────────────────────────────
 # 6. Run the whole pipeline
