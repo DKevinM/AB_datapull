@@ -73,25 +73,7 @@ def get_engine():
     return create_engine(f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
 
 
-# ─────────────────────────────────────────────
-# 5. Create table if needed
-# ─────────────────────────────────────────────
-
-def create_table_if_needed(engine):
-    sql = """
-    CREATE TABLE IF NOT EXISTS aqhi_data (
-        StationName TEXT,
-        ParameterName TEXT,
-        ReadingDate TIMESTAMP,
-        Value FLOAT,
-        Latitude FLOAT,
-        Longitude FLOAT,
-        PRIMARY KEY (StationName, ParameterName, ReadingDate)
-    );
-    """
-    with engine.begin() as conn:
-        conn.execute(sql)
-        
+       
 # ─────────────────────────────────────────────
 # 5b. Efficient upsert via temp table
 # ─────────────────────────────────────────────
