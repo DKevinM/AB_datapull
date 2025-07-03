@@ -22,7 +22,7 @@ def fetch_station_list():
 
 def fetch_last15d(station_name):
     now = datetime.utcnow()
-    start = now - timedelta(days=15)
+    start = now - timedelta(days=1)
     start_str = start.strftime('%Y-%m-%dT%H:%M:%S-06:00')  # Alberta time
 
     safe_name = station_name.replace("'", "''")  # escape apostrophes
