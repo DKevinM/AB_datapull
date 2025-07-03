@@ -49,7 +49,7 @@ def fetch_last15d(station_name):
 
 def clean_data(df):
     df = df.copy()
-    df["ParameterName"] = df["ParameterName"].replace('', 'AQHI')
+    df["ParameterName"] = df["ParameterName"].fillna("").replace('', 'AQHI')
 
     ppm_params = [
         "Nitric Oxide", "Nitrogen Dioxide", "Total Oxides of Nitrogen",
@@ -109,7 +109,7 @@ def upsert_to_main_table(df, engine):
         """))
 
         # 2. Load data into temp table
-        df.to_sql("temp_aqhi_data", engine, if_exists="append", index=False, method='multi')
+        df.to_sql("temp_aqhi_data", con=conn, if_exists="append", index=False, method='multi')
 
         # 3. Insert from temp into main with deduplication
         conn.execute(text("""
