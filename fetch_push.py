@@ -2,7 +2,7 @@ import os
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 # ─────────────────────────────────────────────
 # 1. Fetch station list
@@ -73,10 +73,26 @@ def get_engine():
     return create_engine(f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
 
 
+
        
 # ─────────────────────────────────────────────
 # 5b. Efficient upsert via temp table
 # ─────────────────────────────────────────────
+def create_table_if_needed(engine):
+    sql = """
+    CREATE TABLE IF NOT EXISTS aqhi_data (
+        StationName TEXT,
+        ParameterName TEXT,
+        ReadingDate TIMESTAMP,
+        Value FLOAT,
+        Latitude FLOAT,
+        Longitude FLOAT,
+        PRIMARY KEY (StationName, ParameterName, ReadingDate)
+    );
+    """
+    with engine.begin() as conn:
+        conn.execute(text(sql))  # use `text()` from sqlalchemy
+
 
 def upsert_to_main_table(df, engine):
     with engine.begin() as conn:
