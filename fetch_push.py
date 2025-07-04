@@ -72,13 +72,13 @@ def get_engine():
 def create_table_if_needed(engine):
     sql = """
     CREATE TABLE IF NOT EXISTS aqhi_data (
-        StationName TEXT,
-        ParameterName TEXT,
-        ReadingDate TIMESTAMP,
-        Value FLOAT,
-        Latitude FLOAT,
-        Longitude FLOAT,
-        PRIMARY KEY (StationName, ParameterName, ReadingDate)
+        "StationName" TEXT,
+        "ParameterName" TEXT,
+        "ReadingDate" TIMESTAMP,
+        "Value" DOUBLE PRECISION,
+        "Latitude" DOUBLE PRECISION,
+        "Longitude" DOUBLE PRECISION,
+        PRIMARY KEY ("StationName", "ParameterName", "ReadingDate")
     );
     """
     with engine.begin() as conn:
@@ -93,13 +93,14 @@ def upsert_to_main_table(df, engine):
     with engine.begin() as conn:
         # Step 1: Create temp table
         conn.execute(text("""
-            CREATE TEMP TABLE temp_aqhi_data (
-                StationName TEXT,
-                ParameterName TEXT,
-                ReadingDate TIMESTAMP,
-                Value FLOAT,
-                Latitude FLOAT,
-                Longitude FLOAT
+        CREATE TEMP TABLE temp_aqhi_data (
+            "StationName" TEXT,
+            "ParameterName" TEXT,
+            "ReadingDate" TIMESTAMP,
+            "Value" DOUBLE PRECISION,
+            "Latitude" DOUBLE PRECISION,
+            "Longitude" DOUBLE PRECISION,
+            PRIMARY KEY ("StationName", "ParameterName", "ReadingDate")
             );
         """))
 
@@ -108,10 +109,10 @@ def upsert_to_main_table(df, engine):
 
         # Step 3: Insert into main table with deduplication
         conn.execute(text("""
-            INSERT INTO aqhi_data (StationName, ParameterName, ReadingDate, Value, Latitude, Longitude)
-            SELECT StationName, ParameterName, ReadingDate, Value, Latitude, Longitude
+            INSERT INTO aqhi_data ("StationName", "ParameterName", "ReadingDate", "Value", "Latitude", "Longitude")
+            SELECT "StationName", "ParameterName", "ReadingDate", "Value", "Latitude", "Longitude"
             FROM temp_aqhi_data
-            ON CONFLICT (StationName, ParameterName, ReadingDate) DO NOTHING;
+            ON CONFLICT ("StationName", "ParameterName", "ReadingDate") DO NOTHING;
         """))
 
 
