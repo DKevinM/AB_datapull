@@ -45,11 +45,11 @@ def fetch_last_d(station_name, days=2, start_time=None):
 def clean_data(df):
     df = df.copy()
     df["ParameterName"] = df["ParameterName"].fillna("").replace('', 'AQHI')
-    df["ReadingDate"] = pd.to_datetime(df["ReadingDate"], utc=True)
-    df["ReadingDate"] = df["ReadingDate"].dt.tz_convert("America/Edmonton").dt.tz_localize(None)
-    # Remove invalid values
-    df = df[df["Value"].notna()]  # drop rows with null values
-    df = df.drop_duplicates(subset=["StationName", "ParameterName", "ReadingDate"])
+    df["ReadingDate"] = (
+        pd.to_datetime(df["ReadingDate"], utc=True)
+          .dt.tz_convert("America/Edmonton")
+          .dt.tz_localize(None)  
+    )
     ppm_params = [
         "Nitric Oxide", "Nitrogen Dioxide", "Total Oxides of Nitrogen",
         "Sulphur Dioxide", "Ozone", "Carbon Monoxide"
@@ -58,6 +58,9 @@ def clean_data(df):
     # Remove known outliers
     df = df[~((df["ParameterName"] == "Ozone") & (df["Value"] > 150))]
 
+    # Remove invalid values
+    df = df[df["Value"].notna()]  # drop rows with null values
+    df = df.drop_duplicates(subset=["StationName", "ParameterName", "ReadingDate"])
     return df
 
 
