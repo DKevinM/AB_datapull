@@ -13,7 +13,7 @@ def fetch_station_list():
     return pd.json_normalize(raw["value"])[["Name", "Latitude", "Longitude"]]
 
 # 2. Fetch data per station
-def fetch_last_d(station_name, days=1, start_time=None):
+def fetch_last_d(station_name, days=2, start_time=None):
     """
     Fetch AQHI data for the past `days` from `start_time` (UTC).
     If no `start_time` is provided, defaults to `datetime.utcnow()`.
@@ -45,15 +45,18 @@ def fetch_last_d(station_name, days=1, start_time=None):
 def clean_data(df):
     df = df.copy()
     df["ParameterName"] = df["ParameterName"].fillna("").replace('', 'AQHI')
-    df["ReadingDate"] = pd.to_datetime(df["ReadingDate"], utc=True).dt.tz_convert("America/Edmonton")
+    df["ReadingDate"] = pd.to_datetime(df["ReadingDate"], utc=True)
+    df["ReadingDate"] = df["ReadingDate"].dt.tz_convert("America/Edmonton").dt.tz_localize(None)
+    # Remove invalid values
+    df = df[df["Value"].notna()]  # drop rows with null values
     df = df.drop_duplicates(subset=["StationName", "ParameterName", "ReadingDate"])
     ppm_params = [
         "Nitric Oxide", "Nitrogen Dioxide", "Total Oxides of Nitrogen",
         "Sulphur Dioxide", "Ozone", "Carbon Monoxide"
     ]
     df.loc[df["ParameterName"].isin(ppm_params), "Value"] *= 1000
+    # Remove known outliers
     df = df[~((df["ParameterName"] == "Ozone") & (df["Value"] > 150))]
-    df = df[~((df["ParameterName"] != "Outdoor Temperature") & (df["Value"] == -10))]
 
     return df
 
@@ -113,7 +116,11 @@ def upsert_to_main_table(df, engine):
             INSERT INTO aqhi_data ("StationName", "ParameterName", "ReadingDate", "Value", "Latitude", "Longitude")
             SELECT "StationName", "ParameterName", "ReadingDate", "Value", "Latitude", "Longitude"
             FROM temp_aqhi_data
-            ON CONFLICT ("StationName", "ParameterName", "ReadingDate") DO NOTHING;
+            ON CONFLICT ("StationName", "ParameterName", "ReadingDate") DO UPDATE
+            SET "Value" = EXCLUDED."Value",
+                "Latitude" = EXCLUDED."Latitude",
+                "Longitude" = EXCLUDED."Longitude"
+            WHERE EXCLUDED."Value" IS NOT NULL;
         """))
 
 
