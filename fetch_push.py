@@ -4,10 +4,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine, text
 
-# ─────────────────────────────────────────────
 # 1. Fetch station list
-# ─────────────────────────────────────────────
-
 def fetch_station_list():
     STATIONS_URL = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/Stations?$select=Name,Latitude,Longitude"
     resp = requests.get(STATIONS_URL, timeout=20)
@@ -15,14 +12,16 @@ def fetch_station_list():
     raw = resp.json()
     return pd.json_normalize(raw["value"])[["Name", "Latitude", "Longitude"]]
 
+# 2. Fetch data per station
+def fetch_last_d(station_name, days=1, start_time=None):
+    """
+    Fetch AQHI data for the past `days` from `start_time` (UTC).
+    If no `start_time` is provided, defaults to `datetime.utcnow()`.
+    """
+    if start_time is None:
+        start_time = datetime.utcnow()
 
-# ─────────────────────────────────────────────
-# 2. Fetch last 15 days of data per station
-# ─────────────────────────────────────────────
-
-def fetch_last15d(station_name):
-    now = datetime.utcnow()
-    start = now - timedelta(days=1)
+    start = start_time - timedelta(days=days)
     start_str = start.strftime('%Y-%m-%dT%H:%M:%S-06:00')  # Alberta time
 
     safe_name = station_name.replace("'", "''")  # escape apostrophes
@@ -38,46 +37,38 @@ def fetch_last15d(station_name):
         r = requests.get(url, params=params, timeout=30)
         r.raise_for_status()
         return pd.DataFrame(r.json().get("value", []))
-    except Exception as e:
-        print(f"Failed to fetch data for {station_name}: {e}")
+    except Exception:
         return pd.DataFrame()
 
 
-# ─────────────────────────────────────────────
 # 3. Clean data
-# ─────────────────────────────────────────────
-
 def clean_data(df):
     df = df.copy()
     df["ParameterName"] = df["ParameterName"].fillna("").replace('', 'AQHI')
-
+    df["ReadingDate"] = pd.to_datetime(df["ReadingDate"], utc=True).dt.tz_convert("America/Edmonton")
+    df = df.drop_duplicates(subset=["StationName", "ParameterName", "ReadingDate"])
     ppm_params = [
         "Nitric Oxide", "Nitrogen Dioxide", "Total Oxides of Nitrogen",
         "Sulphur Dioxide", "Ozone", "Carbon Monoxide"
     ]
     df.loc[df["ParameterName"].isin(ppm_params), "Value"] *= 1000
+    df = df[~((df["ParameterName"] == "Ozone") & (df["Value"] > 150))]
+    df = df[~((df["ParameterName"] != "Outdoor Temperature") & (df["Value"] == -10))]
 
     return df
 
 
-# ─────────────────────────────────────────────
 # 4. Create DB connection
-# ─────────────────────────────────────────────
-
 def get_engine():
-    DB_USER = os.environ["DB_DKEV"]
+    DB_USER = os.environ["DB_USER"]
     DB_PASS = os.environ["DB_PASS"]
     DB_HOST = os.environ["DB_HOST"]
     DB_PORT = os.environ.get("DB_PORT", "5432")
     DB_NAME = os.environ["DB_NAME"]
     return create_engine(f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
 
-
-
        
-# ─────────────────────────────────────────────
-# 5b. Efficient upsert via temp table
-# ─────────────────────────────────────────────
+# 5. Efficient upsert via temp table
 def create_table_if_needed(engine):
     sql = """
     CREATE TABLE IF NOT EXISTS aqhi_data (
@@ -122,15 +113,11 @@ def upsert_to_main_table(df, engine):
             FROM temp_aqhi_data
             ON CONFLICT (StationName, ParameterName, ReadingDate) DO NOTHING;
         """))
-        print(f">>> Bulk upsert completed. Inserted {len(df)} rows (deduplicated).")
 
 
-# ─────────────────────────────────────────────
 # 6. Run the whole pipeline
-# ─────────────────────────────────────────────
 
 def main():
-    print(">>> Fetching station list...")
     stations = fetch_station_list()
 
     all_data = []
@@ -139,30 +126,24 @@ def main():
         lat = row["Latitude"]
         lon = row["Longitude"]
 
-        df = fetch_last15d(name)
+        df = fetch_last_d(name)
         if df.empty:
-            print(f"  No data for {name}")
             continue
 
         df["Latitude"] = lat
         df["Longitude"] = lon
         all_data.append(df)
-        print(f"  Pulled {len(df)} rows from {name}")
 
     if not all_data:
-        print(">>> No data found. Exiting.")
         return
 
     combined = pd.concat(all_data, ignore_index=True)
     cleaned = clean_data(combined)
 
-    print(f">>> Total cleaned rows: {len(cleaned)}")
-
     engine = get_engine()
     create_table_if_needed(engine)
 
-    upsert_to_main_table(cleaned, engine)  # ← this is the new line
-    print(">>> Data inserted into database (deduplicated).")
+    upsert_to_main_table(cleaned, engine)
 
 
 if __name__ == "__main__":
