@@ -139,6 +139,7 @@ def main():
     
     non_empty = [df for df in all_data if not df.empty]
     combined = pd.concat(non_empty, ignore_index=True)
+    cleaned = clean_data(combined)
 
     engine = get_engine()
     create_table_if_needed(engine)
