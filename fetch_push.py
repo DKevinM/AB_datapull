@@ -105,6 +105,7 @@ def upsert_to_main_table(df, engine):
         """))
 
         # Step 2: Insert into temp table (bulk insert)
+        df = df[["StationName", "ParameterName", "ReadingDate", "Value", "Latitude", "Longitude"]]
         df.to_sql("temp_aqhi_data", con=conn, if_exists="append", index=False, method='multi')
 
         # Step 3: Insert into main table with deduplication
