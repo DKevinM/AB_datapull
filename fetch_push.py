@@ -66,21 +66,16 @@ def clean_data(df):
 
 # 4. Create DB connection
 def get_engine():
-    DB_USER = os.environ["DB_USER"]
-    DB_PASS = os.environ["DB_PASS"]
-    DB_HOST = os.environ["DB_HOST"]
-    DB_PORT = os.environ.get("DB_PORT", "5432")
-    DB_NAME = os.environ["DB_NAME"]
-    return create_engine(f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+    return create_engine(os.environ["SUPABASE_DB_URL"])
 
        
 # 5. Efficient upsert via temp table
 def create_table_if_needed(engine):
     sql = """
     CREATE TABLE IF NOT EXISTS aqhi_data (
-        "StationName" TEXT,
-        "ParameterName" TEXT,
-        "ReadingDate" TIMESTAMP,
+        "StationName" TEXT NOT NULL,
+        "ParameterName" TEXT NOT NULL,
+        "ReadingDate" TIMESTAMP NOT NULL,
         "Value" DOUBLE PRECISION,
         "Latitude" DOUBLE PRECISION,
         "Longitude" DOUBLE PRECISION,
@@ -100,9 +95,9 @@ def upsert_to_main_table(df, engine):
         # Step 1: Create temp table
         conn.execute(text("""
         CREATE TEMP TABLE temp_aqhi_data (
-            "StationName" TEXT,
-            "ParameterName" TEXT,
-            "ReadingDate" TIMESTAMP,
+            "StationName" TEXT NOT NULL,
+            "ParameterName" TEXT NOT NULL,
+            "ReadingDate" TIMESTAMP NOT NULL,
             "Value" DOUBLE PRECISION,
             "Latitude" DOUBLE PRECISION,
             "Longitude" DOUBLE PRECISION,
