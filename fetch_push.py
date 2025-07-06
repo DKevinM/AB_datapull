@@ -13,7 +13,7 @@ def fetch_station_list():
     return pd.json_normalize(raw["value"])[["Name", "Latitude", "Longitude"]]
 
 # 2. Fetch data per station
-def fetch_last_d(station_name, days=2, start_time=None):
+def fetch_last_d(station_name, days=7, start_time=None):
     """
     Fetch AQHI data for the past `days` from `start_time` (UTC).
     If no `start_time` is provided, defaults to `datetime.utcnow()`.
