@@ -22,7 +22,7 @@ def fetch_last_d(station_name, days=2, start_time=None):
         start_time = datetime.utcnow()
 
     start = start_time - timedelta(days=days)
-    start_str = start.strftime('%Y-%m-%dT%H:%M:%S-06:00')  # Alberta time
+    start_str = start.strftime('%Y-%m-%dT%H:%M:%SZ')  # UTC time (Z = Zulu = UTC)
 
     safe_name = station_name.replace("'", "''")  # escape apostrophes
     url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationMeasurements"
@@ -45,11 +45,7 @@ def fetch_last_d(station_name, days=2, start_time=None):
 def clean_data(df):
     df = df.copy()
     df["ParameterName"] = df["ParameterName"].fillna("").replace('', 'AQHI')
-    df["ReadingDate"] = (
-        pd.to_datetime(df["ReadingDate"], utc=True)
-          .dt.tz_convert("America/Edmonton")
-          .dt.tz_localize(None)  
-    )
+    df["ReadingDate"] = pd.to_datetime(df["ReadingDate"], utc=True)
     ppm_params = [
         "Nitric Oxide", "Nitrogen Dioxide", "Total Oxides of Nitrogen",
         "Sulphur Dioxide", "Ozone", "Carbon Monoxide"
