@@ -1,9 +1,9 @@
 name: Fetch Last 30d Data
 
-on:
-  schedule:
-    - cron: '30 * * * *'
-  workflow_dispatch:
+#on:
+#  schedule:
+#    - cron: '30 * * * *'
+#  workflow_dispatch:
 
 permissions:
   contents: write
