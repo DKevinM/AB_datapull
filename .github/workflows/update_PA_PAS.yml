@@ -26,7 +26,7 @@ jobs:
           pip install pandas geopandas shapely requests
 
       - name: Run PurpleAir region script
-        run: python pull_purpleair.py
+        run: python PA_PAS.py
 
       - name: Commit and push CSV
         run: |
