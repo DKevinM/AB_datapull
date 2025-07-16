@@ -4,32 +4,6 @@ import pandas as pd
 import json
 from datetime import datetime, timezone, timedelta
 
-# Load your static sensor list
-sensor_df = pd.read_csv("data/PAS_sensors.csv")
-sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
-sensor_id_str = ",".join(map(str, sensor_ids))
-
-# Build API call
-url = "https://api.purpleair.com/v1/sensors"
-headers = {"X-API-Key": os.getenv("PURPLEAIR_API_KEY")}
-params = {
-    "fields": "sensor_index,last_seen,humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b",
-    "show_only": sensor_id_str
-}
-
-response = requests.get(url, headers=headers, params=params)
-data = response.json()
-fields = data["fields"]
-rows = data["data"]
-df_live = pd.DataFrame(rows, columns=fields)
-
-# Merge with static sensor metadata
-df = pd.merge(sensor_df, df_live, on="sensor_index", how="inner")
-
-# Filter out sensors older than 3 hours
-now = datetime.now(timezone.utc)
-df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
-df = df[df["last_seen"] >= (now - timedelta(hours=3))]
 
 # Robust PM2.5 calculation (R logic ported)
 def get_best_pm(a, b, avg):
@@ -52,8 +26,6 @@ def get_best_pm(a, b, avg):
     return avg
 
 
-df["pm_raw"] = df.apply(lambda x: get_best_pm(x["pm2.5_atm_a"], x["pm2.5_atm_b"], x["pm2.5_atm"]), axis=1)
-
 # Apply RH correction
 def correct_pm25(pm, rh):
     if pd.isna(pm): return None
@@ -64,7 +36,6 @@ def correct_pm25(pm, rh):
         return pm / (1 + 0.24 / (100 / 70 - 1))
     else:
         return pm / (1 + 0.24 / (100 / rh - 1))
-
 
 
 # Color assignment
@@ -83,14 +54,49 @@ def get_color(pm, name):
     elif pm > 20: return "#016797"
     elif pm > 10: return "#0099cb"
     else: return "#01cbff"
+        
 
+# Load your static sensor list
+sensor_df = pd.read_csv("data/PAS_sensors.csv")
+sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
+sensor_id_str = ",".join(map(str, sensor_ids))
+
+# Build API call
+url = "https://api.purpleair.com/v1/sensors"
+headers = {"X-API-Key": os.getenv("PURPLEAIR_API_KEY")}
+params = {
+    "fields": "sensor_index,last_seen,humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b",
+    "show_only": sensor_id_str
+}
+
+
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
+fields = data["fields"]
+rows = data["data"]
+df_live = pd.DataFrame(rows, columns=fields)
+
+
+# Merge with static sensor metadata
+df = pd.merge(sensor_df, df_live, on="sensor_index", how="inner")
+
+
+# Filter out sensors older than 3 hours
+now = datetime.now(timezone.utc)
+df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
+df = df[df["last_seen"] >= (now - timedelta(hours=3))]
+
+
+df["pm_raw"] = df.apply(lambda x: get_best_pm(x["pm2.5_atm_a"], x["pm2.5_atm_b"], x["pm2.5_atm"]), axis=1)
+
+df["pm_corr"] = df.apply(lambda x: correct_pm25(x["pm_raw"], x["humidity"]), axis=1)
 
 df["color"] = df.apply(lambda x: get_color(x["pm_corr"], x["name"]), axis=1)
 
 # Clean result
 result = df[[
     "sensor_index", "name", "latitude", "longitude",
-    "pm_raw", "humidity", "pm_corr", "color", "last_seen"
+    "humidity", "pm_corr", "color", "last_seen"
 ]]
 
 # Save as JSON for Leaflet or web app
