@@ -65,7 +65,7 @@ def correct_pm25(pm, rh):
     else:
         return pm / (1 + 0.24 / (100 / rh - 1))
 
-df["color"] = df.apply(lambda x: get_color(x["pm_corr"], x["name"]), axis=1)
+
 
 # Color assignment
 def get_color(pm, name):
@@ -85,7 +85,7 @@ def get_color(pm, name):
     else: return "#01cbff"
 
 
-df["color"] = df["pm_corr"].apply(get_color)
+df["color"] = df.apply(lambda x: get_color(x["pm_corr"], x["name"]), axis=1)
 
 # Clean result
 result = df[[
