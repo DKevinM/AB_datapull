@@ -65,10 +65,12 @@ def correct_pm25(pm, rh):
     else:
         return pm / (1 + 0.24 / (100 / rh - 1))
 
-df["pm_corr"] = df.apply(lambda x: correct_pm25(x["pm_raw"], x["humidity"]), axis=1)
+df["color"] = df.apply(lambda x: get_color(x["pm_corr"], x["name"]), axis=1)
 
 # Color assignment
-def get_color(pm):
+def get_color(pm, name):
+    if "PAS" not in str(name):
+        return "#808080"  # gray for non-PAS sensors
     if pd.isna(pm): return "#808080"
     if pm > 100: return "#640100"
     elif pm > 90: return "#9a0100"
@@ -81,6 +83,7 @@ def get_color(pm):
     elif pm > 20: return "#016797"
     elif pm > 10: return "#0099cb"
     else: return "#01cbff"
+
 
 df["color"] = df["pm_corr"].apply(get_color)
 
