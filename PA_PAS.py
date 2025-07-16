@@ -1,5 +1,4 @@
-// purpleair regional pull - once per day to update sensor list
-
+# purpleair regional pull - once per day to update sensor list
 import os
 import requests
 import pandas as pd
