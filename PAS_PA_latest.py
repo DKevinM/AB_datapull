@@ -2,6 +2,7 @@ import os
 import requests
 import pandas as pd
 import json
+import pytz
 from datetime import datetime, timezone, timedelta
 
 
@@ -100,5 +101,6 @@ result = df[[
 ]]
 
 # Save as JSON for Leaflet or web app
-result["last_seen"] = result["last_seen"].dt.strftime('%Y-%m-%d %H:%M:%S')
+ab_tz = pytz.timezone("America/Edmonton")
+result["last_seen"] = result["last_seen"].dt.tz_convert(ab_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
 result.to_json("data/PAS_PM25_map.json", orient="records", indent=2)
