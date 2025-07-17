@@ -33,7 +33,7 @@ df = pd.DataFrame(rows, columns=fields)
 gdf = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.longitude, df.latitude), crs="EPSG:4326")
 
 # Filter to shapefile region
-inside = gdf[gdf.geometry.within(region.unary_union)]
+inside = gdf[gdf.geometry.within(region.union_all())]
 
 # Save to CSV
 inside.to_csv("data/PAS_sensors.csv", index=False)
