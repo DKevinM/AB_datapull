@@ -2,7 +2,7 @@ name: Update PurpleAir PM2.5 Data
 
 on:
   schedule:
-    - cron: '5 * * * *'  # every hour at 00 minutes
+    - cron: '*/30 * * * *'  # every hour at 00 minutes
   workflow_dispatch:      # allow manual runs from GitHub UI
 
 jobs:
