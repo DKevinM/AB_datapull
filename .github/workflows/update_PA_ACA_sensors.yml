@@ -1,9 +1,9 @@
 name: Update ACA PurpleAir PM2.5 Data
 
-on:
-  schedule:
-    - cron: '*/30 * * * *'  # every hour at 00 minutes
-  workflow_dispatch:      # allow manual runs from GitHub UI
+#on:
+#  schedule:
+#    - cron: '*/30 * * * *'  # every hour at 00 minutes
+#  workflow_dispatch:      # allow manual runs from GitHub UI
 
 jobs:
   update-purpleair:
