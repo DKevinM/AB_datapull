@@ -1,8 +1,8 @@
 name: Update ACA PurpleAir Sensor List
 
 on:
-  schedule:
-    - cron: '0 6 * * *'  # Run every day at 6 AM UTC
+#  schedule:
+#    - cron: '0 6 * * *'  # Run every day at 6 AM UTC
   workflow_dispatch:     # Allow manual run via GitHub Actions UI
 
 jobs:
