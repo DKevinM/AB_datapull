@@ -26,7 +26,11 @@ jobs:
           pip install pandas geopandas shapely requests
 
       - name: Run PurpleAir region script
-        run: python PA_PAZA.py
+        run: |
+          python PAZA_PA_latest.py
+          # Safety net: ensure data dir and file exist even if script bailed early
+          mkdir -p data
+          [ -f data/PAZA_PM25_map.json ] || echo "[]" > data/PAZA_PM25_map.json
 
       - name: Commit and push CSV
         run: |
