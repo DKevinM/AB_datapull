@@ -5,6 +5,9 @@ import json
 import pytz
 from datetime import datetime, timezone, timedelta
 from math import ceil
+from pathlib import Path
+# before writing
+Path("data").mkdir(parents=True, exist_ok=True)
 
 API_URL = "https://api.purpleair.com/v1/sensors"
 
@@ -143,8 +146,11 @@ def main():
     ab_tz = pytz.timezone("America/Edmonton")
     out["last_seen"] = out["last_seen"].dt.tz_convert(ab_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
 
-    out.to_json("data/PAZA_PM25_map.json", orient="records", indent=2)
-    print(f"Wrote data/PAZA_PM25_map.json with {len(out)} sensors.")
+    out_path = Path("data/PAZA_PM25_map.json")
+    if df.empty:
+        out_path.write_text("[]", encoding="utf-8")
+    else:
+        out.to_json(out_path, orient="records", indent=2)
 
 if __name__ == "__main__":
     main()
