@@ -1,67 +1,85 @@
 import os
+import sys
 import requests
 import pandas as pd
+from urllib.parse import urlparse
 from sqlalchemy import create_engine, text
 
-# --- 0) DB connection ---
-def get_engine():
-    # e.g. postgres://postgres:<PW>@db.<ref>.supabase.co:5432/postgres?sslmode=require
-    return create_engine(os.environ["SUPABASE_DB_URL"])
+# Optional: use psycopg2 execute_values for fast bulk upserts
+from psycopg2.extras import execute_values
 
-# --- 1) Fetch station list from Alberta OData ---
+def get_engine():
+    url = os.environ.get("SUPABASE_DB_URL")
+    if not url:
+        print("ERROR: SUPABASE_DB_URL env var is not set.", file=sys.stderr)
+        sys.exit(1)
+    return create_engine(url)
+
 def fetch_station_list():
     url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/Stations?$select=Name,Latitude,Longitude"
-    r = requests.get(url, timeout=20)
+    r = requests.get(url, timeout=30)
     r.raise_for_status()
-    df = pd.json_normalize(r.json()["value"])[["Name", "Latitude", "Longitude"]]
-    df = df.dropna(subset=["Name", "Latitude", "Longitude"]).drop_duplicates(subset=["Name"])
-    df["Name"] = df["Name"].str.strip()
-    return df.rename(columns={"Name": "station_name"})
+    raw = r.json()
+    df = pd.json_normalize(raw["value"])[["Name", "Latitude", "Longitude"]]
 
-# --- 2) Upsert into Supabase (daily) ---
-def upsert_stations(engine, stations_df: pd.DataFrame):
+    # clean
+    df = df.dropna(subset=["Name", "Latitude", "Longitude"])
+    df["Name"] = df["Name"].astype(str).str.strip()
+    df = df.drop_duplicates(subset=["Name"])
+
+    # rename to EXACT DB column names
+    df = df.rename(columns={"Name": "StationName"})
+    return df[["StationName", "Latitude", "Longitude"]]
+
+def ensure_table(engine):
+    """Create stations table if missing (NO PostGIS)."""
+    sql = """
+    CREATE TABLE IF NOT EXISTS public.stations (
+      "StationName" TEXT PRIMARY KEY,
+      "Latitude"    DOUBLE PRECISION NOT NULL,
+      "Longitude"   DOUBLE PRECISION NOT NULL
+    );
+    """
     with engine.begin() as conn:
-        # Enable PostGIS once
-        conn.execute(text("CREATE EXTENSION IF NOT EXISTS postgis;"))
+        conn.execute(text(sql))
 
-        # Create table if needed (idempotent)
-        conn.execute(text("""
-        CREATE TABLE IF NOT EXISTS public.stations (
-          station_name TEXT NOT NULL UNIQUE,
-          latitude     DOUBLE PRECISION NOT NULL,
-          longitude    DOUBLE PRECISION NOT NULL,
-          geom         geometry(Point,4326)
-            GENERATED ALWAYS AS (ST_SetSRID(ST_MakePoint(longitude, latitude),4326)) STORED
-        );
-        """))
+def upsert_stations(engine, df: pd.DataFrame):
+    """Bulk UPSERT (ON CONFLICT) into public.stations using psycopg2 execute_values."""
+    if df.empty:
+        print("No stations to upsert.")
+        return
 
-        # Temp table for fast bulk insert
-        conn.execute(text("""
-        CREATE TEMP TABLE tmp_stations (
-          station_name TEXT,
-          latitude     DOUBLE PRECISION,
-          longitude    DOUBLE PRECISION
-        ) ON COMMIT DROP;
-        """))
+    # Convert to list-of-tuples
+    rows = list(df.itertuples(index=False, name=None))  # (StationName, Latitude, Longitude)
 
-        stations_df.to_sql("tmp_stations", conn, if_exists="append", index=False, method="multi")
+    # Build SQL once
+    sql = """
+        INSERT INTO public.stations ("StationName","Latitude","Longitude")
+        VALUES %s
+        ON CONFLICT ("StationName") DO UPDATE
+        SET "Latitude" = EXCLUDED."Latitude",
+            "Longitude" = EXCLUDED."Longitude";
+    """
 
-        # Upsert by station_name; if coords change, update them
-        conn.execute(text("""
-        INSERT INTO public.stations (station_name, latitude, longitude)
-        SELECT station_name, latitude, longitude
-        FROM tmp_stations
-        ON CONFLICT (station_name) DO UPDATE
-          SET latitude  = EXCLUDED.latitude,
-              longitude = EXCLUDED.longitude;
-        """))
+    # Use the raw DBAPI connection underneath SQLAlchemy for execute_values
+    with engine.begin() as sa_conn:
+        raw = sa_conn.connection  # psycopg2 connection
+        with raw.cursor() as cur:
+            execute_values(cur, sql, rows, page_size=1000)
 
-# --- 3) Orchestrate (call once every 24h) ---
 def main():
-    engine = get_engine()
-    stations = fetch_station_list()
-    if not stations.empty:
-        upsert_stations(engine, stations)
+    try:
+        engine = get_engine()
+        ensure_table(engine)
+        df = fetch_station_list()
+        upsert_stations(engine, df)
+        print(f"Upserted {len(df)} stations.")
+    except requests.RequestException as e:
+        print(f"Network error fetching station list: {e}", file=sys.stderr)
+        sys.exit(2)
+    except Exception as e:
+        print(f"Unexpected error: {e}", file=sys.stderr)
+        sys.exit(3)
 
 if __name__ == "__main__":
     main()
