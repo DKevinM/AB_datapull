@@ -1,143 +1,148 @@
 import os
+import sys
+import math
 import requests
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from sqlalchemy import create_engine, text
+from psycopg2.extras import execute_values  # pip install psycopg2-binary
 
-# ------------------------------
-# 3) Measurements fetch (no lat/lon)
-# ------------------------------
-def fetch_last_d(station_name, days=1, start_time=None):
-    if start_time is None:
-        start_time = datetime.utcnow()
-    start = start_time - timedelta(days=days)
-    start_str = start.strftime('%Y-%m-%dT%H:%M:%SZ')  # UTC (Zulu)
-    safe_name = station_name.replace("'", "''")
+# --- Config ---
+HOURS_BACK = 6
+UPSERT_CHUNK = 50_000
+DB_URL = os.environ.get("SUPABASE_DB_URL")
 
-    url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationMeasurements"
+ODATA_STATIONS = (
+    "https://data.environment.alberta.ca/EdwServices/aqhi/odata/Stations?$select=Name"
+)
+ODATA_MEASUREMENTS = (
+    "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationMeasurements"
+)
+
+PPM_PARAMS = {
+    "Nitric Oxide",
+    "Nitrogen Dioxide",
+    "Total Oxides of Nitrogen",
+    "Sulphur Dioxide",
+    "Ozone",
+    "Carbon Monoxide",
+}
+
+# --- DB helpers ---
+def get_engine():
+    if not DB_URL:
+        print("ERROR: SUPABASE_DB_URL env var not set", file=sys.stderr)
+        sys.exit(1)
+    return create_engine(DB_URL)
+
+def ensure_aqhi_table(engine):
+    ddl = """
+    CREATE TABLE IF NOT EXISTS public.aqhi_data (
+      "StationName"   TEXT NOT NULL,
+      "ParameterName" TEXT NOT NULL,
+      "ReadingDate"   TIMESTAMP NOT NULL,
+      "Value"         DOUBLE PRECISION,
+      PRIMARY KEY ("StationName","ParameterName","ReadingDate")
+    );
+    CREATE INDEX IF NOT EXISTS aqhi_readingdate_idx ON public.aqhi_data ("ReadingDate");
+    """
+    with engine.begin() as conn:
+        conn.execute(text(ddl))
+
+# --- Fetch ---
+def fetch_station_names():
+    r = requests.get(ODATA_STATIONS, timeout=30)
+    r.raise_for_status()
+    df = pd.json_normalize(r.json()["value"])[["Name"]]
+    df["Name"] = df["Name"].astype(str).str.strip()
+    return df["Name"].dropna().drop_duplicates().tolist()
+
+def fetch_last_h(station_name: str, hours: int = HOURS_BACK) -> pd.DataFrame:
+    start = datetime.now(timezone.utc) - timedelta(hours=hours)
+    start_str = start.strftime("%Y-%m-%dT%H:%M:%SZ")  # UTC (Zulu)
+    safe = station_name.replace("'", "''")
+
     params = {
         "$format": "json",
-        "$filter": f"StationName eq '{safe_name}' AND ReadingDate gt {start_str}",
+        "$filter": f"StationName eq '{safe}' AND ReadingDate gt {start_str}",
         "$orderby": "ReadingDate desc",
-        "$select": "StationName,ParameterName,ReadingDate,Value"
+        "$select": "StationName,ParameterName,ReadingDate,Value",
     }
     try:
-        r = requests.get(url, params=params, timeout=30)
+        r = requests.get(ODATA_MEASUREMENTS, params=params, timeout=30)
         r.raise_for_status()
         return pd.DataFrame(r.json().get("value", []))
-    except Exception:
+    except Exception as e:
+        print(f"Fetch failed for {station_name!r}: {e}", file=sys.stderr)
         return pd.DataFrame()
 
-
-# ------------------------------
-# 4) Clean measurements
-# ------------------------------
-def clean_data(df):
-    df = df.copy()
+# --- Clean ---
+def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
         return df
-    df["ParameterName"] = df["ParameterName"].fillna("").replace("", "AQHI")
-    df["ReadingDate"] = pd.to_datetime(df["ReadingDate"], utc=True)
-    ppm_params = [
-        "Nitric Oxide", "Nitrogen Dioxide", "Total Oxides of Nitrogen",
-        "Sulphur Dioxide", "Ozone", "Carbon Monoxide"
-    ]
-    df.loc[df["ParameterName"].isin(ppm_params), "Value"] = df.loc[df["ParameterName"].isin(ppm_params), "Value"] * 1000
-    # Remove known outliers
-    df = df[~((df["ParameterName"] == "Ozone") & (df["Value"] > 150))]
-    # Remove invalid values
-    df = df[df["Value"].notna()]
-    df = df.drop_duplicates(subset=["StationName", "ParameterName", "ReadingDate"])
-    return df
+    out = df.copy()
 
+    out["StationName"] = out["StationName"].astype(str).str.strip()
+    out["ParameterName"] = out["ParameterName"].fillna("").replace("", "AQHI")
+    out["ReadingDate"] = pd.to_datetime(out["ReadingDate"], utc=True).dt.tz_convert(None)
 
+    # ppm -> ppb for common gases
+    ppm_mask = out["ParameterName"].isin(PPM_PARAMS)
+    out.loc[ppm_mask, "Value"] = out.loc[ppm_mask, "Value"] * 1000
 
-# ------------------------------
-# 5) DB helpers
-# ------------------------------
-def get_engine():
-    return create_engine(os.environ["SUPABASE_DB_URL"])
+    # known outliers
+    out = out[~((out["ParameterName"] == "Ozone") & (out["Value"] > 150))]
 
-def create_measurements_table_if_needed(engine):
-    with engine.begin() as conn:
-        conn.execute(text("""
-        CREATE TABLE IF NOT EXISTS public.aqhi_data (
-          station_id BIGINT NOT NULL,
-          "ParameterName" TEXT NOT NULL,
-          "ReadingDate" TIMESTAMP NOT NULL,
-          "Value" DOUBLE PRECISION,
-          PRIMARY KEY (station_id, "ParameterName", "ReadingDate"),
-          FOREIGN KEY (station_id) REFERENCES public.stations(station_id)
-            ON UPDATE CASCADE ON DELETE RESTRICT
-        );
-        """))
+    # drop invalids & dups
+    out = out.dropna(subset=["StationName", "ParameterName", "ReadingDate", "Value"])
+    out = out.drop_duplicates(subset=["StationName", "ParameterName", "ReadingDate"])
 
-def get_station_id_map(engine) -> dict:
-    with engine.begin() as conn:
-        res = conn.execute(text("SELECT station_id, station_name FROM public.stations;"))
-        return {row.station_name: row.station_id for row in res}
+    return out[["StationName", "ParameterName", "ReadingDate", "Value"]]
 
-def upsert_measurements(engine, df: pd.DataFrame, name_to_id: dict):
+# --- Upsert ---
+def upsert_measurements(engine, df: pd.DataFrame) -> int:
     if df.empty:
-        return
-    # Map StationName -> station_id, drop rows we can't map (should be none if you just synced stations)
-    df = df[df["StationName"].isin(name_to_id.keys())].copy()
-    if df.empty:
-        return
-    df["station_id"] = df["StationName"].map(name_to_id)
-    df = df.rename(columns={"ParameterName": "ParameterName", "ReadingDate": "ReadingDate", "Value": "Value"})
-    df = df[["station_id", "ParameterName", "ReadingDate", "Value"]]
+        return 0
+    rows = list(df.itertuples(index=False, name=None))
+    sql = """
+      INSERT INTO public.aqhi_data ("StationName","ParameterName","ReadingDate","Value")
+      VALUES %s
+      ON CONFLICT ("StationName","ParameterName","ReadingDate")
+      DO UPDATE SET "Value" = EXCLUDED."Value"
+      -- only write when value actually changed
+      WHERE public.aqhi_data."Value" IS DISTINCT FROM EXCLUDED."Value";
+    """
+    sent = 0
+    with engine.begin() as sa_conn:
+        pg = sa_conn.connection
+        with pg.cursor() as cur:
+            for i in range(0, len(rows), UPSERT_CHUNK):
+                execute_values(cur, sql, rows[i:i+UPSERT_CHUNK], page_size=20_000)
+                sent += min(UPSERT_CHUNK, len(rows) - i)
+    return sent
 
-    with engine.begin() as conn:
-        conn.execute(text("""
-        CREATE TEMP TABLE tmp_aqhi_data (
-          station_id BIGINT NOT NULL,
-          "ParameterName" TEXT NOT NULL,
-          "ReadingDate" TIMESTAMP NOT NULL,
-          "Value" DOUBLE PRECISION,
-          PRIMARY KEY (station_id, "ParameterName", "ReadingDate")
-        ) ON COMMIT DROP;
-        """))
-        df.to_sql("tmp_aqhi_data", conn, if_exists="append", index=False, method="multi")
-        conn.execute(text("""
-        INSERT INTO public.aqhi_data (station_id, "ParameterName", "ReadingDate", "Value")
-        SELECT station_id, "ParameterName", "ReadingDate", "Value"
-        FROM tmp_aqhi_data
-        ON CONFLICT (station_id, "ParameterName", "ReadingDate")
-        DO UPDATE SET "Value" = EXCLUDED."Value"
-        WHERE EXCLUDED."Value" IS NOT NULL;
-        """))
-
-
-
-# ------------------------------
-# 6) Orchestration
-# ------------------------------
-def main(days_back=1):
+# --- Main ---
+def main(hours_back: int = HOURS_BACK):
     engine = get_engine()
+    ensure_aqhi_table(engine)
 
-    # A) Stations: fetch + upsert (do this once per run; schedule the script daily if you want)
-    stations_df = fetch_station_list()
-    upsert_stations(engine, stations_df)
-    name_to_id = get_station_id_map(engine)
+    stations = fetch_station_names()
+    if not stations:
+        print("No stations returned."); return
 
-    # B) Measurements: create table, then fetch per station (no lat/lon), clean, map station_id, upsert
-    create_measurements_table_if_needed(engine)
-
-    all_data = []
-    for station_name in stations_df["station_name"]:
-        df = fetch_last_d(station_name, days=days_back)
+    frames = []
+    for name in stations:
+        df = fetch_last_h(name, hours=hours_back)
         if not df.empty:
-            all_data.append(df)
+            frames.append(df)
 
-    if not all_data:
-        return
-
-    combined = pd.concat(all_data, ignore_index=True)
-    cleaned = clean_data(combined)
-    upsert_measurements(engine, cleaned, name_to_id)
+    if frames:
+        combined = pd.concat(frames, ignore_index=True)
+        cleaned = clean_data(combined)
+        sent = upsert_measurements(engine, cleaned)
+        print(f"✅ window={hours_back}h rows_upserted={sent} (input={len(cleaned)})")
+    else:
+        print("No data fetched in window.")
 
 if __name__ == "__main__":
-    # run daily with days_back=1; or pass a larger window when you need a backfill
-    main(days_back=1)
-    
+    main(hours_back=6)
