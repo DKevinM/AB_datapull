@@ -10,8 +10,7 @@ def get_engine():
 
 # --- 1) Fetch station list from Alberta OData ---
 def fetch_station_list():
-    url = ("https://data.environment.alberta.ca/EdwServices/aqhi/odata/"
-           "Stations?$select=Name,Latitude,Longitude")
+    url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/Stations?$select=Name,Latitude,Longitude"
     r = requests.get(url, timeout=20)
     r.raise_for_status()
     df = pd.json_normalize(r.json()["value"])[["Name", "Latitude", "Longitude"]]
