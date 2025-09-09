@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -25,6 +25,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pandas requests SQLAlchemy python-dotenv psycopg2-binary
-       
+
       - name: Run AQHI fetch/push script
         run: python fetch_stations.py
+        
+      - name: Sanity check row count
+        run: |
+          python - <<'PY'
+          import os
+          from sqlalchemy import create_engine, text
+          eng = create_engine(os.environ["SUPABASE_DB_URL"])
+          with eng.begin() as conn:
+              n = conn.execute(text('select count(*) from public.stations')).scalar_one()
+              print(f"stations rows now: {n}")
+          PY
