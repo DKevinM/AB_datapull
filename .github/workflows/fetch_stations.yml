@@ -2,7 +2,7 @@ name: Fetch and Push AQHI Data
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Runs every hour at 00 minutes
+    - cron: '5 9 * * *'  # Runs every day at 9:05
   workflow_dispatch:     # Allows manual trigger from GitHub UI
 
 jobs:
@@ -27,4 +27,4 @@ jobs:
           pip install pandas requests SQLAlchemy python-dotenv psycopg2-binary
        
       - name: Run AQHI fetch/push script
-        run: python fetch_push.py
+        run: python fetch_stations.py
