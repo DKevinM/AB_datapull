@@ -24,7 +24,6 @@ def upsert_stations(engine, stations_df: pd.DataFrame):
     with engine.begin() as conn:
         conn.execute(text("""
         CREATE TABLE IF NOT EXISTS public.stations (
-          station_id   BIGSERIAL PRIMARY KEY,
           station_name TEXT NOT NULL UNIQUE,
           latitude     DOUBLE PRECISION NOT NULL,
           longitude    DOUBLE PRECISION NOT NULL,
