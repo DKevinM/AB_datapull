@@ -4,54 +4,6 @@ import pandas as pd
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine, text
 
-# 1. Fetch station list
-def fetch_station_list():
-    STATIONS_URL = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/Stations?$select=Name,Latitude,Longitude"
-    resp = requests.get(STATIONS_URL, timeout=20)
-    resp.raise_for_status()
-    raw = resp.json()
-    df = pd.json_normalize(raw["value"])[["Name", "Latitude", "Longitude"]]
-    # basic cleaning / de-dupe just in case
-    df = df.dropna(subset=["Name", "Latitude", "Longitude"]).drop_duplicates(subset=["Name"])
-    return df.rename(columns={"Name": "station_name"})
-
-
-# ------------------------------
-# 2) Upsert stations (daily or each run)
-# ------------------------------
-def upsert_stations(engine, stations_df: pd.DataFrame):
-    # stations table: station_name UNIQUE, latitude, longitude, geom is generated
-    with engine.begin() as conn:
-        conn.execute(text("""
-        CREATE TABLE IF NOT EXISTS public.stations (
-          station_name TEXT NOT NULL UNIQUE,
-          latitude     DOUBLE PRECISION NOT NULL,
-          longitude    DOUBLE PRECISION NOT NULL,
-          geom         geometry(Point,4326)
-            GENERATED ALWAYS AS (ST_SetSRID(ST_MakePoint(longitude, latitude),4326)) STORED
-        );
-        """))
-        # temp table for fast bulk load
-        conn.execute(text("""
-        CREATE TEMP TABLE tmp_stations (
-          station_name TEXT,
-          latitude DOUBLE PRECISION,
-          longitude DOUBLE PRECISION
-        ) ON COMMIT DROP;
-        """))
-        stations_df.to_sql("tmp_stations", conn, if_exists="append", index=False, method="multi")
-        # upsert; if coords change, update them (geom auto-updates)
-        conn.execute(text("""
-        INSERT INTO public.stations (station_name, latitude, longitude)
-        SELECT station_name, latitude, longitude
-        FROM tmp_stations
-        ON CONFLICT (station_name) DO UPDATE
-          SET latitude = EXCLUDED.latitude,
-              longitude = EXCLUDED.longitude;
-        """))
-
-
-
 # ------------------------------
 # 3) Measurements fetch (no lat/lon)
 # ------------------------------
@@ -77,8 +29,6 @@ def fetch_last_d(station_name, days=1, start_time=None):
         return pd.DataFrame()
 
 
-
-
 # ------------------------------
 # 4) Clean measurements
 # ------------------------------
@@ -99,8 +49,6 @@ def clean_data(df):
     df = df[df["Value"].notna()]
     df = df.drop_duplicates(subset=["StationName", "ParameterName", "ReadingDate"])
     return df
-
-
 
 
 
@@ -159,9 +107,6 @@ def upsert_measurements(engine, df: pd.DataFrame, name_to_id: dict):
         DO UPDATE SET "Value" = EXCLUDED."Value"
         WHERE EXCLUDED."Value" IS NOT NULL;
         """))
-
-
-
 
 
 
