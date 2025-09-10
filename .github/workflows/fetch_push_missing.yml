@@ -1,0 +1,64 @@
+name: Backfill AQHI (manual only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_utc:
+        description: "Start (UTC), e.g. 2025-09-07T00:00:00Z"
+        required: true
+        type: string
+      end_utc:
+        description: "End (UTC, non-inclusive), e.g. 2025-09-08T00:00:00Z"
+        required: true
+        type: string
+      stations:
+        description: "Optional: comma/newline separated StationName(s)"
+        required: false
+        type: string
+      slice_hours:
+        description: "Slice size in hours"
+        required: false
+        default: "6"
+        type: string
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; \
+          else pip install requests pandas SQLAlchemy psycopg2-binary; fi
+
+      # Build CLI args from the manual inputs
+      - name: Build CLI args
+        id: args
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARGS=()
+          ARGS+=(--start-utc "${{ inputs.start_utc }}")
+          ARGS+=(--end-utc   "${{ inputs.end_utc }}")
+          ARGS+=(--slice-hours "${{ inputs.slice_hours }}")
+          if [[ -n "${{ inputs.stations }}" ]]; then
+            STATIONS="${{ inputs.stations }}"; STATIONS="${STATIONS//,/\\n}"
+            while IFS= read -r line; do
+              s="$(echo "$line" | sed 's/^ *//; s/ *$//')"
+              [[ -z "$s" ]] && continue
+              ARGS+=(--station "$s")
+            done <<< "$STATIONS"
+          fi
+          printf '%q ' "${ARGS[@]}" > args.txt
+          echo "args=$(cat args.txt)" >> "$GITHUB_OUTPUT"
+
+      - name: Run backfill
+        run: |
+          python fetch_push.py ${{ steps.args.outputs.args }}
