@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       start_utc:
-        description: "Start (UTC), e.g. 2025-09-08T07:00:00Z"
+        description: "Start (UTC), e.g. 2025-09-08T06:00:00Z"
         required: true
         type: string
       end_utc:
-        description: "End (UTC, non-inclusive), e.g. 2025-09-10T07:00:00Z"
+        description: "End (UTC, non-inclusive), e.g. 2025-09-10T06:00:00Z"
         required: true
         type: string
       stations:
