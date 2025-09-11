@@ -1,22 +1,22 @@
-name: Backfill AQHI (manual only)
+name: Backfill AQHI (manual)
 
 on:
   workflow_dispatch:
     inputs:
       start_utc:
-        description: "Start (UTC), e.g. 2025-09-07T00:00:00Z"
+        description: "Start (UTC), e.g. 2025-09-08T07:00:00Z"
         required: true
         type: string
       end_utc:
-        description: "End (UTC, non-inclusive), e.g. 2025-09-08T00:00:00Z"
+        description: "End (UTC, non-inclusive), e.g. 2025-09-10T07:00:00Z"
         required: true
         type: string
       stations:
-        description: "Optional: comma/newline separated StationName(s)"
+        description: "Optional: comma or newline separated StationName(s)"
         required: false
         type: string
       slice_hours:
-        description: "Slice size in hours"
+        description: "Slice size (hours) for fetching"
         required: false
         default: "6"
         type: string
@@ -29,6 +29,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -38,7 +39,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; \
           else pip install requests pandas SQLAlchemy psycopg2-binary; fi
 
-      # Build CLI args from the manual inputs
+      # Build CLI args safely from inputs
       - name: Build CLI args
         id: args
         shell: bash
@@ -48,6 +49,7 @@ jobs:
           ARGS+=(--start-utc "${{ inputs.start_utc }}")
           ARGS+=(--end-utc   "${{ inputs.end_utc }}")
           ARGS+=(--slice-hours "${{ inputs.slice_hours }}")
+          # Split stations on comma OR newline; trim blanks
           if [[ -n "${{ inputs.stations }}" ]]; then
             STATIONS="${{ inputs.stations }}"; STATIONS="${STATIONS//,/\\n}"
             while IFS= read -r line; do
