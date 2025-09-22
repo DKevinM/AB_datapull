@@ -24,6 +24,8 @@ PPM_PARAMS = {
     "Sulphur Dioxide",
     "Ozone",
     "Carbon Monoxide",
+    "Hydrogen Sulphide",
+    "Total Reduced Sulphur",
 }
 
 # --- DB helpers ---
