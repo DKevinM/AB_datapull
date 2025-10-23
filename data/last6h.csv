@@ -3942,6 +3942,9 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 8.0,E-BAM Trout Lake,Fine Particulate Matter,2025-10-22T05:00:00-06:00,56.499503,-114.552304
 5.0,E-BAM Trout Lake,Fine Particulate Matter,2025-10-22T04:00:00-06:00,56.499503,-114.552304
 4.0,Calgary Southeast,,2025-10-22T21:00:00-06:00,50.955122,-113.969742
+0.0,Calgary Southeast,Non-methane Hydrocarbons,2025-10-22T21:00:00-06:00,50.955122,-113.969742
+0.001,Calgary Southeast,Hydrogen Sulphide,2025-10-22T21:00:00-06:00,50.955122,-113.969742
+2.3,Calgary Southeast,Methane,2025-10-22T21:00:00-06:00,50.955122,-113.969742
 17.5,Calgary Southeast,Fine Particulate Matter,2025-10-22T21:00:00-06:00,50.955122,-113.969742
 0.001,Calgary Southeast,Ozone,2025-10-22T21:00:00-06:00,50.955122,-113.969742
 2.3,Calgary Southeast,Total Hydrocarbons,2025-10-22T21:00:00-06:00,50.955122,-113.969742
@@ -3953,9 +3956,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 6.5,Calgary Southeast,Outdoor Temperature,2025-10-22T21:00:00-06:00,50.955122,-113.969742
 0.0,Calgary Southeast,Sulphur Dioxide,2025-10-22T21:00:00-06:00,50.955122,-113.969742
 ,Calgary Southeast,Carbon Monoxide,2025-10-22T21:00:00-06:00,50.955122,-113.969742
-,Calgary Southeast,Non-methane Hydrocarbons,2025-10-22T21:00:00-06:00,50.955122,-113.969742
-,Calgary Southeast,Hydrogen Sulphide,2025-10-22T21:00:00-06:00,50.955122,-113.969742
-,Calgary Southeast,Methane,2025-10-22T21:00:00-06:00,50.955122,-113.969742
 ,Calgary Southeast,Carbon Monoxide,2025-10-22T20:00:00-06:00,50.955122,-113.969742
 0.002,Calgary Southeast,Nitric Oxide,2025-10-22T20:00:00-06:00,50.955122,-113.969742
 9.2,Calgary Southeast,Outdoor Temperature,2025-10-22T20:00:00-06:00,50.955122,-113.969742
@@ -5237,7 +5237,7 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Medicine Hat - Crescent Heights,Nitric Oxide,2025-10-22T04:00:00-06:00,50.0488873,-110.6811172
 2.0,Medicine Hat - Crescent Heights,Total Hydrocarbons,2025-10-22T04:00:00-06:00,50.0488873,-110.6811172
 2.7,Medicine Hat - Crescent Heights,Outdoor Temperature,2025-10-22T04:00:00-06:00,50.0488873,-110.6811172
-3.0,Grande Prairie - Henry Pirker,,2025-10-22T21:00:00-06:00,55.1766364,-118.8077555
+2.0,Grande Prairie - Henry Pirker,,2025-10-22T21:00:00-06:00,55.1766364,-118.8077555
 0.001,Grande Prairie - Henry Pirker,Nitric Oxide,2025-10-22T21:00:00-06:00,55.1766364,-118.8077555
 52.6,Grande Prairie - Henry Pirker,Relative Humidity,2025-10-22T21:00:00-06:00,55.1766364,-118.8077555
 0.01,Grande Prairie - Henry Pirker,Ozone,2025-10-22T21:00:00-06:00,55.1766364,-118.8077555
@@ -10043,62 +10043,62 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Buffalo Viewpoint,Hydrogen Sulphide,2025-10-22T04:00:00-06:00,56.9967,-111.5926
 1.0,Buffalo Viewpoint,Outdoor Temperature,2025-10-22T04:00:00-06:00,56.9967,-111.5926
 1.0,Buffalo Viewpoint,Wind Speed,2025-10-22T04:00:00-06:00,56.9967,-111.5926
-55.4,Calgary Varsity,Relative Humidity,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-294.0,Calgary Varsity,Wind Direction,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Nitric Oxide,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Outdoor Temperature,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Total Oxides of Nitrogen,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Methane,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Fine Particulate Matter,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Total Hydrocarbons,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Carbon Monoxide,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Wind Speed,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Non-methane Hydrocarbons,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+0.015,Calgary Varsity,Nitric Oxide,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+4.8,Calgary Varsity,Outdoor Temperature,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+0.049,Calgary Varsity,Total Oxides of Nitrogen,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+13.9,Calgary Varsity,Fine Particulate Matter,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+1.8,Calgary Varsity,Wind Speed,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+0.001,Calgary Varsity,Ozone,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+0.034,Calgary Varsity,Nitrogen Dioxide,2025-10-22T21:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Ozone,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Nitrogen Dioxide,2025-10-22T21:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Wind Speed,2025-10-22T20:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Ozone,2025-10-22T20:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Non-methane Hydrocarbons,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Carbon Monoxide,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Total Hydrocarbons,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Methane,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+294.0,Calgary Varsity,Wind Direction,2025-10-22T21:00:00-06:00,51.08272,-114.138994
+55.4,Calgary Varsity,Relative Humidity,2025-10-22T21:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Total Hydrocarbons,2025-10-22T20:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Total Oxides of Nitrogen,2025-10-22T20:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Carbon Monoxide,2025-10-22T20:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,,2025-10-22T20:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Fine Particulate Matter,2025-10-22T20:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Nitric Oxide,2025-10-22T20:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Non-methane Hydrocarbons,2025-10-22T20:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Outdoor Temperature,2025-10-22T20:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Nitrogen Dioxide,2025-10-22T20:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Methane,2025-10-22T20:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Relative Humidity,2025-10-22T20:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Wind Direction,2025-10-22T20:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Relative Humidity,2025-10-22T19:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Wind Direction,2025-10-22T19:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Carbon Monoxide,2025-10-22T19:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Wind Speed,2025-10-22T20:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Ozone,2025-10-22T20:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Total Oxides of Nitrogen,2025-10-22T20:00:00-06:00,51.08272,-114.138994
+8.7,Calgary Varsity,Fine Particulate Matter,2025-10-22T20:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Nitric Oxide,2025-10-22T20:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Outdoor Temperature,2025-10-22T20:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Nitrogen Dioxide,2025-10-22T20:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Total Oxides of Nitrogen,2025-10-22T19:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Ozone,2025-10-22T19:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Nitric Oxide,2025-10-22T19:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Outdoor Temperature,2025-10-22T19:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Wind Direction,2025-10-22T19:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Relative Humidity,2025-10-22T19:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Fine Particulate Matter,2025-10-22T19:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Wind Speed,2025-10-22T19:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Nitrogen Dioxide,2025-10-22T19:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Non-methane Hydrocarbons,2025-10-22T19:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Total Hydrocarbons,2025-10-22T19:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Wind Speed,2025-10-22T19:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,,2025-10-22T19:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Methane,2025-10-22T19:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Fine Particulate Matter,2025-10-22T19:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Outdoor Temperature,2025-10-22T19:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Methane,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Non-methane Hydrocarbons,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Carbon Monoxide,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Total Hydrocarbons,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-5.5,Calgary Varsity,Wind Speed,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-0.001,Calgary Varsity,Nitric Oxide,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Ozone,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-13.8,Calgary Varsity,Outdoor Temperature,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-156.0,Calgary Varsity,Wind Direction,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-0.007,Calgary Varsity,Total Oxides of Nitrogen,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-0.006,Calgary Varsity,Nitrogen Dioxide,2025-10-22T18:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Fine Particulate Matter,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Carbon Monoxide,2025-10-22T19:00:00-06:00,51.08272,-114.138994
 26.6,Calgary Varsity,Relative Humidity,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Fine Particulate Matter,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+0.006,Calgary Varsity,Nitrogen Dioxide,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+0.007,Calgary Varsity,Total Oxides of Nitrogen,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+156.0,Calgary Varsity,Wind Direction,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+13.8,Calgary Varsity,Outdoor Temperature,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Ozone,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+0.001,Calgary Varsity,Nitric Oxide,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+5.5,Calgary Varsity,Wind Speed,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Total Hydrocarbons,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Carbon Monoxide,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Non-methane Hydrocarbons,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,,2025-10-22T18:00:00-06:00,51.08272,-114.138994
+,Calgary Varsity,Methane,2025-10-22T18:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Total Hydrocarbons,2025-10-22T17:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Carbon Monoxide,2025-10-22T17:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Methane,2025-10-22T17:00:00-06:00,51.08272,-114.138994
@@ -14688,18 +14688,18 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Tamarack,Sulphur Dioxide,2025-10-22T04:00:00-06:00,54.604935,-110.452637
 2.14,Tamarack,Methane,2025-10-22T04:00:00-06:00,54.604935,-110.452637
 3.0,Calgary Central Inglewood,,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Total Hydrocarbons,2025-10-22T21:00:00-06:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Wind Direction,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Ozone,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Outdoor Temperature,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Carbon Monoxide,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Non-methane Hydrocarbons,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Total Oxides of Nitrogen,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Nitric Oxide,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Nitrogen Dioxide,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Fine Particulate Matter,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+0.013,Calgary Central Inglewood,Ozone,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+6.7,Calgary Central Inglewood,Outdoor Temperature,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+0.46,Calgary Central Inglewood,Carbon Monoxide,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+0.022,Calgary Central Inglewood,Total Oxides of Nitrogen,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+0.0,Calgary Central Inglewood,Nitric Oxide,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+0.022,Calgary Central Inglewood,Nitrogen Dioxide,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+21.0,Calgary Central Inglewood,Fine Particulate Matter,2025-10-22T21:00:00-06:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Wind Speed,2025-10-22T21:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Relative Humidity,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+49.7,Calgary Central Inglewood,Relative Humidity,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+,Calgary Central Inglewood,Total Hydrocarbons,2025-10-22T21:00:00-06:00,51.030789,-114.008836
+,Calgary Central Inglewood,Non-methane Hydrocarbons,2025-10-22T21:00:00-06:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Methane,2025-10-22T21:00:00-06:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Non-methane Hydrocarbons,2025-10-22T20:00:00-06:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Total Hydrocarbons,2025-10-22T20:00:00-06:00,51.030789,-114.008836
