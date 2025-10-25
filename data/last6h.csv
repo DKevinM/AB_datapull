@@ -3942,6 +3942,7 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 6.0,E-BAM Trout Lake,Fine Particulate Matter,2025-10-24T20:00:00-06:00,56.499503,-114.552304
 0.0,E-BAM Trout Lake,Fine Particulate Matter,2025-10-24T19:00:00-06:00,56.499503,-114.552304
 2.0,Calgary Southeast,,2025-10-25T12:00:00-06:00,50.955122,-113.969742
+2.1,Calgary Southeast,Methane,2025-10-25T12:00:00-06:00,50.955122,-113.969742
 318.0,Calgary Southeast,Wind Direction,2025-10-25T12:00:00-06:00,50.955122,-113.969742
 0.003,Calgary Southeast,Total Oxides of Nitrogen,2025-10-25T12:00:00-06:00,50.955122,-113.969742
 2.7,Calgary Southeast,Fine Particulate Matter,2025-10-25T12:00:00-06:00,50.955122,-113.969742
@@ -3954,7 +3955,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 13.0,Calgary Southeast,Outdoor Temperature,2025-10-25T12:00:00-06:00,50.955122,-113.969742
 0.0,Calgary Southeast,Nitric Oxide,2025-10-25T12:00:00-06:00,50.955122,-113.969742
 0.0,Calgary Southeast,Non-methane Hydrocarbons,2025-10-25T12:00:00-06:00,50.955122,-113.969742
-,Calgary Southeast,Methane,2025-10-25T12:00:00-06:00,50.955122,-113.969742
 ,Calgary Southeast,Carbon Monoxide,2025-10-25T12:00:00-06:00,50.955122,-113.969742
 ,Calgary Southeast,Carbon Monoxide,2025-10-25T11:00:00-06:00,50.955122,-113.969742
 0.002,Calgary Southeast,Nitrogen Dioxide,2025-10-25T11:00:00-06:00,50.955122,-113.969742
@@ -10044,6 +10044,9 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Buffalo Viewpoint,Hydrogen Sulphide,2025-10-24T19:00:00-06:00,56.9967,-111.5926
 0.0,Buffalo Viewpoint,Sulphur Dioxide,2025-10-24T19:00:00-06:00,56.9967,-111.5926
 2.0,Calgary Varsity,,2025-10-25T12:00:00-06:00,51.08272,-114.138994
+0.001,Calgary Varsity,Total Oxides of Nitrogen,2025-10-25T12:00:00-06:00,51.08272,-114.138994
+0.001,Calgary Varsity,Nitrogen Dioxide,2025-10-25T12:00:00-06:00,51.08272,-114.138994
+0.0,Calgary Varsity,Nitric Oxide,2025-10-25T12:00:00-06:00,51.08272,-114.138994
 17.9,Calgary Varsity,Wind Speed,2025-10-25T12:00:00-06:00,51.08272,-114.138994
 11.5,Calgary Varsity,Outdoor Temperature,2025-10-25T12:00:00-06:00,51.08272,-114.138994
 2.5,Calgary Varsity,Fine Particulate Matter,2025-10-25T12:00:00-06:00,51.08272,-114.138994
@@ -10051,12 +10054,9 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.043,Calgary Varsity,Ozone,2025-10-25T12:00:00-06:00,51.08272,-114.138994
 285.0,Calgary Varsity,Wind Direction,2025-10-25T12:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Carbon Monoxide,2025-10-25T12:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Total Oxides of Nitrogen,2025-10-25T12:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Nitrogen Dioxide,2025-10-25T12:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Total Hydrocarbons,2025-10-25T12:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Non-methane Hydrocarbons,2025-10-25T12:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Methane,2025-10-25T12:00:00-06:00,51.08272,-114.138994
-,Calgary Varsity,Nitric Oxide,2025-10-25T12:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Non-methane Hydrocarbons,2025-10-25T11:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Methane,2025-10-25T11:00:00-06:00,51.08272,-114.138994
 ,Calgary Varsity,Total Hydrocarbons,2025-10-25T11:00:00-06:00,51.08272,-114.138994
@@ -14687,20 +14687,20 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Tamarack,Non-methane Hydrocarbons,2025-10-24T19:00:00-06:00,54.604935,-110.452637
 0.0,Tamarack,Nitric Oxide,2025-10-24T19:00:00-06:00,54.604935,-110.452637
 0.0,Tamarack,Sulphur Dioxide,2025-10-24T19:00:00-06:00,54.604935,-110.452637
+3.0,Calgary Central Inglewood,,2025-10-25T12:00:00-06:00,51.030789,-114.008836
+0.045,Calgary Central Inglewood,Ozone,2025-10-25T12:00:00-06:00,51.030789,-114.008836
+12.6,Calgary Central Inglewood,Outdoor Temperature,2025-10-25T12:00:00-06:00,51.030789,-114.008836
+0.002,Calgary Central Inglewood,Nitrogen Dioxide,2025-10-25T12:00:00-06:00,51.030789,-114.008836
+0.0,Calgary Central Inglewood,Nitric Oxide,2025-10-25T12:00:00-06:00,51.030789,-114.008836
+3.3,Calgary Central Inglewood,Fine Particulate Matter,2025-10-25T12:00:00-06:00,51.030789,-114.008836
+0.003,Calgary Central Inglewood,Total Oxides of Nitrogen,2025-10-25T12:00:00-06:00,51.030789,-114.008836
+295.0,Calgary Central Inglewood,Wind Direction,2025-10-25T12:00:00-06:00,51.030789,-114.008836
+14.7,Calgary Central Inglewood,Wind Speed,2025-10-25T12:00:00-06:00,51.030789,-114.008836
 10.3,Calgary Central Inglewood,Relative Humidity,2025-10-25T12:00:00-06:00,51.030789,-114.008836
 0.25,Calgary Central Inglewood,Carbon Monoxide,2025-10-25T12:00:00-06:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Total Hydrocarbons,2025-10-25T12:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Ozone,2025-10-25T12:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Outdoor Temperature,2025-10-25T12:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Nitrogen Dioxide,2025-10-25T12:00:00-06:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Non-methane Hydrocarbons,2025-10-25T12:00:00-06:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Methane,2025-10-25T12:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Nitric Oxide,2025-10-25T12:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Fine Particulate Matter,2025-10-25T12:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Total Oxides of Nitrogen,2025-10-25T12:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Wind Direction,2025-10-25T12:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,Wind Speed,2025-10-25T12:00:00-06:00,51.030789,-114.008836
-,Calgary Central Inglewood,,2025-10-25T12:00:00-06:00,51.030789,-114.008836
 3.0,Calgary Central Inglewood,,2025-10-25T11:00:00-06:00,51.030789,-114.008836
 21.4,Calgary Central Inglewood,Wind Speed,2025-10-25T11:00:00-06:00,51.030789,-114.008836
 5.7,Calgary Central Inglewood,Fine Particulate Matter,2025-10-25T11:00:00-06:00,51.030789,-114.008836
@@ -17693,114 +17693,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 60.0,High Level (Airpointer),Relative Humidity,2025-10-24T19:00:00-06:00,58.512216,-117.162258
 0.01,High Level (Airpointer),Total Oxides of Nitrogen,2025-10-24T19:00:00-06:00,58.512216,-117.162258
 ,High Level (Airpointer),Fine Particulate Matter,2025-10-24T19:00:00-06:00,58.512216,-117.162258
-4.0,Leduc Sensor,,2025-10-25T12:00:00-06:00,53.241439,-113.503769
-8.4,Leduc Sensor,Outdoor Temperature,2025-10-25T12:00:00-06:00,53.241439,-113.503769
-93.0,Leduc Sensor,Relative Humidity,2025-10-25T12:00:00-06:00,53.241439,-113.503769
-0.032,Leduc Sensor,Ozone,2025-10-25T12:00:00-06:00,53.241439,-113.503769
-2.4,Leduc Sensor,Fine Particulate Matter,2025-10-25T12:00:00-06:00,53.241439,-113.503769
-0.0195,Leduc Sensor,Nitrogen Dioxide,2025-10-25T12:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T11:00:00-06:00,53.241439,-113.503769
-0.0204,Leduc Sensor,Nitrogen Dioxide,2025-10-25T11:00:00-06:00,53.241439,-113.503769
-5.8,Leduc Sensor,Outdoor Temperature,2025-10-25T11:00:00-06:00,53.241439,-113.503769
-2.3,Leduc Sensor,Fine Particulate Matter,2025-10-25T11:00:00-06:00,53.241439,-113.503769
-0.034,Leduc Sensor,Ozone,2025-10-25T11:00:00-06:00,53.241439,-113.503769
-100.0,Leduc Sensor,Relative Humidity,2025-10-25T11:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T10:00:00-06:00,53.241439,-113.503769
-0.0194,Leduc Sensor,Nitrogen Dioxide,2025-10-25T10:00:00-06:00,53.241439,-113.503769
-82.0,Leduc Sensor,Relative Humidity,2025-10-25T10:00:00-06:00,53.241439,-113.503769
-0.035,Leduc Sensor,Ozone,2025-10-25T10:00:00-06:00,53.241439,-113.503769
-7.3,Leduc Sensor,Outdoor Temperature,2025-10-25T10:00:00-06:00,53.241439,-113.503769
-2.7,Leduc Sensor,Fine Particulate Matter,2025-10-25T10:00:00-06:00,53.241439,-113.503769
-3.2,Leduc Sensor,Fine Particulate Matter,2025-10-25T09:00:00-06:00,53.241439,-113.503769
-0.03,Leduc Sensor,Ozone,2025-10-25T09:00:00-06:00,53.241439,-113.503769
-59.0,Leduc Sensor,Relative Humidity,2025-10-25T09:00:00-06:00,53.241439,-113.503769
-0.0166,Leduc Sensor,Nitrogen Dioxide,2025-10-25T09:00:00-06:00,53.241439,-113.503769
-7.7,Leduc Sensor,Outdoor Temperature,2025-10-25T09:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T09:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T08:00:00-06:00,53.241439,-113.503769
-3.3,Leduc Sensor,Fine Particulate Matter,2025-10-25T08:00:00-06:00,53.241439,-113.503769
-52.0,Leduc Sensor,Relative Humidity,2025-10-25T08:00:00-06:00,53.241439,-113.503769
-8.3,Leduc Sensor,Outdoor Temperature,2025-10-25T08:00:00-06:00,53.241439,-113.503769
-0.031,Leduc Sensor,Ozone,2025-10-25T08:00:00-06:00,53.241439,-113.503769
-0.0174,Leduc Sensor,Nitrogen Dioxide,2025-10-25T08:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T07:00:00-06:00,53.241439,-113.503769
-3.1,Leduc Sensor,Fine Particulate Matter,2025-10-25T07:00:00-06:00,53.241439,-113.503769
-50.0,Leduc Sensor,Relative Humidity,2025-10-25T07:00:00-06:00,53.241439,-113.503769
-0.0154,Leduc Sensor,Nitrogen Dioxide,2025-10-25T07:00:00-06:00,53.241439,-113.503769
-0.032,Leduc Sensor,Ozone,2025-10-25T07:00:00-06:00,53.241439,-113.503769
-6.9,Leduc Sensor,Outdoor Temperature,2025-10-25T07:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T06:00:00-06:00,53.241439,-113.503769
-0.0149,Leduc Sensor,Nitrogen Dioxide,2025-10-25T06:00:00-06:00,53.241439,-113.503769
-48.0,Leduc Sensor,Relative Humidity,2025-10-25T06:00:00-06:00,53.241439,-113.503769
-7.3,Leduc Sensor,Outdoor Temperature,2025-10-25T06:00:00-06:00,53.241439,-113.503769
-3.3,Leduc Sensor,Fine Particulate Matter,2025-10-25T06:00:00-06:00,53.241439,-113.503769
-0.032,Leduc Sensor,Ozone,2025-10-25T06:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T05:00:00-06:00,53.241439,-113.503769
-0.0142,Leduc Sensor,Nitrogen Dioxide,2025-10-25T05:00:00-06:00,53.241439,-113.503769
-3.6,Leduc Sensor,Fine Particulate Matter,2025-10-25T05:00:00-06:00,53.241439,-113.503769
-46.0,Leduc Sensor,Relative Humidity,2025-10-25T05:00:00-06:00,53.241439,-113.503769
-7.3,Leduc Sensor,Outdoor Temperature,2025-10-25T05:00:00-06:00,53.241439,-113.503769
-0.031,Leduc Sensor,Ozone,2025-10-25T05:00:00-06:00,53.241439,-113.503769
-4.0,Leduc Sensor,Fine Particulate Matter,2025-10-25T04:00:00-06:00,53.241439,-113.503769
-0.031,Leduc Sensor,Ozone,2025-10-25T04:00:00-06:00,53.241439,-113.503769
-42.0,Leduc Sensor,Relative Humidity,2025-10-25T04:00:00-06:00,53.241439,-113.503769
-0.0138,Leduc Sensor,Nitrogen Dioxide,2025-10-25T04:00:00-06:00,53.241439,-113.503769
-8.0,Leduc Sensor,Outdoor Temperature,2025-10-25T04:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T04:00:00-06:00,53.241439,-113.503769
-9.9,Leduc Sensor,Outdoor Temperature,2025-10-25T03:00:00-06:00,53.241439,-113.503769
-0.031,Leduc Sensor,Ozone,2025-10-25T03:00:00-06:00,53.241439,-113.503769
-35.0,Leduc Sensor,Relative Humidity,2025-10-25T03:00:00-06:00,53.241439,-113.503769
-0.0141,Leduc Sensor,Nitrogen Dioxide,2025-10-25T03:00:00-06:00,53.241439,-113.503769
-4.1,Leduc Sensor,Fine Particulate Matter,2025-10-25T03:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T03:00:00-06:00,53.241439,-113.503769
-0.0121,Leduc Sensor,Nitrogen Dioxide,2025-10-25T02:00:00-06:00,53.241439,-113.503769
-4.4,Leduc Sensor,Fine Particulate Matter,2025-10-25T02:00:00-06:00,53.241439,-113.503769
-9.6,Leduc Sensor,Outdoor Temperature,2025-10-25T02:00:00-06:00,53.241439,-113.503769
-36.0,Leduc Sensor,Relative Humidity,2025-10-25T02:00:00-06:00,53.241439,-113.503769
-0.031,Leduc Sensor,Ozone,2025-10-25T02:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T02:00:00-06:00,53.241439,-113.503769
-9.4,Leduc Sensor,Outdoor Temperature,2025-10-25T01:00:00-06:00,53.241439,-113.503769
-36.0,Leduc Sensor,Relative Humidity,2025-10-25T01:00:00-06:00,53.241439,-113.503769
-0.0124,Leduc Sensor,Nitrogen Dioxide,2025-10-25T01:00:00-06:00,53.241439,-113.503769
-4.4,Leduc Sensor,Fine Particulate Matter,2025-10-25T01:00:00-06:00,53.241439,-113.503769
-0.032,Leduc Sensor,Ozone,2025-10-25T01:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T01:00:00-06:00,53.241439,-113.503769
-32.0,Leduc Sensor,Relative Humidity,2025-10-25T00:00:00-06:00,53.241439,-113.503769
-0.035,Leduc Sensor,Ozone,2025-10-25T00:00:00-06:00,53.241439,-113.503769
-3.9,Leduc Sensor,Fine Particulate Matter,2025-10-25T00:00:00-06:00,53.241439,-113.503769
-0.0139,Leduc Sensor,Nitrogen Dioxide,2025-10-25T00:00:00-06:00,53.241439,-113.503769
-11.1,Leduc Sensor,Outdoor Temperature,2025-10-25T00:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-25T00:00:00-06:00,53.241439,-113.503769
-0.035,Leduc Sensor,Ozone,2025-10-24T23:00:00-06:00,53.241439,-113.503769
-0.0141,Leduc Sensor,Nitrogen Dioxide,2025-10-24T23:00:00-06:00,53.241439,-113.503769
-4.0,Leduc Sensor,Fine Particulate Matter,2025-10-24T23:00:00-06:00,53.241439,-113.503769
-13.4,Leduc Sensor,Outdoor Temperature,2025-10-24T23:00:00-06:00,53.241439,-113.503769
-28.0,Leduc Sensor,Relative Humidity,2025-10-24T23:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-24T23:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-24T22:00:00-06:00,53.241439,-113.503769
-0.0146,Leduc Sensor,Nitrogen Dioxide,2025-10-24T22:00:00-06:00,53.241439,-113.503769
-14.3,Leduc Sensor,Outdoor Temperature,2025-10-24T22:00:00-06:00,53.241439,-113.503769
-4.4,Leduc Sensor,Fine Particulate Matter,2025-10-24T22:00:00-06:00,53.241439,-113.503769
-26.0,Leduc Sensor,Relative Humidity,2025-10-24T22:00:00-06:00,53.241439,-113.503769
-0.034,Leduc Sensor,Ozone,2025-10-24T22:00:00-06:00,53.241439,-113.503769
-24.0,Leduc Sensor,Relative Humidity,2025-10-24T21:00:00-06:00,53.241439,-113.503769
-4.0,Leduc Sensor,Fine Particulate Matter,2025-10-24T21:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-24T21:00:00-06:00,53.241439,-113.503769
-0.0155,Leduc Sensor,Nitrogen Dioxide,2025-10-24T21:00:00-06:00,53.241439,-113.503769
-16.1,Leduc Sensor,Outdoor Temperature,2025-10-24T21:00:00-06:00,53.241439,-113.503769
-0.036,Leduc Sensor,Ozone,2025-10-24T21:00:00-06:00,53.241439,-113.503769
-24.0,Leduc Sensor,Relative Humidity,2025-10-24T20:00:00-06:00,53.241439,-113.503769
-0.036,Leduc Sensor,Ozone,2025-10-24T20:00:00-06:00,53.241439,-113.503769
-4.1,Leduc Sensor,Fine Particulate Matter,2025-10-24T20:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-24T20:00:00-06:00,53.241439,-113.503769
-16.3,Leduc Sensor,Outdoor Temperature,2025-10-24T20:00:00-06:00,53.241439,-113.503769
-0.0172,Leduc Sensor,Nitrogen Dioxide,2025-10-24T20:00:00-06:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2025-10-24T19:00:00-06:00,53.241439,-113.503769
-31.0,Leduc Sensor,Relative Humidity,2025-10-24T19:00:00-06:00,53.241439,-113.503769
-0.032,Leduc Sensor,Ozone,2025-10-24T19:00:00-06:00,53.241439,-113.503769
-4.9,Leduc Sensor,Fine Particulate Matter,2025-10-24T19:00:00-06:00,53.241439,-113.503769
-0.0141,Leduc Sensor,Nitrogen Dioxide,2025-10-24T19:00:00-06:00,53.241439,-113.503769
-15.0,Leduc Sensor,Outdoor Temperature,2025-10-24T19:00:00-06:00,53.241439,-113.503769
 7.2,O’Morrow Station 1,Outdoor Temperature,2025-10-25T12:00:00-06:00,54.9036817,-112.8433489
 13.7,O’Morrow Station 1,Wind Speed,2025-10-25T12:00:00-06:00,54.9036817,-112.8433489
 257.0,O’Morrow Station 1,Wind Direction,2025-10-25T12:00:00-06:00,54.9036817,-112.8433489
