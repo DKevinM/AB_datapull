@@ -43,11 +43,13 @@ print(f"[AQHI_idw] param_col='{param_col}' top labels (top 30): {top_vals}")
 # Broad AQHI matcher (tweak to match your export)
 # ---------------------------
 aqhi_regex = (
-    r"(?i)\bAQHI\b"
-    r"|(?i)Air\s*Quality\s*Health\s*Index"
-    r"|(?i)\bAQHI\s*[-_/() ]*\s*(now|current|3h|3-?hr|3hour|3 hr)?"
-    r"|(?i)\bHealth\s*Index\b"
+    r"(?i)"  # apply case-insensitive once globally
+    r"(?:\bAQHI\b"
+    r"|Air\s*Quality\s*Health\s*Index"
+    r"|\bAQHI\s*[-_/() ]*\s*(?:now|current|3h|3-?hr|3hour|3 hr)?"
+    r"|\bHealth\s*Index\b)"
 )
+
 
 is_aqhi_named = labels.str.contains(aqhi_regex, regex=True, na=False)
 is_legacy_blank = labels.isna() | (labels.str.strip() == "")
