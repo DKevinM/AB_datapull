@@ -744,19 +744,19 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 3.1,Edmonton Lendrum,Outdoor Temperature,2025-11-09T16:00:00-07:00,53.4978,-113.527
 0.0,Edmonton Lendrum,Non-methane Hydrocarbons,2025-11-09T16:00:00-07:00,53.4978,-113.527
 ,Calgary Central Inglewood,Non-methane Hydrocarbons,2025-11-10T15:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Nitric Oxide,2025-11-10T15:00:00-07:00,51.030789,-114.008836
+0.001,Calgary Central Inglewood,Nitric Oxide,2025-11-10T15:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Total Hydrocarbons,2025-11-10T15:00:00-07:00,51.030789,-114.008836
 3.0,Calgary Central Inglewood,,2025-11-10T15:00:00-07:00,51.030789,-114.008836
 0.25,Calgary Central Inglewood,Carbon Monoxide,2025-11-10T15:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Total Oxides of Nitrogen,2025-11-10T15:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Ozone,2025-11-10T15:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Wind Direction,2025-11-10T15:00:00-07:00,51.030789,-114.008836
+0.007,Calgary Central Inglewood,Total Oxides of Nitrogen,2025-11-10T15:00:00-07:00,51.030789,-114.008836
+0.043,Calgary Central Inglewood,Ozone,2025-11-10T15:00:00-07:00,51.030789,-114.008836
+298.0,Calgary Central Inglewood,Wind Direction,2025-11-10T15:00:00-07:00,51.030789,-114.008836
 16.3,Calgary Central Inglewood,Relative Humidity,2025-11-10T15:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Methane,2025-11-10T15:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Wind Speed,2025-11-10T15:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Outdoor Temperature,2025-11-10T15:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Fine Particulate Matter,2025-11-10T15:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Nitrogen Dioxide,2025-11-10T15:00:00-07:00,51.030789,-114.008836
+18.1,Calgary Central Inglewood,Wind Speed,2025-11-10T15:00:00-07:00,51.030789,-114.008836
+14.7,Calgary Central Inglewood,Outdoor Temperature,2025-11-10T15:00:00-07:00,51.030789,-114.008836
+4.4,Calgary Central Inglewood,Fine Particulate Matter,2025-11-10T15:00:00-07:00,51.030789,-114.008836
+0.006,Calgary Central Inglewood,Nitrogen Dioxide,2025-11-10T15:00:00-07:00,51.030789,-114.008836
 3.5,Calgary Central Inglewood,Fine Particulate Matter,2025-11-10T14:00:00-07:00,51.030789,-114.008836
 285.0,Calgary Central Inglewood,Wind Direction,2025-11-10T14:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Methane,2025-11-10T14:00:00-07:00,51.030789,-114.008836
@@ -1090,7 +1090,7 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Calgary Southeast,Non-methane Hydrocarbons,2025-11-10T15:00:00-07:00,50.955122,-113.969742
 15.1,Calgary Southeast,Outdoor Temperature,2025-11-10T15:00:00-07:00,50.955122,-113.969742
 14.8,Calgary Southeast,Wind Speed,2025-11-10T15:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Methane,2025-11-10T15:00:00-07:00,50.955122,-113.969742
+2.0,Calgary Southeast,Methane,2025-11-10T15:00:00-07:00,50.955122,-113.969742
 0.0,Calgary Southeast,Hydrogen Sulphide,2025-11-10T15:00:00-07:00,50.955122,-113.969742
 3.1,Calgary Southeast,Fine Particulate Matter,2025-11-10T15:00:00-07:00,50.955122,-113.969742
 ,Calgary Southeast,Carbon Monoxide,2025-11-10T15:00:00-07:00,50.955122,-113.969742
@@ -1441,7 +1441,7 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.014,Calgary Southeast,Nitrogen Dioxide,2025-11-09T16:00:00-07:00,50.955122,-113.969742
 ,Calgary Varsity,Total Hydrocarbons,2025-11-10T15:00:00-07:00,51.08272,-114.138994
 2.2,Calgary Varsity,Fine Particulate Matter,2025-11-10T15:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Nitric Oxide,2025-11-10T15:00:00-07:00,51.08272,-114.138994
+0.0,Calgary Varsity,Nitric Oxide,2025-11-10T15:00:00-07:00,51.08272,-114.138994
 3.0,Calgary Varsity,,2025-11-10T15:00:00-07:00,51.08272,-114.138994
 21.6,Calgary Varsity,Relative Humidity,2025-11-10T15:00:00-07:00,51.08272,-114.138994
 0.042,Calgary Varsity,Ozone,2025-11-10T15:00:00-07:00,51.08272,-114.138994
@@ -1449,10 +1449,10 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Calgary Varsity,Non-methane Hydrocarbons,2025-11-10T15:00:00-07:00,51.08272,-114.138994
 14.2,Calgary Varsity,Outdoor Temperature,2025-11-10T15:00:00-07:00,51.08272,-114.138994
 ,Calgary Varsity,Carbon Monoxide,2025-11-10T15:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Total Oxides of Nitrogen,2025-11-10T15:00:00-07:00,51.08272,-114.138994
+0.003,Calgary Varsity,Total Oxides of Nitrogen,2025-11-10T15:00:00-07:00,51.08272,-114.138994
 ,Calgary Varsity,Methane,2025-11-10T15:00:00-07:00,51.08272,-114.138994
 15.6,Calgary Varsity,Wind Speed,2025-11-10T15:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Nitrogen Dioxide,2025-11-10T15:00:00-07:00,51.08272,-114.138994
+0.003,Calgary Varsity,Nitrogen Dioxide,2025-11-10T15:00:00-07:00,51.08272,-114.138994
 ,Calgary Varsity,Total Hydrocarbons,2025-11-10T14:00:00-07:00,51.08272,-114.138994
 3.0,Calgary Varsity,,2025-11-10T14:00:00-07:00,51.08272,-114.138994
 ,Calgary Varsity,Methane,2025-11-10T14:00:00-07:00,51.08272,-114.138994
