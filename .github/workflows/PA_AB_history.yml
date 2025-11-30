@@ -1,0 +1,34 @@
+name: PurpleAir - AB History Pull
+
+on:
+  workflow_dispatch:    # manual trigger only
+
+jobs:
+  pa_full_history:
+    runs-on: ubuntu-latest
+
+    env:
+      PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas pytz
+
+      - name: Run full AB history pull (Jan 1, 2025 → now)
+        run: |
+          python PA_AB_pull.py --full
+
+      - name: Show resulting history file size
+        run: |
+          ls -lh data || true
+          [ -f data/AB_PA_history_full.csv ] && ls -lh data/AB_PA_history_full.csv || echo "History file not found"
