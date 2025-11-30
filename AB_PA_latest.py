@@ -1,228 +1,118 @@
-#!/usr/bin/env python3
 import os
 import requests
 import pandas as pd
+import json
 import pytz
 from datetime import datetime, timezone, timedelta
 import sys
-import time
 
-# =========================================================
-# CONFIG
-# =========================================================
+# [Keep all your existing functions: get_best_pm, correct_pm25, get_color]
 
-PURPLEAIR_API_KEY = os.getenv("PURPLEAIR_API_KEY")
-if not PURPLEAIR_API_KEY:
-    raise RuntimeError("Missing PURPLEAIR_API_KEY")
-
-SENSOR_LIST_PATH = "data/AB_PA_sensors.csv"
-HISTORY_PATH = "data/AB_PA_history_full.csv"
-LIVE_JSON_PATH = "data/AB_PM25_map.json"
-
-EDM_TZ = pytz.timezone("America/Edmonton")
-
-# =========================================================
-# PM LOGIC
-# =========================================================
-
-def get_best_pm(a, b, avg):
-    if pd.isna(a) and not pd.isna(b) and b <= 2000:
-        return b
-    if pd.isna(b) and not pd.isna(a) and a <= 2000:
-        return a
-    if a > 2000 and b <= 2000:
-        return b
-    if b > 2000 and a <= 2000:
-        return a
-    if not pd.isna(a) and not pd.isna(b):
-        diff = abs(a - b)
-        if diff > 50 and diff <= 500:
-            return max(a, b)
-        elif diff > 500:
-            return None
-        elif diff <= 50 and not pd.isna(avg) and avg >= 0:
-            return avg
-    return avg
-
-
-def correct_pm25(pm, rh):
-    if pd.isna(pm):
-        return None
-    if pd.isna(rh):
-        rh = 50
-    if rh < 30:
-        return pm / (1 + 0.24 / (100/30 - 1))
-    elif rh > 70:
-        return pm / (1 + 0.24 / (100/70 - 1))
-    else:
-        return pm / (1 + 0.24 / (100/rh - 1))
-
-
-def get_color(pm, name):
-    # if "ACA" not in str(name):
-    #    return "#808080"
-    if pd.isna(pm): return "#808080"
-    if pm > 100: return "#640100"
-    elif pm > 90: return "#9a0100"
-    elif pm > 80: return "#cc0001"
-    elif pm > 70: return "#fe0002"
-    elif pm > 60: return "#fd6866"
-    elif pm > 50: return "#ff9835"
-    elif pm > 40: return "#ffcb00"
-    elif pm > 30: return "#fffe03"
-    elif pm > 20: return "#016797"
-    elif pm > 10: return "#0099cb"
-    else: return "#01cbff"
-
-# =========================================================
-# API: FETCH HISTORY FOR A SENSOR
-# =========================================================
-
-def fetch_history(sensor_id, start_ts, end_ts, average=60):
-    """
-    Fetch PurpleAir history for a sensor between start_ts and end_ts.
-    average=60 → 1-hour averages.
-    """
-    url = f"https://api.purpleair.com/v1/sensors/{sensor_id}/history"
+def get_alberta_sensors(api_key):
+    """Get all sensors in Alberta using bounding box"""
     params = {
-        "average": average,                     # 60-minute averages
-        "start_timestamp": start_ts,
-        "end_timestamp": end_ts,
-        "fields": "time_stamp,humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b",
+        "fields": "sensor_index,name,latitude,longitude",
+        "nwlng": -120.0,
+        "nwlat": 60.0,  
+        "selng": -110.0,
+        "selat": 49.0,
+        "max_age": 86400
     }
-    headers = {"X-API-Key": PURPLEAIR_API_KEY}
-
-    r = requests.get(url, params=params, headers=headers, timeout=20)
-    r.raise_for_status()
-    data = r.json()
-
-    fields = data.get("fields", [])
-    rows = data.get("data", [])
-
-    df = pd.DataFrame(rows, columns=fields)
-    df["sensor_index"] = sensor_id
-    return df
-
-
-
-# =========================================================
-# MAIN FULL HISTORY MODE
-# =========================================================
-
-def run_full_history():
-    print("🔵 Running FULL history pull (Jan 1, 2025 → now)...")
-
-    # Time window: Jan 1, 2025 UTC → now UTC
-    start_ts = int(datetime(2025, 1, 1, tzinfo=timezone.utc).timestamp())
-    end_ts   = int(datetime.now(timezone.utc).timestamp())
-
-    sensors = pd.read_csv(SENSOR_LIST_PATH)
-    ids = sensors["sensor_index"].dropna().astype(int).tolist()
-
-    all_frames = []
-
-    for sid in ids:
-        print(f"→ Fetching {sid} ...")
-        try:
-            # hourly averages + extra fields
-            df = fetch_history(sid, start_ts, end_ts, average=60)
-            if df.empty:
-                print("   No data.")
-                continue
-
-            # convert timestamp
-            df["time_stamp"] = pd.to_datetime(df["time_stamp"], unit="s", utc=True)
-
-            # robust PM + RH correction
-            df["pm_raw"] = df.apply(
-                lambda r: get_best_pm(
-                    r.get("pm2.5_atm_a"),
-                    r.get("pm2.5_atm_b"),
-                    r.get("pm2.5_atm"),
-                ),
-                axis=1,
-            )
-            df["pm_corr"] = df.apply(
-                lambda r: correct_pm25(r["pm_raw"], r.get("humidity")),
-                axis=1,
-            )
-
-            # attach metadata from sensor list (name, lat, lon, etc.)
-            meta = sensors.loc[sensors["sensor_index"] == sid].iloc[0]
-            df["name"]      = meta.get("name", "")
-            df["latitude"]  = meta.get("latitude", None)
-            df["longitude"] = meta.get("longitude", None)
-
-            all_frames.append(df)
-            time.sleep(1)  # be polite to the API
-        except Exception as e:
-            print(f"   ERROR: {e}")
-
-    if not all_frames:
-        print("No history returned.")
-        return
-
-    full = pd.concat(all_frames, ignore_index=True)
-
-    # optional: also store local AB time as a string column
-    full["time_ab"] = full["time_stamp"].dt.tz_convert(EDM_TZ)
-    full["time_ab_str"] = full["time_ab"].dt.strftime("%Y-%m-%d %H:%M")
-
-    full.to_csv(HISTORY_PATH, index=False)
-    print(f"✅ Saved full history → {HISTORY_PATH} ({len(full)} rows)")
-
-
-
-# =========================================================
-# MAIN LIVE UPDATE MODE (YOUR ORIGINAL LOGIC)
-# =========================================================
-
-def run_live_update():
-
-    print("🟢 Running 30-minute live update...")
-
-    sensor_df = pd.read_csv(SENSOR_LIST_PATH)
-    sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
-    id_str = ",".join(map(str, sensor_ids))
-
+    
+    headers = {"X-API-Key": api_key}
     url = "https://api.purpleair.com/v1/sensors"
-    headers = {"X-API-Key": PURPLEAIR_API_KEY}
+    
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        if "data" not in data or not data["data"]:
+            print("No sensors found in Alberta bounding box")
+            return []
+            
+        sensors = []
+        for row in data["data"]:
+            sensors.append({
+                "sensor_index": row[0],
+                "name": row[1],
+                "latitude": row[2],
+                "longitude": row[3]
+            })
+        
+        print(f"Found {len(sensors)} sensors in Alberta")
+        return sensors
+        
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching Alberta sensors: {e}")
+        return []
+
+def fetch_current_data(sensor_ids, api_key):
+    """Fetch current sensor data"""
+    headers = {"X-API-Key": api_key}
+    sensor_id_str = ",".join(map(str, sensor_ids))
+    
     params = {
         "fields": "sensor_index,last_seen,humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b",
-        "show_only": id_str
+        "show_only": sensor_id_str
     }
+    
+    response = requests.get("https://api.purpleair.com/v1/sensors", headers=headers, params=params)
+    data = response.json()
+    fields = data["fields"]
+    rows = data["data"]
+    
+    return pd.DataFrame(rows, columns=fields)
 
-    r = requests.get(url, headers=headers, params=params)
-    data = r.json()
-
-    df_live = pd.DataFrame(data["data"], columns=data["fields"])
-    df = pd.merge(sensor_df, df_live, on="sensor_index", how="inner")
-
+def process_data(df, sensor_metadata):
+    """Process the sensor data"""
+    df_processed = pd.merge(sensor_metadata, df, on="sensor_index", how="inner")
+    
+    # Filter out old sensors
     now = datetime.now(timezone.utc)
-    df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
-    df = df[df["last_seen"] >= (now - timedelta(hours=3))]
+    df_processed["last_seen"] = pd.to_datetime(df_processed["last_seen"], unit="s", utc=True)
+    df_processed = df_processed[df_processed["last_seen"] >= (now - timedelta(hours=3))]
+    
+    # Calculate PM values
+    df_processed["pm_raw"] = df_processed.apply(
+        lambda x: get_best_pm(x["pm2.5_atm_a"], x["pm2.5_atm_b"], x["pm2.5_atm"]), axis=1
+    )
+    df_processed["pm_corr"] = df_processed.apply(
+        lambda x: correct_pm25(x["pm_raw"], x["humidity"]), axis=1
+    )
+    df_processed["color"] = df_processed.apply(
+        lambda x: get_color(x["pm_corr"], x["name"]), axis=1
+    )
+    
+    return df_processed
 
-    df["pm_raw"] = df.apply(lambda x: get_best_pm(x["pm2.5_atm_a"], x["pm2.5_atm_b"], x["pm2.5_atm"]), axis=1)
-    df["pm_corr"] = df.apply(lambda x: correct_pm25(x["pm_raw"], x["humidity"]), axis=1)
-    df["color"] = df.apply(lambda x: get_color(x["pm_corr"], x["name"]), axis=1)
-
-    result = df[[
-        "sensor_index", "name", "latitude", "longitude",
-        "humidity", "pm_corr", "color", "last_seen"
-    ]]
-
-    result["last_seen"] = result["last_seen"].dt.tz_convert(EDM_TZ).dt.strftime('%Y-%m-%d %I:%M:%S %p')
-    result.to_json(LIVE_JSON_PATH, orient="records", indent=2)
-
-    print(f"✅ Saved live map → {LIVE_JSON_PATH}")
-
-# =========================================================
-# ENTRY POINT
-# =========================================================
+def main():
+    api_key = os.getenv("PURPLEAIR_API_KEY")
+    if not api_key:
+        print("Error: PURPLEAIR_API_KEY environment variable not set")
+        sys.exit(1)
+    
+    # Get all sensors in Alberta
+    sensors = get_alberta_sensors(api_key)
+    if not sensors:
+        print("No sensors found. Exiting.")
+        return
+    
+    sensor_df = pd.DataFrame(sensors)
+    sensor_ids = sensor_df["sensor_index"].tolist()
+    
+    # Fetch and process current data
+    df = fetch_current_data(sensor_ids, api_key)
+    result = process_data(df, sensor_df)
+    
+    # Save current data
+    ab_tz = pytz.timezone("America/Edmonton")
+    result["last_seen"] = result["last_seen"].dt.tz_convert(ab_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
+    
+    # Ensure data directory exists
+    os.makedirs("data", exist_ok=True)
+    result.to_json("data/AB_PM25_map.json", orient="records", indent=2)
+    print(f"Data saved for {len(result)} sensors")
 
 if __name__ == "__main__":
-
-    if "--full" in sys.argv:
-        run_full_history()
-    else:
-        run_live_update()
+    main()
