@@ -1,0 +1,31 @@
+name: PurpleAir - Live AB Update
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # every 30 minutes
+  workflow_dispatch:         # allow manual runs from the Actions tab
+
+jobs:
+  pa_live_update:
+    runs-on: ubuntu-latest
+
+    env:
+      PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas pytz
+
+      - name: Run live AB PurpleAir update (last 3h)
+        run: |
+          python PA_AB_pull.py
