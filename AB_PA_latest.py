@@ -78,23 +78,31 @@ def get_color(pm, name):
 # API: FETCH HISTORY FOR A SENSOR
 # =========================================================
 
-def fetch_history(sensor_id, start_ts, end_ts):
+def fetch_history(sensor_id, start_ts, end_ts, average=60):
+    """
+    Fetch PurpleAir history for a sensor between start_ts and end_ts.
+    average=60 → 1-hour averages.
+    """
     url = f"https://api.purpleair.com/v1/sensors/{sensor_id}/history"
     params = {
-        "average": 0,
+        "average": average,                     # 60-minute averages
         "start_timestamp": start_ts,
         "end_timestamp": end_ts,
-        "fields": "time_stamp,humidity,pm2.5_atm"
+        "fields": "time_stamp,humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b",
     }
     headers = {"X-API-Key": PURPLEAIR_API_KEY}
+
     r = requests.get(url, params=params, headers=headers, timeout=20)
     r.raise_for_status()
     data = r.json()
+
     fields = data.get("fields", [])
     rows = data.get("data", [])
+
     df = pd.DataFrame(rows, columns=fields)
     df["sensor_index"] = sensor_id
     return df
+
 
 
 # =========================================================
@@ -104,8 +112,9 @@ def fetch_history(sensor_id, start_ts, end_ts):
 def run_full_history():
     print("🔵 Running FULL history pull (Jan 1, 2025 → now)...")
 
+    # Time window: Jan 1, 2025 UTC → now UTC
     start_ts = int(datetime(2025, 1, 1, tzinfo=timezone.utc).timestamp())
-    end_ts = int(datetime.now(timezone.utc).timestamp())
+    end_ts   = int(datetime.now(timezone.utc).timestamp())
 
     sensors = pd.read_csv(SENSOR_LIST_PATH)
     ids = sensors["sensor_index"].dropna().astype(int).tolist()
@@ -115,13 +124,37 @@ def run_full_history():
     for sid in ids:
         print(f"→ Fetching {sid} ...")
         try:
-            df = fetch_history(sid, start_ts, end_ts)
+            # hourly averages + extra fields
+            df = fetch_history(sid, start_ts, end_ts, average=60)
             if df.empty:
-                print(f"   No data.")
+                print("   No data.")
                 continue
-            df["pm_corr"] = df.apply(lambda r: correct_pm25(r["pm2.5_atm"], r["humidity"]), axis=1)
+
+            # convert timestamp
+            df["time_stamp"] = pd.to_datetime(df["time_stamp"], unit="s", utc=True)
+
+            # robust PM + RH correction
+            df["pm_raw"] = df.apply(
+                lambda r: get_best_pm(
+                    r.get("pm2.5_atm_a"),
+                    r.get("pm2.5_atm_b"),
+                    r.get("pm2.5_atm"),
+                ),
+                axis=1,
+            )
+            df["pm_corr"] = df.apply(
+                lambda r: correct_pm25(r["pm_raw"], r.get("humidity")),
+                axis=1,
+            )
+
+            # attach metadata from sensor list (name, lat, lon, etc.)
+            meta = sensors.loc[sensors["sensor_index"] == sid].iloc[0]
+            df["name"]      = meta.get("name", "")
+            df["latitude"]  = meta.get("latitude", None)
+            df["longitude"] = meta.get("longitude", None)
+
             all_frames.append(df)
-            time.sleep(1)
+            time.sleep(1)  # be polite to the API
         except Exception as e:
             print(f"   ERROR: {e}")
 
@@ -130,9 +163,14 @@ def run_full_history():
         return
 
     full = pd.concat(all_frames, ignore_index=True)
-    full.to_csv(HISTORY_PATH, index=False)
 
-    print(f"✅ Saved full history → {HISTORY_PATH}")
+    # optional: also store local AB time as a string column
+    full["time_ab"] = full["time_stamp"].dt.tz_convert(EDM_TZ)
+    full["time_ab_str"] = full["time_ab"].dt.strftime("%Y-%m-%d %H:%M")
+
+    full.to_csv(HISTORY_PATH, index=False)
+    print(f"✅ Saved full history → {HISTORY_PATH} ({len(full)} rows)")
+
 
 
 # =========================================================
