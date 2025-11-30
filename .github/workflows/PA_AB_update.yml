@@ -1,31 +1,43 @@
-name: PurpleAir - Live AB Update
+name: Update PurpleAir Data
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # every 30 minutes
-  workflow_dispatch:         # allow manual runs from the Actions tab
+    # Run every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch:  # Allow manual triggers
+  push:
+    branches: [ main ]
+    paths:
+      - 'scripts/**'
 
 jobs:
-  pa_live_update:
+  update-data:
     runs-on: ubuntu-latest
-
-    env:
-      PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
-
+    
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests pandas pytz
-
-      - name: Run live AB PurpleAir update (last 3h)
-        run: |
-          python PA_AB_pull.py
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas requests pytz
+        
+    - name: Run PurpleAir data collection
+      env:
+        PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
+      run: |
+        python scripts/alberta_purpleair.py
+        
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/AB_PM25_map.json
+        git diff --quiet && git diff --staged --quiet || git commit -m "Update PurpleAir data [skip ci]"
+        git push
