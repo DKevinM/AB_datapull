@@ -64,7 +64,6 @@ def main():
     try:
         sensor_df = pd.read_csv("data/AB_PA_sensors.csv")
         sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
-        sensor_id_str = ",".join(map(str, sensor_ids))
         print(f"Loaded {len(sensor_ids)} sensors from CSV")
     except FileNotFoundError:
         print("Error: data/AB_PA_sensors.csv not found")
@@ -109,12 +108,35 @@ def main():
     fields = data["fields"]
     rows = data["data"]
     df_live = pd.DataFrame(rows, columns=fields)
+
+
     
-    print(f"Retrieved data for {len(df_live)} sensors from PurpleAir")
+    # DEBUG: Check what we got from API
+    print(f"API returned {len(df_live)} sensors")
+    print("Columns in df_live:", df_live.columns.tolist())
+    if 'last_seen' in df_live.columns:
+        print("last_seen IS in df_live")
+    else:
+        print("last_seen is NOT in df_live - this is the problem!")
+
+
+
     
     # Merge with static sensor metadata
     df = pd.merge(sensor_df, df_live, on="sensor_index", how="inner")
+
+
+
+    # DEBUG: Check after merge
     print(f"After merge: {len(df)} sensors")
+    print("Columns after merge:", df.columns.tolist())
+    if 'last_seen' in df.columns:
+        print("last_seen IS in merged df")
+    else:
+        print("last_seen is NOT in merged df - lost during merge!")
+
+
+    
     
     # Filter out sensors older than 3 hours
     now = datetime.now(timezone.utc)
