@@ -69,6 +69,31 @@ def main():
     except FileNotFoundError:
         print("Error: data/AB_PA_sensors.csv not found")
         sys.exit(1)
+
+    # Load dead_list.csv and remove those sensors
+    try:
+        dead_df = pd.read_csv("data/dead_list.csv")
+        dead_sensor_ids = dead_df["sensor_index"].dropna().astype(int).tolist()
+        print(f"Loaded {len(dead_sensor_ids)} sensors from dead_list.csv")
+        
+        # Remove dead sensors from our list
+        original_count = len(sensor_ids)
+        sensor_ids = [sensor_id for sensor_id in sensor_ids if sensor_id not in dead_sensor_ids]
+        removed_count = original_count - len(sensor_ids)
+        print(f"Removed {removed_count} dead sensors. {len(sensor_ids)} sensors remaining.")
+        
+    except FileNotFoundError:
+        print("Warning: data/dead_list.csv not found, proceeding with all sensors")
+    except Exception as e:
+        print(f"Warning: Error reading dead_list.csv: {e}, proceeding with all sensors")
+    
+    # If no sensors left, exit
+    if len(sensor_ids) == 0:
+        print("No sensors remaining after filtering. Exiting.")
+        return
+    
+    sensor_id_str = ",".join(map(str, sensor_ids))
+
     
     # Build API call for ONLY the sensors in your CSV
     url = "https://api.purpleair.com/v1/sensors"
