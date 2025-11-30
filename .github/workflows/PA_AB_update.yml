@@ -32,7 +32,7 @@ jobs:
       env:
         PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
       run: |
-        python scripts/alberta_purpleair.py
+        python AB_PA_latest.py
         
     - name: Commit and push if changed
       run: |
