@@ -1,34 +1,42 @@
-name: PurpleAir - AB History Pull
+name: Historical PurpleAir Data
 
 on:
-  workflow_dispatch:    # manual trigger only
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: 'Start date (YYYY-MM-DD)'
+        required: true
+        default: '2025-01-01'
+      end_date:
+        description: 'End date (YYYY-MM-DD)' 
+        required: true
+        default: '2025-02-01'
 
 jobs:
-  pa_full_history:
+  historical-data:
     runs-on: ubuntu-latest
-
-    env:
-      PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
-
+    
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests pandas pytz
-
-      - name: Run full AB history pull (Jan 1, 2025 → now)
-        run: |
-          python PA_AB_pull.py --full
-
-      - name: Show resulting history file size
-        run: |
-          ls -lh data || true
-          [ -f data/AB_PA_history_full.csv ] && ls -lh data/AB_PA_history_full.csv || echo "History file not found"
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        pip install pandas requests pytz
+        
+    - name: Run historical data collection
+      env:
+        PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
+      run: |
+        python scripts/historical_purpleair.py --start-date ${{ github.event.inputs.start_date }} --end-date ${{ github.event.inputs.end_date }}
+        
+    - name: Upload historical data as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: historical-data
+        path: data/historical_*.csv
