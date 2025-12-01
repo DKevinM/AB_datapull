@@ -142,8 +142,8 @@ def main():
     print(f"After adding metadata: {len(df)} sensors")
 
     if len(df) == 0:
-    print("No sensors with valid metadata found. Exiting.")
-    return
+        print("No sensors with valid metadata found. Exiting.")
+        return
 
     
     # Filter out sensors older than 3 hours
