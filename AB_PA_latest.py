@@ -124,23 +124,7 @@ def main():
     
     # Now try the mapping
     df_live["name"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("name", ""))
-
-
-    # Filter out sensors older than 3 hours
-    now = datetime.now(timezone.utc)
-    df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
-    df = df[df["last_seen"] >= (now - timedelta(hours=3))]
-    print(f"After time filter: {len(df)} sensors")
-
-    # Now add the metadata columns from sensor_df without merging
-    # Create a mapping from sensor_index to the metadata we need
-    sensor_metadata = sensor_df.set_index("sensor_index")[["name", "latitude", "longitude"]].to_dict('index')
-
-
-    # Add the metadata columns to df_live
-    df_live["name"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("name", ""))
-    df_live["latitude"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("latitude", None))
-    df_live["longitude"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("longitude", None))
+    
     
     # Remove any rows where we couldn't find metadata (shouldn't happen but just in case)
     df = df_live.dropna(subset=["name", "latitude", "longitude"])
