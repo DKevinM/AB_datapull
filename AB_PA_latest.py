@@ -124,7 +124,8 @@ def main():
     
     # Now try the mapping
     df_live["name"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("name", ""))
-    
+    df_live["latitude"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("latitude", None))
+    df_live["longitude"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("longitude", None))
     
     # Remove any rows where we couldn't find metadata (shouldn't happen but just in case)
     df = df_live.dropna(subset=["name", "latitude", "longitude"])
