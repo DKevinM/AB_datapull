@@ -4,6 +4,7 @@ import pandas as pd
 import json
 import pytz
 from datetime import datetime, timezone, timedelta
+from supabase import create_client, Client
 import sys
 
 # Robust PM2.5 calculation (R logic ported) - ADD THESE FUNCTIONS
@@ -53,6 +54,52 @@ def get_color(pm, name):
     elif pm > 20: return "#016797"
     elif pm > 10: return "#0099cb"
     else: return "#01cbff"
+
+
+
+def push_to_supabase(df_result):
+    """Push sensor data to Supabase database"""
+    try:
+        # Get Supabase credentials
+        supabase_url = os.getenv("SUPABASE_URL")
+        supabase_key = os.getenv("SUPABASE_SERVICE_KEY")
+        
+        if not supabase_url or not supabase_key:
+            print("Missing Supabase credentials. Skipping database upload.")
+            return False
+        
+        # Create client
+        supabase: Client = create_client(supabase_url, supabase_key)
+        
+        # Prepare records for database
+        records = []
+        for _, row in df_result.iterrows():
+            record = {
+                "sensor_index": int(row["sensor_index"]),
+                "name": str(row["name"]) if pd.notna(row["name"]) else "",
+                "latitude": float(row["latitude"]) if pd.notna(row["latitude"]) else None,
+                "longitude": float(row["longitude"]) if pd.notna(row["longitude"]) else None,
+                "pm_corrected": float(row["pm_corr"]) if pd.notna(row["pm_corr"]) else None,
+                "humidity": float(row["humidity"]) if pd.notna(row["humidity"]) else None,
+                "color": str(row["color"]),
+                "recorded_at": datetime.now(timezone.utc).isoformat()
+            }
+            records.append(record)
+        
+        # Insert into database
+        if records:
+            response = supabase.table("sensor_readings").insert(records).execute()
+            print(f"Successfully pushed {len(records)} records to Supabase")
+            return True
+            
+    except Exception as e:
+        print(f"Error pushing to Supabase: {e}")
+    
+    return False
+
+
+
+
 
 def main():
     api_key = os.getenv("PURPLEAIR_API_KEY")
@@ -162,6 +209,11 @@ def main():
     os.makedirs("data", exist_ok=True)
     result.to_json("data/AB_PM25_map.json", orient="records", indent=2)
     print(f"Final data saved for {len(result)} sensors to data/AB_PM25_map.json")
+
+    print("Pushing data to Supabase...")
+    push_to_supabase(result)
+
+
 
 if __name__ == "__main__":
     main()
