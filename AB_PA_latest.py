@@ -75,11 +75,11 @@ def main():
         dead_sensor_ids = dead_df["sensor_index"].dropna().astype(int).tolist()
         print(f"Loaded {len(dead_sensor_ids)} sensors from dead_list.csv")
         
-        # Remove dead sensors from our list
-        original_count = len(sensor_ids)
-        sensor_ids = [sensor_id for sensor_id in sensor_ids if sensor_id not in dead_sensor_ids]
-        removed_count = original_count - len(sensor_ids)
-        print(f"Removed {removed_count} dead sensors. {len(sensor_ids)} sensors remaining.")
+    # Remove dead sensors from sensor_df BEFORE any processing
+        original_count = len(sensor_df)
+        sensor_df = sensor_df[~sensor_df["sensor_index"].isin(dead_sensor_ids)]
+        removed_count = original_count - len(sensor_df)
+        print(f"Removed {removed_count} dead sensors. {len(sensor_df)} sensors remaining.")
         
     except FileNotFoundError:
         print("Warning: data/dead_list.csv not found, proceeding with all sensors")
@@ -91,6 +91,8 @@ def main():
         print("No sensors remaining after filtering. Exiting.")
         return
     
+    # Get sensor IDs from the filtered sensor_df
+    sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
     sensor_id_str = ",".join(map(str, sensor_ids))
 
     
@@ -110,50 +112,48 @@ def main():
     df_live = pd.DataFrame(rows, columns=fields)
 
 
-    
-    # DEBUG: Check what we got from API
-    print(f"API returned {len(df_live)} sensors")
-    print("Columns in df_live:", df_live.columns.tolist())
-    if 'last_seen' in df_live.columns:
-        print("last_seen IS in df_live")
-    else:
-        print("last_seen is NOT in df_live - this is the problem!")
+   print(f"Retrieved data for {len(df_live)} sensors from PurpleAir")
+
+   
+    # NO MERGE - just use the live data and add the metadata we need
+    # Filter df_live to only include sensors that are in our filtered sensor_df
+    df_live = df_live[df_live["sensor_index"].isin(sensor_ids)]
+    print(f"After filtering to our sensor list: {len(df_live)} sensors")
 
 
-
-    
-    # Merge with static sensor metadata
-    df = pd.merge(sensor_df, df_live, on="sensor_index", how="inner")
-
-
-
-    # DEBUG: Check after merge
-    print(f"After merge: {len(df)} sensors")
-    print("Columns after merge:", df.columns.tolist())
-    if 'last_seen' in df.columns:
-        print("last_seen IS in merged df")
-    else:
-        print("last_seen is NOT in merged df - lost during merge!")
-
-
-    
-    
     # Filter out sensors older than 3 hours
     now = datetime.now(timezone.utc)
     df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
     df = df[df["last_seen"] >= (now - timedelta(hours=3))]
     print(f"After time filter: {len(df)} sensors")
+
+    # Now add the metadata columns from sensor_df without merging
+    # Create a mapping from sensor_index to the metadata we need
+    sensor_metadata = sensor_df.set_index("sensor_index")[["name", "latitude", "longitude"]].to_dict('index')
+
+
+    # Add the metadata columns to df_live
+    df_live["name"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("name", ""))
+    df_live["latitude"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("latitude", None))
+    df_live["longitude"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("longitude", None))
     
+    # Remove any rows where we couldn't find metadata (shouldn't happen but just in case)
+    df = df_live.dropna(subset=["name", "latitude", "longitude"])
+    print(f"After adding metadata: {len(df)} sensors")
+
+    # Filter out sensors older than 3 hours
+    now = datetime.now(timezone.utc)
+    df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
+    df = df[df["last_seen"] >= (now - timedelta(hours=3))]
+    print(f"After time filter: {len(df)} sensors")
+
+
+
+
     # Calculate PM values
-    df["pm_raw"] = df.apply(
-        lambda x: get_best_pm(x["pm2.5_atm_a"], x["pm2.5_atm_b"], x["pm2.5_atm"]), axis=1
-    )
-    df["pm_corr"] = df.apply(
-        lambda x: correct_pm25(x["pm_raw"], x["humidity"]), axis=1
-    )
-    df["color"] = df.apply(
-        lambda x: get_color(x["pm_corr"], x["name"]), axis=1
-    )
+    df["pm_raw"] = df.apply(lambda x: get_best_pm(x["pm2.5_atm_a"], x["pm2.5_atm_b"], x["pm2.5_atm"]), axis=1)
+    df["pm_corr"] = df.apply(lambda x: correct_pm25(x["pm_raw"], x["humidity"]), axis=1)
+    df["color"] = df.apply(lambda x: get_color(x["pm_corr"], x["name"]), axis=1)
     
     # Clean result
     result = df[[
