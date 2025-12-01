@@ -38,6 +38,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add data/AB_PM25_map.json
+        git pull --rebase origin main  # ADD THIS LINE - pulls latest changes
+        git add data/ACA_PM25_map.json
         git diff --quiet && git diff --staged --quiet || git commit -m "Update PurpleAir data [skip ci]"
         git push
