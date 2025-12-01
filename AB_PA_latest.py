@@ -141,6 +141,11 @@ def main():
     df = df_live.dropna(subset=["name", "latitude", "longitude"])
     print(f"After adding metadata: {len(df)} sensors")
 
+    if len(df) == 0:
+    print("No sensors with valid metadata found. Exiting.")
+    return
+
+    
     # Filter out sensors older than 3 hours
     now = datetime.now(timezone.utc)
     df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
