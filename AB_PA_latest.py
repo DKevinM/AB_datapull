@@ -111,14 +111,19 @@ def main():
     rows = data["data"]
     df_live = pd.DataFrame(rows, columns=fields)
 
-
-    print(f"Retrieved data for {len(df_live)} sensors from PurpleAir")
-
-   
-    # NO MERGE - just use the live data and add the metadata we need
-    # Filter df_live to only include sensors that are in our filtered sensor_df
-    df_live = df_live[df_live["sensor_index"].isin(sensor_ids)]
-    print(f"After filtering to our sensor list: {len(df_live)} sensors")
+    # Now add the metadata columns from sensor_df without merging
+    # Create a mapping from sensor_index to the metadata we need
+    sensor_metadata = sensor_df.set_index("sensor_index")[["name", "latitude", "longitude"]].to_dict('index')
+    
+    # DEBUG: Show what sensor_index values look like
+    print(f"First sensor_index from df_live: {df_live['sensor_index'].iloc[0]}, type: {type(df_live['sensor_index'].iloc[0])}")
+    print(f"First sensor_index from sensor_metadata keys: {list(sensor_metadata.keys())[0]}, type: {type(list(sensor_metadata.keys())[0])}")
+    
+    # Convert sensor_index in df_live to match the keys in sensor_metadata
+    df_live["sensor_index"] = df_live["sensor_index"].astype(int)
+    
+    # Now try the mapping
+    df_live["name"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("name", ""))
 
 
     # Filter out sensors older than 3 hours
