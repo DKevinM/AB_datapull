@@ -34,11 +34,11 @@ jobs:
       run: |
         python AB_PA_latest.py
         
-    - name: Commit and push if changed
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git pull --rebase origin main  # ADD THIS LINE - pulls latest changes
-        git add data/ACA_PM25_map.json
-        git diff --quiet && git diff --staged --quiet || git commit -m "Update PurpleAir data [skip ci]"
-        git push
+    - name: Commit and Push Changes
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Update PurpleAir data [skip ci]
+        file_pattern: data/*.json
+        branch: main
+        commit_user_name: GitHub Action
+        commit_user_email: action@github.com
