@@ -112,7 +112,7 @@ def main():
     df_live = pd.DataFrame(rows, columns=fields)
 
 
-   print(f"Retrieved data for {len(df_live)} sensors from PurpleAir")
+    print(f"Retrieved data for {len(df_live)} sensors from PurpleAir")
 
    
     # NO MERGE - just use the live data and add the metadata we need
@@ -146,8 +146,6 @@ def main():
     df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
     df = df[df["last_seen"] >= (now - timedelta(hours=3))]
     print(f"After time filter: {len(df)} sensors")
-
-
 
 
     # Calculate PM values
