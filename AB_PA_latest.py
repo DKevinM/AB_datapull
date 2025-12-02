@@ -61,7 +61,7 @@ def push_to_supabase(df_result):
     """Push sensor data to Supabase database"""
     try:
         # Get Supabase credentials
-        supabase_url = os.getenv("SUPABASE_URL")
+        supabase_url = os.getenv("SUPABASE_DB_URL")
         supabase_key = os.getenv("SUPABASE_SERVICE_KEY")
         
         if not supabase_url or not supabase_key:
@@ -74,16 +74,24 @@ def push_to_supabase(df_result):
         # Prepare records for database
         records = []
         for _, row in df_result.iterrows():
+            # Calculate pm_raw if not present
+            if 'pm_raw' not in row or pd.isna(row['pm_raw']):
+                pm_raw = get_best_pm(row["pm2.5_atm_a"], row["pm2.5_atm_b"], row["pm2.5_atm"])
+            else:
+                pm_raw = row['pm_raw']
+
+            pm_corr = correct_pm25(pm_raw, row["humidity"]) if pm_raw else None
+            
             record = {
                 "sensor_index": int(row["sensor_index"]),
+                "recorded_at": hourly_timestamp.isoformat(),
                 "name": str(row["name"]) if pd.notna(row["name"]) else "",
                 "latitude": float(row["latitude"]) if pd.notna(row["latitude"]) else None,
                 "longitude": float(row["longitude"]) if pd.notna(row["longitude"]) else None,
-                "pm_raw": float(row["pm_raw"]) if pd.notna(row["pm_raw"]) else None,
-                "pm_corrected": float(row["pm_corr"]) if pd.notna(row["pm_corr"]) else None,
+                "pm_raw": float(pm_raw) if pd.notna(pm_raw) else None,
+                "pm_corrected": float(pm_corr) if pd.notna(pm_corr) else None,
                 "humidity": float(row["humidity"]) if pd.notna(row["humidity"]) else None,
-                "color": str(row["color"]),
-                "recorded_at": hourly_timestamp.isoformat()
+                "color": str(row["color"])
             }
             records.append(record)
         
