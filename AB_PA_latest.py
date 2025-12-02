@@ -208,7 +208,7 @@ def main():
     
     # Save as JSON for Leaflet or web app
     ab_tz = pytz.timezone("America/Edmonton")
-    result["last_seen"] = result["last_seen"].dt.tz_convert(ab_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
+    result.loc[:, "last_seen"] = result["last_seen"].dt.tz_convert(ab_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
     
     # Ensure data directory exists
     os.makedirs("data", exist_ok=True)
