@@ -90,10 +90,15 @@ def push_to_supabase(df_result):
         if records:
             response = supabase.table("sensor_readings").insert(records).execute()
             print(f"Successfully pushed {len(records)} records to Supabase")
-            return True
+
+            print(f"Supabase response: {response}")
             
+            return True
+
+    
     except Exception as e:
         print(f"Error pushing to Supabase: {e}")
+        print(f"Error type: {type(e).__name__}")
     
     return False
 
