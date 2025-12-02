@@ -35,10 +35,4 @@ jobs:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       run: |
-        python AB_PA_latest.py --start-date ${{ github.event.inputs.start_date }} --end-date ${{ github.event.inputs.end_date }}
-        
-    - name: Upload historical data as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: historical-data
-        path: data/historical_*.csv
+        python scripts/historical_to_db.py --start-date ${{ github.event.inputs.start_date }} --end-date ${{ github.event.inputs.end_date }}
