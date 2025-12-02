@@ -13,15 +13,54 @@ from datetime import datetime, timedelta, timezone
 from supabase import create_client, Client
 import time
 
-# Import your existing functions if they're in a module
-# Or copy them here
 def get_best_pm(a, b, avg):
-    # [Copy your existing function]
-    pass
+    if pd.isna(a) and not pd.isna(b) and b <= 2000:
+        return b
+    if pd.isna(b) and not pd.isna(a) and a <= 2000:
+        return a
+    if a > 2000 and b <= 2000:
+        return b
+    if b > 2000 and a <= 2000:
+        return a
+    if not pd.isna(a) and not pd.isna(b):
+        diff = abs(a - b)
+        if diff > 50 and diff <= 500:
+            return max(a, b)
+        elif diff > 500:
+            return None
+        elif diff <= 50 and not pd.isna(avg) and avg >= 0:
+            return avg
+    return avg
 
+# Apply RH correction
 def correct_pm25(pm, rh):
-    # [Copy your existing function]
-    pass
+    if pd.isna(pm): return None
+    if pd.isna(rh): rh = 50
+    if rh < 30:
+        return pm / (1 + 0.24 / (100 / 30 - 1))
+    elif rh > 70:
+        return pm / (1 + 0.24 / (100 / 70 - 1))
+    else:
+        return pm / (1 + 0.24 / (100 / rh - 1))
+
+# Color assignment
+def get_color(pm, name):
+    ## if "ACA" not in str(name):
+    ##     return "#808080"  # gray for non-ACA sensors
+    if pd.isna(pm): return "#808080"
+    if pm > 100: return "#640100"
+    elif pm > 90: return "#9a0100"
+    elif pm > 80: return "#cc0001"
+    elif pm > 70: return "#fe0002"
+    elif pm > 60: return "#fd6866"
+    elif pm > 50: return "#ff9835"
+    elif pm > 40: return "#ffcb00"
+    elif pm > 30: return "#fffe03"
+    elif pm > 20: return "#016797"
+    elif pm > 10: return "#0099cb"
+    else: return "#01cbff"
+
+
 
 def push_to_supabase(records):
     """Push records to Supabase database"""
