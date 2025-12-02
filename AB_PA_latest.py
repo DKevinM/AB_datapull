@@ -79,10 +79,11 @@ def push_to_supabase(df_result):
                 "name": str(row["name"]) if pd.notna(row["name"]) else "",
                 "latitude": float(row["latitude"]) if pd.notna(row["latitude"]) else None,
                 "longitude": float(row["longitude"]) if pd.notna(row["longitude"]) else None,
+                "pm_raw": float(row["pm_raw"]) if pd.notna(row["pm_raw"]) else None,
                 "pm_corrected": float(row["pm_corr"]) if pd.notna(row["pm_corr"]) else None,
                 "humidity": float(row["humidity"]) if pd.notna(row["humidity"]) else None,
                 "color": str(row["color"]),
-                "recorded_at": datetime.now(timezone.utc).isoformat()
+                "recorded_at": hourly_timestamp.isoformat()
             }
             records.append(record)
         
@@ -190,6 +191,7 @@ def main():
     
     # Filter out sensors older than 3 hours
     now = datetime.now(timezone.utc)
+    hourly_timestamp = now.replace(minute=0, second=0, microsecond=0)
     df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
     df = df[df["last_seen"] >= (now - timedelta(hours=3))]
     print(f"After time filter: {len(df)} sensors")
