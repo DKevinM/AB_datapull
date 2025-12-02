@@ -1,4 +1,4 @@
-name: Update PurpleAir Data
+name: PA_AB_update
 
 on:
   schedule:
@@ -37,12 +37,3 @@ jobs:
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       run: |
         python AB_PA_latest.py
-        
-    - name: Commit and Push Changes
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: Update PurpleAir data [skip ci]
-        file_pattern: data/AB_PM25_map.json
-        branch: main
-        commit_user_name: GitHub Action
-        commit_user_email: action@github.com
