@@ -91,7 +91,7 @@ def push_to_supabase(records):
     
     return False
 
-def fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts, sensor_metadata:
+def fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts, sensor_metadata):
     """Fetch historical data for a single sensor"""
     url = f"https://api.purpleair.com/v1/sensors/{sensor_id}/history"
     
