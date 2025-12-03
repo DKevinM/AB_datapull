@@ -91,7 +91,8 @@ def push_to_supabase(df_result):
                 "pm_raw": float(pm_raw) if pd.notna(pm_raw) else None,
                 "pm_corrected": float(pm_corr) if pd.notna(pm_corr) else None,
                 "humidity": float(row["humidity"]) if pd.notna(row["humidity"]) else None,
-                "color": str(row["color"])
+                "color": str(row["color"]),
+                "created_at": datetime.now(timezone.utc).isoformat() 
             }
             records.append(record)
         
