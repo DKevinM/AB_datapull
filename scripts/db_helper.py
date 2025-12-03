@@ -5,7 +5,7 @@ from datetime import datetime
 
 class SupabaseDB:
     def __init__(self):
-        self.url = os.getenv("SUPABASE_URL")
+        self.url = os.getenv("SUPABASE_DB_URL")
         self.key = os.getenv("SUPABASE_SERVICE_KEY")  # Use service key for write access
         self.supabase: Client = create_client(self.url, self.key)
     
