@@ -222,10 +222,7 @@ def main():
     df["color"] = df.apply(lambda x: get_color(x["pm_corr"], x["name"]), axis=1)
     
     # Clean result
-    result = df[[
-        "sensor_index", "name", "latitude", "longitude",
-        "humidity", "pm_corr", "color", "last_seen"
-    ]]
+    result = df.copy()
     
     # Save as JSON for Leaflet or web app
     ab_tz = pytz.timezone("America/Edmonton")
