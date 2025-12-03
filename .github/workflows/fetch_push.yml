@@ -18,6 +18,7 @@ jobs:
           else pip install requests pandas SQLAlchemy psycopg2-binary; fi
       - name: Run fetch + push
         env:
+          DB_URL: ${{ secrets.DB_URL }}                        # <-- new Postgres URL
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}          # Postgres connection string
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }} # if needed elsewhere
         run: |
