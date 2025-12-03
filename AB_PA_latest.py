@@ -105,7 +105,7 @@ def push_to_supabase(df_result):
         
         # Insert into database
         if records:
-            response = supabase.table("sensor_readings").insert(records).execute()
+            response = supabase.table("sensor_readings").upsert(records).execute()
             print(f"Successfully pushed {len(records)} records to Supabase")
 
             print(f"Supabase response: {response}")
