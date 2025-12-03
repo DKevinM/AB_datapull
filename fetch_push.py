@@ -6,13 +6,14 @@ import requests
 import pandas as pd
 from datetime import datetime, timedelta, timezone
 from sqlalchemy import create_engine, text
+from sqlalchemy.engine.url import make_url 
 from psycopg2.extras import execute_values  # pip install psycopg2-binary
 
 # --- Config ---
 DEFAULT_HOURS_BACK = 6
 UPSERT_CHUNK = 50_000
 SLICE_HOURS = 6  # time-slice size for range backfills
-DB_URL = os.environ.get("SUPABASE_DB_URL")
+
 
 ODATA_STATIONS = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/Stations?$select=Name"
 ODATA_MEASUREMENTS = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationMeasurements"
@@ -30,10 +31,42 @@ PPM_PARAMS = {
 
 # --- DB helpers ---
 def get_engine():
-    if not DB_URL:
+    """
+    Build a SQLAlchemy engine from SUPABASE_DB_URL.
+    Fails early if the URL is missing or not a Postgres URL.
+    """
+    db_url = os.environ.get("SUPABASE_DB_URL")
+
+    print(f"DEBUG: SUPABASE_DB_URL set? {'[SET]' if db_url else '[MISSING]'}", file=sys.stderr)
+
+    if not db_url:
         print("ERROR: SUPABASE_DB_URL env var not set", file=sys.stderr)
         sys.exit(1)
-    return create_engine(DB_URL)
+
+    # Let SQLAlchemy parse and sanity-check the URL
+    try:
+        url = make_url(db_url)
+    except Exception as e:
+        print(f"ERROR: could not parse SUPABASE_DB_URL: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    backend = url.get_backend_name()
+
+    if not backend.startswith("postgresql"):
+        print(
+            f"ERROR: SUPABASE_DB_URL backend is '{backend}', expected something like "
+            f"'postgresql' or 'postgresql+psycopg2'. "
+            "You probably used an https:// REST URL instead of the Postgres connection string.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    print(
+        f"Connecting to DB: backend={backend}, host={url.host}, database={url.database}",
+        file=sys.stderr,
+    )
+    return create_engine(db_url)
+    
 
 def ensure_aqhi_table(engine):
     ddl = """
@@ -189,7 +222,13 @@ def build_argparser():
     return p
 
 def main():
-    args = build_argparser().parse_args()
+   args = build_argparser().parse_args()
+
+    # Optional env debug
+    print(f"1. SUPABASE_DB_URL: {'[SET]' if os.getenv('SUPABASE_DB_URL') else '[MISSING]'}", file=sys.stderr)
+    print(f"2. SUPABASE_SERVICE_KEY: {'[SET]' if os.getenv('SUPABASE_SERVICE_KEY') else '[MISSING]'}", file=sys.stderr)
+    print(f"3. PURPLEAIR_API_KEY: {'[SET]' if os.getenv('PURPLEAIR_API_KEY') else '[MISSING]'}", file=sys.stderr)
+
     engine = get_engine()
     ensure_aqhi_table(engine)
 
@@ -217,7 +256,7 @@ def main():
             cleaned = clean_data(raw)
             total_in += len(cleaned)
             total_sent += upsert_measurements(engine, cleaned)
-        print(f"✅ range={start_utc.isoformat()}..{end_utc.isoformat()} stations={len(stations)} "
+        print(f" range={start_utc.isoformat()}..{end_utc.isoformat()} stations={len(stations)} "
               f"rows_in={total_in} rows_upserted={total_sent}")
         return
 
@@ -232,7 +271,7 @@ def main():
         combined = pd.concat(frames, ignore_index=True)
         cleaned = clean_data(combined)
         sent = upsert_measurements(engine, cleaned)
-        print(f"✅ window={args.hours_back}h rows_upserted={sent} (input={len(cleaned)})")
+        print(f" window={args.hours_back}h rows_upserted={sent} (input={len(cleaned)})")
     else:
         print("No data fetched in window.")
 
