@@ -65,7 +65,7 @@ def get_color(pm, name):
 def push_to_supabase(records):
     """Push records to Supabase database"""
     try:
-        supabase_url = os.getenv("SUPABASE_URL")
+        supabase_url = os.getenv("SUPABASE_DB_URL")
         supabase_key = os.getenv("SUPABASE_SERVICE_KEY")
         
         if not supabase_url or not supabase_key:
