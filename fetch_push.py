@@ -222,9 +222,9 @@ def build_argparser():
     return p
 
 def main():
-   args = build_argparser().parse_args()
+    args = build_argparser().parse_args()
 
-    # Optional env debug
+    # Optional env debug (MUST be at correct indentation)
     print(f"1. SUPABASE_DB_URL: {'[SET]' if os.getenv('SUPABASE_DB_URL') else '[MISSING]'}", file=sys.stderr)
     print(f"2. SUPABASE_SERVICE_KEY: {'[SET]' if os.getenv('SUPABASE_SERVICE_KEY') else '[MISSING]'}", file=sys.stderr)
     print(f"3. PURPLEAIR_API_KEY: {'[SET]' if os.getenv('PURPLEAIR_API_KEY') else '[MISSING]'}", file=sys.stderr)
