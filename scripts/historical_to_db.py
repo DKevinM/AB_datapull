@@ -99,7 +99,7 @@ def fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts):
         "start_timestamp": start_ts,
         "end_timestamp": end_ts,
         "average": 60,  # 1 hour averages
-        "fields": "time_stamp,humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b"
+        "fields": "humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b"
     }
     
     headers = {"X-API-Key": api_key}
