@@ -79,7 +79,7 @@ def push_to_supabase(records):
             batch_size = 100
             for i in range(0, len(records), batch_size):
                 batch = records[i:i + batch_size]
-                response = supabase.table("sensor_readings").insert(batch).execute()
+                response = supabase.table("sensor_readings").upsert(batch).execute()
                 print(f"Pushed batch {i//batch_size + 1}: {len(batch)} records")
                 time.sleep(1)  # Rate limiting
             
@@ -91,7 +91,7 @@ def push_to_supabase(records):
     
     return False
 
-def fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts):
+def fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts, sensor_metadata:
     """Fetch historical data for a single sensor"""
     url = f"https://api.purpleair.com/v1/sensors/{sensor_id}/history"
     
@@ -115,14 +115,19 @@ def fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts):
                 # Process each reading
                 pm_raw = get_best_pm(row[3], row[4], row[2])  # Adjust indices based on API response
                 pm_corr = correct_pm25(pm_raw, row[1]) if pm_raw else None
+
+                meta = sensor_metadata.get(sensor_id, {})
                 
                 record = {
                     "sensor_index": sensor_id,
+                    "name": meta.get("name", ""),
+                    "latitude": meta.get("latitude"),
+                    "longitude": meta.get("longitude"),
                     "pm_raw": pm_raw,
                     "pm_corrected": pm_corr,
                     "humidity": row[1],
-                    "recorded_at": datetime.fromtimestamp(row[0], tz=timezone.utc).isoformat()
-                    # Add name, latitude, longitude from your sensor CSV if needed
+                    "color": get_color(pm_corr, meta.get("name", "")),  # Calculate color
+                    "recorded_at": datetime.fromtimestamp(row[0], tz=timezone.utc).isoformat()               
                 }
                 records.append(record)
         
@@ -149,9 +154,15 @@ def main():
         sensor_df = pd.read_csv("data/AB_PA_sensors.csv")
         sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
         print(f"Loaded {len(sensor_ids)} sensors")
+
+        # Load sensor metadata ONCE
+        sensor_metadata = sensor_df.set_index("sensor_index")[["name", "latitude", "longitude"]].to_dict('index')
+
     except FileNotFoundError:
         print("Error: data/AB_PA_sensors.csv not found")
         sys.exit(1)
+
+    
     
     # Parse dates
     start_date = datetime.strptime(args.start_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
@@ -165,7 +176,7 @@ def main():
     # Fetch data for each sensor
     for sensor_id in sensor_ids:
         print(f"Fetching historical data for sensor {sensor_id}...")
-        records = fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts)
+        records = fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts, sensor_metadata)
         all_records.extend(records)
         print(f"  Got {len(records)} records")
         time.sleep(2)  # Rate limiting between sensors
