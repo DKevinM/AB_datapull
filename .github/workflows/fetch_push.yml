@@ -16,7 +16,10 @@ jobs:
         run: |
           if [ -f requirements.txt ]; then pip install -r requirements.txt; \
           else pip install requests pandas SQLAlchemy psycopg2-binary; fi
-      - name: fetch and push
-        run: python fetch_push.py
+      - name: Run fetch + push
         env:
-          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}          # Postgres connection string
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }} # if needed elsewhere
+        run: |
+          python fetch_push.py
+
