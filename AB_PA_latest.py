@@ -70,6 +70,13 @@ def push_to_supabase(df_result):
         
         # Create client
         supabase: Client = create_client(supabase_url, supabase_key)
+
+        
+        # ADD THIS: Create hourly timestamp
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc)
+        hourly_timestamp = now.replace(minute=0, second=0, microsecond=0)
+        
         
         # Prepare records for database
         records = []
