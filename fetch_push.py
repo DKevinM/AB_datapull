@@ -32,31 +32,27 @@ PPM_PARAMS = {
 # --- DB helpers ---
 def get_engine():
     """
-    Build a SQLAlchemy engine from SUPABASE_DB_URL.
+    Build a SQLAlchemy engine from DB_URL.
     Fails early if the URL is missing or not a Postgres URL.
     """
-    db_url = os.environ.get("SUPABASE_DB_URL")
+    db_url = os.environ.get("DB_URL")
 
-    print(f"DEBUG: SUPABASE_DB_URL set? {'[SET]' if db_url else '[MISSING]'}", file=sys.stderr)
+    print(f"DEBUG: DB_URL set? {'[SET]' if db_url else '[MISSING]'}", file=sys.stderr)
+    print(f"DEBUG: SUPABASE_DB_URL (REST) set? {'[SET]' if os.environ.get('SUPABASE_DB_URL') else '[MISSING]'}", file=sys.stderr)
 
     if not db_url:
-        print("ERROR: SUPABASE_DB_URL env var not set", file=sys.stderr)
+        print("ERROR: DB_URL env var not set (must be a Postgres connection string)", file=sys.stderr)
         sys.exit(1)
 
     # Let SQLAlchemy parse and sanity-check the URL
-    try:
-        url = make_url(db_url)
-    except Exception as e:
-        print(f"ERROR: could not parse SUPABASE_DB_URL: {e}", file=sys.stderr)
-        sys.exit(1)
-
+    url = make_url(db_url)
     backend = url.get_backend_name()
 
     if not backend.startswith("postgresql"):
         print(
-            f"ERROR: SUPABASE_DB_URL backend is '{backend}', expected something like "
+            f"ERROR: DB_URL backend is '{backend}', expected something like "
             f"'postgresql' or 'postgresql+psycopg2'. "
-            "You probably used an https:// REST URL instead of the Postgres connection string.",
+            "Make sure DB_URL is the Postgres connection string, not an https:// REST URL.",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -223,11 +219,6 @@ def build_argparser():
 
 def main():
     args = build_argparser().parse_args()
-
-    # Optional env debug (MUST be at correct indentation)
-    print(f"1. SUPABASE_DB_URL: {'[SET]' if os.getenv('SUPABASE_DB_URL') else '[MISSING]'}", file=sys.stderr)
-    print(f"2. SUPABASE_SERVICE_KEY: {'[SET]' if os.getenv('SUPABASE_SERVICE_KEY') else '[MISSING]'}", file=sys.stderr)
-    print(f"3. PURPLEAIR_API_KEY: {'[SET]' if os.getenv('PURPLEAIR_API_KEY') else '[MISSING]'}", file=sys.stderr)
 
     engine = get_engine()
     ensure_aqhi_table(engine)
