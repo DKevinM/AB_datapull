@@ -117,6 +117,16 @@ def push_to_supabase(df_result):
 
 
 def main():
+
+
+    print("=== DEBUG: CHECKING ENVIRONMENT ===")
+    print(f"1. SUPABASE_DB_URL: {'[SET]' if os.getenv('SUPABASE_DB_URL') else '[MISSING]'}")
+    print(f"2. SUPABASE_SERVICE_KEY: {'[SET]' if os.getenv('SUPABASE_SERVICE_KEY') else '[MISSING]'}")
+    print(f"3. PURPLEAIR_API_KEY: {'[SET]' if os.getenv('PURPLEAIR_API_KEY') else '[MISSING]'}")
+    print("=== END DEBUG ===")
+    
+
+    
     api_key = os.getenv("PURPLEAIR_API_KEY")
     if not api_key:
         print("Error: PURPLEAIR_API_KEY environment variable not set")
