@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import json
 import argparse
 import requests
 import pandas as pd
@@ -10,9 +11,9 @@ from sqlalchemy.engine.url import make_url
 from psycopg2.extras import execute_values  # pip install psycopg2-binary
 
 # --- Config ---
-DEFAULT_HOURS_BACK = 6
-UPSERT_CHUNK = 50_000
-SLICE_HOURS = 6  # time-slice size for range backfills
+DEFAULT_HOURS_BACK = 12
+UPSERT_CHUNK = 5000
+SLICE_HOURS = 12  # time-slice size for range backfills
 
 
 ODATA_STATIONS = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/Stations?$select=Name"
@@ -29,54 +30,21 @@ PPM_PARAMS = {
     "Total Reduced Sulphur",
 }
 
+
+
 # --- DB helpers ---
-def get_engine():
-    """
-    Build a SQLAlchemy engine from DB_URL.
-    Fails early if the URL is missing or not a Postgres URL.
-    """
-    db_url = os.environ.get("DB_URL")
+# Supabase REST config
+SUPABASE_DB_URL = os.getenv("SUPABASE_DB_URL")          # your https://...supabase.co
+SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
 
-    print(f"DEBUG: DB_URL set? {'[SET]' if db_url else '[MISSING]'}", file=sys.stderr)
-    print(f"DEBUG: SUPABASE_DB_URL (REST) set? {'[SET]' if os.environ.get('SUPABASE_DB_URL') else '[MISSING]'}", file=sys.stderr)
+if not SUPABASE_DB_URL:
+    print("ERROR: SUPABASE_DB_URL (Supabase base URL) not set", file=sys.stderr)
+    sys.exit(1)
+if not SUPABASE_SERVICE_KEY:
+    print("ERROR: SUPABASE_SERVICE_KEY not set", file=sys.stderr)
+    sys.exit(1)
 
-    if not db_url:
-        print("ERROR: DB_URL env var not set (must be a Postgres connection string)", file=sys.stderr)
-        sys.exit(1)
 
-    # Let SQLAlchemy parse and sanity-check the URL
-    url = make_url(db_url)
-    backend = url.get_backend_name()
-
-    if not backend.startswith("postgresql"):
-        print(
-            f"ERROR: DB_URL backend is '{backend}', expected something like "
-            f"'postgresql' or 'postgresql+psycopg2'. "
-            "Make sure DB_URL is the Postgres connection string, not an https:// REST URL.",
-            file=sys.stderr,
-        )
-        sys.exit(1)
-
-    print(
-        f"Connecting to DB: backend={backend}, host={url.host}, database={url.database}",
-        file=sys.stderr,
-    )
-    return create_engine(db_url)
-    
-
-def ensure_aqhi_table(engine):
-    ddl = """
-    CREATE TABLE IF NOT EXISTS public.aqhi_data (
-      "StationName"   TEXT NOT NULL,
-      "ParameterName" TEXT NOT NULL,
-      "ReadingDate"   TIMESTAMP NOT NULL,
-      "Value"         DOUBLE PRECISION,
-      PRIMARY KEY ("StationName","ParameterName","ReadingDate")
-    );
-    CREATE INDEX IF NOT EXISTS aqhi_readingdate_idx ON public.aqhi_data ("ReadingDate");
-    """
-    with engine.begin() as conn:
-        conn.execute(text(ddl))
 
 # --- Station list ---
 def fetch_station_names():
@@ -174,26 +142,70 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
     return out[["StationName", "ParameterName", "ReadingDate", "Value"]]
 
-# --- Upsert ---
-def upsert_measurements(engine, df: pd.DataFrame) -> int:
+
+# --- REST upsert into Supabase ---
+def upsert_measurements_rest(df: pd.DataFrame) -> int:
+    """
+    Upsert rows into Supabase via REST /rest/v1/aqhi_data.
+
+    Table schema:
+      StationName   varchar
+      ParameterName varchar
+      ReadingDate   timestamptz
+      Value         numeric
+      PRIMARY KEY (StationName, ParameterName, ReadingDate)
+    """
     if df.empty:
         return 0
-    rows = list(df.itertuples(index=False, name=None))
-    sql = """
-      INSERT INTO public.aqhi_data ("StationName","ParameterName","ReadingDate","Value")
-      VALUES %s
-      ON CONFLICT ("StationName","ParameterName","ReadingDate")
-      DO UPDATE SET "Value" = EXCLUDED."Value"
-      WHERE public.aqhi_data."Value" IS DISTINCT FROM EXCLUDED."Value";
-    """
-    sent = 0
-    with engine.begin() as sa_conn:
-        pg = sa_conn.connection
-        with pg.cursor() as cur:
-            for i in range(0, len(rows), UPSERT_CHUNK):
-                execute_values(cur, sql, rows[i:i+UPSERT_CHUNK], page_size=20_000)
-                sent += min(UPSERT_CHUNK, len(rows) - i)
-    return sent
+
+    base_url = SUPABASE_URL.rstrip("/")
+    url = f"{base_url}/rest/v1/aqhi_data"
+
+    headers = {
+        "apikey": SUPABASE_SERVICE_KEY,
+        "Authorization": f"Bearer {SUPABASE_SERVICE_KEY}",
+        "Content-Type": "application/json",
+        # merge-duplicates = upsert on on_conflict columns
+        "Prefer": "resolution=merge-duplicates"
+    }
+
+    total_sent = 0
+
+    # Chunk to avoid giant payloads
+    for start in range(0, len(df), UPSERT_CHUNK):
+        chunk = df.iloc[start:start+UPSERT_CHUNK].copy()
+
+        # Convert ReadingDate to ISO 8601 with Z for UTC, for timestamptz
+        chunk["ReadingDate"] = chunk["ReadingDate"].apply(
+            lambda x: pd.Timestamp(x).isoformat().replace("+00:00", "Z")
+        )
+
+        records = chunk.to_dict(orient="records")
+
+        params = {
+            "on_conflict": "StationName,ParameterName,ReadingDate"
+        }
+
+        resp = requests.post(
+            url,
+            headers=headers,
+            params=params,
+            data=json.dumps(records),
+            timeout=60
+        )
+
+        if resp.status_code >= 400:
+            print(
+                f"[ERROR] Supabase REST upsert failed (status {resp.status_code}): {resp.text}",
+                file=sys.stderr
+            )
+            # don't crash entire run; continue with what we have
+            continue
+
+        total_sent += len(records)
+
+    return total_sent
+
 
 # --- CLI & main ---
 def parse_utc(ts: str) -> datetime:
@@ -204,6 +216,7 @@ def parse_utc(ts: str) -> datetime:
     except Exception:
         print(f"ERROR parsing timestamp '{ts}'. Use ISO8601 like 2025-09-09T02:00:00Z", file=sys.stderr)
         sys.exit(2)
+
 
 def build_argparser():
     p = argparse.ArgumentParser(description="Ingest last N hours (default) or a specific UTC time range.")
@@ -217,12 +230,17 @@ def build_argparser():
                    help="Limit to one or more StationName values (repeat --station). Default: all stations.")
     return p
 
+
+
+
 def main():
     args = build_argparser().parse_args()
 
-    engine = get_engine()
-    ensure_aqhi_table(engine)
+    # Env debug
+    print(f"1. SUPABASE_DB_URL: {'[SET]' if os.getenv('SUPABASE_DB_URL') else '[MISSING]'}", file=sys.stderr)
+    print(f"2. SUPABASE_SERVICE_KEY: {'[SET]' if os.getenv('SUPABASE_SERVICE_KEY') else '[MISSING]'}", file=sys.stderr)
 
+    
     # Station selection
     if args.station:
         stations = [s.strip() for s in args.station if s.strip()]
