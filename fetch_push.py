@@ -6,8 +6,6 @@ import argparse
 import requests
 import pandas as pd
 from datetime import datetime, timedelta, timezone
-from sqlalchemy import create_engine, text
-from sqlalchemy.engine.url import make_url 
 from psycopg2.extras import execute_values  # pip install psycopg2-binary
 
 # --- Config ---
@@ -264,7 +262,7 @@ def main():
                 continue
             cleaned = clean_data(raw)
             total_in += len(cleaned)
-            total_sent += upsert_measurements(engine, cleaned)
+            total_sent += upsert_measurements_rest(cleaned) 
         print(f" range={start_utc.isoformat()}..{end_utc.isoformat()} stations={len(stations)} "
               f"rows_in={total_in} rows_upserted={total_sent}")
         return
@@ -279,7 +277,7 @@ def main():
     if frames:
         combined = pd.concat(frames, ignore_index=True)
         cleaned = clean_data(combined)
-        sent = upsert_measurements(engine, cleaned)
+        sent = upsert_measurements_rest(cleaned) 
         print(f" window={args.hours_back}h rows_upserted={sent} (input={len(cleaned)})")
     else:
         print("No data fetched in window.")
