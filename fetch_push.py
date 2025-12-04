@@ -156,7 +156,7 @@ def upsert_measurements_rest(df: pd.DataFrame) -> int:
     if df.empty:
         return 0
 
-    base_url = SUPABASE_URL.rstrip("/")
+    base_url = SUPABASE_DB_URL.rstrip("/")
     url = f"{base_url}/rest/v1/aqhi_data"
 
     headers = {
