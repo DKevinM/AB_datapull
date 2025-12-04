@@ -9,9 +9,9 @@ from datetime import datetime, timedelta, timezone
 from psycopg2.extras import execute_values  # pip install psycopg2-binary
 
 # --- Config ---
-DEFAULT_HOURS_BACK = 12
+DEFAULT_HOURS_BACK = 6
 UPSERT_CHUNK = 5000
-SLICE_HOURS = 12  # time-slice size for range backfills
+SLICE_HOURS = 6  # time-slice size for range backfills
 
 
 ODATA_STATIONS = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/Stations?$select=Name"
