@@ -43,17 +43,17 @@ def get_color(pm, name):
     ## if "ACA" not in str(name):
     ##     return "#808080"  # gray for non-ACA sensors
     if pd.isna(pm): return "#808080"
-    if v > 100: return "#640100"  #AQHI 10+
-    elif v > 90: return "#9a0100" #AQHI 10
-    elif v > 80: return "#cc0001" #AQHI 9
-    elif v > 70: return "#fe0002" #AQHI 8
-    elif v > 60: return "#fd6866" #AQHI 7
-    elif v > 50: return "#ff9835" #AQHI 6
-    elif v > 40: return "#ffcb00" #AQHI 5
-    elif v > 30: return "#fffe03" #AQHI 4
-    elif v > 20: return "#016797" #AQHI 3
-    elif v > 10: return "#0099cb" #AQHI 2
-    elif v > 0: return "#01cbff"  #AQHI 1
+    if pm > 100: return "#640100"  #AQHI 10+
+    elif pm > 90: return "#9a0100" #AQHI 10
+    elif pm > 80: return "#cc0001" #AQHI 9
+    elif pm > 70: return "#fe0002" #AQHI 8
+    elif pm > 60: return "#fd6866" #AQHI 7
+    elif pm > 50: return "#ff9835" #AQHI 6
+    elif pm > 40: return "#ffcb00" #AQHI 5
+    elif pm > 30: return "#fffe03" #AQHI 4
+    elif pm > 20: return "#016797" #AQHI 3
+    elif pm > 10: return "#0099cb" #AQHI 2
+    elif pm > 0: return "#01cbff"  #AQHI 1
     else: return "#D3D3D3"
 
 
@@ -227,7 +227,7 @@ def main():
     # Calculate PM values
     df["pm_raw"] = df.apply(lambda x: get_best_pm(x["pm2.5_atm_a"], x["pm2.5_atm_b"], x["pm2.5_atm"]), axis=1)
     df["pm_corr"] = df.apply(lambda x: correct_pm25(x["pm_raw"], x["humidity"]), axis=1)
-    df["color"] = df.apply(lambda x: get_color(x["pm_corr"], x["name"]), axis=1)
+
     
     # Clean result
     result = df.copy()
