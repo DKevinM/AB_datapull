@@ -139,41 +139,49 @@ def main():
     if not api_key:
         print("Error: PURPLEAIR_API_KEY environment variable not set")
         sys.exit(1)
+
     
-    # Load your static sensor list from CSV (ONLY THESE SENSORS)
+    # Load your static sensor list from CSV
     try:
         sensor_df = pd.read_csv("data/AB_PA_sensors.csv")
-        sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
-        print(f"Loaded {len(sensor_ids)} sensors from CSV")
+        sensor_df["sensor_index"] = pd.to_numeric(sensor_df["sensor_index"], errors="coerce")
+        sensor_df = sensor_df.dropna(subset=["sensor_index"])
+        sensor_df["sensor_index"] = sensor_df["sensor_index"].astype("int64")
+        print(f"Loaded {len(sensor_df)} sensors from CSV")
     except FileNotFoundError:
         print("Error: data/AB_PA_sensors.csv not found")
         sys.exit(1)
-
+    
     # Load dead_list.csv and remove those sensors
+    dead_sensor_ids = set()
     try:
         dead_df = pd.read_csv("data/dead_list.csv")
-        dead_sensor_ids = dead_df["sensor_index"].dropna().astype(int).tolist()
-        print(f"Loaded {len(dead_sensor_ids)} sensors from dead_list.csv")
-        
-    # Remove dead sensors from sensor_df BEFORE any processing
+        dead_df["sensor_index"] = pd.to_numeric(dead_df["sensor_index"], errors="coerce")
+        dead_df = dead_df.dropna(subset=["sensor_index"])
+        dead_df["sensor_index"] = dead_df["sensor_index"].astype("int64")
+        dead_sensor_ids = set(dead_df["sensor_index"].tolist())
+        print(f"Loaded {len(dead_sensor_ids)} sensors from dead_list.csv: {dead_sensor_ids}")
+    
         original_count = len(sensor_df)
         sensor_df = sensor_df[~sensor_df["sensor_index"].isin(dead_sensor_ids)]
         removed_count = original_count - len(sensor_df)
         print(f"Removed {removed_count} dead sensors. {len(sensor_df)} sensors remaining.")
-        
     except FileNotFoundError:
         print("Warning: data/dead_list.csv not found, proceeding with all sensors")
     except Exception as e:
         print(f"Warning: Error reading dead_list.csv: {e}, proceeding with all sensors")
     
-    # If no sensors left, exit
-    if len(sensor_ids) == 0:
-        print("No sensors remaining after filtering. Exiting.")
-        return
+    # Build sensor_ids **after** filtering
+    sensor_ids = sensor_df["sensor_index"].astype("int64").tolist()
+    print(f"Sensor IDs after dead-list filter: {sensor_ids}")
     
-    # Get sensor IDs from the filtered sensor_df
-    sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
+    if not sensor_ids:
+        print("No sensors remaining after filtering. Exiting.")
+        sys.exit(0)
+    
     sensor_id_str = ",".join(map(str, sensor_ids))
+
+
 
     
     # Build API call for ONLY the sensors in your CSV
@@ -186,34 +194,40 @@ def main():
     
     # Fetch data
     response = requests.get(url, headers=headers, params=params)
+    response.raise_for_status()
     data = response.json()
+    
     fields = data["fields"]
-    rows = data["data"]
+    rows   = data["data"]
     df_live = pd.DataFrame(rows, columns=fields)
-
-    # Now add the metadata columns from sensor_df without merging
-    # Create a mapping from sensor_index to the metadata we need
-    sensor_metadata = sensor_df.set_index("sensor_index")[["name", "latitude", "longitude"]].to_dict('index')
     
-    # DEBUG: Show what sensor_index values look like
-    print(f"First sensor_index from df_live: {df_live['sensor_index'].iloc[0]}, type: {type(df_live['sensor_index'].iloc[0])}")
-    print(f"First sensor_index from sensor_metadata keys: {list(sensor_metadata.keys())[0]}, type: {type(list(sensor_metadata.keys())[0])}")
+    # Make sure sensor_index is numeric and comparable
+    df_live["sensor_index"] = pd.to_numeric(df_live["sensor_index"], errors="coerce")
+    df_live = df_live.dropna(subset=["sensor_index"])
+    df_live["sensor_index"] = df_live["sensor_index"].astype("int64")
     
-    # Convert sensor_index in df_live to match the keys in sensor_metadata
-    df_live["sensor_index"] = df_live["sensor_index"].astype(int)
+    print(f"Live dataframe from PurpleAir has {len(df_live)} rows")
     
-    # Now try the mapping
-    df_live["name"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("name", ""))
-    df_live["latitude"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("latitude", None))
-    df_live["longitude"] = df_live["sensor_index"].map(lambda x: sensor_metadata.get(x, {}).get("longitude", None))
+    # Inner-join with sensor_df so only whitelisted & non-dead sensors remain
+    meta_cols = ["sensor_index", "name", "latitude", "longitude"]
+    missing_meta = [c for c in meta_cols if c not in sensor_df.columns]
+    if missing_meta:
+        raise ValueError(f"Missing columns in sensor_df: {missing_meta}")
     
-    # Remove any rows where we couldn't find metadata (shouldn't happen but just in case)
-    df = df_live.dropna(subset=["name", "latitude", "longitude"])
-    print(f"After adding metadata: {len(df)} sensors")
-
-    if len(df) == 0:
-        print("No sensors with valid metadata found. Exiting.")
+    df = df_live.merge(
+        sensor_df[meta_cols],
+        on="sensor_index",
+        how="inner",
+        validate="many_to_one"
+    )
+    
+    print(f"After merging with metadata (and dead-list filter): {len(df)} sensors")
+    print("Unique sensor_index in merged df:", sorted(df["sensor_index"].unique())[:20])
+    
+    if df.empty:
+        print("No sensors with valid metadata found after merge. Exiting.")
         return
+
 
     
     # Filter out sensors older than 3 hours
