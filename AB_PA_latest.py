@@ -151,7 +151,8 @@ def main():
     except FileNotFoundError:
         print("Error: data/AB_PA_sensors.csv not found")
         sys.exit(1)
-    
+
+        
     # Load dead_list.csv and remove those sensors
     dead_sensor_ids = set()
     try:
@@ -170,7 +171,9 @@ def main():
         print("Warning: data/dead_list.csv not found, proceeding with all sensors")
     except Exception as e:
         print(f"Warning: Error reading dead_list.csv: {e}, proceeding with all sensors")
-    
+
+
+   
     # Build sensor_ids **after** filtering
     sensor_ids = sensor_df["sensor_index"].astype("int64").tolist()
     print(f"Sensor IDs after dead-list filter: {sensor_ids}")
@@ -182,7 +185,9 @@ def main():
     sensor_id_str = ",".join(map(str, sensor_ids))
 
 
-
+    print(f"Original sensor count: {len(sensor_df)}")
+    print(f"Dead sensor IDs: {dead_sensor_ids}")
+    
     
     # Build API call for ONLY the sensors in your CSV
     url = "https://api.purpleair.com/v1/sensors"
@@ -220,9 +225,27 @@ def main():
         how="inner",
         validate="many_to_one"
     )
+
+    # EXPLICITLY filter out any dead sensors that slipped through
+    original_len = len(df)
+    df = df[~df["sensor_index"].isin(dead_sensor_ids)]
+    if len(df) < original_len:
+        print(f"Explicitly removed {original_len - len(df)} dead sensors after merge")
+
     
-    print(f"After merging with metadata (and dead-list filter): {len(df)} sensors")
-    print("Unique sensor_index in merged df:", sorted(df["sensor_index"].unique())[:20])
+    # After filtering
+    print(f"Sensor IDs after filter: {sensor_ids}")
+    print(f"Are dead sensors still in sensor_ids? {[id for id in sensor_ids if id in dead_sensor_ids]}")
+    
+    # After API call
+    print(f"API returned {len(df_live)} sensors")
+    print(f"API sensor IDs: {sorted(df_live['sensor_index'].unique())}")
+    print(f"Dead sensors from API: {[id for id in df_live['sensor_index'].unique() if id in dead_sensor_ids]}")
+    
+    # After merge
+    print(f"After merge: {len(df)} sensors")
+    print(f"Unique sensors after merge: {sorted(df['sensor_index'].unique())}")
+
     
     if df.empty:
         print("No sensors with valid metadata found after merge. Exiting.")
