@@ -126,7 +126,7 @@ def fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts, sensor_me
                     "pm_raw": pm_raw,
                     "pm_corrected": pm_corr,
                     "humidity": row[1],
-                    "color": get_color(pm_corr, meta.get("name", "")),  # Calculate color
+                    # "color": get_color(pm_corr, meta.get("name", "")),  # Calculate color
                     "recorded_at": datetime.fromtimestamp(row[0], tz=timezone.utc).isoformat()               
                 }
                 records.append(record)
