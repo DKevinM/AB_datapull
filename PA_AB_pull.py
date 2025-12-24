@@ -7,6 +7,8 @@ import pandas as pd
 import geopandas as gpd
 
 from shapely.geometry import Point
+from supabase import create_client, Client
+
 
 # 1) Load Alberta boundary (can be any provincial polygon)
 ab = gpd.read_file("data/Alberta.shp")
@@ -66,3 +68,38 @@ inside.to_csv("data/AB_PA_sensors.csv", index=False)
 
 print(f"Total sensors from API: {len(gdf)}")
 print(f"Sensors inside Alberta: {len(inside)}")
+
+# 8) Push sensor metadata into Supabase
+supabase = create_client(
+    os.getenv("SUPABASE_URL"),
+    os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+)
+
+payload = inside[[
+    "sensor_index",
+    "name",
+    "latitude",
+    "longitude",
+    "location_type",
+    "last_seen"
+]].copy()
+
+# Optional: compute network label now or leave it null
+def infer_network(name):
+    n = name.upper()
+    if "ACA" in n or "ALBERTA CAPITAL" in n:
+        return "ACA"
+    if "WCAS" in n or "WCA" in n:
+        return "WCAS"
+    return "OTHER"
+
+payload["network"] = payload["name"].apply(infer_network)
+
+supabase.table("purpleair_sensors_meta") \
+    .upsert(payload.to_dict("records"), on_conflict="sensor_index") \
+    .execute()
+
+print(f"Upserted {len(payload)} sensors into Supabase.")
+
+
+
