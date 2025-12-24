@@ -10,7 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
       PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
+
 
     steps:
       - name: Checkout repository
@@ -23,7 +26,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas geopandas shapely requests
+          pip install pandas geopandas shapely requests supabase
 
       - name: Run PurpleAir region script
         run: python PA_AB_pull.py
@@ -33,5 +36,6 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add data/AB_PA_sensors.csv
-          git commit -m "Daily update: AB_PA_sensors.csv"
+          git diff --cached --quiet || git commit -m "Daily update: AB_PA_sensors.csv"
           git push
+
