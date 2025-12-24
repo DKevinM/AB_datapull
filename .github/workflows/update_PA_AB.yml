@@ -14,15 +14,6 @@ jobs:
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
       PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
 
-      - name: Debug environment wiring
-        run: |
-          echo "SUPABASE_URL set?        -> ${{ secrets.SUPABASE_URL != '' }}"
-          echo "SERVICE_ROLE_KEY set?   -> ${{ secrets.SUPABASE_SERVICE_ROLE_KEY != '' }}"
-          echo "PURPLEAIR_API_KEY set?  -> ${{ secrets.PURPLEAIR_API_KEY != '' }}"
-          echo "Runner sees SUPABASE_URL? -> ${SUPABASE_URL:+yes}"
-          echo "Runner sees SERVICE_ROLE_KEY? -> ${SUPABASE_SERVICE_ROLE_KEY:+yes}"
-          echo "Runner sees PURPLEAIR_API_KEY? -> ${PURPLEAIR_API_KEY:+yes}"    
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
