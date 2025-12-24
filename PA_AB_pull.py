@@ -69,6 +69,19 @@ inside.to_csv("data/AB_PA_sensors.csv", index=False)
 print(f"Total sensors from API: {len(gdf)}")
 print(f"Sensors inside Alberta: {len(inside)}")
 
+
+print("=== ENV CHECK ===")
+print("PURPLEAIR_API_KEY set:", bool(os.getenv("PURPLEAIR_API_KEY")))
+print("SUPABASE_URL set:", bool(os.getenv("SUPABASE_URL")))
+print("SUPABASE_SERVICE_ROLE_KEY set:", bool(os.getenv("SUPABASE_SERVICE_ROLE_KEY")))
+
+# show only the host, not full URL
+u = os.getenv("SUPABASE_URL") or ""
+host = u.split("//")[-1].split("/")[0]
+print("SUPABASE host:", host if host else "(missing)")
+print("=== END ENV CHECK ===")
+
+
 # 8) Push sensor metadata into Supabase
 supabase = create_client(
     os.getenv("SUPABASE_URL"),
@@ -91,6 +104,10 @@ def infer_network(name):
         return "ACA"
     if "WCAS" in n or "WCA" in n:
         return "WCAS"
+    if "PAS" in n:
+        return "PAS"
+    if "CRAZ" in n:
+        return "CRAZ"            
     return "OTHER"
 
 payload["network"] = payload["name"].apply(infer_network)
