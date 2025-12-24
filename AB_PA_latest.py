@@ -89,18 +89,32 @@ def push_to_supabase(df_result):
                 pm_raw = row['pm_raw']
 
             pm_corr = correct_pm25(pm_raw, row["humidity"]) if pm_raw else None
+
+            
+            method = "avg"
+            if pd.isna(row["pm2.5_atm_a"]) and not pd.isna(row["pm2.5_atm_b"]):
+                method = "b_only"
+            elif pd.isna(row["pm2.5_atm_b"]) and not pd.isna(row["pm2.5_atm_a"]):
+                method = "a_only"
+            elif abs(row["pm2.5_atm_a"] - row["pm2.5_atm_b"]) > 50:
+                method = "large_diff"
+
             
             record = {
                 "sensor_index": int(row["sensor_index"]),
                 "recorded_at": hourly_timestamp.isoformat(),
-                "name": str(row["name"]) if pd.notna(row["name"]) else "",
-                "latitude": float(row["latitude"]) if pd.notna(row["latitude"]) else None,
-                "longitude": float(row["longitude"]) if pd.notna(row["longitude"]) else None,
+            
+                # Raw channels
+                "pm25_atm_a": float(row["pm2.5_atm_a"]) if pd.notna(row["pm2.5_atm_a"]) else None,
+                "pm25_atm_b": float(row["pm2.5_atm_b"]) if pd.notna(row["pm2.5_atm_b"]) else None,
+                "humidity": float(row["humidity"]) if pd.notna(row["humidity"]) else None,
+            
+                # Derived values (unchanged logic)
                 "pm_raw": float(pm_raw) if pd.notna(pm_raw) else None,
                 "pm_corrected": float(pm_corr) if pd.notna(pm_corr) else None,
-                "humidity": float(row["humidity"]) if pd.notna(row["humidity"]) else None,
-                # "color": str(row["color"]),
-                "created_at": datetime.now(timezone.utc).isoformat() 
+                "pm_method": method,
+            
+                "created_at": datetime.now(timezone.utc).isoformat()
             }
             records.append(record)
         
