@@ -9,7 +9,7 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 4.3,Edmonton East,Outdoor Temperature,2026-01-31T05:00:00-07:00,53.5482115,-113.3680856
 280.0,Edmonton East,Wind Direction,2026-01-31T05:00:00-07:00,53.5482115,-113.3680856
 ,Edmonton East,Total Hydrocarbons,2026-01-31T05:00:00-07:00,53.5482115,-113.3680856
-,Edmonton East,,2026-01-31T05:00:00-07:00,53.5482115,-113.3680856
+2.0,Edmonton East,,2026-01-31T05:00:00-07:00,53.5482115,-113.3680856
 0.007,Edmonton East,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,53.5482115,-113.3680856
 ,Edmonton East,Sulphur Dioxide,2026-01-31T05:00:00-07:00,53.5482115,-113.3680856
 0.0,Edmonton East,Nitric Oxide,2026-01-31T05:00:00-07:00,53.5482115,-113.3680856
@@ -384,7 +384,7 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.001,Edmonton East,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.5482115,-113.3680856
 0.11,Edmonton East,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.5482115,-113.3680856
 ,Edmonton Lendrum,Total Hydrocarbons,2026-01-31T05:00:00-07:00,53.4978,-113.527
-3.0,Edmonton Lendrum,,2026-01-31T05:00:00-07:00,53.4978,-113.527
+2.0,Edmonton Lendrum,,2026-01-31T05:00:00-07:00,53.4978,-113.527
 12.0,Edmonton Lendrum,Wind Speed,2026-01-31T05:00:00-07:00,53.4978,-113.527
 ,Edmonton Lendrum,Nitric Oxide,2026-01-31T05:00:00-07:00,53.4978,-113.527
 ,Edmonton Lendrum,Ozone,2026-01-31T05:00:00-07:00,53.4978,-113.527
@@ -745,18 +745,18 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Edmonton Lendrum,Carbon Monoxide,2026-01-30T06:00:00-07:00,53.4978,-113.527
 ,Calgary Central Inglewood,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,,2026-01-31T05:00:00-07:00,51.030789,-114.008836
+2.0,Calgary Central Inglewood,,2026-01-31T05:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Wind Direction,2026-01-31T05:00:00-07:00,51.030789,-114.008836
+2.0,Calgary Central Inglewood,Wind Direction,2026-01-31T05:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Methane,2026-01-31T05:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.030789,-114.008836
+2.8,Calgary Central Inglewood,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Total Hydrocarbons,2026-01-31T05:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Ozone,2026-01-31T05:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Relative Humidity,2026-01-31T05:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.030789,-114.008836
+0.022,Calgary Central Inglewood,Ozone,2026-01-31T05:00:00-07:00,51.030789,-114.008836
+46.7,Calgary Central Inglewood,Relative Humidity,2026-01-31T05:00:00-07:00,51.030789,-114.008836
+3.9,Calgary Central Inglewood,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Nitric Oxide,2026-01-31T05:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Wind Speed,2026-01-31T05:00:00-07:00,51.030789,-114.008836
-,Calgary Central Inglewood,Carbon Monoxide,2026-01-31T05:00:00-07:00,51.030789,-114.008836
+3.0,Calgary Central Inglewood,Wind Speed,2026-01-31T05:00:00-07:00,51.030789,-114.008836
+0.15,Calgary Central Inglewood,Carbon Monoxide,2026-01-31T05:00:00-07:00,51.030789,-114.008836
 0.0,Calgary Central Inglewood,Nitric Oxide,2026-01-31T04:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Ozone,2026-01-31T04:00:00-07:00,51.030789,-114.008836
 2.0,Calgary Central Inglewood,,2026-01-31T04:00:00-07:00,51.030789,-114.008836
@@ -1079,21 +1079,21 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 -1.1,Calgary Central Inglewood,Outdoor Temperature,2026-01-30T06:00:00-07:00,51.030789,-114.008836
 1.0,Calgary Central Inglewood,Wind Speed,2026-01-30T06:00:00-07:00,51.030789,-114.008836
 ,Calgary Central Inglewood,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,51.030789,-114.008836
-,Calgary Southeast,Methane,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Nitric Oxide,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Wind Speed,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Outdoor Temperature,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+2.2,Calgary Southeast,Methane,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+0.001,Calgary Southeast,Nitric Oxide,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+1.8,Calgary Southeast,Wind Speed,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+3.5,Calgary Southeast,Outdoor Temperature,2026-01-31T05:00:00-07:00,50.955122,-113.969742
 ,Calgary Southeast,Carbon Monoxide,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Wind Direction,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Fine Particulate Matter,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Ozone,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Total Hydrocarbons,2026-01-31T05:00:00-07:00,50.955122,-113.969742
-,Calgary Southeast,Sulphur Dioxide,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+0.024,Calgary Southeast,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+327.0,Calgary Southeast,Wind Direction,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+0.1,Calgary Southeast,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+0.001,Calgary Southeast,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+2.3,Calgary Southeast,Fine Particulate Matter,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+3.0,Calgary Southeast,,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+0.015,Calgary Southeast,Ozone,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+0.024,Calgary Southeast,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+2.2,Calgary Southeast,Total Hydrocarbons,2026-01-31T05:00:00-07:00,50.955122,-113.969742
+0.0,Calgary Southeast,Sulphur Dioxide,2026-01-31T05:00:00-07:00,50.955122,-113.969742
 0.014,Calgary Southeast,Total Oxides of Nitrogen,2026-01-31T04:00:00-07:00,50.955122,-113.969742
 0.014,Calgary Southeast,Nitrogen Dioxide,2026-01-31T04:00:00-07:00,50.955122,-113.969742
 3.0,Calgary Southeast,,2026-01-31T04:00:00-07:00,50.955122,-113.969742
@@ -1439,18 +1439,18 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 2.1,Calgary Southeast,Total Hydrocarbons,2026-01-30T06:00:00-07:00,50.955122,-113.969742
 2.1,Calgary Southeast,Methane,2026-01-30T06:00:00-07:00,50.955122,-113.969742
 2.4,Calgary Southeast,Wind Speed,2026-01-30T06:00:00-07:00,50.955122,-113.969742
-,Calgary Varsity,Ozone,2026-01-31T05:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,,2026-01-31T05:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Wind Direction,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+0.023,Calgary Varsity,Ozone,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+2.0,Calgary Varsity,,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+285.0,Calgary Varsity,Wind Direction,2026-01-31T05:00:00-07:00,51.08272,-114.138994
 ,Calgary Varsity,Carbon Monoxide,2026-01-31T05:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Wind Speed,2026-01-31T05:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+2.7,Calgary Varsity,Wind Speed,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+0.013,Calgary Varsity,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.08272,-114.138994
 ,Calgary Varsity,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Relative Humidity,2026-01-31T05:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.08272,-114.138994
-,Calgary Varsity,Nitric Oxide,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+2.2,Calgary Varsity,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+57.1,Calgary Varsity,Relative Humidity,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+0.013,Calgary Varsity,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+0.6,Calgary Varsity,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.08272,-114.138994
+0.0,Calgary Varsity,Nitric Oxide,2026-01-31T05:00:00-07:00,51.08272,-114.138994
 ,Calgary Varsity,Methane,2026-01-31T05:00:00-07:00,51.08272,-114.138994
 ,Calgary Varsity,Total Hydrocarbons,2026-01-31T05:00:00-07:00,51.08272,-114.138994
 2.0,Calgary Varsity,,2026-01-31T04:00:00-07:00,51.08272,-114.138994
@@ -3767,19 +3767,19 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.027,Cold Lake South,Ozone,2026-01-30T06:00:00-07:00,54.4138811,-110.2330575
 -9.0,Cold Lake South,Outdoor Temperature,2026-01-30T06:00:00-07:00,54.4138811,-110.2330575
 93.0,Cold Lake South,Relative Humidity,2026-01-30T06:00:00-07:00,54.4138811,-110.2330575
-,Caroline,Sulphur Dioxide,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Nitric Oxide,2026-01-31T05:00:00-07:00,51.95,-114.7
+0.0,Caroline,Sulphur Dioxide,2026-01-31T05:00:00-07:00,51.95,-114.7
+0.001,Caroline,Nitric Oxide,2026-01-31T05:00:00-07:00,51.95,-114.7
 ,Caroline,Total Hydrocarbons,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Wind Speed,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Wind Direction,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Relative Humidity,2026-01-31T05:00:00-07:00,51.95,-114.7
-,Caroline,Ozone,2026-01-31T05:00:00-07:00,51.95,-114.7
+-0.4,Caroline,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.95,-114.7
+2.0,Caroline,,2026-01-31T05:00:00-07:00,51.95,-114.7
+12.2,Caroline,Wind Speed,2026-01-31T05:00:00-07:00,51.95,-114.7
+0.3,Caroline,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.95,-114.7
+0.0,Caroline,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,51.95,-114.7
+254.0,Caroline,Wind Direction,2026-01-31T05:00:00-07:00,51.95,-114.7
+0.001,Caroline,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.95,-114.7
+0.002,Caroline,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.95,-114.7
+70.0,Caroline,Relative Humidity,2026-01-31T05:00:00-07:00,51.95,-114.7
+0.031,Caroline,Ozone,2026-01-31T05:00:00-07:00,51.95,-114.7
 0.0,Caroline,Total Reduced Sulphur,2026-01-31T04:00:00-07:00,51.95,-114.7
 ,Caroline,Nitrogen Dioxide,2026-01-31T04:00:00-07:00,51.95,-114.7
 2.7,Caroline,Total Hydrocarbons,2026-01-31T04:00:00-07:00,51.95,-114.7
@@ -4079,20 +4079,20 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Caroline,Sulphur Dioxide,2026-01-30T06:00:00-07:00,51.95,-114.7
 ,Caroline,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,51.95,-114.7
 ,Caroline,Outdoor Temperature,2026-01-30T06:00:00-07:00,51.95,-114.7
-,Medicine Hat - Crescent Heights,Solar Radiation,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Nitric Oxide,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Wind Speed,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Relative Humidity,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Carbon Monoxide,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Ozone,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Outdoor Temperature,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Wind Direction,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+0.0,Medicine Hat - Crescent Heights,Solar Radiation,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+0.0,Medicine Hat - Crescent Heights,Nitric Oxide,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+9.3,Medicine Hat - Crescent Heights,Wind Speed,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+67.5,Medicine Hat - Crescent Heights,Relative Humidity,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+0.257,Medicine Hat - Crescent Heights,Carbon Monoxide,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+0.024,Medicine Hat - Crescent Heights,Ozone,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+0.01,Medicine Hat - Crescent Heights,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+4.2,Medicine Hat - Crescent Heights,Outdoor Temperature,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+296.0,Medicine Hat - Crescent Heights,Wind Direction,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
 ,Medicine Hat - Crescent Heights,Total Hydrocarbons,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Fine Particulate Matter,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Sulphur Dioxide,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
-,Medicine Hat - Crescent Heights,,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+3.1,Medicine Hat - Crescent Heights,Fine Particulate Matter,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+0.0,Medicine Hat - Crescent Heights,Sulphur Dioxide,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+0.01,Medicine Hat - Crescent Heights,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
+2.0,Medicine Hat - Crescent Heights,,2026-01-31T05:00:00-07:00,50.0488873,-110.6811172
 2.0,Medicine Hat - Crescent Heights,,2026-01-31T04:00:00-07:00,50.0488873,-110.6811172
 0.0,Medicine Hat - Crescent Heights,Solar Radiation,2026-01-31T04:00:00-07:00,50.0488873,-110.6811172
 ,Medicine Hat - Crescent Heights,Ozone,2026-01-31T04:00:00-07:00,50.0488873,-110.6811172
@@ -4415,20 +4415,20 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.011,Medicine Hat - Crescent Heights,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,50.0488873,-110.6811172
 8.2,Medicine Hat - Crescent Heights,Wind Speed,2026-01-30T06:00:00-07:00,50.0488873,-110.6811172
 2.0,Medicine Hat - Crescent Heights,,2026-01-30T06:00:00-07:00,50.0488873,-110.6811172
-,Grande Prairie - Henry Pirker,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+0.003,Grande Prairie - Henry Pirker,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
 ,Grande Prairie - Henry Pirker,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Wind Direction,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+0.3,Grande Prairie - Henry Pirker,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+0.003,Grande Prairie - Henry Pirker,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+0.0,Grande Prairie - Henry Pirker,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+254.0,Grande Prairie - Henry Pirker,Wind Direction,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
 ,Grande Prairie - Henry Pirker,Total Hydrocarbons,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Nitric Oxide,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Wind Speed,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Ozone,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Relative Humidity,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
-,Grande Prairie - Henry Pirker,Carbon Monoxide,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+3.8,Grande Prairie - Henry Pirker,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+0.0,Grande Prairie - Henry Pirker,Nitric Oxide,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+16.5,Grande Prairie - Henry Pirker,Wind Speed,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+0.034,Grande Prairie - Henry Pirker,Ozone,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+2.0,Grande Prairie - Henry Pirker,,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+67.5,Grande Prairie - Henry Pirker,Relative Humidity,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
+0.09,Grande Prairie - Henry Pirker,Carbon Monoxide,2026-01-31T05:00:00-07:00,55.1766364,-118.8077555
 0.003,Grande Prairie - Henry Pirker,Nitrogen Dioxide,2026-01-31T04:00:00-07:00,55.1766364,-118.8077555
 2.0,Grande Prairie - Henry Pirker,,2026-01-31T04:00:00-07:00,55.1766364,-118.8077555
 0.09,Grande Prairie - Henry Pirker,Carbon Monoxide,2026-01-31T04:00:00-07:00,55.1766364,-118.8077555
@@ -4751,12 +4751,12 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Grande Prairie - Henry Pirker,Carbon Monoxide,2026-01-30T06:00:00-07:00,55.1766364,-118.8077555
 ,Grande Prairie - Henry Pirker,Sulphur Dioxide,2026-01-30T06:00:00-07:00,55.1766364,-118.8077555
 ,Grande Prairie - Henry Pirker,Wind Speed,2026-01-30T06:00:00-07:00,55.1766364,-118.8077555
-,Smoky Heights,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.405,-118.275
-,Smoky Heights,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.405,-118.275
-,Smoky Heights,Wind Direction,2026-01-31T05:00:00-07:00,55.405,-118.275
-,Smoky Heights,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.405,-118.275
-,Smoky Heights,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.405,-118.275
-,Smoky Heights,Wind Speed,2026-01-31T05:00:00-07:00,55.405,-118.275
+0.0,Smoky Heights,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.405,-118.275
+0.001,Smoky Heights,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.405,-118.275
+273.0,Smoky Heights,Wind Direction,2026-01-31T05:00:00-07:00,55.405,-118.275
+0.0,Smoky Heights,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.405,-118.275
+0.7,Smoky Heights,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.405,-118.275
+17.6,Smoky Heights,Wind Speed,2026-01-31T05:00:00-07:00,55.405,-118.275
 18.2,Smoky Heights,Wind Speed,2026-01-31T04:00:00-07:00,55.405,-118.275
 0.0,Smoky Heights,Total Reduced Sulphur,2026-01-31T04:00:00-07:00,55.405,-118.275
 0.0,Smoky Heights,Sulphur Dioxide,2026-01-31T04:00:00-07:00,55.405,-118.275
@@ -4895,13 +4895,13 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Smoky Heights,Fine Particulate Matter,2026-01-30T06:00:00-07:00,55.405,-118.275
 ,Smoky Heights,Wind Speed,2026-01-30T06:00:00-07:00,55.405,-118.275
 ,Smoky Heights,Sulphur Dioxide,2026-01-30T06:00:00-07:00,55.405,-118.275
-,Beaverlodge,Wind Direction,2026-01-31T05:00:00-07:00,55.1963,-119.3968
+98.0,Beaverlodge,Wind Direction,2026-01-31T05:00:00-07:00,55.1963,-119.3968
 2.0,Beaverlodge,,2026-01-31T05:00:00-07:00,55.1963,-119.3968
-,Beaverlodge,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.1963,-119.3968
-,Beaverlodge,Wind Speed,2026-01-31T05:00:00-07:00,55.1963,-119.3968
-,Beaverlodge,Relative Humidity,2026-01-31T05:00:00-07:00,55.1963,-119.3968
+0.5,Beaverlodge,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.1963,-119.3968
+11.0,Beaverlodge,Wind Speed,2026-01-31T05:00:00-07:00,55.1963,-119.3968
+71.3,Beaverlodge,Relative Humidity,2026-01-31T05:00:00-07:00,55.1963,-119.3968
 ,Beaverlodge,Ozone,2026-01-31T05:00:00-07:00,55.1963,-119.3968
-,Beaverlodge,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.1963,-119.3968
+3.7,Beaverlodge,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.1963,-119.3968
 ,Beaverlodge,Nitric Oxide,2026-01-31T05:00:00-07:00,55.1963,-119.3968
 ,Beaverlodge,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.1963,-119.3968
 ,Beaverlodge,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.1963,-119.3968
@@ -6359,21 +6359,21 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Powers,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.633,-114.4199
 ,Powers,Nitric Oxide,2026-01-30T06:00:00-07:00,53.633,-114.4199
 ,Powers,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.633,-114.4199
-,Fort McMurray Athabasca Valley,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Wind Direction,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Relative Humidity,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Nitric Oxide,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Wind Speed,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Ozone,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+0.001,Fort McMurray Athabasca Valley,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+2.22,Fort McMurray Athabasca Valley,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+0.002,Fort McMurray Athabasca Valley,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+-7.2,Fort McMurray Athabasca Valley,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+320.0,Fort McMurray Athabasca Valley,Wind Direction,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+81.7,Fort McMurray Athabasca Valley,Relative Humidity,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+0.0,Fort McMurray Athabasca Valley,Nitric Oxide,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+8.3,Fort McMurray Athabasca Valley,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+0.012,Fort McMurray Athabasca Valley,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+3.0,Fort McMurray Athabasca Valley,,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+0.012,Fort McMurray Athabasca Valley,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+17.7,Fort McMurray Athabasca Valley,Wind Speed,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+0.014,Fort McMurray Athabasca Valley,Ozone,2026-01-31T05:00:00-07:00,56.7328,-111.3902
 ,Fort McMurray Athabasca Valley,Carbon Monoxide,2026-01-31T05:00:00-07:00,56.7328,-111.3902
-,Fort McMurray Athabasca Valley,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,56.7328,-111.3902
+0.0,Fort McMurray Athabasca Valley,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,56.7328,-111.3902
 19.1,Fort McMurray Athabasca Valley,Wind Speed,2026-01-31T04:00:00-07:00,56.7328,-111.3902
 0.0,Fort McMurray Athabasca Valley,Non-methane Hydrocarbons,2026-01-31T04:00:00-07:00,56.7328,-111.3902
 ,Fort McMurray Athabasca Valley,Nitrogen Dioxide,2026-01-31T04:00:00-07:00,56.7328,-111.3902
@@ -6719,24 +6719,24 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Fort McMurray Athabasca Valley,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,56.7328,-111.3902
 -14.3,Fort McMurray Athabasca Valley,Outdoor Temperature,2026-01-30T06:00:00-07:00,56.7328,-111.3902
 83.1,Fort McMurray Athabasca Valley,Relative Humidity,2026-01-30T06:00:00-07:00,56.7328,-111.3902
-,Fort McKay,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Wind Speed,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+2.19,Fort McKay,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+0.0,Fort McKay,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+0.01,Fort McKay,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+0.0,Fort McKay,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+12.0,Fort McKay,Wind Speed,2026-01-31T05:00:00-07:00,57.189406,-111.640504
 ,Fort McKay,Nitric Oxide,2026-01-31T05:00:00-07:00,57.189406,-111.640504
 ,Fort McKay,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Solar Radiation,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Methane,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+-8.5,Fort McKay,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+5.7,Fort McKay,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+0.001,Fort McKay,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+0.0,Fort McKay,Solar Radiation,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+2.18,Fort McKay,Methane,2026-01-31T05:00:00-07:00,57.189406,-111.640504
 ,Fort McKay,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Ozone,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Wind Direction,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Relative Humidity,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,Ammonia,2026-01-31T05:00:00-07:00,57.189406,-111.640504
-,Fort McKay,,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+0.02,Fort McKay,Ozone,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+12.0,Fort McKay,Wind Direction,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+86.1,Fort McKay,Relative Humidity,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+0.01,Fort McKay,Ammonia,2026-01-31T05:00:00-07:00,57.189406,-111.640504
+3.0,Fort McKay,,2026-01-31T05:00:00-07:00,57.189406,-111.640504
 0.02,Fort McKay,Non-methane Hydrocarbons,2026-01-31T04:00:00-07:00,57.189406,-111.640504
 10.0,Fort McKay,Wind Direction,2026-01-31T04:00:00-07:00,57.189406,-111.640504
 0.0,Fort McKay,Hydrogen Sulphide,2026-01-31T04:00:00-07:00,57.189406,-111.640504
@@ -7158,13 +7158,13 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Mildred Lake,Relative Humidity,2026-01-31T05:00:00-07:00,57.05,-111.5631
 ,Mildred Lake,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.05,-111.5631
 ,Mildred Lake,Wind Direction,2026-01-31T05:00:00-07:00,57.05,-111.5631
-,Mildred Lake,Sulphur Dioxide,2026-01-31T04:00:00-07:00,57.05,-111.5631
+0.001,Mildred Lake,Sulphur Dioxide,2026-01-31T04:00:00-07:00,57.05,-111.5631
 ,Mildred Lake,Hydrogen Sulphide,2026-01-31T04:00:00-07:00,57.05,-111.5631
-,Mildred Lake,Wind Direction,2026-01-31T04:00:00-07:00,57.05,-111.5631
-,Mildred Lake,Wind Speed,2026-01-31T04:00:00-07:00,57.05,-111.5631
-,Mildred Lake,Outdoor Temperature,2026-01-31T04:00:00-07:00,57.05,-111.5631
-,Mildred Lake,Total Hydrocarbons,2026-01-31T04:00:00-07:00,57.05,-111.5631
-,Mildred Lake,Relative Humidity,2026-01-31T04:00:00-07:00,57.05,-111.5631
+2.0,Mildred Lake,Wind Direction,2026-01-31T04:00:00-07:00,57.05,-111.5631
+17.2,Mildred Lake,Wind Speed,2026-01-31T04:00:00-07:00,57.05,-111.5631
+-8.7,Mildred Lake,Outdoor Temperature,2026-01-31T04:00:00-07:00,57.05,-111.5631
+2.15,Mildred Lake,Total Hydrocarbons,2026-01-31T04:00:00-07:00,57.05,-111.5631
+89.4,Mildred Lake,Relative Humidity,2026-01-31T04:00:00-07:00,57.05,-111.5631
 0.001,Mildred Lake,Hydrogen Sulphide,2026-01-31T03:00:00-07:00,57.05,-111.5631
 88.6,Mildred Lake,Relative Humidity,2026-01-31T03:00:00-07:00,57.05,-111.5631
 1.0,Mildred Lake,Wind Direction,2026-01-31T03:00:00-07:00,57.05,-111.5631
@@ -7319,14 +7319,14 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 90.4,Mildred Lake,Relative Humidity,2026-01-30T06:00:00-07:00,57.05,-111.5631
 2.37,Mildred Lake,Total Hydrocarbons,2026-01-30T06:00:00-07:00,57.05,-111.5631
 0.001,Mildred Lake,Sulphur Dioxide,2026-01-30T06:00:00-07:00,57.05,-111.5631
-,Buffalo Viewpoint,Relative Humidity,2026-01-31T05:00:00-07:00,56.9967,-111.5926
-,Buffalo Viewpoint,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.9967,-111.5926
-,Buffalo Viewpoint,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.9967,-111.5926
-,Buffalo Viewpoint,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.9967,-111.5926
-,Buffalo Viewpoint,Wind Direction,2026-01-31T05:00:00-07:00,56.9967,-111.5926
-,Buffalo Viewpoint,Wind Speed,2026-01-31T05:00:00-07:00,56.9967,-111.5926
-,Buffalo Viewpoint,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,56.9967,-111.5926
-,Buffalo Viewpoint,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.9967,-111.5926
+89.1,Buffalo Viewpoint,Relative Humidity,2026-01-31T05:00:00-07:00,56.9967,-111.5926
+2.21,Buffalo Viewpoint,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.9967,-111.5926
+0.0,Buffalo Viewpoint,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.9967,-111.5926
+-8.9,Buffalo Viewpoint,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.9967,-111.5926
+3.0,Buffalo Viewpoint,Wind Direction,2026-01-31T05:00:00-07:00,56.9967,-111.5926
+11.4,Buffalo Viewpoint,Wind Speed,2026-01-31T05:00:00-07:00,56.9967,-111.5926
+0.001,Buffalo Viewpoint,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,56.9967,-111.5926
+7.0,Buffalo Viewpoint,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.9967,-111.5926
 0.001,Buffalo Viewpoint,Hydrogen Sulphide,2026-01-31T04:00:00-07:00,56.9967,-111.5926
 88.1,Buffalo Viewpoint,Relative Humidity,2026-01-31T04:00:00-07:00,56.9967,-111.5926
 7.1,Buffalo Viewpoint,Fine Particulate Matter,2026-01-31T04:00:00-07:00,56.9967,-111.5926
@@ -7511,13 +7511,13 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 156.0,Buffalo Viewpoint,Wind Direction,2026-01-30T06:00:00-07:00,56.9967,-111.5926
 ,Buffalo Viewpoint,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,56.9967,-111.5926
 -11.4,Buffalo Viewpoint,Outdoor Temperature,2026-01-30T06:00:00-07:00,56.9967,-111.5926
-,Mannix,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.9688,-111.482
-,Mannix,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.9688,-111.482
-,Mannix,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,56.9688,-111.482
-,Mannix,Wind Direction,2026-01-31T05:00:00-07:00,56.9688,-111.482
-,Mannix,Relative Humidity,2026-01-31T05:00:00-07:00,56.9688,-111.482
-,Mannix,Wind Speed,2026-01-31T05:00:00-07:00,56.9688,-111.482
-,Mannix,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.9688,-111.482
+2.09,Mannix,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.9688,-111.482
+0.002,Mannix,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.9688,-111.482
+0.001,Mannix,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,56.9688,-111.482
+5.0,Mannix,Wind Direction,2026-01-31T05:00:00-07:00,56.9688,-111.482
+89.8,Mannix,Relative Humidity,2026-01-31T05:00:00-07:00,56.9688,-111.482
+15.5,Mannix,Wind Speed,2026-01-31T05:00:00-07:00,56.9688,-111.482
+-8.8,Mannix,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.9688,-111.482
 342.0,Mannix,Wind Direction,2026-01-31T04:00:00-07:00,56.9688,-111.482
 2.11,Mannix,Total Hydrocarbons,2026-01-31T04:00:00-07:00,56.9688,-111.482
 0.0,Mannix,Hydrogen Sulphide,2026-01-31T04:00:00-07:00,56.9688,-111.482
@@ -7679,20 +7679,20 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 12.4,Mannix,Wind Speed,2026-01-30T06:00:00-07:00,56.9688,-111.482
 ,Mannix,Sulphur Dioxide,2026-01-30T06:00:00-07:00,56.9688,-111.482
 0.001,Mannix,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,56.9688,-111.482
-,Fort McMurray Patricia McInnes,,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Wind Direction,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Ozone,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+3.0,Fort McMurray Patricia McInnes,,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+346.0,Fort McMurray Patricia McInnes,Wind Direction,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+8.6,Fort McMurray Patricia McInnes,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+0.003,Fort McMurray Patricia McInnes,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+-8.2,Fort McMurray Patricia McInnes,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+0.014,Fort McMurray Patricia McInnes,Ozone,2026-01-31T05:00:00-07:00,56.751386,-111.476596
 ,Fort McMurray Patricia McInnes,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Relative Humidity,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+88.1,Fort McMurray Patricia McInnes,Relative Humidity,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+2.19,Fort McMurray Patricia McInnes,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.751386,-111.476596
 ,Fort McMurray Patricia McInnes,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Ammonia,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+0.014,Fort McMurray Patricia McInnes,Ammonia,2026-01-31T05:00:00-07:00,56.751386,-111.476596
 ,Fort McMurray Patricia McInnes,Nitric Oxide,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,56.751386,-111.476596
-,Fort McMurray Patricia McInnes,Wind Speed,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+0.001,Fort McMurray Patricia McInnes,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,56.751386,-111.476596
+17.5,Fort McMurray Patricia McInnes,Wind Speed,2026-01-31T05:00:00-07:00,56.751386,-111.476596
 2.56,Fort McMurray Patricia McInnes,Total Hydrocarbons,2026-01-31T04:00:00-07:00,56.751386,-111.476596
 -7.5,Fort McMurray Patricia McInnes,Outdoor Temperature,2026-01-31T04:00:00-07:00,56.751386,-111.476596
 342.0,Fort McMurray Patricia McInnes,Wind Direction,2026-01-31T04:00:00-07:00,56.751386,-111.476596
@@ -8015,18 +8015,18 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.002,Fort McMurray Patricia McInnes,Nitric Oxide,2026-01-30T06:00:00-07:00,56.751386,-111.476596
 0.0,Fort McMurray Patricia McInnes,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,56.751386,-111.476596
 ,Fort McMurray Patricia McInnes,Total Hydrocarbons,2026-01-30T06:00:00-07:00,56.751386,-111.476596
-,Fort Chipewyan,Ozone,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Nitric Oxide,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Wind Speed,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Outdoor Temperature,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Fine Particulate Matter,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Solar Radiation,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Sulphur Dioxide,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Relative Humidity,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Wind Direction,2026-01-31T05:00:00-07:00,58.7084,-111.1764
-,Fort Chipewyan,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+0.035,Fort Chipewyan,Ozone,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+0.001,Fort Chipewyan,Nitric Oxide,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+12.7,Fort Chipewyan,Wind Speed,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+0.0,Fort Chipewyan,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+-10.7,Fort Chipewyan,Outdoor Temperature,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+4.0,Fort Chipewyan,Fine Particulate Matter,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+0.0,Fort Chipewyan,Solar Radiation,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+2.0,Fort Chipewyan,,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+0.0,Fort Chipewyan,Sulphur Dioxide,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+86.3,Fort Chipewyan,Relative Humidity,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+329.0,Fort Chipewyan,Wind Direction,2026-01-31T05:00:00-07:00,58.7084,-111.1764
+0.001,Fort Chipewyan,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,58.7084,-111.1764
 ,Fort Chipewyan,Nitric Oxide,2026-01-31T04:00:00-07:00,58.7084,-111.1764
 333.0,Fort Chipewyan,Wind Direction,2026-01-31T04:00:00-07:00,58.7084,-111.1764
 4.2,Fort Chipewyan,Fine Particulate Matter,2026-01-31T04:00:00-07:00,58.7084,-111.1764
@@ -8310,13 +8310,13 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Barge Landing,Wind Direction,2026-01-31T05:00:00-07:00,57.1982,-111.5996
 ,Barge Landing,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.1982,-111.5996
 ,Barge Landing,Wind Speed,2026-01-31T05:00:00-07:00,57.1982,-111.5996
-,Barge Landing,Sulphur Dioxide,2026-01-31T04:00:00-07:00,57.1982,-111.5996
-,Barge Landing,Relative Humidity,2026-01-31T04:00:00-07:00,57.1982,-111.5996
-,Barge Landing,Wind Direction,2026-01-31T04:00:00-07:00,57.1982,-111.5996
-,Barge Landing,Total Reduced Sulphur,2026-01-31T04:00:00-07:00,57.1982,-111.5996
-,Barge Landing,Total Hydrocarbons,2026-01-31T04:00:00-07:00,57.1982,-111.5996
-,Barge Landing,Wind Speed,2026-01-31T04:00:00-07:00,57.1982,-111.5996
-,Barge Landing,Outdoor Temperature,2026-01-31T04:00:00-07:00,57.1982,-111.5996
+0.001,Barge Landing,Sulphur Dioxide,2026-01-31T04:00:00-07:00,57.1982,-111.5996
+88.2,Barge Landing,Relative Humidity,2026-01-31T04:00:00-07:00,57.1982,-111.5996
+4.0,Barge Landing,Wind Direction,2026-01-31T04:00:00-07:00,57.1982,-111.5996
+0.0,Barge Landing,Total Reduced Sulphur,2026-01-31T04:00:00-07:00,57.1982,-111.5996
+2.31,Barge Landing,Total Hydrocarbons,2026-01-31T04:00:00-07:00,57.1982,-111.5996
+9.7,Barge Landing,Wind Speed,2026-01-31T04:00:00-07:00,57.1982,-111.5996
+-8.9,Barge Landing,Outdoor Temperature,2026-01-31T04:00:00-07:00,57.1982,-111.5996
 88.7,Barge Landing,Relative Humidity,2026-01-31T03:00:00-07:00,57.1982,-111.5996
 0.001,Barge Landing,Sulphur Dioxide,2026-01-31T03:00:00-07:00,57.1982,-111.5996
 -8.7,Barge Landing,Outdoor Temperature,2026-01-31T03:00:00-07:00,57.1982,-111.5996
@@ -8471,13 +8471,13 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 2.51,Barge Landing,Total Hydrocarbons,2026-01-30T06:00:00-07:00,57.1982,-111.5996
 0.001,Barge Landing,Sulphur Dioxide,2026-01-30T06:00:00-07:00,57.1982,-111.5996
 224.0,Barge Landing,Wind Direction,2026-01-30T06:00:00-07:00,57.1982,-111.5996
-,Lower Camp,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
-,Lower Camp,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
-,Lower Camp,Relative Humidity,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
-,Lower Camp,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
-,Lower Camp,Wind Speed,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
-,Lower Camp,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
-,Lower Camp,Wind Direction,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
+2.12,Lower Camp,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
+-8.2,Lower Camp,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
+85.9,Lower Camp,Relative Humidity,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
+0.0,Lower Camp,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
+12.7,Lower Camp,Wind Speed,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
+0.0,Lower Camp,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
+8.0,Lower Camp,Wind Direction,2026-01-31T05:00:00-07:00,57.026869,-111.5007492
 2.0,Lower Camp,Wind Direction,2026-01-31T04:00:00-07:00,57.026869,-111.5007492
 0.0,Lower Camp,Sulphur Dioxide,2026-01-31T04:00:00-07:00,57.026869,-111.5007492
 0.0,Lower Camp,Hydrogen Sulphide,2026-01-31T04:00:00-07:00,57.026869,-111.5007492
@@ -8639,19 +8639,19 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 2.7,Lower Camp,Wind Speed,2026-01-30T06:00:00-07:00,57.026869,-111.5007492
 87.5,Lower Camp,Relative Humidity,2026-01-30T06:00:00-07:00,57.026869,-111.5007492
 ,Lower Camp,Total Hydrocarbons,2026-01-30T06:00:00-07:00,57.026869,-111.5007492
-,Fort McKay South,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Wind Speed,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Nitric Oxide,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Relative Humidity,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Wind Direction,2026-01-31T05:00:00-07:00,57.1492,-111.6424
-,Fort McKay South,Ozone,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+0.001,Fort McKay South,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+-8.9,Fort McKay South,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+13.0,Fort McKay South,Wind Speed,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+0.0,Fort McKay South,Nitric Oxide,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+0.009,Fort McKay South,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+3.0,Fort McKay South,,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+2.12,Fort McKay South,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+0.0,Fort McKay South,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+0.009,Fort McKay South,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+6.1,Fort McKay South,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+87.5,Fort McKay South,Relative Humidity,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+16.0,Fort McKay South,Wind Direction,2026-01-31T05:00:00-07:00,57.1492,-111.6424
+0.025,Fort McKay South,Ozone,2026-01-31T05:00:00-07:00,57.1492,-111.6424
 0.001,Fort McKay South,Total Reduced Sulphur,2026-01-31T04:00:00-07:00,57.1492,-111.6424
 2.31,Fort McKay South,Total Hydrocarbons,2026-01-31T04:00:00-07:00,57.1492,-111.6424
 3.0,Fort McKay South,,2026-01-31T04:00:00-07:00,57.1492,-111.6424
@@ -8951,22 +8951,22 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 2.0,Fort McKay South,,2026-01-30T06:00:00-07:00,57.1492,-111.6424
 8.1,Fort McKay South,Fine Particulate Matter,2026-01-30T06:00:00-07:00,57.1492,-111.6424
 0.016,Fort McKay South,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,57.1492,-111.6424
-,Red Deer - Riverside,Relative Humidity,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+100.0,Red Deer - Riverside,Relative Humidity,2026-01-31T05:00:00-07:00,52.298622,-113.793438
 2.0,Red Deer - Riverside,,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Ozone,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Outdoor Temperature,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+0.01,Red Deer - Riverside,Ozone,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+-0.3,Red Deer - Riverside,Outdoor Temperature,2026-01-31T05:00:00-07:00,52.298622,-113.793438
 ,Red Deer - Riverside,Methane,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Wind Speed,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Wind Direction,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Carbon Monoxide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Nitric Oxide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Total Hydrocarbons,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Sulphur Dioxide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,52.298622,-113.793438
-,Red Deer - Riverside,Fine Particulate Matter,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+0.01,Red Deer - Riverside,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+5.2,Red Deer - Riverside,Wind Speed,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+182.0,Red Deer - Riverside,Wind Direction,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+0.32,Red Deer - Riverside,Carbon Monoxide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+0.0,Red Deer - Riverside,Nitric Oxide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+0.0,Red Deer - Riverside,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+0.0,Red Deer - Riverside,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+2.4,Red Deer - Riverside,Total Hydrocarbons,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+0.0,Red Deer - Riverside,Sulphur Dioxide,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+0.01,Red Deer - Riverside,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,52.298622,-113.793438
+5.3,Red Deer - Riverside,Fine Particulate Matter,2026-01-31T05:00:00-07:00,52.298622,-113.793438
 0.014,Red Deer - Riverside,Ozone,2026-01-31T04:00:00-07:00,52.298622,-113.793438
 5.1,Red Deer - Riverside,Wind Speed,2026-01-31T04:00:00-07:00,52.298622,-113.793438
 4.9,Red Deer - Riverside,Fine Particulate Matter,2026-01-31T04:00:00-07:00,52.298622,-113.793438
@@ -11207,19 +11207,19 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,St. Lina,Sulphur Dioxide,2026-01-30T06:00:00-07:00,54.2165,-111.5026
 180.0,St. Lina,Wind Direction,2026-01-30T06:00:00-07:00,54.2165,-111.5026
 89.0,St. Lina,Relative Humidity,2026-01-30T06:00:00-07:00,54.2165,-111.5026
-,Anzac,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Relative Humidity,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Nitric Oxide,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Ozone,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Wind Speed,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Wind Direction,2026-01-31T05:00:00-07:00,56.448889,-111.038056
-,Anzac,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+13.0,Anzac,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+-6.8,Anzac,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+89.4,Anzac,Relative Humidity,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+2.0,Anzac,,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+0.023,Anzac,Nitric Oxide,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+2.68,Anzac,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+0.002,Anzac,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+0.0,Anzac,Ozone,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+0.053,Anzac,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+14.6,Anzac,Wind Speed,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+0.03,Anzac,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+318.0,Anzac,Wind Direction,2026-01-31T05:00:00-07:00,56.448889,-111.038056
+0.001,Anzac,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,56.448889,-111.038056
 86.9,Anzac,Relative Humidity,2026-01-31T04:00:00-07:00,56.448889,-111.038056
 9.2,Anzac,Fine Particulate Matter,2026-01-31T04:00:00-07:00,56.448889,-111.038056
 2.0,Anzac,,2026-01-31T04:00:00-07:00,56.448889,-111.038056
@@ -11783,21 +11783,21 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Woodcroft,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.564411,-113.562583
 0.005,Woodcroft,Ozone,2026-01-30T06:00:00-07:00,53.564411,-113.562583
 164.0,Woodcroft,Wind Direction,2026-01-30T06:00:00-07:00,53.564411,-113.562583
-,Red Deer - Lancaster,Nitric Oxide,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Ozone,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+0.0,Red Deer - Lancaster,Nitric Oxide,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+0.028,Red Deer - Lancaster,Ozone,2026-01-31T05:00:00-07:00,52.24095,-113.765439
 ,Red Deer - Lancaster,Total Hydrocarbons,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Wind Direction,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Sulphur Dioxide,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+0.01,Red Deer - Lancaster,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+0.01,Red Deer - Lancaster,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+254.0,Red Deer - Lancaster,Wind Direction,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+0.0,Red Deer - Lancaster,Sulphur Dioxide,2026-01-31T05:00:00-07:00,52.24095,-113.765439
 ,Red Deer - Lancaster,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Relative Humidity,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Wind Speed,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+86.5,Red Deer - Lancaster,Relative Humidity,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+6.2,Red Deer - Lancaster,Wind Speed,2026-01-31T05:00:00-07:00,52.24095,-113.765439
 ,Red Deer - Lancaster,Methane,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Outdoor Temperature,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Fine Particulate Matter,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,,2026-01-31T05:00:00-07:00,52.24095,-113.765439
-,Red Deer - Lancaster,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+1.3,Red Deer - Lancaster,Outdoor Temperature,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+5.8,Red Deer - Lancaster,Fine Particulate Matter,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+3.0,Red Deer - Lancaster,,2026-01-31T05:00:00-07:00,52.24095,-113.765439
+0.001,Red Deer - Lancaster,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,52.24095,-113.765439
 0.0,Red Deer - Lancaster,Nitric Oxide,2026-01-31T04:00:00-07:00,52.24095,-113.765439
 0.0,Red Deer - Lancaster,Sulphur Dioxide,2026-01-31T04:00:00-07:00,52.24095,-113.765439
 3.0,Red Deer - Lancaster,,2026-01-31T04:00:00-07:00,52.24095,-113.765439
@@ -13187,18 +13187,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Gibbons,Sulphur Dioxide,2026-01-30T07:00:00-07:00,53.827241,-113.327174
 0.0414,Gibbons,Nitric Oxide,2026-01-30T07:00:00-07:00,53.827241,-113.327174
 0.0034,Gibbons,Ozone,2026-01-30T07:00:00-07:00,53.827241,-113.327174
-0.0,Gibbons,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-0.6,Gibbons,Wind Speed,2026-01-30T06:00:00-07:00,53.827241,-113.327174
--9.7,Gibbons,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-0.0318,Gibbons,Nitric Oxide,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-4.0,Gibbons,,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-0.0031,Gibbons,Ozone,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-0.0656,Gibbons,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-205.0,Gibbons,Wind Direction,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-89.1,Gibbons,Relative Humidity,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-0.0015,Gibbons,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-0.0337,Gibbons,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.827241,-113.327174
-27.7,Gibbons,Fine Particulate Matter,2026-01-30T06:00:00-07:00,53.827241,-113.327174
 3.5,St. Albert,Outdoor Temperature,2026-01-31T05:00:00-07:00,53.6269722,-113.6119166
 ,St. Albert,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,53.6269722,-113.6119166
 ,St. Albert,Carbon Monoxide,2026-01-31T05:00:00-07:00,53.6269722,-113.6119166
@@ -13475,35 +13463,23 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,St. Albert,,2026-01-30T07:00:00-07:00,53.6269722,-113.6119166
 0.0,St. Albert,Ozone,2026-01-30T07:00:00-07:00,53.6269722,-113.6119166
 87.5,St. Albert,Relative Humidity,2026-01-30T07:00:00-07:00,53.6269722,-113.6119166
-,St. Albert,,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-28.6,St. Albert,Fine Particulate Matter,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
--4.8,St. Albert,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-87.2,St. Albert,Relative Humidity,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-,St. Albert,Ozone,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-0.05,St. Albert,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-,St. Albert,Carbon Monoxide,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-0.001,St. Albert,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-5.7,St. Albert,Wind Speed,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-140.0,St. Albert,Wind Direction,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-0.037,St. Albert,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-0.013,St. Albert,Nitric Oxide,2026-01-30T06:00:00-07:00,53.6269722,-113.6119166
-,Stony Mountain,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Nitric Oxide,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Relative Humidity,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+0.001,Stony Mountain,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+0.0,Stony Mountain,Nitric Oxide,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+94.3,Stony Mountain,Relative Humidity,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+-3.7,Stony Mountain,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+0.0,Stony Mountain,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,55.62141,-111.17269
 ,Stony Mountain,Carbon Monoxide,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Ozone,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Total Hydrocarbons,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Wind Speed,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Solar Radiation,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Methane,2026-01-31T05:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Wind Direction,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+13.1,Stony Mountain,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+0.024,Stony Mountain,Ozone,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+0.004,Stony Mountain,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+0.004,Stony Mountain,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+2.18,Stony Mountain,Total Hydrocarbons,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+0.0,Stony Mountain,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+2.0,Stony Mountain,,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+11.6,Stony Mountain,Wind Speed,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+0.0,Stony Mountain,Solar Radiation,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+2.18,Stony Mountain,Methane,2026-01-31T05:00:00-07:00,55.62141,-111.17269
+297.0,Stony Mountain,Wind Direction,2026-01-31T05:00:00-07:00,55.62141,-111.17269
 2.0,Stony Mountain,,2026-01-31T04:00:00-07:00,55.62141,-111.17269
 -4.0,Stony Mountain,Outdoor Temperature,2026-01-31T04:00:00-07:00,55.62141,-111.17269
 0.0,Stony Mountain,Sulphur Dioxide,2026-01-31T04:00:00-07:00,55.62141,-111.17269
@@ -13878,38 +13854,21 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.001,Stony Mountain,Total Reduced Sulphur,2026-01-30T07:00:00-07:00,55.62141,-111.17269
 0.004,Stony Mountain,Total Oxides of Nitrogen,2026-01-30T07:00:00-07:00,55.62141,-111.17269
 -8.7,Stony Mountain,Outdoor Temperature,2026-01-30T07:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Sulphur Dioxide,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Total Hydrocarbons,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-0.001,Stony Mountain,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-19.0,Stony Mountain,Wind Speed,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-0.004,Stony Mountain,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-2.0,Stony Mountain,,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-0.0,Stony Mountain,Nitric Oxide,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-194.0,Stony Mountain,Wind Direction,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-10.6,Stony Mountain,Fine Particulate Matter,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-88.7,Stony Mountain,Relative Humidity,2026-01-30T06:00:00-07:00,55.62141,-111.17269
--8.9,Stony Mountain,Outdoor Temperature,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-0.004,Stony Mountain,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Methane,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-,Stony Mountain,Carbon Monoxide,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-0.026,Stony Mountain,Ozone,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-0.0,Stony Mountain,Solar Radiation,2026-01-30T06:00:00-07:00,55.62141,-111.17269
-,Conklin Community,Ozone,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Wind Direction,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Wind Speed,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Total Hydrocarbons,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Nitric Oxide,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Relative Humidity,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Methane,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.632331,-111.078872
-,Conklin Community,,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+0.025,Conklin Community,Ozone,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+-3.9,Conklin Community,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+0.0,Conklin Community,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+0.0,Conklin Community,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+294.0,Conklin Community,Wind Direction,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+11.0,Conklin Community,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+4.0,Conklin Community,Wind Speed,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+0.004,Conklin Community,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+0.0,Conklin Community,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+2.17,Conklin Community,Total Hydrocarbons,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+0.0,Conklin Community,Nitric Oxide,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+96.2,Conklin Community,Relative Humidity,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+2.17,Conklin Community,Methane,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+0.004,Conklin Community,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.632331,-111.078872
+2.0,Conklin Community,,2026-01-31T05:00:00-07:00,55.632331,-111.078872
 2.0,Conklin Community,,2026-01-31T04:00:00-07:00,55.632331,-111.078872
 2.16,Conklin Community,Methane,2026-01-31T04:00:00-07:00,55.632331,-111.078872
 2.3,Conklin Community,Wind Speed,2026-01-31T04:00:00-07:00,55.632331,-111.078872
@@ -14240,31 +14199,16 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 88.4,Conklin Community,Relative Humidity,2026-01-30T07:00:00-07:00,55.632331,-111.078872
 0.0,Conklin Community,Sulphur Dioxide,2026-01-30T07:00:00-07:00,55.632331,-111.078872
 0.004,Conklin Community,Total Oxides of Nitrogen,2026-01-30T07:00:00-07:00,55.632331,-111.078872
-8.9,Conklin Community,Fine Particulate Matter,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-0.0,Conklin Community,Nitric Oxide,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-0.0,Conklin Community,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-0.027,Conklin Community,Ozone,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-2.21,Conklin Community,Methane,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-7.6,Conklin Community,Wind Speed,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-0.004,Conklin Community,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-88.1,Conklin Community,Relative Humidity,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-0.004,Conklin Community,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-0.0,Conklin Community,Sulphur Dioxide,2026-01-30T06:00:00-07:00,55.632331,-111.078872
--9.7,Conklin Community,Outdoor Temperature,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-2.0,Conklin Community,,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-0.0,Conklin Community,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-142.0,Conklin Community,Wind Direction,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-2.21,Conklin Community,Total Hydrocarbons,2026-01-30T06:00:00-07:00,55.632331,-111.078872
-,Brion-MacKay River,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.779722,-112.089167
-,Brion-MacKay River,Wind Speed,2026-01-31T05:00:00-07:00,56.779722,-112.089167
-,Brion-MacKay River,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.779722,-112.089167
+0.002,Brion-MacKay River,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.779722,-112.089167
+6.7,Brion-MacKay River,Wind Speed,2026-01-31T05:00:00-07:00,56.779722,-112.089167
+-8.1,Brion-MacKay River,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.779722,-112.089167
 ,Brion-MacKay River,Nitric Oxide,2026-01-31T05:00:00-07:00,56.779722,-112.089167
-,Brion-MacKay River,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.779722,-112.089167
+2.67,Brion-MacKay River,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.779722,-112.089167
 ,Brion-MacKay River,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,56.779722,-112.089167
-,Brion-MacKay River,Relative Humidity,2026-01-31T05:00:00-07:00,56.779722,-112.089167
+89.4,Brion-MacKay River,Relative Humidity,2026-01-31T05:00:00-07:00,56.779722,-112.089167
 ,Brion-MacKay River,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,56.779722,-112.089167
-,Brion-MacKay River,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,56.779722,-112.089167
-,Brion-MacKay River,Wind Direction,2026-01-31T05:00:00-07:00,56.779722,-112.089167
+0.0,Brion-MacKay River,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,56.779722,-112.089167
+14.0,Brion-MacKay River,Wind Direction,2026-01-31T05:00:00-07:00,56.779722,-112.089167
 0.003,Brion-MacKay River,Sulphur Dioxide,2026-01-31T04:00:00-07:00,56.779722,-112.089167
 90.1,Brion-MacKay River,Relative Humidity,2026-01-31T04:00:00-07:00,56.779722,-112.089167
 0.027,Brion-MacKay River,Nitrogen Dioxide,2026-01-31T04:00:00-07:00,56.779722,-112.089167
@@ -14485,28 +14429,18 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 -9.7,Brion-MacKay River,Outdoor Temperature,2026-01-30T07:00:00-07:00,56.779722,-112.089167
 0.004,Brion-MacKay River,Total Oxides of Nitrogen,2026-01-30T07:00:00-07:00,56.779722,-112.089167
 185.0,Brion-MacKay River,Wind Direction,2026-01-30T07:00:00-07:00,56.779722,-112.089167
-0.003,Brion-MacKay River,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,56.779722,-112.089167
-0.0,Brion-MacKay River,Nitric Oxide,2026-01-30T06:00:00-07:00,56.779722,-112.089167
-4.1,Brion-MacKay River,Wind Speed,2026-01-30T06:00:00-07:00,56.779722,-112.089167
-0.003,Brion-MacKay River,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,56.779722,-112.089167
-147.0,Brion-MacKay River,Wind Direction,2026-01-30T06:00:00-07:00,56.779722,-112.089167
--11.5,Brion-MacKay River,Outdoor Temperature,2026-01-30T06:00:00-07:00,56.779722,-112.089167
-89.4,Brion-MacKay River,Relative Humidity,2026-01-30T06:00:00-07:00,56.779722,-112.089167
-,Brion-MacKay River,Sulphur Dioxide,2026-01-30T06:00:00-07:00,56.779722,-112.089167
-0.0,Brion-MacKay River,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,56.779722,-112.089167
-,Brion-MacKay River,Total Hydrocarbons,2026-01-30T06:00:00-07:00,56.779722,-112.089167
-,Wapasu,Nitric Oxide,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Relative Humidity,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Ozone,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Wind Speed,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Wind Direction,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+0.0,Wapasu,Nitric Oxide,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+0.0,Wapasu,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+0.006,Wapasu,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+7.4,Wapasu,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+2.29,Wapasu,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+94.9,Wapasu,Relative Humidity,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+0.024,Wapasu,Ozone,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+8.4,Wapasu,Wind Speed,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+0.006,Wapasu,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+11.0,Wapasu,Wind Direction,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+0.0,Wapasu,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
+-10.5,Wapasu,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.2591972,-111.0385833
 10.0,Wapasu,Wind Speed,2026-01-31T04:00:00-07:00,57.2591972,-111.0385833
 95.2,Wapasu,Relative Humidity,2026-01-31T04:00:00-07:00,57.2591972,-111.0385833
 ,Wapasu,Total Oxides of Nitrogen,2026-01-31T04:00:00-07:00,57.2591972,-111.0385833
@@ -14771,33 +14705,21 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Wapasu,Sulphur Dioxide,2026-01-30T07:00:00-07:00,57.2591972,-111.0385833
 10.1,Wapasu,Fine Particulate Matter,2026-01-30T07:00:00-07:00,57.2591972,-111.0385833
 7.1,Wapasu,Wind Speed,2026-01-30T07:00:00-07:00,57.2591972,-111.0385833
-0.025,Wapasu,Ozone,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-0.0,Wapasu,Nitric Oxide,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-2.44,Wapasu,Total Hydrocarbons,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-172.0,Wapasu,Wind Direction,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-9.1,Wapasu,Fine Particulate Matter,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-0.004,Wapasu,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-,Wapasu,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-7.8,Wapasu,Wind Speed,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-0.0,Wapasu,Sulphur Dioxide,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-89.7,Wapasu,Relative Humidity,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-0.004,Wapasu,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
--8.2,Wapasu,Outdoor Temperature,2026-01-30T06:00:00-07:00,57.2591972,-111.0385833
-,Janvier,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Wind Direction,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Ozone,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Wind Speed,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Relative Humidity,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Methane,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Total Hydrocarbons,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Nitric Oxide,2026-01-31T05:00:00-07:00,55.9033,-110.7499
-,Janvier,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+0.0,Janvier,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+230.0,Janvier,Wind Direction,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+0.0,Janvier,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+0.0,Janvier,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+2.0,Janvier,,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+0.026,Janvier,Ozone,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+-3.2,Janvier,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+4.7,Janvier,Wind Speed,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+9.4,Janvier,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+0.003,Janvier,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+93.6,Janvier,Relative Humidity,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+2.08,Janvier,Methane,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+2.08,Janvier,Total Hydrocarbons,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+0.0,Janvier,Nitric Oxide,2026-01-31T05:00:00-07:00,55.9033,-110.7499
+0.003,Janvier,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.9033,-110.7499
 92.7,Janvier,Relative Humidity,2026-01-31T04:00:00-07:00,55.9033,-110.7499
 ,Janvier,Total Oxides of Nitrogen,2026-01-31T04:00:00-07:00,55.9033,-110.7499
 4.6,Janvier,Wind Speed,2026-01-31T04:00:00-07:00,55.9033,-110.7499
@@ -15128,31 +15050,16 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 2.13,Janvier,Methane,2026-01-30T07:00:00-07:00,55.9033,-110.7499
 0.007,Janvier,Nitrogen Dioxide,2026-01-30T07:00:00-07:00,55.9033,-110.7499
 85.9,Janvier,Relative Humidity,2026-01-30T07:00:00-07:00,55.9033,-110.7499
-2.0,Janvier,,2026-01-30T06:00:00-07:00,55.9033,-110.7499
--8.1,Janvier,Outdoor Temperature,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-0.001,Janvier,Sulphur Dioxide,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-0.006,Janvier,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-0.006,Janvier,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-,Janvier,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-2.13,Janvier,Methane,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-0.025,Janvier,Ozone,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-207.0,Janvier,Wind Direction,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-85.1,Janvier,Relative Humidity,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-0.0,Janvier,Nitric Oxide,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-8.0,Janvier,Fine Particulate Matter,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-11.2,Janvier,Wind Speed,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-0.0,Janvier,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-2.13,Janvier,Total Hydrocarbons,2026-01-30T06:00:00-07:00,55.9033,-110.7499
-,Firebag,Relative Humidity,2026-01-31T05:00:00-07:00,57.23732,-110.90004
-,Firebag,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.23732,-110.90004
+88.9,Firebag,Relative Humidity,2026-01-31T05:00:00-07:00,57.23732,-110.90004
+2.37,Firebag,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.23732,-110.90004
 ,Firebag,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.23732,-110.90004
 ,Firebag,Nitric Oxide,2026-01-31T05:00:00-07:00,57.23732,-110.90004
-,Firebag,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.23732,-110.90004
-,Firebag,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.23732,-110.90004
-,Firebag,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.23732,-110.90004
-,Firebag,Wind Direction,2026-01-31T05:00:00-07:00,57.23732,-110.90004
+0.0,Firebag,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.23732,-110.90004
+-10.7,Firebag,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.23732,-110.90004
+0.0,Firebag,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.23732,-110.90004
+3.0,Firebag,Wind Direction,2026-01-31T05:00:00-07:00,57.23732,-110.90004
 ,Firebag,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.23732,-110.90004
-,Firebag,Wind Speed,2026-01-31T05:00:00-07:00,57.23732,-110.90004
+12.6,Firebag,Wind Speed,2026-01-31T05:00:00-07:00,57.23732,-110.90004
 0.006,Firebag,Nitrogen Dioxide,2026-01-31T04:00:00-07:00,57.23732,-110.90004
 0.0,Firebag,Nitric Oxide,2026-01-31T04:00:00-07:00,57.23732,-110.90004
 90.8,Firebag,Relative Humidity,2026-01-31T04:00:00-07:00,57.23732,-110.90004
@@ -15373,16 +15280,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.032,Firebag,Nitrogen Dioxide,2026-01-30T07:00:00-07:00,57.23732,-110.90004
 86.5,Firebag,Relative Humidity,2026-01-30T07:00:00-07:00,57.23732,-110.90004
 189.0,Firebag,Wind Direction,2026-01-30T07:00:00-07:00,57.23732,-110.90004
-,Firebag,Total Hydrocarbons,2026-01-30T06:00:00-07:00,57.23732,-110.90004
-186.0,Firebag,Wind Direction,2026-01-30T06:00:00-07:00,57.23732,-110.90004
-0.032,Firebag,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,57.23732,-110.90004
-0.038,Firebag,Nitric Oxide,2026-01-30T06:00:00-07:00,57.23732,-110.90004
-10.5,Firebag,Wind Speed,2026-01-30T06:00:00-07:00,57.23732,-110.90004
-,Firebag,Sulphur Dioxide,2026-01-30T06:00:00-07:00,57.23732,-110.90004
-86.2,Firebag,Relative Humidity,2026-01-30T06:00:00-07:00,57.23732,-110.90004
--8.6,Firebag,Outdoor Temperature,2026-01-30T06:00:00-07:00,57.23732,-110.90004
-0.001,Firebag,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,57.23732,-110.90004
-0.07,Firebag,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,57.23732,-110.90004
 2.12,Three Creeks 842,Methane,2026-01-31T05:00:00-07:00,56.27408,-116.9815
 5.6,Three Creeks 842,Wind Speed,2026-01-31T05:00:00-07:00,56.27408,-116.9815
 0.0,Three Creeks 842,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,56.27408,-116.9815
@@ -15590,15 +15487,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Three Creeks 842,Non-methane Hydrocarbons,2026-01-30T07:00:00-07:00,56.27408,-116.9815
 0.0,Three Creeks 842,Total Reduced Sulphur,2026-01-30T07:00:00-07:00,56.27408,-116.9815
 2.23,Three Creeks 842,Methane,2026-01-30T07:00:00-07:00,56.27408,-116.9815
-0.0,Three Creeks 842,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,56.27408,-116.9815
-0.0,Three Creeks 842,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,56.27408,-116.9815
-92.0,Three Creeks 842,Relative Humidity,2026-01-30T06:00:00-07:00,56.27408,-116.9815
-3.7,Three Creeks 842,Wind Speed,2026-01-30T06:00:00-07:00,56.27408,-116.9815
-2.19,Three Creeks 842,Methane,2026-01-30T06:00:00-07:00,56.27408,-116.9815
-0.0,Three Creeks 842,Sulphur Dioxide,2026-01-30T06:00:00-07:00,56.27408,-116.9815
--2.5,Three Creeks 842,Outdoor Temperature,2026-01-30T06:00:00-07:00,56.27408,-116.9815
-129.0,Three Creeks 842,Wind Direction,2026-01-30T06:00:00-07:00,56.27408,-116.9815
-2.19,Three Creeks 842,Total Hydrocarbons,2026-01-30T06:00:00-07:00,56.27408,-116.9815
 2.18,Three Creeks 986,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.37603,-116.9406
 0.0,Three Creeks 986,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.37603,-116.9406
 -9.8,Three Creeks 986,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.37603,-116.9406
@@ -15806,26 +15694,17 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.001,Three Creeks 986,Sulphur Dioxide,2026-01-30T07:00:00-07:00,56.37603,-116.9406
 2.22,Three Creeks 986,Total Hydrocarbons,2026-01-30T07:00:00-07:00,56.37603,-116.9406
 2.7,Three Creeks 986,Wind Speed,2026-01-30T07:00:00-07:00,56.37603,-116.9406
-2.22,Three Creeks 986,Total Hydrocarbons,2026-01-30T06:00:00-07:00,56.37603,-116.9406
-0.0,Three Creeks 986,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,56.37603,-116.9406
--1.8,Three Creeks 986,Outdoor Temperature,2026-01-30T06:00:00-07:00,56.37603,-116.9406
-90.0,Three Creeks 986,Relative Humidity,2026-01-30T06:00:00-07:00,56.37603,-116.9406
-157.0,Three Creeks 986,Wind Direction,2026-01-30T06:00:00-07:00,56.37603,-116.9406
-0.0,Three Creeks 986,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,56.37603,-116.9406
-6.8,Three Creeks 986,Wind Speed,2026-01-30T06:00:00-07:00,56.37603,-116.9406
-0.001,Three Creeks 986,Sulphur Dioxide,2026-01-30T06:00:00-07:00,56.37603,-116.9406
-2.22,Three Creeks 986,Methane,2026-01-30T06:00:00-07:00,56.37603,-116.9406
-,Airdrie,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.268227,-114.037677
-,Airdrie,Ozone,2026-01-31T05:00:00-07:00,51.268227,-114.037677
-,Airdrie,Wind Speed,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+1.2,Airdrie,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+0.028,Airdrie,Ozone,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+9.7,Airdrie,Wind Speed,2026-01-31T05:00:00-07:00,51.268227,-114.037677
 ,Airdrie,Carbon Monoxide,2026-01-31T05:00:00-07:00,51.268227,-114.037677
-,Airdrie,Nitric Oxide,2026-01-31T05:00:00-07:00,51.268227,-114.037677
-,Airdrie,Relative Humidity,2026-01-31T05:00:00-07:00,51.268227,-114.037677
-,Airdrie,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.268227,-114.037677
-,Airdrie,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.268227,-114.037677
-,Airdrie,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.268227,-114.037677
-,Airdrie,,2026-01-31T05:00:00-07:00,51.268227,-114.037677
-,Airdrie,Wind Direction,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+0.0,Airdrie,Nitric Oxide,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+60.6,Airdrie,Relative Humidity,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+0.002,Airdrie,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+1.2,Airdrie,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+0.002,Airdrie,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+2.0,Airdrie,,2026-01-31T05:00:00-07:00,51.268227,-114.037677
+286.0,Airdrie,Wind Direction,2026-01-31T05:00:00-07:00,51.268227,-114.037677
 2.0,Airdrie,,2026-01-31T04:00:00-07:00,51.268227,-114.037677
 ,Airdrie,Carbon Monoxide,2026-01-31T04:00:00-07:00,51.268227,-114.037677
 7.9,Airdrie,Wind Speed,2026-01-31T04:00:00-07:00,51.268227,-114.037677
@@ -16068,17 +15947,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Airdrie,Nitric Oxide,2026-01-30T07:00:00-07:00,51.268227,-114.037677
 60.9,Airdrie,Relative Humidity,2026-01-30T07:00:00-07:00,51.268227,-114.037677
 ,Airdrie,Carbon Monoxide,2026-01-30T07:00:00-07:00,51.268227,-114.037677
-,Airdrie,Carbon Monoxide,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-2.0,Airdrie,Outdoor Temperature,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-5.7,Airdrie,Wind Speed,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-2.0,Airdrie,,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-1.5,Airdrie,Fine Particulate Matter,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-57.2,Airdrie,Relative Humidity,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-145.0,Airdrie,Wind Direction,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-0.025,Airdrie,Ozone,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-0.012,Airdrie,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-0.0,Airdrie,Nitric Oxide,2026-01-30T06:00:00-07:00,51.268227,-114.037677
-0.012,Airdrie,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,51.268227,-114.037677
 ,Redwater,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,53.951834,-113.105857
 ,Redwater,Wind Speed,2026-01-31T05:00:00-07:00,53.951834,-113.105857
 ,Redwater,Outdoor Temperature,2026-01-31T05:00:00-07:00,53.951834,-113.105857
@@ -16401,20 +16269,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Redwater,Hydrogen Sulphide,2026-01-30T07:00:00-07:00,53.951834,-113.105857
 0.001,Redwater,Nitric Oxide,2026-01-30T07:00:00-07:00,53.951834,-113.105857
 0.018,Redwater,Ozone,2026-01-30T07:00:00-07:00,53.951834,-113.105857
-0.003,Redwater,Ammonia,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-0.001,Redwater,Nitric Oxide,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-5.9,Redwater,Wind Speed,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-0.006,Redwater,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-0.006,Redwater,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-943.0,Redwater,Barometric Pressure,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-0.0,Redwater,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-100.0,Redwater,Relative Humidity,2026-01-30T06:00:00-07:00,53.951834,-113.105857
--6.8,Redwater,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-121.0,Redwater,Wind Direction,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-0.001,Redwater,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-3.0,Redwater,,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-0.02,Redwater,Ozone,2026-01-30T06:00:00-07:00,53.951834,-113.105857
-18.633,Redwater,Fine Particulate Matter,2026-01-30T06:00:00-07:00,53.951834,-113.105857
 ,Edmonton McCauley,Ozone,2026-01-31T05:00:00-07:00,53.549509,-113.48593
 2.0,Edmonton McCauley,,2026-01-31T05:00:00-07:00,53.549509,-113.48593
 ,Edmonton McCauley,Methane,2026-01-31T05:00:00-07:00,53.549509,-113.48593
@@ -16737,20 +16591,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 7.6,Edmonton McCauley,Wind Speed,2026-01-30T07:00:00-07:00,53.549509,-113.48593
 0.005,Edmonton McCauley,Ozone,2026-01-30T07:00:00-07:00,53.549509,-113.48593
 ,Edmonton McCauley,Methane,2026-01-30T07:00:00-07:00,53.549509,-113.48593
-0.004,Edmonton McCauley,Ozone,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-0.038,Edmonton McCauley,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-0.6,Edmonton McCauley,Carbon Monoxide,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-33.0,Edmonton McCauley,Fine Particulate Matter,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-68.0,Edmonton McCauley,Relative Humidity,2026-01-30T06:00:00-07:00,53.549509,-113.48593
--2.9,Edmonton McCauley,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-7.9,Edmonton McCauley,Wind Speed,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-0.006,Edmonton McCauley,Nitric Oxide,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-0.033,Edmonton McCauley,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-,Edmonton McCauley,Total Hydrocarbons,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-,Edmonton McCauley,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-,Edmonton McCauley,Methane,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-153.0,Edmonton McCauley,Wind Direction,2026-01-30T06:00:00-07:00,53.549509,-113.48593
-5.0,Edmonton McCauley,,2026-01-30T06:00:00-07:00,53.549509,-113.48593
 ,Scotford South,Xylene,2026-01-31T05:00:00-07:00,53.759684,-113.027247
 ,Scotford South,Wind Direction,2026-01-31T05:00:00-07:00,53.759684,-113.027247
 ,Scotford South,Sulphur Dioxide,2026-01-31T05:00:00-07:00,53.759684,-113.027247
@@ -17096,21 +16936,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.154,Scotford South,Benzene,2026-01-30T07:00:00-07:00,53.759684,-113.027247
 0.05,Scotford South,Styrene,2026-01-30T07:00:00-07:00,53.759684,-113.027247
 0.079,Scotford South,Xylene,2026-01-30T07:00:00-07:00,53.759684,-113.027247
-0.0001,Scotford South,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-0.019,Scotford South,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-48.0,Scotford South,Wind Direction,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-0.057,Scotford South,Styrene,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-0.0,Scotford South,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-0.125,Scotford South,Xylene,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-0.0,Scotford South,Nitric Oxide,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-0.02,Scotford South,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-90.2,Scotford South,Relative Humidity,2026-01-30T06:00:00-07:00,53.759684,-113.027247
--9.5,Scotford South,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-0.276,Scotford South,Toluene,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-0.164,Scotford South,Benzene,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-0.089,Scotford South,Ethylbenzene,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-1.9,Scotford South,Wind Speed,2026-01-30T06:00:00-07:00,53.759684,-113.027247
-943.0,Scotford South,Barometric Pressure,2026-01-30T06:00:00-07:00,53.759684,-113.027247
 ,Lamont,Total Hydrocarbons,2026-01-31T05:00:00-07:00,53.757334,-112.778004
 0.006,Lamont,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,53.757334,-112.778004
 0.002,Lamont,Sulphur Dioxide,2026-01-31T05:00:00-07:00,53.757334,-112.778004
@@ -17456,21 +17281,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 -9.2,Lamont,Outdoor Temperature,2026-01-30T07:00:00-07:00,53.757334,-112.778004
 2.54,Lamont,Total Hydrocarbons,2026-01-30T07:00:00-07:00,53.757334,-112.778004
 0.018,Lamont,Ozone,2026-01-30T07:00:00-07:00,53.757334,-112.778004
-0.0,Lamont,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-3.0,Lamont,,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-2.51,Lamont,Methane,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-15.1,Lamont,Wind Speed,2026-01-30T06:00:00-07:00,53.757334,-112.778004
--9.0,Lamont,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-0.007,Lamont,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-0.008,Lamont,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-140.0,Lamont,Wind Direction,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-0.001,Lamont,Nitric Oxide,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-0.0,Lamont,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-17.7,Lamont,Fine Particulate Matter,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-0.02,Lamont,Ozone,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-2.51,Lamont,Total Hydrocarbons,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-0.001,Lamont,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,53.757334,-112.778004
-100.0,Lamont,Relative Humidity,2026-01-30T06:00:00-07:00,53.757334,-112.778004
 2.18,Tamarack,Methane,2026-01-31T05:00:00-07:00,54.604935,-110.452637
 -5.2,Tamarack,Outdoor Temperature,2026-01-31T05:00:00-07:00,54.604935,-110.452637
 0.0,Tamarack,Sulphur Dioxide,2026-01-31T05:00:00-07:00,54.604935,-110.452637
@@ -17816,28 +17626,13 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.004,Tamarack,Nitrogen Dioxide,2026-01-30T07:00:00-07:00,54.604935,-110.452637
 95.0,Tamarack,Relative Humidity,2026-01-30T07:00:00-07:00,54.604935,-110.452637
 0.0,Tamarack,Non-methane Hydrocarbons,2026-01-30T07:00:00-07:00,54.604935,-110.452637
-2.0,Tamarack,,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-3.5,Tamarack,Wind Speed,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-0.0,Tamarack,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-0.029,Tamarack,Ozone,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-0.004,Tamarack,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-96.0,Tamarack,Relative Humidity,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-0.0,Tamarack,Nitric Oxide,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-121.0,Tamarack,Wind Direction,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-2.19,Tamarack,Methane,2026-01-30T06:00:00-07:00,54.604935,-110.452637
--10.9,Tamarack,Outdoor Temperature,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-0.0,Tamarack,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-2.19,Tamarack,Total Hydrocarbons,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-0.004,Tamarack,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-8.6,Tamarack,Fine Particulate Matter,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-0.001,Tamarack,Sulphur Dioxide,2026-01-30T06:00:00-07:00,54.604935,-110.452637
-,Waskow ohci Pimatisiwin,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.1837,-111.6395
-,Waskow ohci Pimatisiwin,Wind Speed,2026-01-31T05:00:00-07:00,57.1837,-111.6395
-,Waskow ohci Pimatisiwin,Relative Humidity,2026-01-31T05:00:00-07:00,57.1837,-111.6395
-,Waskow ohci Pimatisiwin,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.1837,-111.6395
-,Waskow ohci Pimatisiwin,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.1837,-111.6395
+-8.3,Waskow ohci Pimatisiwin,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.1837,-111.6395
+8.0,Waskow ohci Pimatisiwin,Wind Speed,2026-01-31T05:00:00-07:00,57.1837,-111.6395
+86.3,Waskow ohci Pimatisiwin,Relative Humidity,2026-01-31T05:00:00-07:00,57.1837,-111.6395
+0.0,Waskow ohci Pimatisiwin,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.1837,-111.6395
+0.0,Waskow ohci Pimatisiwin,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,57.1837,-111.6395
 ,Waskow ohci Pimatisiwin,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,57.1837,-111.6395
-,Waskow ohci Pimatisiwin,Wind Direction,2026-01-31T05:00:00-07:00,57.1837,-111.6395
+17.0,Waskow ohci Pimatisiwin,Wind Direction,2026-01-31T05:00:00-07:00,57.1837,-111.6395
 ,Waskow ohci Pimatisiwin,Total Reduced Sulphur,2026-01-31T04:00:00-07:00,57.1837,-111.6395
 7.1,Waskow ohci Pimatisiwin,Wind Speed,2026-01-31T04:00:00-07:00,57.1837,-111.6395
 86.1,Waskow ohci Pimatisiwin,Relative Humidity,2026-01-31T04:00:00-07:00,57.1837,-111.6395
@@ -17992,26 +17787,19 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 243.0,Waskow ohci Pimatisiwin,Wind Direction,2026-01-30T07:00:00-07:00,57.1837,-111.6395
 0.001,Waskow ohci Pimatisiwin,Hydrogen Sulphide,2026-01-30T07:00:00-07:00,57.1837,-111.6395
 0.0,Waskow ohci Pimatisiwin,Sulphur Dioxide,2026-01-30T07:00:00-07:00,57.1837,-111.6395
--15.0,Waskow ohci Pimatisiwin,Outdoor Temperature,2026-01-30T06:00:00-07:00,57.1837,-111.6395
-,Waskow ohci Pimatisiwin,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,57.1837,-111.6395
-84.0,Waskow ohci Pimatisiwin,Relative Humidity,2026-01-30T06:00:00-07:00,57.1837,-111.6395
-287.0,Waskow ohci Pimatisiwin,Wind Direction,2026-01-30T06:00:00-07:00,57.1837,-111.6395
-1.4,Waskow ohci Pimatisiwin,Wind Speed,2026-01-30T06:00:00-07:00,57.1837,-111.6395
-0.0,Waskow ohci Pimatisiwin,Sulphur Dioxide,2026-01-30T06:00:00-07:00,57.1837,-111.6395
-,Waskow ohci Pimatisiwin,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,57.1837,-111.6395
-,Fort Hills,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Wind Speed,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Nitric Oxide,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Relative Humidity,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Wind Direction,2026-01-31T05:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Methane,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+2.13,Fort Hills,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+0.0,Fort Hills,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+6.9,Fort Hills,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+0.018,Fort Hills,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+22.2,Fort Hills,Wind Speed,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+-8.6,Fort Hills,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+0.001,Fort Hills,Nitric Oxide,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+0.019,Fort Hills,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+0.0,Fort Hills,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+0.0,Fort Hills,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+86.5,Fort Hills,Relative Humidity,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+17.0,Fort Hills,Wind Direction,2026-01-31T05:00:00-07:00,57.3489,-111.63969
+2.13,Fort Hills,Methane,2026-01-31T05:00:00-07:00,57.3489,-111.63969
 22.0,Fort Hills,Wind Speed,2026-01-31T04:00:00-07:00,57.3489,-111.63969
 ,Fort Hills,Nitric Oxide,2026-01-31T04:00:00-07:00,57.3489,-111.63969
 2.07,Fort Hills,Methane,2026-01-31T04:00:00-07:00,57.3489,-111.63969
@@ -18298,28 +18086,15 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 10.5,Fort Hills,Fine Particulate Matter,2026-01-30T07:00:00-07:00,57.3489,-111.63969
 3.18,Fort Hills,Methane,2026-01-30T07:00:00-07:00,57.3489,-111.63969
 86.2,Fort Hills,Relative Humidity,2026-01-30T07:00:00-07:00,57.3489,-111.63969
-346.0,Fort Hills,Wind Direction,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-0.025,Fort Hills,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-3.14,Fort Hills,Methane,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-0.067,Fort Hills,Nitric Oxide,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-,Fort Hills,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-9.5,Fort Hills,Fine Particulate Matter,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-0.001,Fort Hills,Sulphur Dioxide,2026-01-30T06:00:00-07:00,57.3489,-111.63969
--15.3,Fort Hills,Outdoor Temperature,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-0.092,Fort Hills,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-3.38,Fort Hills,Total Hydrocarbons,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-0.24,Fort Hills,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-2.0,Fort Hills,Wind Speed,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-86.3,Fort Hills,Relative Humidity,2026-01-30T06:00:00-07:00,57.3489,-111.63969
-,Jackfish 2/3,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
-,Jackfish 2/3,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
-,Jackfish 2/3,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
-,Jackfish 2/3,Wind Speed,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
-,Jackfish 2/3,Nitric Oxide,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
-,Jackfish 2/3,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
-,Jackfish 2/3,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
-,Jackfish 2/3,Relative Humidity,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
-,Jackfish 2/3,Wind Direction,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
+0.003,Jackfish 2/3,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
+0.001,Jackfish 2/3,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
+-4.2,Jackfish 2/3,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
+6.2,Jackfish 2/3,Wind Speed,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
+0.003,Jackfish 2/3,Nitric Oxide,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
+0.006,Jackfish 2/3,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
+0.0,Jackfish 2/3,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
+93.8,Jackfish 2/3,Relative Humidity,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
+278.0,Jackfish 2/3,Wind Direction,2026-01-31T05:00:00-07:00,55.5186932,-110.9759926
 -4.6,Jackfish 2/3,Outdoor Temperature,2026-01-31T04:00:00-07:00,55.5186932,-110.9759926
 ,Jackfish 2/3,Nitric Oxide,2026-01-31T04:00:00-07:00,55.5186932,-110.9759926
 5.8,Jackfish 2/3,Wind Speed,2026-01-31T04:00:00-07:00,55.5186932,-110.9759926
@@ -18518,15 +18293,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 88.8,Jackfish 2/3,Relative Humidity,2026-01-30T07:00:00-07:00,55.5186932,-110.9759926
 0.0,Jackfish 2/3,Hydrogen Sulphide,2026-01-30T07:00:00-07:00,55.5186932,-110.9759926
 12.1,Jackfish 2/3,Wind Speed,2026-01-30T07:00:00-07:00,55.5186932,-110.9759926
-,Jackfish 2/3,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,55.5186932,-110.9759926
-0.0,Jackfish 2/3,Sulphur Dioxide,2026-01-30T06:00:00-07:00,55.5186932,-110.9759926
-12.5,Jackfish 2/3,Wind Speed,2026-01-30T06:00:00-07:00,55.5186932,-110.9759926
--9.0,Jackfish 2/3,Outdoor Temperature,2026-01-30T06:00:00-07:00,55.5186932,-110.9759926
-0.002,Jackfish 2/3,Nitric Oxide,2026-01-30T06:00:00-07:00,55.5186932,-110.9759926
-0.004,Jackfish 2/3,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,55.5186932,-110.9759926
-185.0,Jackfish 2/3,Wind Direction,2026-01-30T06:00:00-07:00,55.5186932,-110.9759926
-0.007,Jackfish 2/3,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,55.5186932,-110.9759926
-88.5,Jackfish 2/3,Relative Humidity,2026-01-30T06:00:00-07:00,55.5186932,-110.9759926
 ,Jackfish 1,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.87711,-111.44853
 ,Jackfish 1,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,55.87711,-111.44853
 ,Jackfish 1,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.87711,-111.44853
@@ -18734,26 +18500,17 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Jackfish 1,Outdoor Temperature,2026-01-30T07:00:00-07:00,55.87711,-111.44853
 ,Jackfish 1,Wind Speed,2026-01-30T07:00:00-07:00,55.87711,-111.44853
 ,Jackfish 1,Nitric Oxide,2026-01-30T07:00:00-07:00,55.87711,-111.44853
-,Jackfish 1,Sulphur Dioxide,2026-01-30T06:00:00-07:00,55.87711,-111.44853
-,Jackfish 1,Wind Speed,2026-01-30T06:00:00-07:00,55.87711,-111.44853
-,Jackfish 1,Relative Humidity,2026-01-30T06:00:00-07:00,55.87711,-111.44853
-,Jackfish 1,Wind Direction,2026-01-30T06:00:00-07:00,55.87711,-111.44853
-,Jackfish 1,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,55.87711,-111.44853
-,Jackfish 1,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,55.87711,-111.44853
-,Jackfish 1,Nitric Oxide,2026-01-30T06:00:00-07:00,55.87711,-111.44853
-,Jackfish 1,Outdoor Temperature,2026-01-30T06:00:00-07:00,55.87711,-111.44853
-,Jackfish 1,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,55.87711,-111.44853
-,Surmont 2,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Wind Speed,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Wind Direction,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Nitric Oxide,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Relative Humidity,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+-3.6,Surmont 2,Outdoor Temperature,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+3.7,Surmont 2,Wind Speed,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+0.0,Surmont 2,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+0.0,Surmont 2,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+0.005,Surmont 2,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+6.7,Surmont 2,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+12.0,Surmont 2,Wind Direction,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+0.005,Surmont 2,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+0.0,Surmont 2,Nitric Oxide,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+86.1,Surmont 2,Relative Humidity,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
+2.58,Surmont 2,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.2124673,-110.9091168
 ,Surmont 2,Nitric Oxide,2026-01-31T04:00:00-07:00,56.2124673,-110.9091168
 1.9,Surmont 2,Wind Speed,2026-01-31T04:00:00-07:00,56.2124673,-110.9091168
 2.51,Surmont 2,Total Hydrocarbons,2026-01-31T04:00:00-07:00,56.2124673,-110.9091168
@@ -18996,31 +18753,20 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 7.8,Surmont 2,Fine Particulate Matter,2026-01-30T07:00:00-07:00,56.2124673,-110.9091168
 -10.9,Surmont 2,Outdoor Temperature,2026-01-30T07:00:00-07:00,56.2124673,-110.9091168
 91.4,Surmont 2,Relative Humidity,2026-01-30T07:00:00-07:00,56.2124673,-110.9091168
-0.0,Surmont 2,Sulphur Dioxide,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
--11.6,Surmont 2,Outdoor Temperature,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-0.004,Surmont 2,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-1.1,Surmont 2,Wind Speed,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-2.6,Surmont 2,Total Hydrocarbons,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-,Surmont 2,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-7.5,Surmont 2,Fine Particulate Matter,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-91.0,Surmont 2,Relative Humidity,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-0.0,Surmont 2,Nitric Oxide,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-193.0,Surmont 2,Wind Direction,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-0.004,Surmont 2,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,56.2124673,-110.9091168
-,Ells River,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Wind Speed,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Nitric Oxide,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Solar Radiation,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Wind Direction,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Methane,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Relative Humidity,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.24118,-111.722081
-,Ells River,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+0.01,Ells River,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+0.0,Ells River,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+16.0,Ells River,Wind Speed,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+5.7,Ells River,Fine Particulate Matter,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+2.13,Ells River,Total Hydrocarbons,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+0.0,Ells River,Nitric Oxide,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+0.0,Ells River,Solar Radiation,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+0.01,Ells River,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+20.0,Ells River,Wind Direction,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+2.13,Ells River,Methane,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+84.3,Ells River,Relative Humidity,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+0.0,Ells River,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+-8.5,Ells River,Outdoor Temperature,2026-01-31T05:00:00-07:00,57.24118,-111.722081
+0.0,Ells River,Sulphur Dioxide,2026-01-31T05:00:00-07:00,57.24118,-111.722081
 0.0,Ells River,Non-methane Hydrocarbons,2026-01-31T04:00:00-07:00,57.24118,-111.722081
 -8.4,Ells River,Outdoor Temperature,2026-01-31T04:00:00-07:00,57.24118,-111.722081
 0.0,Ells River,Solar Radiation,2026-01-31T04:00:00-07:00,57.24118,-111.722081
@@ -19329,20 +19075,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 2.47,Ells River,Methane,2026-01-30T07:00:00-07:00,57.24118,-111.722081
 2.8,Ells River,Wind Speed,2026-01-30T07:00:00-07:00,57.24118,-111.722081
 0.016,Ells River,Nitrogen Dioxide,2026-01-30T07:00:00-07:00,57.24118,-111.722081
-200.0,Ells River,Wind Direction,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-2.47,Ells River,Total Hydrocarbons,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-0.016,Ells River,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-6.0,Ells River,Fine Particulate Matter,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-1.9,Ells River,Wind Speed,2026-01-30T06:00:00-07:00,57.24118,-111.722081
--16.1,Ells River,Outdoor Temperature,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-0.0,Ells River,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-0.047,Ells River,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-2.47,Ells River,Methane,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-80.9,Ells River,Relative Humidity,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-0.0,Ells River,Sulphur Dioxide,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-,Ells River,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-0.0,Ells River,Solar Radiation,2026-01-30T06:00:00-07:00,57.24118,-111.722081
-0.032,Ells River,Nitric Oxide,2026-01-30T06:00:00-07:00,57.24118,-111.722081
 22.0,Grimshaw,Wind Direction,2026-01-31T05:00:00-07:00,56.18657,-117.604994
 0.002,Grimshaw,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,56.18657,-117.604994
 0.0,Grimshaw,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,56.18657,-117.604994
@@ -19665,20 +19397,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.007,Grimshaw,Nitric Oxide,2026-01-30T07:00:00-07:00,56.18657,-117.604994
 0.08,Grimshaw,Non-methane Hydrocarbons,2026-01-30T07:00:00-07:00,56.18657,-117.604994
 3.0,Grimshaw,,2026-01-30T07:00:00-07:00,56.18657,-117.604994
-2.64,Grimshaw,Methane,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-0.0,Grimshaw,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-0.026,Grimshaw,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-1.5,Grimshaw,Wind Speed,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-3.0,Grimshaw,,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-0.001,Grimshaw,Sulphur Dioxide,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-0.004,Grimshaw,Nitric Oxide,2026-01-30T06:00:00-07:00,56.18657,-117.604994
--8.9,Grimshaw,Outdoor Temperature,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-15.0,Grimshaw,Wind Direction,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-0.022,Grimshaw,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-93.0,Grimshaw,Relative Humidity,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-0.008,Grimshaw,Ozone,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-11.7,Grimshaw,Fine Particulate Matter,2026-01-30T06:00:00-07:00,56.18657,-117.604994
-0.02,Grimshaw,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,56.18657,-117.604994
 2.07,PRC,Total Hydrocarbons,2026-01-31T05:00:00-07:00,56.38257,-116.769283
 0.0,PRC,Sulphur Dioxide,2026-01-31T05:00:00-07:00,56.38257,-116.769283
 0.0,PRC,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,56.38257,-116.769283
@@ -19886,15 +19604,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,PRC,Hydrogen Sulphide,2026-01-30T07:00:00-07:00,56.38257,-116.769283
 172.0,PRC,Wind Direction,2026-01-30T07:00:00-07:00,56.38257,-116.769283
 2.1,PRC,Methane,2026-01-30T07:00:00-07:00,56.38257,-116.769283
-0.0,PRC,Sulphur Dioxide,2026-01-30T06:00:00-07:00,56.38257,-116.769283
--3.3,PRC,Outdoor Temperature,2026-01-30T06:00:00-07:00,56.38257,-116.769283
-2.09,PRC,Methane,2026-01-30T06:00:00-07:00,56.38257,-116.769283
-7.3,PRC,Wind Speed,2026-01-30T06:00:00-07:00,56.38257,-116.769283
-0.0,PRC,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,56.38257,-116.769283
-0.0,PRC,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,56.38257,-116.769283
-0.0,PRC,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,56.38257,-116.769283
-2.09,PRC,Total Hydrocarbons,2026-01-30T06:00:00-07:00,56.38257,-116.769283
-178.0,PRC,Wind Direction,2026-01-30T06:00:00-07:00,56.38257,-116.769283
 319.0,Lac La Biche,Wind Direction,2026-01-31T05:00:00-07:00,54.76516,-111.971449
 0.0,Lac La Biche,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,54.76516,-111.971449
 3.3,Lac La Biche,Wind Speed,2026-01-31T05:00:00-07:00,54.76516,-111.971449
@@ -20263,22 +19972,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Lac La Biche,Nitric Oxide,2026-01-30T07:00:00-07:00,54.76516,-111.971449
 ,Lac La Biche,Hydrogen Sulphide,2026-01-30T07:00:00-07:00,54.76516,-111.971449
 ,Lac La Biche,Total Reduced Sulphur,2026-01-30T07:00:00-07:00,54.76516,-111.971449
-2.25,Lac La Biche,Methane,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-0.0,Lac La Biche,Sulphur Dioxide,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-0.007,Lac La Biche,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-0.006,Lac La Biche,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-,Lac La Biche,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,54.76516,-111.971449
--7.7,Lac La Biche,Outdoor Temperature,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-3.0,Lac La Biche,,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-,Lac La Biche,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-0.0,Lac La Biche,Nitric Oxide,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-0.027,Lac La Biche,Ozone,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-2.25,Lac La Biche,Total Hydrocarbons,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-85.0,Lac La Biche,Relative Humidity,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-9.5,Lac La Biche,Wind Speed,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-136.0,Lac La Biche,Wind Direction,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-0.0,Lac La Biche,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,54.76516,-111.971449
-16.5,Lac La Biche,Fine Particulate Matter,2026-01-30T06:00:00-07:00,54.76516,-111.971449
 ,Hinton-Hillcrest,Wind Speed,2026-01-31T05:00:00-07:00,53.3927365,-117.5846086
 ,Hinton-Hillcrest,,2026-01-31T05:00:00-07:00,53.3927365,-117.5846086
 ,Hinton-Hillcrest,Ozone,2026-01-31T05:00:00-07:00,53.3927365,-117.5846086
@@ -20555,29 +20248,17 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.039,Hinton-Hillcrest,Ozone,2026-01-30T07:00:00-07:00,53.3927365,-117.5846086
 202.0,Hinton-Hillcrest,Wind Direction,2026-01-30T07:00:00-07:00,53.3927365,-117.5846086
 51.8,Hinton-Hillcrest,Relative Humidity,2026-01-30T07:00:00-07:00,53.3927365,-117.5846086
-0.036,Hinton-Hillcrest,Ozone,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-2.0,Hinton-Hillcrest,,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-54.9,Hinton-Hillcrest,Relative Humidity,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-4.0,Hinton-Hillcrest,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-11.8,Hinton-Hillcrest,Wind Speed,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-0.0,Hinton-Hillcrest,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-0.0,Hinton-Hillcrest,Nitric Oxide,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-0.0,Hinton-Hillcrest,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-0.002,Hinton-Hillcrest,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-0.002,Hinton-Hillcrest,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-164.0,Hinton-Hillcrest,Wind Direction,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-7.4,Hinton-Hillcrest,Fine Particulate Matter,2026-01-30T06:00:00-07:00,53.3927365,-117.5846086
-,Fox Creek,Wind Direction,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Wind Speed,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Ozone,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Fine Particulate Matter,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Outdoor Temperature,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Sulphur Dioxide,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Nitric Oxide,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+282.0,Fox Creek,Wind Direction,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+0.0,Fox Creek,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+2.3,Fox Creek,Wind Speed,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+0.011,Fox Creek,Ozone,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+0.018,Fox Creek,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+0.7,Fox Creek,Fine Particulate Matter,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+-0.5,Fox Creek,Outdoor Temperature,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+0.0,Fox Creek,Sulphur Dioxide,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+2.0,Fox Creek,,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+0.013,Fox Creek,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,54.395492,-116.80948
+0.005,Fox Creek,Nitric Oxide,2026-01-31T05:00:00-07:00,54.395492,-116.80948
 1.1,Fox Creek,Fine Particulate Matter,2026-01-31T04:00:00-07:00,54.395492,-116.80948
 0.018,Fox Creek,Total Oxides of Nitrogen,2026-01-31T04:00:00-07:00,54.395492,-116.80948
 0.0,Fox Creek,Sulphur Dioxide,2026-01-31T04:00:00-07:00,54.395492,-116.80948
@@ -20820,17 +20501,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Fox Creek,Fine Particulate Matter,2026-01-30T07:00:00-07:00,54.395492,-116.80948
 ,Fox Creek,Outdoor Temperature,2026-01-30T07:00:00-07:00,54.395492,-116.80948
 ,Fox Creek,Ozone,2026-01-30T07:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Ozone,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Outdoor Temperature,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Nitric Oxide,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Sulphur Dioxide,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Wind Speed,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Fine Particulate Matter,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Wind Direction,2026-01-30T06:00:00-07:00,54.395492,-116.80948
-,Fox Creek,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,54.395492,-116.80948
 ,High Level (Airpointer),Nitrogen Dioxide,2026-01-31T05:00:00-07:00,58.512216,-117.162258
 ,High Level (Airpointer),Relative Humidity,2026-01-31T05:00:00-07:00,58.512216,-117.162258
 2.0,High Level (Airpointer),,2026-01-31T05:00:00-07:00,58.512216,-117.162258
@@ -21061,16 +20731,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,High Level (Airpointer),Fine Particulate Matter,2026-01-30T07:00:00-07:00,58.512216,-117.162258
 74.0,High Level (Airpointer),Wind Direction,2026-01-30T07:00:00-07:00,58.512216,-117.162258
 0.021,High Level (Airpointer),Ozone,2026-01-30T07:00:00-07:00,58.512216,-117.162258
-2.0,High Level (Airpointer),,2026-01-30T06:00:00-07:00,58.512216,-117.162258
-0.003,High Level (Airpointer),Nitrogen Dioxide,2026-01-30T06:00:00-07:00,58.512216,-117.162258
-8.5,High Level (Airpointer),Fine Particulate Matter,2026-01-30T06:00:00-07:00,58.512216,-117.162258
-68.0,High Level (Airpointer),Wind Direction,2026-01-30T06:00:00-07:00,58.512216,-117.162258
-7.6,High Level (Airpointer),Wind Speed,2026-01-30T06:00:00-07:00,58.512216,-117.162258
-0.021,High Level (Airpointer),Ozone,2026-01-30T06:00:00-07:00,58.512216,-117.162258
-0.0,High Level (Airpointer),Nitric Oxide,2026-01-30T06:00:00-07:00,58.512216,-117.162258
-93.0,High Level (Airpointer),Relative Humidity,2026-01-30T06:00:00-07:00,58.512216,-117.162258
--10.9,High Level (Airpointer),Outdoor Temperature,2026-01-30T06:00:00-07:00,58.512216,-117.162258
-0.003,High Level (Airpointer),Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,58.512216,-117.162258
 4.1,Leduc Sensor,Fine Particulate Matter,2026-01-31T05:00:00-07:00,53.241439,-113.503769
 92.0,Leduc Sensor,Relative Humidity,2026-01-31T05:00:00-07:00,53.241439,-113.503769
 0.0304,Leduc Sensor,Ozone,2026-01-31T05:00:00-07:00,53.241439,-113.503769
@@ -21209,12 +20869,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 22.1,Leduc Sensor,Fine Particulate Matter,2026-01-30T07:00:00-07:00,53.241439,-113.503769
 0.015,Leduc Sensor,Nitrogen Dioxide,2026-01-30T07:00:00-07:00,53.241439,-113.503769
 88.0,Leduc Sensor,Relative Humidity,2026-01-30T07:00:00-07:00,53.241439,-113.503769
-0.0173,Leduc Sensor,Ozone,2026-01-30T06:00:00-07:00,53.241439,-113.503769
-3.0,Leduc Sensor,,2026-01-30T06:00:00-07:00,53.241439,-113.503769
--3.7,Leduc Sensor,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.241439,-113.503769
-0.0131,Leduc Sensor,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.241439,-113.503769
-19.3,Leduc Sensor,Fine Particulate Matter,2026-01-30T06:00:00-07:00,53.241439,-113.503769
-87.0,Leduc Sensor,Relative Humidity,2026-01-30T06:00:00-07:00,53.241439,-113.503769
 0.0,O’Morrow Station 1,Sulphur Dioxide,2026-01-31T05:00:00-07:00,54.9036817,-112.8433489
 0.0,O’Morrow Station 1,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,54.9036817,-112.8433489
 5.1,O’Morrow Station 1,Fine Particulate Matter,2026-01-31T05:00:00-07:00,54.9036817,-112.8433489
@@ -21376,13 +21030,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 85.9,O’Morrow Station 1,Relative Humidity,2026-01-30T07:00:00-07:00,54.9036817,-112.8433489
 10.4,O’Morrow Station 1,Fine Particulate Matter,2026-01-30T07:00:00-07:00,54.9036817,-112.8433489
 2.2,O’Morrow Station 1,Wind Speed,2026-01-30T07:00:00-07:00,54.9036817,-112.8433489
-0.0,O’Morrow Station 1,Sulphur Dioxide,2026-01-30T06:00:00-07:00,54.9036817,-112.8433489
--13.2,O’Morrow Station 1,Outdoor Temperature,2026-01-30T06:00:00-07:00,54.9036817,-112.8433489
-9.9,O’Morrow Station 1,Fine Particulate Matter,2026-01-30T06:00:00-07:00,54.9036817,-112.8433489
-87.8,O’Morrow Station 1,Relative Humidity,2026-01-30T06:00:00-07:00,54.9036817,-112.8433489
-0.0,O’Morrow Station 1,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,54.9036817,-112.8433489
-111.0,O’Morrow Station 1,Wind Direction,2026-01-30T06:00:00-07:00,54.9036817,-112.8433489
-2.5,O’Morrow Station 1,Wind Speed,2026-01-30T06:00:00-07:00,54.9036817,-112.8433489
 0.001,Poacher’s Landing Station 2,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,54.9457874,-112.816501
 9.6,Poacher’s Landing Station 2,Wind Speed,2026-01-31T05:00:00-07:00,54.9457874,-112.816501
 274.0,Poacher’s Landing Station 2,Wind Direction,2026-01-31T05:00:00-07:00,54.9457874,-112.816501
@@ -21452,24 +21099,21 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 138.0,Poacher’s Landing Station 2,Wind Direction,2026-01-30T07:00:00-07:00,54.9457874,-112.816501
 0.001,Poacher’s Landing Station 2,Total Reduced Sulphur,2026-01-30T07:00:00-07:00,54.9457874,-112.816501
 1.2,Poacher’s Landing Station 2,Wind Speed,2026-01-30T07:00:00-07:00,54.9457874,-112.816501
-0.8,Poacher’s Landing Station 2,Wind Speed,2026-01-30T06:00:00-07:00,54.9457874,-112.816501
-0.001,Poacher’s Landing Station 2,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,54.9457874,-112.816501
-244.0,Poacher’s Landing Station 2,Wind Direction,2026-01-30T06:00:00-07:00,54.9457874,-112.816501
-,Happy Valley,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Wind Speed,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Methane,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Nitric Oxide,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Ozone,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Total Hydrocarbons,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Wind Direction,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+0.0,Happy Valley,Non-methane Hydrocarbons,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+0.004,Happy Valley,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+0.001,Happy Valley,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+6.0,Happy Valley,Wind Speed,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+2.16,Happy Valley,Methane,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+2.0,Happy Valley,,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+0.004,Happy Valley,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+3.2,Happy Valley,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+0.0,Happy Valley,Nitric Oxide,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+0.018,Happy Valley,Ozone,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+-3.9,Happy Valley,Outdoor Temperature,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+2.18,Happy Valley,Total Hydrocarbons,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+44.0,Happy Valley,Wind Direction,2026-01-31T05:00:00-07:00,55.752778,-119.086667
 ,Happy Valley,Relative Humidity,2026-01-31T05:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.752778,-119.086667
+0.0,Happy Valley,Total Reduced Sulphur,2026-01-31T05:00:00-07:00,55.752778,-119.086667
 ,Happy Valley,Relative Humidity,2026-01-31T04:00:00-07:00,55.752778,-119.086667
 0.001,Happy Valley,Total Oxides of Nitrogen,2026-01-31T04:00:00-07:00,55.752778,-119.086667
 0.03,Happy Valley,Ozone,2026-01-31T04:00:00-07:00,55.752778,-119.086667
@@ -21800,21 +21444,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Happy Valley,Total Reduced Sulphur,2026-01-30T07:00:00-07:00,55.752778,-119.086667
 ,Happy Valley,Sulphur Dioxide,2026-01-30T07:00:00-07:00,55.752778,-119.086667
 ,Happy Valley,Nitric Oxide,2026-01-30T07:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Wind Direction,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Outdoor Temperature,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Ozone,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Sulphur Dioxide,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Total Hydrocarbons,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Methane,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Relative Humidity,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Nitric Oxide,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Wind Speed,2026-01-30T06:00:00-07:00,55.752778,-119.086667
-,Happy Valley,Fine Particulate Matter,2026-01-30T06:00:00-07:00,55.752778,-119.086667
 ,Kirby North,Hydrogen Sulphide,2026-01-31T05:00:00-07:00,55.461647,-111.218823
 ,Kirby North,Sulphur Dioxide,2026-01-31T05:00:00-07:00,55.461647,-111.218823
 ,Kirby North,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,55.461647,-111.218823
@@ -22045,26 +21674,16 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Kirby North,Nitric Oxide,2026-01-30T07:00:00-07:00,55.461647,-111.218823
 ,Kirby North,Sulphur Dioxide,2026-01-30T07:00:00-07:00,55.461647,-111.218823
 ,Kirby North,Wind Speed,2026-01-30T07:00:00-07:00,55.461647,-111.218823
-,Kirby North,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Kirby North,Nitric Oxide,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Kirby North,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Kirby North,Wind Direction,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Kirby North,Total Hydrocarbons,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Kirby North,Outdoor Temperature,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Kirby North,Sulphur Dioxide,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Kirby North,Wind Speed,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Kirby North,Relative Humidity,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Kirby North,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,55.461647,-111.218823
-,Brooks Meadowplace,Ozone,2026-01-31T05:00:00-07:00,50.558969,-111.863769
-,Brooks Meadowplace,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,50.558969,-111.863769
-,Brooks Meadowplace,Fine Particulate Matter,2026-01-31T05:00:00-07:00,50.558969,-111.863769
-,Brooks Meadowplace,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,50.558969,-111.863769
-,Brooks Meadowplace,Nitric Oxide,2026-01-31T05:00:00-07:00,50.558969,-111.863769
-,Brooks Meadowplace,Wind Speed,2026-01-31T05:00:00-07:00,50.558969,-111.863769
-,Brooks Meadowplace,,2026-01-31T05:00:00-07:00,50.558969,-111.863769
-,Brooks Meadowplace,Outdoor Temperature,2026-01-31T05:00:00-07:00,50.558969,-111.863769
-,Brooks Meadowplace,Relative Humidity,2026-01-31T05:00:00-07:00,50.558969,-111.863769
-,Brooks Meadowplace,Wind Direction,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+0.021,Brooks Meadowplace,Ozone,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+0.005,Brooks Meadowplace,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+4.5,Brooks Meadowplace,Fine Particulate Matter,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+0.005,Brooks Meadowplace,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+0.005,Brooks Meadowplace,Nitric Oxide,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+8.9,Brooks Meadowplace,Wind Speed,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+2.0,Brooks Meadowplace,,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+3.0,Brooks Meadowplace,Outdoor Temperature,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+74.7,Brooks Meadowplace,Relative Humidity,2026-01-31T05:00:00-07:00,50.558969,-111.863769
+317.0,Brooks Meadowplace,Wind Direction,2026-01-31T05:00:00-07:00,50.558969,-111.863769
 7.6,Brooks Meadowplace,Wind Speed,2026-01-31T04:00:00-07:00,50.558969,-111.863769
 70.7,Brooks Meadowplace,Relative Humidity,2026-01-31T04:00:00-07:00,50.558969,-111.863769
 0.006,Brooks Meadowplace,Nitric Oxide,2026-01-31T04:00:00-07:00,50.558969,-111.863769
@@ -22285,16 +21904,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 95.8,Brooks Meadowplace,Relative Humidity,2026-01-30T07:00:00-07:00,50.558969,-111.863769
 2.0,Brooks Meadowplace,,2026-01-30T07:00:00-07:00,50.558969,-111.863769
 0.011,Brooks Meadowplace,Nitrogen Dioxide,2026-01-30T07:00:00-07:00,50.558969,-111.863769
-0.001,Brooks Meadowplace,Ozone,2026-01-30T06:00:00-07:00,50.558969,-111.863769
-0.01,Brooks Meadowplace,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,50.558969,-111.863769
-94.4,Brooks Meadowplace,Relative Humidity,2026-01-30T06:00:00-07:00,50.558969,-111.863769
-0.012,Brooks Meadowplace,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,50.558969,-111.863769
-3.0,Brooks Meadowplace,Wind Speed,2026-01-30T06:00:00-07:00,50.558969,-111.863769
-13.9,Brooks Meadowplace,Fine Particulate Matter,2026-01-30T06:00:00-07:00,50.558969,-111.863769
-170.0,Brooks Meadowplace,Wind Direction,2026-01-30T06:00:00-07:00,50.558969,-111.863769
--9.6,Brooks Meadowplace,Outdoor Temperature,2026-01-30T06:00:00-07:00,50.558969,-111.863769
-0.012,Brooks Meadowplace,Nitric Oxide,2026-01-30T06:00:00-07:00,50.558969,-111.863769
-2.0,Brooks Meadowplace,,2026-01-30T06:00:00-07:00,50.558969,-111.863769
 2.8,Jasper,Outdoor Temperature,2026-01-31T05:00:00-07:00,52.873528,-118.09144
 0.027,Jasper,Ozone,2026-01-31T05:00:00-07:00,52.873528,-118.09144
 0.0,Jasper,Nitric Oxide,2026-01-31T05:00:00-07:00,52.873528,-118.09144
@@ -22571,18 +22180,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Jasper,Total Reduced Sulphur,2026-01-30T07:00:00-07:00,52.873528,-118.09144
 7.7,Jasper,Wind Speed,2026-01-30T07:00:00-07:00,52.873528,-118.09144
 1.1,Jasper,Outdoor Temperature,2026-01-30T07:00:00-07:00,52.873528,-118.09144
-,Jasper,Total Reduced Sulphur,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-1.4,Jasper,Fine Particulate Matter,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-2.0,Jasper,,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-0.005,Jasper,Nitric Oxide,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-0.9,Jasper,Outdoor Temperature,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-0.01,Jasper,Ozone,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-,Jasper,Sulphur Dioxide,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-77.1,Jasper,Relative Humidity,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-8.4,Jasper,Wind Speed,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-0.016,Jasper,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-0.021,Jasper,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,52.873528,-118.09144
-231.0,Jasper,Wind Direction,2026-01-30T06:00:00-07:00,52.873528,-118.09144
 ,Okotoks Wylie,Nitric Oxide,2026-01-31T05:00:00-07:00,50.728571,-113.969207
 ,Okotoks Wylie,Wind Direction,2026-01-31T05:00:00-07:00,50.728571,-113.969207
 ,Okotoks Wylie,,2026-01-31T05:00:00-07:00,50.728571,-113.969207
@@ -22790,24 +22387,15 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,Okotoks Wylie,,2026-01-30T07:00:00-07:00,50.728571,-113.969207
 ,Okotoks Wylie,Ozone,2026-01-30T07:00:00-07:00,50.728571,-113.969207
 ,Okotoks Wylie,Nitrogen Dioxide,2026-01-30T07:00:00-07:00,50.728571,-113.969207
-,Okotoks Wylie,Ozone,2026-01-30T06:00:00-07:00,50.728571,-113.969207
-,Okotoks Wylie,Wind Speed,2026-01-30T06:00:00-07:00,50.728571,-113.969207
-,Okotoks Wylie,,2026-01-30T06:00:00-07:00,50.728571,-113.969207
-,Okotoks Wylie,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,50.728571,-113.969207
-,Okotoks Wylie,Wind Direction,2026-01-30T06:00:00-07:00,50.728571,-113.969207
-,Okotoks Wylie,Fine Particulate Matter,2026-01-30T06:00:00-07:00,50.728571,-113.969207
-,Okotoks Wylie,Nitric Oxide,2026-01-30T06:00:00-07:00,50.728571,-113.969207
-,Okotoks Wylie,Outdoor Temperature,2026-01-30T06:00:00-07:00,50.728571,-113.969207
-,Okotoks Wylie,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,50.728571,-113.969207
 ,Hanna Library (Airpointer),Wind Direction,2026-01-31T05:00:00-07:00,51.642351,-111.928226
-,Hanna Library (Airpointer),Ozone,2026-01-31T05:00:00-07:00,51.642351,-111.928226
-,Hanna Library (Airpointer),Nitric Oxide,2026-01-31T05:00:00-07:00,51.642351,-111.928226
+0.035,Hanna Library (Airpointer),Ozone,2026-01-31T05:00:00-07:00,51.642351,-111.928226
+0.0,Hanna Library (Airpointer),Nitric Oxide,2026-01-31T05:00:00-07:00,51.642351,-111.928226
 ,Hanna Library (Airpointer),Wind Speed,2026-01-31T05:00:00-07:00,51.642351,-111.928226
-,Hanna Library (Airpointer),,2026-01-31T05:00:00-07:00,51.642351,-111.928226
-,Hanna Library (Airpointer),Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.642351,-111.928226
-,Hanna Library (Airpointer),Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.642351,-111.928226
+2.0,Hanna Library (Airpointer),,2026-01-31T05:00:00-07:00,51.642351,-111.928226
+0.005,Hanna Library (Airpointer),Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.642351,-111.928226
+0.005,Hanna Library (Airpointer),Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.642351,-111.928226
 ,Hanna Library (Airpointer),Relative Humidity,2026-01-31T05:00:00-07:00,51.642351,-111.928226
-,Hanna Library (Airpointer),Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.642351,-111.928226
+3.8,Hanna Library (Airpointer),Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.642351,-111.928226
 2.0,Hanna Library (Airpointer),,2026-01-31T04:00:00-07:00,51.642351,-111.928226
 297.0,Hanna Library (Airpointer),Wind Direction,2026-01-31T04:00:00-07:00,51.642351,-111.928226
 ,Hanna Library (Airpointer),Nitrogen Dioxide,2026-01-31T04:00:00-07:00,51.642351,-111.928226
@@ -23006,24 +22594,15 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.01,Hanna Library (Airpointer),Total Oxides of Nitrogen,2026-01-30T07:00:00-07:00,51.642351,-111.928226
 2.0,Hanna Library (Airpointer),,2026-01-30T07:00:00-07:00,51.642351,-111.928226
 0.002,Hanna Library (Airpointer),Nitric Oxide,2026-01-30T07:00:00-07:00,51.642351,-111.928226
-10.0,Hanna Library (Airpointer),Fine Particulate Matter,2026-01-30T06:00:00-07:00,51.642351,-111.928226
-2.0,Hanna Library (Airpointer),,2026-01-30T06:00:00-07:00,51.642351,-111.928226
-,Hanna Library (Airpointer),Relative Humidity,2026-01-30T06:00:00-07:00,51.642351,-111.928226
-0.015,Hanna Library (Airpointer),Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,51.642351,-111.928226
-,Hanna Library (Airpointer),Wind Direction,2026-01-30T06:00:00-07:00,51.642351,-111.928226
-,Hanna Library (Airpointer),Wind Speed,2026-01-30T06:00:00-07:00,51.642351,-111.928226
-0.01,Hanna Library (Airpointer),Nitrogen Dioxide,2026-01-30T06:00:00-07:00,51.642351,-111.928226
-0.005,Hanna Library (Airpointer),Nitric Oxide,2026-01-30T06:00:00-07:00,51.642351,-111.928226
-0.015,Hanna Library (Airpointer),Ozone,2026-01-30T06:00:00-07:00,51.642351,-111.928226
-,Raymond (Airpointer),Wind Direction,2026-01-31T05:00:00-07:00,49.46218,-112.64222
+259.0,Raymond (Airpointer),Wind Direction,2026-01-31T05:00:00-07:00,49.46218,-112.64222
 2.0,Raymond (Airpointer),,2026-01-31T05:00:00-07:00,49.46218,-112.64222
-,Raymond (Airpointer),Wind Speed,2026-01-31T05:00:00-07:00,49.46218,-112.64222
+24.4,Raymond (Airpointer),Wind Speed,2026-01-31T05:00:00-07:00,49.46218,-112.64222
 ,Raymond (Airpointer),Ozone,2026-01-31T05:00:00-07:00,49.46218,-112.64222
 ,Raymond (Airpointer),Nitric Oxide,2026-01-31T05:00:00-07:00,49.46218,-112.64222
 ,Raymond (Airpointer),Nitrogen Dioxide,2026-01-31T05:00:00-07:00,49.46218,-112.64222
-,Raymond (Airpointer),Relative Humidity,2026-01-31T05:00:00-07:00,49.46218,-112.64222
-,Raymond (Airpointer),Outdoor Temperature,2026-01-31T05:00:00-07:00,49.46218,-112.64222
-,Raymond (Airpointer),Fine Particulate Matter,2026-01-31T05:00:00-07:00,49.46218,-112.64222
+52.4,Raymond (Airpointer),Relative Humidity,2026-01-31T05:00:00-07:00,49.46218,-112.64222
+6.9,Raymond (Airpointer),Outdoor Temperature,2026-01-31T05:00:00-07:00,49.46218,-112.64222
+0.0,Raymond (Airpointer),Fine Particulate Matter,2026-01-31T05:00:00-07:00,49.46218,-112.64222
 ,Raymond (Airpointer),Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,49.46218,-112.64222
 17.4,Raymond (Airpointer),Wind Speed,2026-01-31T04:00:00-07:00,49.46218,-112.64222
 2.0,Raymond (Airpointer),,2026-01-31T04:00:00-07:00,49.46218,-112.64222
@@ -23245,16 +22824,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 4.3,Raymond (Airpointer),Outdoor Temperature,2026-01-30T07:00:00-07:00,49.46218,-112.64222
 0.037,Raymond (Airpointer),Ozone,2026-01-30T07:00:00-07:00,49.46218,-112.64222
 233.0,Raymond (Airpointer),Wind Direction,2026-01-30T07:00:00-07:00,49.46218,-112.64222
-3.6,Raymond (Airpointer),Outdoor Temperature,2026-01-30T06:00:00-07:00,49.46218,-112.64222
-233.0,Raymond (Airpointer),Wind Direction,2026-01-30T06:00:00-07:00,49.46218,-112.64222
-0.3,Raymond (Airpointer),Fine Particulate Matter,2026-01-30T06:00:00-07:00,49.46218,-112.64222
-12.2,Raymond (Airpointer),Wind Speed,2026-01-30T06:00:00-07:00,49.46218,-112.64222
-65.7,Raymond (Airpointer),Relative Humidity,2026-01-30T06:00:00-07:00,49.46218,-112.64222
-2.0,Raymond (Airpointer),,2026-01-30T06:00:00-07:00,49.46218,-112.64222
-0.001,Raymond (Airpointer),Nitrogen Dioxide,2026-01-30T06:00:00-07:00,49.46218,-112.64222
-0.0,Raymond (Airpointer),Nitric Oxide,2026-01-30T06:00:00-07:00,49.46218,-112.64222
-0.001,Raymond (Airpointer),Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,49.46218,-112.64222
-0.036,Raymond (Airpointer),Ozone,2026-01-30T06:00:00-07:00,49.46218,-112.64222
 12.9,Enoch,Wind Speed,2026-01-31T05:00:00-07:00,53.4980544,-113.7607143
 ,Enoch,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,53.4980544,-113.7607143
 3.0,Enoch,Outdoor Temperature,2026-01-31T05:00:00-07:00,53.4980544,-113.7607143
@@ -23485,16 +23054,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 25.7,Enoch,Fine Particulate Matter,2026-01-30T07:00:00-07:00,53.4980544,-113.7607143
 131.0,Enoch,Wind Direction,2026-01-30T07:00:00-07:00,53.4980544,-113.7607143
 2.4,Enoch,Wind Speed,2026-01-30T07:00:00-07:00,53.4980544,-113.7607143
-2.4,Enoch,Wind Speed,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
-0.011,Enoch,Ozone,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
-,Enoch,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
-,Enoch,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
-24.8,Enoch,Fine Particulate Matter,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
--7.2,Enoch,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
-90.3,Enoch,Relative Humidity,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
-154.0,Enoch,Wind Direction,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
-,Enoch,,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
-,Enoch,Nitric Oxide,2026-01-30T06:00:00-07:00,53.4980544,-113.7607143
 ,E-BAM Swan Hills,Fine Particulate Matter,2026-01-31T05:00:00-07:00,54.71695,-115.4047
 ,E-BAM Swan Hills,Fine Particulate Matter,2026-01-31T04:00:00-07:00,54.71695,-115.4047
 ,E-BAM Swan Hills,Fine Particulate Matter,2026-01-31T03:00:00-07:00,54.71695,-115.4047
@@ -23518,7 +23077,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,E-BAM Swan Hills,Fine Particulate Matter,2026-01-30T09:00:00-07:00,54.71695,-115.4047
 ,E-BAM Swan Hills,Fine Particulate Matter,2026-01-30T08:00:00-07:00,54.71695,-115.4047
 ,E-BAM Swan Hills,Fine Particulate Matter,2026-01-30T07:00:00-07:00,54.71695,-115.4047
-,E-BAM Swan Hills,Fine Particulate Matter,2026-01-30T06:00:00-07:00,54.71695,-115.4047
 3.0,Waskatenau,,2026-01-31T05:00:00-07:00,54.098046,-112.779695
 11.0,Waskatenau,Wind Speed,2026-01-31T05:00:00-07:00,54.098046,-112.779695
 1.4,Waskatenau,Outdoor Temperature,2026-01-31T05:00:00-07:00,54.098046,-112.779695
@@ -23795,18 +23353,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.006,Waskatenau,Total Oxides of Nitrogen,2026-01-30T07:00:00-07:00,54.098046,-112.779695
 0.0,Waskatenau,Nitric Oxide,2026-01-30T07:00:00-07:00,54.098046,-112.779695
 19.6,Waskatenau,Fine Particulate Matter,2026-01-30T07:00:00-07:00,54.098046,-112.779695
-0.0,Waskatenau,Sulphur Dioxide,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-0.001,Waskatenau,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,54.098046,-112.779695
--6.8,Waskatenau,Outdoor Temperature,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-0.006,Waskatenau,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-3.0,Waskatenau,,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-7.2,Waskatenau,Wind Speed,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-0.006,Waskatenau,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-0.0,Waskatenau,Nitric Oxide,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-92.0,Waskatenau,Wind Direction,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-0.023,Waskatenau,Ozone,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-20.0,Waskatenau,Fine Particulate Matter,2026-01-30T06:00:00-07:00,54.098046,-112.779695
-99.8,Waskatenau,Relative Humidity,2026-01-30T06:00:00-07:00,54.098046,-112.779695
 7.0,Edmonton-Gold Bar,Outdoor Temperature,2026-01-31T05:00:00-07:00,53.54925,-113.41473
 279.0,Edmonton-Gold Bar,Wind Direction,2026-01-31T05:00:00-07:00,53.54925,-113.41473
 0.006,Edmonton-Gold Bar,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,53.54925,-113.41473
@@ -23991,14 +23537,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 5.0,Edmonton-Gold Bar,Wind Speed,2026-01-30T07:00:00-07:00,53.54925,-113.41473
 0.001,Edmonton-Gold Bar,Hydrogen Sulphide,2026-01-30T07:00:00-07:00,53.54925,-113.41473
 0.051,Edmonton-Gold Bar,Nitric Oxide,2026-01-30T07:00:00-07:00,53.54925,-113.41473
--5.0,Edmonton-Gold Bar,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.54925,-113.41473
-0.003,Edmonton-Gold Bar,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,53.54925,-113.41473
-3.0,Edmonton-Gold Bar,Wind Speed,2026-01-30T06:00:00-07:00,53.54925,-113.41473
-0.048,Edmonton-Gold Bar,Nitric Oxide,2026-01-30T06:00:00-07:00,53.54925,-113.41473
-0.088,Edmonton-Gold Bar,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.54925,-113.41473
-0.001,Edmonton-Gold Bar,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.54925,-113.41473
-157.0,Edmonton-Gold Bar,Wind Direction,2026-01-30T06:00:00-07:00,53.54925,-113.41473
-0.04,Edmonton-Gold Bar,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.54925,-113.41473
 2.08,Edmonton-Beverly,Total Hydrocarbons,2026-01-31T05:00:00-07:00,53.56693,-113.39849
 0.002,Edmonton-Beverly,Sulphur Dioxide,2026-01-31T05:00:00-07:00,53.56693,-113.39849
 10.0,Edmonton-Beverly,Wind Speed,2026-01-31T05:00:00-07:00,53.56693,-113.39849
@@ -24137,12 +23675,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 -7.2,Edmonton-Beverly,Outdoor Temperature,2026-01-30T07:00:00-07:00,53.56693,-113.39849
 0.008,Edmonton-Beverly,Sulphur Dioxide,2026-01-30T07:00:00-07:00,53.56693,-113.39849
 4.0,Edmonton-Beverly,Wind Speed,2026-01-30T07:00:00-07:00,53.56693,-113.39849
--7.7,Edmonton-Beverly,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.56693,-113.39849
-0.002,Edmonton-Beverly,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.56693,-113.39849
-0.003,Edmonton-Beverly,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,53.56693,-113.39849
-134.0,Edmonton-Beverly,Wind Direction,2026-01-30T06:00:00-07:00,53.56693,-113.39849
-4.27,Edmonton-Beverly,Total Hydrocarbons,2026-01-30T06:00:00-07:00,53.56693,-113.39849
-2.0,Edmonton-Beverly,Wind Speed,2026-01-30T06:00:00-07:00,53.56693,-113.39849
 ,E-BAM Peerless Lake FN,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.68136,-114.57921
 ,E-BAM Peerless Lake FN,Fine Particulate Matter,2026-01-31T04:00:00-07:00,56.68136,-114.57921
 ,E-BAM Peerless Lake FN,Fine Particulate Matter,2026-01-31T03:00:00-07:00,56.68136,-114.57921
@@ -24166,7 +23698,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,E-BAM Peerless Lake FN,Fine Particulate Matter,2026-01-30T09:00:00-07:00,56.68136,-114.57921
 ,E-BAM Peerless Lake FN,Fine Particulate Matter,2026-01-30T08:00:00-07:00,56.68136,-114.57921
 ,E-BAM Peerless Lake FN,Fine Particulate Matter,2026-01-30T07:00:00-07:00,56.68136,-114.57921
-,E-BAM Peerless Lake FN,Fine Particulate Matter,2026-01-30T06:00:00-07:00,56.68136,-114.57921
 ,E-BAM Slave Lake,Fine Particulate Matter,2026-01-31T05:00:00-07:00,55.290868,-114.758962
 ,E-BAM Slave Lake,Fine Particulate Matter,2026-01-31T04:00:00-07:00,55.290868,-114.758962
 ,E-BAM Slave Lake,Fine Particulate Matter,2026-01-31T03:00:00-07:00,55.290868,-114.758962
@@ -24190,7 +23721,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,E-BAM Slave Lake,Fine Particulate Matter,2026-01-30T09:00:00-07:00,55.290868,-114.758962
 ,E-BAM Slave Lake,Fine Particulate Matter,2026-01-30T08:00:00-07:00,55.290868,-114.758962
 ,E-BAM Slave Lake,Fine Particulate Matter,2026-01-30T07:00:00-07:00,55.290868,-114.758962
-,E-BAM Slave Lake,Fine Particulate Matter,2026-01-30T06:00:00-07:00,55.290868,-114.758962
 ,E-BAM Trout Lake,Fine Particulate Matter,2026-01-31T05:00:00-07:00,56.499503,-114.552304
 ,E-BAM Trout Lake,Fine Particulate Matter,2026-01-31T04:00:00-07:00,56.499503,-114.552304
 ,E-BAM Trout Lake,Fine Particulate Matter,2026-01-31T03:00:00-07:00,56.499503,-114.552304
@@ -24214,7 +23744,6 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 ,E-BAM Trout Lake,Fine Particulate Matter,2026-01-30T09:00:00-07:00,56.499503,-114.552304
 ,E-BAM Trout Lake,Fine Particulate Matter,2026-01-30T08:00:00-07:00,56.499503,-114.552304
 ,E-BAM Trout Lake,Fine Particulate Matter,2026-01-30T07:00:00-07:00,56.499503,-114.552304
-,E-BAM Trout Lake,Fine Particulate Matter,2026-01-30T06:00:00-07:00,56.499503,-114.552304
 2.0,Southfort,,2026-01-31T05:00:00-07:00,53.682364,-113.237639
 2.17,Southfort,Methane,2026-01-31T05:00:00-07:00,53.682364,-113.237639
 3.4,Southfort,Outdoor Temperature,2026-01-31T05:00:00-07:00,53.682364,-113.237639
@@ -24583,31 +24112,15 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 0.0,Southfort,Non-methane Hydrocarbons,2026-01-30T07:00:00-07:00,53.682364,-113.237639
 -9.6,Southfort,Outdoor Temperature,2026-01-30T07:00:00-07:00,53.682364,-113.237639
 0.152,Southfort,Total Oxides of Nitrogen,2026-01-30T07:00:00-07:00,53.682364,-113.237639
-,Southfort,Total Hydrocarbons,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-,Southfort,Non-methane Hydrocarbons,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-0.116,Southfort,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-86.6,Southfort,Relative Humidity,2026-01-30T06:00:00-07:00,53.682364,-113.237639
--9.2,Southfort,Outdoor Temperature,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-0.001,Southfort,Ozone,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-4.0,Southfort,,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-30.9,Southfort,Fine Particulate Matter,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-0.001,Southfort,Sulphur Dioxide,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-,Southfort,Methane,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-284.3,Southfort,Wind Direction,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-0.6,Southfort,Wind Speed,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-0.002,Southfort,Hydrogen Sulphide,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-0.08,Southfort,Nitric Oxide,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-0.036,Southfort,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-0.56,Southfort,Carbon Monoxide,2026-01-30T06:00:00-07:00,53.682364,-113.237639
-,Cochrane-Mitford Park,Nitric Oxide,2026-01-31T05:00:00-07:00,51.188118,-114.490938
-,Cochrane-Mitford Park,Wind Speed,2026-01-31T05:00:00-07:00,51.188118,-114.490938
-,Cochrane-Mitford Park,,2026-01-31T05:00:00-07:00,51.188118,-114.490938
-,Cochrane-Mitford Park,Wind Direction,2026-01-31T05:00:00-07:00,51.188118,-114.490938
-,Cochrane-Mitford Park,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.188118,-114.490938
-,Cochrane-Mitford Park,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.188118,-114.490938
-,Cochrane-Mitford Park,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.188118,-114.490938
-,Cochrane-Mitford Park,Ozone,2026-01-31T05:00:00-07:00,51.188118,-114.490938
-,Cochrane-Mitford Park,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.188118,-114.490938
+0.0,Cochrane-Mitford Park,Nitric Oxide,2026-01-31T05:00:00-07:00,51.188118,-114.490938
+11.6,Cochrane-Mitford Park,Wind Speed,2026-01-31T05:00:00-07:00,51.188118,-114.490938
+2.0,Cochrane-Mitford Park,,2026-01-31T05:00:00-07:00,51.188118,-114.490938
+316.0,Cochrane-Mitford Park,Wind Direction,2026-01-31T05:00:00-07:00,51.188118,-114.490938
+0.003,Cochrane-Mitford Park,Nitrogen Dioxide,2026-01-31T05:00:00-07:00,51.188118,-114.490938
+0.6,Cochrane-Mitford Park,Fine Particulate Matter,2026-01-31T05:00:00-07:00,51.188118,-114.490938
+0.003,Cochrane-Mitford Park,Total Oxides of Nitrogen,2026-01-31T05:00:00-07:00,51.188118,-114.490938
+0.037,Cochrane-Mitford Park,Ozone,2026-01-31T05:00:00-07:00,51.188118,-114.490938
+4.8,Cochrane-Mitford Park,Outdoor Temperature,2026-01-31T05:00:00-07:00,51.188118,-114.490938
 0.035,Cochrane-Mitford Park,Ozone,2026-01-31T04:00:00-07:00,51.188118,-114.490938
 5.2,Cochrane-Mitford Park,Outdoor Temperature,2026-01-31T04:00:00-07:00,51.188118,-114.490938
 0.004,Cochrane-Mitford Park,Total Oxides of Nitrogen,2026-01-31T04:00:00-07:00,51.188118,-114.490938
@@ -24806,12 +24319,3 @@ Value,StationName,ParameterName,ReadingDate,Latitude,Longitude
 3.0,Cochrane-Mitford Park,,2026-01-30T07:00:00-07:00,51.188118,-114.490938
 0.1,Cochrane-Mitford Park,Outdoor Temperature,2026-01-30T07:00:00-07:00,51.188118,-114.490938
 3.7,Cochrane-Mitford Park,Fine Particulate Matter,2026-01-30T07:00:00-07:00,51.188118,-114.490938
-0.001,Cochrane-Mitford Park,Nitric Oxide,2026-01-30T06:00:00-07:00,51.188118,-114.490938
-0.009,Cochrane-Mitford Park,Ozone,2026-01-30T06:00:00-07:00,51.188118,-114.490938
-0.025,Cochrane-Mitford Park,Nitrogen Dioxide,2026-01-30T06:00:00-07:00,51.188118,-114.490938
-0.026,Cochrane-Mitford Park,Total Oxides of Nitrogen,2026-01-30T06:00:00-07:00,51.188118,-114.490938
-3.0,Cochrane-Mitford Park,,2026-01-30T06:00:00-07:00,51.188118,-114.490938
-91.0,Cochrane-Mitford Park,Wind Direction,2026-01-30T06:00:00-07:00,51.188118,-114.490938
--0.2,Cochrane-Mitford Park,Outdoor Temperature,2026-01-30T06:00:00-07:00,51.188118,-114.490938
-3.9,Cochrane-Mitford Park,Wind Speed,2026-01-30T06:00:00-07:00,51.188118,-114.490938
-5.3,Cochrane-Mitford Park,Fine Particulate Matter,2026-01-30T06:00:00-07:00,51.188118,-114.490938
