@@ -82,6 +82,8 @@ def get_color(pm, name):
     else: return "#01cbff"
 
 
+
+
 def fetch_sensor_historical_data(
     sensor_id,
     api_key,
@@ -90,7 +92,95 @@ def fetch_sensor_historical_data(
     sensor_metadata,
     channel_override
 ):
-    pass
+    url = f"https://api.purpleair.com/v1/sensors/{sensor_id}/history"
+
+    params = {
+        "start_timestamp": start_ts,
+        "end_timestamp": end_ts,
+        "average": 60,
+        "fields": "humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b"
+    }
+
+    headers = {"X-API-Key": api_key}
+
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+
+        if "data" not in data:
+            return []
+
+        records = []
+        meta = sensor_metadata.get(sensor_id, {})
+
+        for row in data["data"]:
+            timestamp = datetime.fromtimestamp(row[0], tz=timezone.utc).isoformat()
+            humidity = row[1]
+            avg = row[2]
+            a = row[3]
+            b = row[4]
+
+            # Channel override logic
+            if sensor_id in channel_override and channel_override[sensor_id] == "OFF":
+                pm_raw = None
+                pm_method = "off"
+
+            elif sensor_id in channel_override and channel_override[sensor_id] == "A":
+                pm_raw = a
+                pm_method = "forced_A"
+
+            elif sensor_id in channel_override and channel_override[sensor_id] == "B":
+                pm_raw = b
+                pm_method = "forced_B"
+
+            else:
+                if pd.notna(a) and pd.notna(b):
+                    diff = abs(a - b)
+                    if diff > 500:
+                        pm_raw = None
+                        pm_method = "extreme_diff"
+                    elif diff > 50:
+                        pm_raw = min(a, b)
+                        pm_method = "min_ab"
+                    else:
+                        pm_raw = avg
+                        pm_method = "avg"
+                elif pd.isna(a) and pd.notna(b):
+                    pm_raw = b
+                    pm_method = "b_only"
+                elif pd.isna(b) and pd.notna(a):
+                    pm_raw = a
+                    pm_method = "a_only"
+                else:
+                    pm_raw = avg
+                    pm_method = "fallback"
+
+            pm_corr = correct_pm25(pm_raw, humidity) if pd.notna(pm_raw) else None
+
+            record = {
+                "sensor_index": sensor_id,
+                "name": meta.get("name", ""),
+                "latitude": meta.get("latitude"),
+                "longitude": meta.get("longitude"),
+                "pm_raw": pm_raw,
+                "pm_corrected": pm_corr,
+                "pm_method": pm_method,
+                "humidity": humidity,
+                "recorded_at": timestamp
+            }
+
+            records.append(record)
+
+        return records
+
+    except Exception as e:
+        print(f"Error fetching sensor {sensor_id}: {e}")
+        return []
+
+
+
+
 
 
 def push_to_supabase(records):
@@ -201,7 +291,8 @@ def main():
 
     if all_records:
         print(f"\nTotal records collected: {len(all_records)}")
-        push_to_supabase(all_records)
+        print(f"\nCollected {len(all_records)} records")
+        print("Sample:", all_records[:3])
     else:
         print("No records collected")
 
