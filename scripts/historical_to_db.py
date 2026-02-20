@@ -13,23 +13,44 @@ from datetime import datetime, timedelta, timezone
 from supabase import create_client, Client
 import time
 
+
+# Load channel override
+def load_channel_override():
+    try:
+        df = pd.read_csv("data/channel_override.csv")
+        df["sensor_index"] = df["sensor_index"].astype(int)
+        return dict(zip(df["sensor_index"], df["force_channel"]))
+    except:
+        return {}
+
+
+
 def get_best_pm(a, b, avg):
-    if pd.isna(a) and not pd.isna(b) and b <= 2000:
+    # Hard invalids
+    if pd.isna(a) and pd.notna(b) and b <= 2000:
         return b
-    if pd.isna(b) and not pd.isna(a) and a <= 2000:
+    if pd.isna(b) and pd.notna(a) and a <= 2000:
         return a
-    if a > 2000 and b <= 2000:
+    if pd.notna(a) and a > 2000 and pd.notna(b) and b <= 2000:
         return b
-    if b > 2000 and a <= 2000:
+    if pd.notna(b) and b > 2000 and pd.notna(a) and a <= 2000:
         return a
-    if not pd.isna(a) and not pd.isna(b):
+
+    if pd.notna(a) and pd.notna(b):
         diff = abs(a - b)
-        if diff > 50 and diff <= 500:
-            return max(a, b)
-        elif diff > 500:
+
+        # Extreme divergence → reject
+        if diff > 500:
             return None
-        elif diff <= 50 and not pd.isna(avg) and avg >= 0:
+
+        # Moderate divergence → choose LOWER (safer)
+        if diff > 50:
+            return min(a, b)
+
+        # Small difference → use average
+        if pd.notna(avg):
             return avg
+
     return avg
 
 # Apply RH correction
@@ -61,132 +82,128 @@ def get_color(pm, name):
     else: return "#01cbff"
 
 
+def fetch_sensor_historical_data(
+    sensor_id,
+    api_key,
+    start_ts,
+    end_ts,
+    sensor_metadata,
+    channel_override
+):
+
 
 def push_to_supabase(records):
     """Push records to Supabase database"""
     try:
         supabase_url = os.getenv("SUPABASE_DB_URL")
         supabase_key = os.getenv("SUPABASE_SERVICE_KEY")
-        
+
         if not supabase_url or not supabase_key:
             print("Missing Supabase credentials")
             return False
-        
+
         supabase: Client = create_client(supabase_url, supabase_key)
-        
-        if records:
-            # Insert in batches to avoid timeout
-            batch_size = 100
-            for i in range(0, len(records), batch_size):
-                batch = records[i:i + batch_size]
-                response = supabase.table("sensor_readings").upsert(batch).execute()
-                print(f"Pushed batch {i//batch_size + 1}: {len(batch)} records")
-                time.sleep(1)  # Rate limiting
-            
-            print(f"✅ Total {len(records)} records pushed to Supabase")
-            return True
-            
-    except Exception as e:
-        print(f"❌ Error pushing to Supabase: {e}")
-    
-    return False
 
-def fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts, sensor_metadata):
-    """Fetch historical data for a single sensor"""
-    url = f"https://api.purpleair.com/v1/sensors/{sensor_id}/history"
-    
-    params = {
-        "start_timestamp": start_ts,
-        "end_timestamp": end_ts,
-        "average": 60,  # 1 hour averages
-        "fields": "humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b"
-    }
-    
-    headers = {"X-API-Key": api_key}
-    
-    try:
-        response = requests.get(url, headers=headers, params=params)
-        response.raise_for_status()
-        data = response.json()
-        
-        records = []
-        if "data" in data:
-            for row in data["data"]:
-                # Process each reading
-                pm_raw = get_best_pm(row[3], row[4], row[2])  # Adjust indices based on API response
-                pm_corr = correct_pm25(pm_raw, row[1]) if pm_raw else None
+        if not records:
+            print("No records to push.")
+            return False
 
-                meta = sensor_metadata.get(sensor_id, {})
-                
-                record = {
-                    "sensor_index": sensor_id,
-                    "name": meta.get("name", ""),
-                    "latitude": meta.get("latitude"),
-                    "longitude": meta.get("longitude"),
-                    "pm_raw": pm_raw,
-                    "pm_corrected": pm_corr,
-                    "humidity": row[1],
-                    # "color": get_color(pm_corr, meta.get("name", "")),  # Calculate color
-                    "recorded_at": datetime.fromtimestamp(row[0], tz=timezone.utc).isoformat()               
-                }
-                records.append(record)
-        
-        return records
-        
+        batch_size = 100
+
+        for i in range(0, len(records), batch_size):
+            batch = records[i:i + batch_size]
+
+            response = (
+                supabase
+                .table("sensor_readings")
+                .upsert(batch)
+                .execute()
+            )
+
+            if hasattr(response, "error") and response.error:
+                print("Supabase error:", response.error)
+                return False
+
+            print(f"Pushed batch {i//batch_size + 1}: {len(batch)} records")
+            time.sleep(0.5)  # lighter throttle
+
+        print(f"Total {len(records)} records pushed to Supabase")
+        return True
+
     except Exception as e:
-        print(f"Error fetching sensor {sensor_id}: {e}")
-        return []
+        print(f"Error pushing to Supabase: {e}")
+        return False
+
+
 
 def main():
     parser = argparse.ArgumentParser(description='Collect historical PurpleAir data')
     parser.add_argument('--start-date', required=True, help='Start date (YYYY-MM-DD)')
     parser.add_argument('--end-date', required=True, help='End date (YYYY-MM-DD)')
-    
     args = parser.parse_args()
-    
+
+    channel_override = load_channel_override()
+
     api_key = os.getenv("PURPLEAIR_API_KEY")
     if not api_key:
         print("Error: PURPLEAIR_API_KEY not set")
         sys.exit(1)
-    
-    # Load your sensor list
+
+    # Load sensor list
     try:
         sensor_df = pd.read_csv("data/AB_PA_sensors.csv")
-        sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
-        print(f"Loaded {len(sensor_ids)} sensors")
 
-        # Load sensor metadata ONCE
+        # Remove dead sensors before building sensor_ids
+        try:
+            dead_df = pd.read_csv("data/dead_list.csv")
+            dead_df["sensor_index"] = dead_df["sensor_index"].astype(int)
+            dead_ids = set(dead_df["sensor_index"].tolist())
+            print(f"Loaded {len(dead_ids)} dead sensors")
+
+            sensor_df = sensor_df[~sensor_df["sensor_index"].isin(dead_ids)]
+        except FileNotFoundError:
+            print("No dead_list.csv found")
+
+        sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
+        print(f"{len(sensor_ids)} sensors after dead filter")
+
         sensor_metadata = sensor_df.set_index("sensor_index")[["name", "latitude", "longitude"]].to_dict('index')
 
     except FileNotFoundError:
         print("Error: data/AB_PA_sensors.csv not found")
         sys.exit(1)
 
-    
-    
     # Parse dates
     start_date = datetime.strptime(args.start_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
     end_date = datetime.strptime(args.end_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
-    
+
     start_ts = int(start_date.timestamp())
     end_ts = int(end_date.timestamp())
-    
+
     all_records = []
-    
-    # Fetch data for each sensor
+
     for sensor_id in sensor_ids:
         print(f"Fetching historical data for sensor {sensor_id}...")
-        records = fetch_sensor_historical_data(sensor_id, api_key, start_ts, end_ts, sensor_metadata)
+
+        records = fetch_sensor_historical_data(
+            sensor_id,
+            api_key,
+            start_ts,
+            end_ts,
+            sensor_metadata,
+            channel_override
+        )
+
         all_records.extend(records)
         print(f"  Got {len(records)} records")
-        time.sleep(2)  # Rate limiting between sensors
-    
-    # Push to Supabase
+        time.sleep(1)
+
     if all_records:
         print(f"\nTotal records collected: {len(all_records)}")
         push_to_supabase(all_records)
     else:
         print("No records collected")
+
 
 if __name__ == "__main__":
     main()
