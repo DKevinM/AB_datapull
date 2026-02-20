@@ -90,6 +90,7 @@ def fetch_sensor_historical_data(
     sensor_metadata,
     channel_override
 ):
+    pass
 
 
 def push_to_supabase(records):
