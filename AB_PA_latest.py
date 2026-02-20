@@ -20,7 +20,7 @@ def get_best_pm(a, b, avg):
     if not pd.isna(a) and not pd.isna(b):
         diff = abs(a - b)
         if diff > 50 and diff <= 500:
-            return max(a, b)
+            return min(a, b)
         elif diff > 500:
             return None
         elif diff <= 50 and not pd.isna(avg) and avg >= 0:
@@ -88,7 +88,7 @@ def push_to_supabase(df_result):
             else:
                 pm_raw = row['pm_raw']
 
-            pm_corr = correct_pm25(pm_raw, row["humidity"]) if pm_raw else None
+            pm_corr = correct_pm25(pm_raw, row["humidity"]) if pd.notna(pm_raw) else None
 
             
             method = "avg"
@@ -187,6 +187,24 @@ def main():
         print(f"Warning: Error reading dead_list.csv: {e}, proceeding with all sensors")
 
 
+    channel_override = {}
+    try:
+        override_df = pd.read_csv("data/channel_override.csv")
+        override_df["sensor_index"] = pd.to_numeric(override_df["sensor_index"], errors="coerce")
+        override_df = override_df.dropna(subset=["sensor_index"])
+        override_df["sensor_index"] = override_df["sensor_index"].astype("int64")
+    
+        channel_override = dict(zip(
+            override_df["sensor_index"],
+            override_df["force_channel"]
+        ))
+    
+        print(f"Loaded {len(channel_override)} channel overrides")
+    
+    except FileNotFoundError:
+        print("No channel_override.csv found")
+    
+    
    
     # Build sensor_ids **after** filtering
     sensor_ids = sensor_df["sensor_index"].astype("int64").tolist()
@@ -275,9 +293,60 @@ def main():
     print(f"After time filter: {len(df)} sensors")
 
 
-    # Calculate PM values
-    df["pm_raw"] = df.apply(lambda x: get_best_pm(x["pm2.5_atm_a"], x["pm2.5_atm_b"], x["pm2.5_atm"]), axis=1)
-    df["pm_corr"] = df.apply(lambda x: correct_pm25(x["pm_raw"], x["humidity"]), axis=1)
+    # -------- PM Selection With Override + Safer Diff Logic --------
+    def select_pm(row):
+        sid = row["sensor_index"]
+    
+        a = row["pm2.5_atm_a"]
+        b = row["pm2.5_atm_b"]
+        avg = row["pm2.5_atm"]
+    
+        # 1️⃣ Forced OFF
+        if sid in channel_override and channel_override[sid] == "OFF":
+            return None, "off"
+    
+        # 2️⃣ Forced channel
+        if sid in channel_override:
+            if channel_override[sid] == "A":
+                return a, "forced_A"
+            if channel_override[sid] == "B":
+                return b, "forced_B"
+    
+        # 3️⃣ Automatic logic
+        if pd.notna(a) and pd.notna(b):
+            diff = abs(a - b)
+    
+            # Extreme divergence → reject
+            if diff > 500:
+                return None, "extreme_diff"
+    
+            # Moderate divergence → choose LOWER (safer than max)
+            if diff > 50:
+                return min(a, b), "min_ab"
+    
+            # Small diff → use average
+            return avg, "avg"
+    
+        # 4️⃣ One channel missing
+        if pd.isna(a) and pd.notna(b):
+            return b, "b_only"
+        if pd.isna(b) and pd.notna(a):
+            return a, "a_only"
+    
+        return avg, "fallback"
+    
+    
+    # Apply selection
+    df[["pm_raw", "pm_method"]] = df.apply(
+        lambda x: pd.Series(select_pm(x)),
+        axis=1
+    )
+    
+    # Apply RH correction
+    df["pm_corr"] = df.apply(
+        lambda x: correct_pm25(x["pm_raw"], x["humidity"]),
+        axis=1
+    )
 
     
     # Clean result
