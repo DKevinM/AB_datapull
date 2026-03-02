@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas requests
+          pip install pytz pandas requests
 
       - name: Run PurpleAir PM2.5 script
         run: python ACA_PA_latest.py
