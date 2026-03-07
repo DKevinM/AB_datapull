@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 
 LAST6H_CSV = DATA_DIR / "last6h.csv"
+PURPLE_HISTORY = DATA_DIR / "AB_PA_history.csv"
 PURPLE_JSON = DATA_DIR / "AB_PM25_map.json"
 OUTPUT_JSON = DATA_DIR / "eAQHI_map.json"
 
@@ -106,6 +107,35 @@ def normalize_purple_records(records):
         })
 
     return pd.DataFrame(rows)
+
+
+def read_purple_history(path):
+    df = pd.read_csv(path)
+
+    df["datetime"] = pd.to_datetime(df["datetime"], errors="coerce", utc=True)
+    df["pm_corr"] = pd.to_numeric(df["pm_corr"], errors="coerce")
+
+    df = df.dropna(subset=["sensor_index", "datetime", "pm_corr"])
+    return df
+    
+
+def compute_sensor_3h_means(history_df):
+    now = history_df["datetime"].max()
+
+    window_start = now - pd.Timedelta(hours=3)
+
+    recent = history_df[history_df["datetime"] >= window_start]
+
+    means = (
+        recent.groupby("sensor_index")["pm_corr"]
+        .mean()
+        .reset_index()
+        .rename(columns={"pm_corr": "pm25_3h"})
+    )
+
+    return means
+
+
 
 
 def read_purpleair_json(path):
@@ -240,10 +270,10 @@ def build_station_result(station_name, station_df, purple_df):
     nearby["weight"] = 1 / nearby["distance_km"].clip(lower=0.5)
     
     pm25_weighted = np.average(
-        nearby["pm_corr"],
+        nearby["pm_corr_3h"],
         weights=nearby["weight"]
     )
-    
+        
     
     # -----------------------------------------
     # Step 3 — approximate 3-hour PM2.5 average
@@ -301,6 +331,13 @@ def main():
 
     last6h = pd.read_csv(LAST6H_CSV)
     last6h = normalize_station_columns(last6h)
+
+    purple_history = read_purple_history(PURPLE_HISTORY)
+    sensor_means = compute_sensor_3h_means(purple_history)
+    purple_df = purple_df.merge(sensor_means, on="sensor_index", how="left")
+    # create a new column that prefers the 3-hour average
+    purple_df["pm_corr_3h"] = purple_df["pm25_3h"].fillna(purple_df["pm_corr"])
+
 
     required = {"StationName", "ParameterName", "ReadingDate", "Value", "Latitude", "Longitude"}
     missing = required - set(last6h.columns)
