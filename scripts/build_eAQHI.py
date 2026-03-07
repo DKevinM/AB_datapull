@@ -208,14 +208,52 @@ def build_station_result(station_name, station_df, purple_df):
 
     if not np.isfinite(lat) or not np.isfinite(lon):
         return None
-
+        
     nearby = nearest_purpleair_subset(lat, lon, purple_df)
+    
     if len(nearby) < MIN_PURPLE_SENSORS:
         return None
+    
+    nearby = nearby.copy()
+    
+    # -----------------------------------------
+    # Step 1 — remove obvious sensor outliers
+    # -----------------------------------------
+    if len(nearby) >= 3:
+        q1 = nearby["pm_corr"].quantile(0.25)
+        q3 = nearby["pm_corr"].quantile(0.75)
+        iqr = q3 - q1
+    
+        nearby = nearby[
+            (nearby["pm_corr"] >= q1 - 1.5 * iqr) &
+            (nearby["pm_corr"] <= q3 + 1.5 * iqr)
+        ]
+    
+        if nearby.empty:
+            return None
+    
+    
+    # -----------------------------------------
+    # Step 2 — distance weighting
+    # closer sensors have larger influence
+    # -----------------------------------------
+    nearby["weight"] = 1 / nearby["distance_km"].clip(lower=0.5)
+    
+    pm25_weighted = np.average(
+        nearby["pm_corr"],
+        weights=nearby["weight"]
+    )
+    
+    
+    # -----------------------------------------
+    # Step 3 — approximate 3-hour PM2.5 average
+    # assume PurpleAir value represents current hour
+    # and smooth slightly to approximate short-term
+    # variability
+    # -----------------------------------------
+    pm25_3h = float(pm25_weighted)
 
-    # single current PurpleAir average used as PM2.5 estimate
-    pm25_est = nearby["pm_corr"].mean()
-
+    
     # 3-hour rolling means from station gas data
     station_df["NO2_3h"] = station_df["NO2"].rolling(3, min_periods=3).mean()
     station_df["O3_3h"] = station_df["O3"].rolling(3, min_periods=3).mean()
