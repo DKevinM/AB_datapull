@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import os
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -110,12 +111,22 @@ def normalize_purple_records(records):
 
 
 def read_purple_history(path):
+
+    if not os.path.exists(path):
+        print("No PurpleAir history file yet — creating empty dataset.")
+        return pd.DataFrame(columns=[
+            "sensor_index",
+            "datetime",
+            "pm_corr"
+        ])
+
     df = pd.read_csv(path)
 
     df["datetime"] = pd.to_datetime(df["datetime"], errors="coerce", utc=True)
     df["pm_corr"] = pd.to_numeric(df["pm_corr"], errors="coerce")
 
     df = df.dropna(subset=["sensor_index", "datetime", "pm_corr"])
+
     return df
     
 
@@ -296,7 +307,7 @@ def build_station_result(station_name, station_df, purple_df):
 
     # PM2.5 is assumed current-hour estimate repeated over 3 hours
     # first-pass operational version
-    pm25_3h = float(pm25_est)
+    pm25_3h = float(pm25_weighted)
 
     aqhi_est = compute_aqhi(
         o3_ppb=float(latest_row["O3_3h"]),
@@ -332,6 +343,8 @@ def main():
     last6h = pd.read_csv(LAST6H_CSV)
     last6h = normalize_station_columns(last6h)
 
+    purple_df = read_purpleair_json(PURPLE_JSON)
+
     purple_history = read_purple_history(PURPLE_HISTORY)
     sensor_means = compute_sensor_3h_means(purple_history)
     purple_df = purple_df.merge(sensor_means, on="sensor_index", how="left")
@@ -344,7 +357,7 @@ def main():
     if missing:
         raise ValueError(f"last6h.csv is missing required columns: {sorted(missing)}")
 
-    purple_df = read_purpleair_json(PURPLE_JSON)
+
     if purple_df.empty:
         print("No usable PurpleAir records found.")
         OUTPUT_JSON.write_text("[]", encoding="utf-8")
