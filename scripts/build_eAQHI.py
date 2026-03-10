@@ -309,9 +309,11 @@ def build_station_result(station_name, station_df, purple_df):
     # first-pass operational version
     pm25_3h = float(pm25_weighted)
 
+    o3_ppb = float(latest_row["O3_3h"]) * 1000
+    no2_ppb = float(latest_row["NO2_3h"]) * 1000
     aqhi_est = compute_aqhi(
-        o3_ppb=float(latest_row["O3_3h"]),
-        no2_ppb=float(latest_row["NO2_3h"]),
+        o3_ppb=o3_ppb,
+        no2_ppb=no2_ppb,
         pm25_ugm3=pm25_3h
     )
 
@@ -325,8 +327,8 @@ def build_station_result(station_name, station_df, purple_df):
         "AQHI_type": "estimated",
         "pm25_source": "PurpleAir",
         "pm25_est": round(pm25_3h, 2),
-        "o3_3h": round(float(latest_row["O3_3h"]), 2),
-        "no2_3h": round(float(latest_row["NO2_3h"]), 2),
+        "o3_3h": round(o3_ppb, 1),
+        "no2_3h": round(no2_ppb, 1),
         "timestamp_utc": pd.Timestamp(latest_row["ReadingDate"]).isoformat(),
         "purpleair_sensor_count": int(len(nearby)),
         "purpleair_sensors": sensors_used
