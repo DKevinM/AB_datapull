@@ -6,17 +6,56 @@
     "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.24,
-    "o3_3h": 33.3,
-    "no2_3h": 6.0,
-    "timestamp_utc": "2026-03-11T16:00:00+00:00",
+    "pm25_est": 0.08,
+    "o3_3h": 32.3,
+    "no2_3h": 7.0,
+    "timestamp_utc": "2026-03-11T17:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 49843,
         "name": "WCAS_Breton",
         "distance_km": 2.7912544038525637,
-        "pm_corr": 0.2419354839
+        "pm_corr": 0.0806451613
+      }
+    ]
+  },
+  {
+    "station": "Calgary Varsity",
+    "lat": 51.08272,
+    "lon": -114.138994,
+    "AQHI": 3,
+    "AQHI_type": "estimated",
+    "pm25_source": "PurpleAir",
+    "pm25_est": 0.06,
+    "o3_3h": 35.0,
+    "no2_3h": 10.7,
+    "timestamp_utc": "2026-03-11T16:00:00+00:00",
+    "purpleair_sensor_count": 4,
+    "purpleair_sensors": [
+      {
+        "sensor_index": 225365,
+        "name": "McMahon Stadium - Concourse Level",
+        "distance_km": 1.7841586229594892,
+        "pm_corr": 0.0
+      },
+      {
+        "sensor_index": 225383,
+        "name": "McMahon Stadium - Field Level",
+        "distance_km": 1.9262173761661925,
+        "pm_corr": 0.0906735751
+      },
+      {
+        "sensor_index": 249153,
+        "name": "302 - 200 Patina Court SW",
+        "distance_km": 3.1165005550981792,
+        "pm_corr": 0.0
+      },
+      {
+        "sensor_index": 211505,
+        "name": "Silverview DR Silver Springs",
+        "distance_km": 3.7295099338259337,
+        "pm_corr": 0.1813471503
       }
     ]
   },
@@ -27,17 +66,17 @@
     "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.74,
-    "o3_3h": 39.7,
-    "no2_3h": 2.7,
-    "timestamp_utc": "2026-03-11T16:00:00+00:00",
+    "pm25_est": 0.0,
+    "o3_3h": 40.3,
+    "no2_3h": 3.0,
+    "timestamp_utc": "2026-03-11T17:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 0.7367758186
+        "pm_corr": 0.0
       }
     ]
   }
