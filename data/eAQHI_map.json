@@ -3,13 +3,13 @@
     "station": "Breton",
     "lat": 53.090278,
     "lon": -114.460556,
-    "AQHI": 2,
+    "AQHI": 3,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
     "pm25_est": 0.16,
-    "o3_3h": 46.0,
+    "o3_3h": 46.7,
     "no2_3h": 1.0,
-    "timestamp_utc": "2026-03-15T23:00:00+00:00",
+    "timestamp_utc": "2026-03-16T01:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -27,17 +27,23 @@
     "AQHI": 3,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.44,
-    "o3_3h": 46.3,
-    "no2_3h": 2.7,
-    "timestamp_utc": "2026-03-15T23:00:00+00:00",
-    "purpleair_sensor_count": 3,
+    "pm25_est": 1.22,
+    "o3_3h": 44.7,
+    "no2_3h": 3.7,
+    "timestamp_utc": "2026-03-16T01:00:00+00:00",
+    "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 177857,
         "name": "MATC",
         "distance_km": 3.865394512725387,
         "pm_corr": 0.0
+      },
+      {
+        "sensor_index": 177339,
+        "name": "Canada Task Force 2",
+        "distance_km": 3.8730742749384492,
+        "pm_corr": 3.5106382979
       },
       {
         "sensor_index": 180571,
@@ -49,7 +55,7 @@
         "sensor_index": 178305,
         "name": "Sunnyside",
         "distance_km": 5.491336950171661,
-        "pm_corr": 0.5440414508
+        "pm_corr": 0.0898520085
       }
     ]
   },
@@ -61,16 +67,16 @@
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
     "pm25_est": 0.09,
-    "o3_3h": 45.0,
-    "no2_3h": 0.0,
-    "timestamp_utc": "2026-03-15T23:00:00+00:00",
+    "o3_3h": 45.7,
+    "no2_3h": 0.3,
+    "timestamp_utc": "2026-03-16T01:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 0.089428724
+        "pm_corr": 0.0871766029
       }
     ]
   },
@@ -81,17 +87,17 @@
     "AQHI": 3,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 12.7,
+    "pm25_est": 13.76,
     "o3_3h": 38.3,
-    "no2_3h": 2.7,
-    "timestamp_utc": "2026-03-15T23:00:00+00:00",
+    "no2_3h": 3.3,
+    "timestamp_utc": "2026-03-16T01:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 100655,
         "name": "LICA - County of St. Paul",
         "distance_km": 2.160967930465531,
-        "pm_corr": 12.7029520295
+        "pm_corr": 13.7622468975
       }
     ]
   }
