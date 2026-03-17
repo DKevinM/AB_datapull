@@ -10,8 +10,7 @@ on:
     paths:
       - 'scripts/**'
       - '.github/workflows/**'
-      - 'SK_PA_latest.py'
-      - 'dataSK/SK_PA_sensors.csv'  
+      - 'PA_SK_pull.py'
      
 
 jobs:
@@ -35,7 +34,7 @@ jobs:
         pip install pandas requests pytz supabase
         
     - name: Run PurpleAir data collection
-      run: python SK_PA_latest.py
+      run: python PA_SK_pull.py
       env:
         PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
         SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
