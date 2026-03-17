@@ -16,8 +16,11 @@ on:
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    
+
     steps:
+      - name: Checkout repository   
+        uses: actions/checkout@v4
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
