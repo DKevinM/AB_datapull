@@ -27,7 +27,7 @@ headers = {"X-API-Key": os.getenv("PURPLEAIR_API_KEY")}
 
 params = {
     # what fields you want – add more if needed later
-    "fields": "sensor_index,name,latitude,longitude,location_type,last_seen",
+    "fields": "sensor_index,name,latitude,longitude,location_type,last_seen,pm2.5,pm2.5_a,pm2.5_b",
 
     # optional: 0 = outside only, 1 = inside only
     "location_type": 0,
@@ -62,7 +62,7 @@ gdf = gpd.GeoDataFrame(
 # 6) Clip to Alberta polygon (so we don’t keep BC/SK border sensors)
 sk_union = sk.unary_union   # single polygon for the province
 
-inside = gdf[gdf.geometry.within(sk_union)].copy()
+inside = gdf[gdf.geometry.intersects(sk_union)].copy()
 
 
 
@@ -76,7 +76,9 @@ for _, row in inside.iterrows():
         "properties": {
             "sensor_index": int(row["sensor_index"]),
             "name": row["name"],
-            "pm25": None,  # placeholder (future real-time join)
+            "pm25": row.get("pm2.5"),
+            "pm25_a": row.get("pm2.5_a"),
+            "pm25_b": row.get("pm2.5_b"),
             "last_seen": int(row["last_seen"]),
             "location_type": int(row["location_type"])
         },
