@@ -1,5 +1,5 @@
-# PA_AB_pull.py
-# Pull all PurpleAir sensors in Alberta and save as CSV
+# PA_SK_pull.py
+# Pull all PurpleAir sensors in Saskatchewan and save as CSV
 
 import os
 import requests
@@ -8,7 +8,7 @@ import geopandas as gpd
 import json
 
 from shapely.geometry import Point
-# from supabase import create_client, Client
+from supabase import create_client, Client
 
 
 # 1) Load Alberta boundary (can be any provincial polygon)
@@ -74,44 +74,52 @@ print(sk.crs)
 
 
 
-# 6) Clip to Alberta polygon (so we don’t keep BC/SK border sensors)
+# 6) Clip to Sask polygon
 sk_union = sk.unary_union   # single polygon for the province
 
 inside = gdf[gdf.geometry.intersects(sk_union)].copy()
-
+inside["province"] = "SK"
 
 
 # 7) Save to CSV for downstream use
-features = []
+inside.to_csv("dataSK/SK_PA_sensors.csv", index=False)
 
-for _, row in inside.iterrows():
+print(f"Total sensors from API: {len(gdf)}")
+print(f"Sensors inside Saskatchewan: {len(inside)}")
 
-    features.append({
-        "type": "Feature",
-        "properties": {
-            "sensor_index": int(row["sensor_index"]),
-            "name": row["name"],
-            "province": "SK", 
-            "pm25": row.get("pm2.5"),
-            "pm25_a": row.get("pm2.5_a"),
-            "pm25_b": row.get("pm2.5_b"),
-            "last_seen": int(row["last_seen"]),
-            "location_type": int(row["location_type"])
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [float(row["longitude"]), float(row["latitude"])]
-        }
-    })
 
-geojson = {
-    "type": "FeatureCollection",
-    "features": features
-}
+# 8) Push sensor metadata into Supabase
+supabase = create_client(
+    os.getenv("SUPABASE_DB_URL"),
+    os.getenv("SUPABASE_SERVICE_KEY")
+)
 
-outfile = "dataSK/SK_PA_sensors.geojson"
+payload = inside[[
+    "sensor_index",
+    "name",
+    "latitude",
+    "longitude",
+    "location_type",
+    "last_seen",
+    "province"
+]].copy()
 
-with open(outfile, "w") as f:
-    json.dump(geojson, f)
+# Optional: compute network label now or leave it null
+def infer_network(name):
+    n = name.upper()
+    return "OTHER"
 
-print(f"Saved GeoJSON: {outfile}  features: {len(features)}")
+payload["network"] = payload["name"].apply(infer_network)
+
+
+print("Supabase URL:", os.getenv("SUPABASE_URL"))
+print("Payload sample:", payload.head().to_dict("records")[:3])
+print("Total payload rows:", len(payload))
+
+
+response = supabase.table("purpleair_sensors_meta") \
+    .upsert(payload.to_dict("records"), on_conflict="sensor_index") \
+    .execute()
+
+print("Supabase response:", response)
+print(f"Attempted to upsert {len(payload)} sensors.")
