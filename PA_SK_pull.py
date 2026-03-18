@@ -5,6 +5,7 @@ import os
 import requests
 import pandas as pd
 import geopandas as gpd
+import json
 
 from shapely.geometry import Point
 # from supabase import create_client, Client
@@ -63,40 +64,36 @@ sk_union = sk.unary_union   # single polygon for the province
 
 inside = gdf[gdf.geometry.within(sk_union)].copy()
 
+
+
 # 7) Save to CSV for downstream use
-inside.to_csv("dataSK/SK_PA_sensors.csv", index=False)
+features = []
 
-# print(f"Total sensors from API: {len(gdf)}")
-# print(f"Sensors inside Alberta: {len(inside)}")
+for _, row in inside.iterrows():
 
+    features.append({
+        "type": "Feature",
+        "properties": {
+            "sensor_index": int(row["sensor_index"]),
+            "name": row["name"],
+            "pm25": None,  # placeholder (future real-time join)
+            "last_seen": int(row["last_seen"]),
+            "location_type": int(row["location_type"])
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [float(row["longitude"]), float(row["latitude"])]
+        }
+    })
 
-# 8) Push sensor metadata into Supabase
-# supabase = create_client(
-#    os.getenv("SUPABASE_DB_URL"),
-#    os.getenv("SUPABASE_SERVICE_KEY")
-# )
+geojson = {
+    "type": "FeatureCollection",
+    "features": features
+}
 
-# payload = inside[[
-#    "sensor_index",
-#    "name",
-#    "latitude",
-#    "longitude",
-#    "location_type",
-#    "last_seen"
-# ]].copy()
+outfile = "dataSK/SK_PA_sensors.geojson"
 
+with open(outfile, "w") as f:
+    json.dump(geojson, f)
 
-# payload["network"] = payload["name"].apply(infer_network)
-
-
-# print("Supabase URL:", os.getenv("SUPABASE_URL"))
-# print("Payload sample:", payload.head().to_dict("records")[:3])
-# print("Total payload rows:", len(payload))
-
-
-# response = supabase.table("purpleair_sensors_meta") \
-#     .upsert(payload.to_dict("records"), on_conflict="sensor_index") \
-#     .execute()
-
-# print("Supabase response:", response)
-# print(f"Attempted to upsert {len(payload)} sensors.")
+print(f"Saved GeoJSON: {outfile}  features: {len(features)}")
