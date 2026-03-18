@@ -1,4 +1,4 @@
-name: Update AB PurpleAir Sensor List
+name: Update SK PurpleAir Sensor List
 
 on:
   schedule:
@@ -28,13 +28,13 @@ jobs:
           pip install pandas geopandas shapely requests supabase
 
       - name: Run PurpleAir region script
-        run: python PA_AB_pull.py
+        run: python PA_SK_pull.py
 
       - name: Commit and push CSV
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add data/AB_PA_sensors.csv
-          git diff --cached --quiet || git commit -m "Daily update: AB_PA_sensors.csv"
+          git add dataSK/SK_PA_sensors.csv
+          git diff --cached --quiet || git commit -m "Daily update: SK_PA_sensors.csv"
           git pull --rebase origin main
           git push
