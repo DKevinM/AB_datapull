@@ -61,7 +61,8 @@ gdf = gpd.GeoDataFrame(
 # 6) Clip to Alberta polygon (so we don’t keep BC/SK border sensors)
 ab_union = ab.unary_union   # single polygon for the province
 
-inside = gdf[gdf.geometry.within(ab_union)].copy()
+inside = gdf[gdf.geometry.intersects(ab_union)].copy()
+inside["province"] = "AB"
 
 # 7) Save to CSV for downstream use
 inside.to_csv("data/AB_PA_sensors.csv", index=False)
@@ -82,7 +83,8 @@ payload = inside[[
     "latitude",
     "longitude",
     "location_type",
-    "last_seen"
+    "last_seen",
+    "province"
 ]].copy()
 
 # Optional: compute network label now or leave it null
