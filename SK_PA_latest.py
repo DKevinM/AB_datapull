@@ -102,6 +102,7 @@ def push_to_supabase(df_result):
             
             record = {
                 "sensor_index": int(row["sensor_index"]),
+                "province": "SK",
                 "recorded_at": hourly_timestamp.isoformat(),
             
                 # Raw channels
@@ -157,13 +158,13 @@ def main():
     
     # Load your static sensor list from CSV
     try:
-        sensor_df = pd.read_csv("data/AB_PA_sensors.csv")
+        sensor_df = pd.read_csv("dataSK/SK_PA_sensors.csv")
         sensor_df["sensor_index"] = pd.to_numeric(sensor_df["sensor_index"], errors="coerce")
         sensor_df = sensor_df.dropna(subset=["sensor_index"])
         sensor_df["sensor_index"] = sensor_df["sensor_index"].astype("int64")
         print(f"Loaded {len(sensor_df)} sensors from CSV")
     except FileNotFoundError:
-        print("Error: data/AB_PA_sensors.csv not found")
+        print("Error: dataSK/SK_PA_sensors.csv not found")
         sys.exit(1)
 
         
@@ -353,13 +354,14 @@ def main():
     result = df.copy()
     
     # Save as JSON for Leaflet or web app
-    ab_tz = pytz.timezone("America/Edmonton")
-    result.loc[:, "last_seen"] = result["last_seen"].dt.tz_convert(ab_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
+    # ab_tz = pytz.timezone("America/Edmonton")
+    sk_tz = pytz.timezone("America/Regina")
+    result.loc[:, "last_seen"] = result["last_seen"].dt.tz_convert(sk_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
     
     # Ensure data directory exists
     os.makedirs("data", exist_ok=True)
-    result.to_json("data/AB_PM25_map.json", orient="records", indent=2)
-    print(f"Final data saved for {len(result)} sensors to data/AB_PM25_map.json")
+    result.to_json("dataSK/SK_PM25_map.json", orient="records", indent=2)
+    print(f"Final data saved for {len(result)} sensors to dataSK/SK_PM25_map.json")
 
     print("Pushing data to Supabase...")
     push_to_supabase(result)
