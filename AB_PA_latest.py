@@ -102,6 +102,7 @@ def push_to_supabase(df_result):
             
             record = {
                 "sensor_index": int(row["sensor_index"]),
+                "province": "AB",
                 "recorded_at": hourly_timestamp.isoformat(),
             
                 # Raw channels
