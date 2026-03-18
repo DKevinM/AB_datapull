@@ -357,14 +357,51 @@ def main():
     # ab_tz = pytz.timezone("America/Edmonton")
     sk_tz = pytz.timezone("America/Regina")
     result.loc[:, "last_seen"] = result["last_seen"].dt.tz_convert(sk_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
-    
-    # Ensure data directory exists
-    os.makedirs("data", exist_ok=True)
-    result.to_json("dataSK/SK_PM25_map.json", orient="records", indent=2)
-    print(f"Final data saved for {len(result)} sensors to dataSK/SK_PM25_map.json")
 
     print("Pushing data to Supabase...")
     push_to_supabase(result)
+
+    # Ensure data directory exists
+    os.makedirs("data", exist_ok=True)
+
+    # --- Convert to GeoJSON ---
+    features = []
+    
+    for _, row in result.iterrows():
+    
+        if pd.isna(row["latitude"]) or pd.isna(row["longitude"]):
+            continue
+    
+        features.append({
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    float(row["longitude"]),
+                    float(row["latitude"])
+                ]
+            },
+            "properties": {
+                "sensor_index": int(row["sensor_index"]),
+                "name": row["name"],
+                "pm25": float(row["pm_corr"]) if pd.notna(row["pm_corr"]) else None,
+                "pm_raw": float(row["pm_raw"]) if pd.notna(row["pm_raw"]) else None,
+                "humidity": float(row["humidity"]) if pd.notna(row["humidity"]) else None,
+                "method": row["pm_method"],
+                "last_seen": row["last_seen"]
+            }
+        })
+    
+    geojson = {
+        "type": "FeatureCollection",
+        "features": features
+    }
+    
+    # Save GeoJSON
+    with open("dataSK/SK_PM25_map.json", "w") as f:
+        json.dump(geojson, f, indent=2)
+    
+    print(f"Saved {len(features)} features to GeoJSON")
 
 
 
