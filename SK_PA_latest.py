@@ -383,12 +383,12 @@ def main():
             },
             "properties": {
                 "sensor_index": int(row["sensor_index"]),
-                "name": row["name"],
+                "name": str(row["name"]) if pd.notna(row["name"]) else None,
                 "pm25": float(row["pm_corr"]) if pd.notna(row["pm_corr"]) else None,
                 "pm_raw": float(row["pm_raw"]) if pd.notna(row["pm_raw"]) else None,
                 "humidity": float(row["humidity"]) if pd.notna(row["humidity"]) else None,
-                "method": row["pm_method"],
-                "last_seen": row["last_seen"]
+                "method": str(row["pm_method"]) if pd.notna(row["pm_method"]) else None,
+                "last_seen": str(row["last_seen"]) if pd.notna(row["last_seen"]) else None
             }
         })
     
