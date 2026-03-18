@@ -50,15 +50,17 @@ if not rows:
     raise RuntimeError("No sensors returned from PurpleAir – check bbox or API key.")
 
 # 4) Convert to DataFrame
+# 4) Convert to DataFrame
 df = pd.DataFrame(rows, columns=fields)
+
+# force numeric coordinates
 df["latitude"] = pd.to_numeric(df["latitude"], errors="coerce")
 df["longitude"] = pd.to_numeric(df["longitude"], errors="coerce")
-
-# drop garbage rows
 df = df.dropna(subset=["latitude", "longitude"])
+
 print(df[["latitude", "longitude"]].head())
-print(gdf.crs)
-print(sk.crs)
+print("LAT range:", df["latitude"].min(), df["latitude"].max())
+print("LON range:", df["longitude"].min(), df["longitude"].max())
 
 # 5) GeoDataFrame for spatial filtering
 gdf = gpd.GeoDataFrame(
@@ -66,6 +68,9 @@ gdf = gpd.GeoDataFrame(
     geometry=gpd.points_from_xy(df.longitude, df.latitude),
     crs="EPSG:4326"
 )
+
+print(gdf.crs)
+print(sk.crs)
 
 
 
