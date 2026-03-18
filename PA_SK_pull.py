@@ -111,12 +111,6 @@ def infer_network(name):
 
 payload["network"] = payload["name"].apply(infer_network)
 
-
-print("Supabase URL:", os.getenv("SUPABASE_URL"))
-print("Payload sample:", payload.head().to_dict("records")[:3])
-print("Total payload rows:", len(payload))
-
-
 response = supabase.table("purpleair_sensors_meta") \
     .upsert(payload.to_dict("records"), on_conflict="sensor_index") \
     .execute()
