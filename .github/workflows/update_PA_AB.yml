@@ -36,5 +36,6 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git add data/AB_PA_sensors.csv
           git diff --cached --quiet || git commit -m "Daily update: AB_PA_sensors.csv"
+          git pull --rebase origin main
           git push
 
