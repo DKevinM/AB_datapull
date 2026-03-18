@@ -13,7 +13,7 @@ on:
     paths:
       - 'scripts/**'
       - '.github/workflows/**'
-      - 'PA_SK_pull.py'
+      - 'PA_SK_latest.py'
      
 jobs:
   update-data:
@@ -39,7 +39,7 @@ jobs:
           pip install pandas requests pytz supabase geopandas
       
       - name: Run PurpleAir data collection
-        run: python  PA_SK_pull.py
+        run: python  PA_SK_latest.py
         env:
           PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
