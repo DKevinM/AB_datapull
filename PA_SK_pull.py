@@ -51,6 +51,14 @@ if not rows:
 
 # 4) Convert to DataFrame
 df = pd.DataFrame(rows, columns=fields)
+df["latitude"] = pd.to_numeric(df["latitude"], errors="coerce")
+df["longitude"] = pd.to_numeric(df["longitude"], errors="coerce")
+
+# drop garbage rows
+df = df.dropna(subset=["latitude", "longitude"])
+print(df[["latitude", "longitude"]].head())
+print(gdf.crs)
+print(sk.crs)
 
 # 5) GeoDataFrame for spatial filtering
 gdf = gpd.GeoDataFrame(
@@ -58,6 +66,8 @@ gdf = gpd.GeoDataFrame(
     geometry=gpd.points_from_xy(df.longitude, df.latitude),
     crs="EPSG:4326"
 )
+
+
 
 # 6) Clip to Alberta polygon (so we don’t keep BC/SK border sensors)
 sk_union = sk.unary_union   # single polygon for the province
