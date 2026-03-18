@@ -52,4 +52,5 @@ jobs:
       
           git add dataSK/SK_PA_sensors.geojson
           git commit -m "Update SK PurpleAir data" || echo "No changes to commit"
+          git pull --rebase origin main
           git push    
