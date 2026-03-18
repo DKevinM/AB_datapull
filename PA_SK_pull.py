@@ -91,6 +91,7 @@ for _, row in inside.iterrows():
         "properties": {
             "sensor_index": int(row["sensor_index"]),
             "name": row["name"],
+            "province": "SK", 
             "pm25": row.get("pm2.5"),
             "pm25_a": row.get("pm2.5_a"),
             "pm25_b": row.get("pm2.5_b"),
