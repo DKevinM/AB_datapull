@@ -101,48 +101,58 @@ AB_datapull/
 
 ---
 
-## Setup
+## Setup (GitHub Actions — no local editor needed)
 
-### 1. Install dependencies
+This project runs entirely through **GitHub Actions**. You do not need a code editor, Python installation, or `.env` file. Everything runs in the cloud automatically.
+
+### 1. Add GitHub Actions secrets
+
+Go to your repository on GitHub → **Settings → Secrets and variables → Actions → New repository secret**, and add these three secrets:
+
+| Secret name | What to put in it |
+|---|---|
+| `SUPABASE_DB_URL` | Your Supabase project URL (e.g. `https://xxxx.supabase.co`) |
+| `SUPABASE_SERVICE_KEY` | Your Supabase service role key (has write access) |
+| `PURPLEAIR_API_KEY` | Your PurpleAir API read key |
+
+Once the secrets are saved, the workflows will pick them up automatically — **no other configuration is needed**.
+
+### 2. Enable the workflows
+
+Go to the **Actions** tab in your repository. If workflows are disabled, click **"I understand my workflows, go ahead and enable them"**. The scheduled workflows will then run automatically on their set schedules (see the Workflows table below).
+
+You can also run any workflow manually at any time: go to **Actions → pick a workflow → Run workflow**.
+
+### 3. Creating new directories via the GitHub web UI
+
+Git does not allow empty directories. To create a new folder directly on the GitHub website (without a code editor):
+
+1. Navigate to the location in your repo where you want the new folder.
+2. Click **Add file → Create new file**.
+3. In the filename box, type the folder name followed by `/` and then a filename, for example:
+   ```
+   data/output/.gitkeep
+   ```
+   GitHub will automatically create the `data/output/` directory containing the `.gitkeep` file.
+4. Scroll down and click **Commit new file**.
+
+> **Note:** All directories used by the automated workflows (`data/output/`, `data/sensor_lists/`) are already pre-created in this repository with `.gitkeep` placeholder files, so you should not need to create them manually.
+
+---
+
+### Local development (optional)
+
+If you want to run scripts locally from a terminal:
 
 ```bash
 pip install -r requirements.txt
-```
 
-### 2. Configure environment
-
-Copy `.env.example` to `.env` and fill in your credentials:
-
-```bash
-cp .env.example .env
-```
-
-Required secrets (also set as GitHub Actions secrets):
-
-| Variable | Description |
-|---|---|
-| `SUPABASE_DB_URL` | Your Supabase project URL (`https://xxxx.supabase.co`) |
-| `SUPABASE_SERVICE_KEY` | Service role key (write access) |
-| `PURPLEAIR_API_KEY` | PurpleAir API read key |
-
-### 3. Run manually
-
-```bash
-# Fetch latest AQHI data
+# Set secrets as environment variables, then run:
 python scripts/fetch_aqhi.py --hours-back 24
-
-# Fetch PurpleAir for Alberta (single province pull)
 python scripts/fetch_purpleair.py --province AB
-
-# Process and push to Supabase
 python scripts/process_aqhi.py
 python scripts/process_purpleair.py --province AB
-
-# Generate interpolation grids
 python scripts/interpolate_grid.py --region AB
-python scripts/interpolate_grid.py --region ACA
-
-# Health check
 python scripts/health_check.py
 ```
 
