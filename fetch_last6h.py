@@ -218,6 +218,66 @@ if __name__ == "__main__":
     combined_df.to_csv(out_path, index=False)
     print(f">>> Wrote {len(combined_df)} rows to {out_path}")
 
+
+
+    # ------------------ WRITE GEOJSON ------------------
+    geojson_path = out_dir / "stations.geojson"
+
+    features = []
+
+    if not combined_df.empty:
+
+        # Get latest value per station per parameter
+        combined_df["ReadingDate"] = pd.to_datetime(combined_df["ReadingDate"], errors="coerce")
+
+        latest = (
+            combined_df.sort_values("ReadingDate")
+            .groupby(["StationName", "ParameterName"], as_index=False)
+            .last()
+        )
+
+        # Build per-station records
+        for station, group in latest.groupby("StationName"):
+
+            lat = float(group["Latitude"].iloc[0])
+            lon = float(group["Longitude"].iloc[0])
+
+            props = {
+                "stationName": station,
+                "aqhi": None
+            }
+
+            # add parameters
+            for _, row in group.iterrows():
+                param = row["ParameterName"]
+                val = row["Value"]
+
+                props[param] = val
+
+                if param == "AQHI":
+                    props["aqhi"] = val
+
+            features.append({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [lon, lat]
+                },
+                "properties": props
+            })
+
+    geojson = {
+        "type": "FeatureCollection",
+        "features": features
+    }
+
+    with open(geojson_path, "w") as f:
+        json.dump(geojson, f)
+
+    print(f">>> Wrote {len(features)} features to {geojson_path}")
+
+
+    
     # List directory contents
     for p in sorted(out_dir.iterdir(), key=lambda x: x.name.lower()):
         print("   ", p.name)
