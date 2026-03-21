@@ -1,0 +1,47 @@
+name: "02 · Fetch Live Data (Every 30 mins)"
+
+on:
+  schedule:
+    - cron: "0,30 * * * *"   # Every 30 minutes
+  workflow_dispatch:
+
+jobs:
+  fetch-live:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch AQHI measurements
+        run: python scripts/fetch_aqhi.py --hours-back 24
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
+      - name: Fetch PurpleAir — Alberta
+        run: python scripts/fetch_purpleair.py --province AB
+        env:
+          PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
+      - name: Fetch PurpleAir — Saskatchewan
+        run: python scripts/fetch_purpleair.py --province SK
+        env:
+          PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
+      - name: Upload live data as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-data-${{ github.run_id }}
+          path: data/output/
+          retention-days: 1

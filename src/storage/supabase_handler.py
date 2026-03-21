@@ -1,5 +1,3 @@
-# storage/supabase_handler.py
-
 """Supabase database operations"""
 from supabase import create_client
 from src.utils.logger import setup_logger
@@ -7,59 +5,52 @@ from config.settings import SUPABASE_URL, SUPABASE_KEY
 
 logger = setup_logger(__name__)
 
+
 class SupabaseHandler:
     """Handle Supabase database operations"""
     
     def __init__(self):
+        if not SUPABASE_URL or not SUPABASE_KEY:
+            raise ValueError("SUPABASE_DB_URL and SUPABASE_SERVICE_KEY must be set")
         self.client = create_client(SUPABASE_URL, SUPABASE_KEY)
     
-    def upsert_sensor_readings(self, records: list[dict], batch_size=5000):
-        """Batch upsert sensor readings"""
-        logger.info(f"Upserting {len(records)} records...")
+    def upsert_sensor_readings(self, records: list[dict], batch_size: int = 5000) -> int:
+        """Batch upsert sensor readings. Returns total records upserted."""
+        if not records:
+            logger.warning("No records to upsert")
+            return 0
         
+        logger.info(f"Upserting {len(records)} records...")
+        total = 0
         for i in range(0, len(records), batch_size):
             chunk = records[i:i + batch_size]
             try:
-                response = self.client.table("sensor_readings").upsert(chunk).execute()
-                logger.info(f"Upserted batch {i//batch_size + 1}")
+                self.client.table("sensor_readings").upsert(chunk).execute()
+                total += len(chunk)
+                logger.info(f"Upserted batch {i // batch_size + 1} ({len(chunk)} records)")
             except Exception as e:
-                logger.error(f"Upsert failed for batch {i//batch_size + 1}: {e}")
+                logger.error(f"Upsert failed for batch {i // batch_size + 1}: {e}")
                 raise
         
-        logger.info("All records upserted successfully")
-
-
-
-class SupabaseHandler:
-    """Database operations"""
+        logger.info(f"All {total} records upserted successfully")
+        return total
     
-    def __init__(self):
-        self.client = create_client(SUPABASE_URL, SUPABASE_KEY)
+    def upsert_stations(self, records: list[dict]) -> int:
+        """Upsert AQHI station metadata."""
+        if not records:
+            return 0
+        logger.info(f"Upserting {len(records)} station records...")
+        self.client.table("stations").upsert(records, on_conflict="StationName").execute()
+        logger.info(f"Upserted {len(records)} stations")
+        return len(records)
     
-    def upsert_sensor_readings(self, records: list[dict], batch_size=5000):
-        """Batch upsert with chunking"""
-        for chunk in self._chunk(records, batch_size):
-            response = self.client.table("sensor_readings").upsert(chunk).execute()
-            logger.info(f"Upserted {len(chunk)} records")
-    
-    def upsert_interpolated_grid(self, grid_gdf: gpd.GeoDataFrame, region: str):
-        """Store interpolated data"""
-        pass
-
-# storage/csv_writer.py
-class CSVWriter:
-    """Export to CSV"""
-    
-    def write_sensor_data(self, df: pd.DataFrame, region: str):
-        path = f"data/output/{region}_readings.csv"
-        df.to_csv(path, index=False)
-        logger.info(f"Wrote {len(df)} rows to {path}")
-
-# storage/geojson_writer.py
-class GeoJSONWriter:
-    """Export to GeoJSON"""
-    
-    def write_sensor_map(self, gdf: gpd.GeoDataFrame, region: str):
-        path = f"data/output/{region}_map.geojson"
-        gdf.to_file(path, driver="GeoJSON")
-        logger.info(f"Wrote GeoJSON to {path}")
+    def upsert_purpleair_sensors(self, records: list[dict]) -> int:
+        """Upsert PurpleAir sensor metadata."""
+        if not records:
+            return 0
+        logger.info(f"Upserting {len(records)} PurpleAir sensor records...")
+        self.client.table("purpleair_sensors_meta").upsert(
+            records, on_conflict="sensor_index"
+        ).execute()
+        logger.info(f"Upserted {len(records)} PurpleAir sensors")
+        return len(records)

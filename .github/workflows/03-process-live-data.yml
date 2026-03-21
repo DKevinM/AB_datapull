@@ -1,0 +1,59 @@
+name: "03 · Process Live Data (Triggered)"
+
+on:
+  workflow_run:
+    workflows: ["02 · Fetch Live Data (Every 30 mins)"]
+    types: [completed]
+  workflow_dispatch:
+
+jobs:
+  process-live:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download live data artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: live-data-${{ github.event.workflow_run.id }}
+          path: data/output/
+        continue-on-error: true   # fall back to files already in repo
+
+      - name: Process AQHI data
+        run: python scripts/process_aqhi.py
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
+      - name: Process PurpleAir — Alberta
+        run: python scripts/process_purpleair.py --province AB
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
+      - name: Process PurpleAir — Saskatchewan
+        run: python scripts/process_purpleair.py --province SK
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
+      - name: Build estimated AQHI
+        run: python scripts/build_eAQHI.py
+
+      - name: Commit processed outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/output/ data/eAQHI_map.json data/AB_PM25_map.json || true
+          git diff --staged --quiet || \
+            git commit -m "chore: processed live data $(date -u +'%Y-%m-%dT%H:%M')Z" && \
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Generated outputs (tracked selectively)
+data/output/*.csv
+data/output/*.json
+data/output/*.geojson
+!data/output/.gitkeep
+data/sensor_lists/*.csv
+!data/sensor_lists/.gitkeep

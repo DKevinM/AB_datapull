@@ -1,0 +1,26 @@
+name: "05 · Health Check (Every 30 mins)"
+
+on:
+  schedule:
+    - cron: "10,40 * * * *"   # Every 30 minutes, offset from fetch
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run health check
+        run: python scripts/health_check.py --max-age-mins 45
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}

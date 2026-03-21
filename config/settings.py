@@ -1,5 +1,6 @@
 """Central configuration management"""
 import os
+import logging
 from pathlib import Path
 from enum import Enum
 
@@ -13,9 +14,24 @@ DEBUG = ENV == Environment.DEV
 # Paths
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-SHAPEFILES_DIR = DATA_DIR / "shapefiles"
-SENSOR_LISTS_DIR = DATA_DIR / "sensor_lists"
+DATA_SK_DIR = PROJECT_ROOT / "dataSK"
 OUTPUT_DIR = DATA_DIR / "output"
+SENSOR_LISTS_DIR = DATA_DIR / "sensor_lists"
+
+# Shapefile paths (kept in original locations for backward compatibility)
+SHAPEFILES = {
+    "AB": DATA_DIR / "Alberta.shp",
+    "ACA": DATA_DIR / "ACA_Boundary_2022.shp",
+    "PAZA": DATA_DIR / "PAZA_AEPA.shp",
+    "PAS": DATA_DIR / "PAS_2025.shp",
+    "SK": DATA_SK_DIR / "SK.shp",
+}
+
+# Sensor list paths
+SENSOR_LISTS = {
+    "AB": DATA_DIR / "AB_PA_sensors.csv",
+    "SK": DATA_SK_DIR / "SK_PA_sensors.csv",
+}
 
 # API Credentials
 SUPABASE_URL = os.getenv("SUPABASE_DB_URL", "")
@@ -23,7 +39,8 @@ SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY", "")
 PURPLEAIR_API_KEY = os.getenv("PURPLEAIR_API_KEY", "")
 
 if not SUPABASE_URL or not SUPABASE_KEY:
-    raise ValueError("Missing Supabase credentials. Set SUPABASE_DB_URL and SUPABASE_SERVICE_KEY")
+    logging.warning("Supabase credentials not set (SUPABASE_DB_URL / SUPABASE_SERVICE_KEY). "
+                    "Database operations will fail.")
 
 # API Timeouts & Retries
 REQUEST_TIMEOUT = 45
