@@ -5,6 +5,9 @@ on:
     - cron: "10,40 * * * *"   # Every 30 minutes, offset from fetch
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   health-check:
     runs-on: ubuntu-latest

@@ -11,7 +11,7 @@ class SupabaseHandler:
     
     def __init__(self):
         if not SUPABASE_URL or not SUPABASE_KEY:
-            raise ValueError("SUPABASE_DB_URL and SUPABASE_SERVICE_KEY must be set")
+            raise ValueError("Missing Supabase credentials. Set SUPABASE_DB_URL and SUPABASE_SERVICE_KEY")
         self.client = create_client(SUPABASE_URL, SUPABASE_KEY)
     
     def upsert_sensor_readings(self, records: list[dict], batch_size: int = 5000) -> int:

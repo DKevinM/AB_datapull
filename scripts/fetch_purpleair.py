@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import pandas as pd
 import geopandas as gpd
 
-from config.settings import OUTPUT_DIR, SHAPEFILES, SENSOR_LISTS
+from config.settings import OUTPUT_DIR, SHAPEFILES, SENSOR_LISTS, PURPLEAIR_MAX_DATA_AGE_HOURS
 from src.utils.logger import setup_logger
 from src.ingestion.purpleair_client import PurpleAirClient
 from src.processing.pm25_processor import PM25Processor
@@ -143,8 +143,8 @@ def main():
     if "last_seen" in inside.columns:
         inside["last_seen"] = pd.to_numeric(inside["last_seen"], errors="coerce")
         inside["last_seen_dt"] = pd.to_datetime(inside["last_seen"], unit="s", utc=True)
-        inside = inside[inside["last_seen_dt"] >= (now_utc - timedelta(hours=3))].copy()
-        logger.info(f"{len(inside)} sensors with recent data (within 3h)")
+        inside = inside[inside["last_seen_dt"] >= (now_utc - timedelta(hours=PURPLEAIR_MAX_DATA_AGE_HOURS))].copy()
+        logger.info(f"{len(inside)} sensors with recent data (within {PURPLEAIR_MAX_DATA_AGE_HOURS}h)")
 
     pm_cols = ["pm2.5_atm", "pm2.5_atm_a", "pm2.5_atm_b", "humidity"]
     available_pm_cols = [c for c in pm_cols if c in inside.columns]

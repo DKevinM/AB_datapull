@@ -5,6 +5,9 @@ on:
     - cron: "15 * * * *"   # Hourly at :15 (after live data is likely processed)
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generate-grids:
     runs-on: ubuntu-latest

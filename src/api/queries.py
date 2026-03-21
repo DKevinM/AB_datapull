@@ -12,7 +12,7 @@ class SupabaseQueries:
     
     def __init__(self):
         if not SUPABASE_URL or not SUPABASE_KEY:
-            raise ValueError("SUPABASE_DB_URL and SUPABASE_SERVICE_KEY must be set")
+            raise ValueError("Missing Supabase credentials. Set SUPABASE_DB_URL and SUPABASE_SERVICE_KEY")
         self.client = create_client(SUPABASE_URL, SUPABASE_KEY)
     
     def get_latest_sensors(self, province: str = None, limit: int = 500) -> list[dict]:

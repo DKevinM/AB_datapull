@@ -5,6 +5,10 @@ on:
     - cron: "0,30 * * * *"   # Every 30 minutes
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   fetch-live:
     runs-on: ubuntu-latest
