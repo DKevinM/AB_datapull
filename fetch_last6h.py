@@ -264,19 +264,7 @@ if __name__ == "__main__":
                 param = row["ParameterName"]
                 val = float(row["Value"])
                 props[param] = val
-    
-            # ----------------------------
-            # FIX 4 — DERIVE AQHI (fallback)
-            # ----------------------------
-            if "AQHI" in props:
-                props["aqhi"] = props["AQHI"]
-            else:
-                pm = props.get("Fine Particulate Matter")
-                if pm is not None:
-                    props["aqhi"] = min(10, max(1, int(pm / 10) + 1))
-                else:
-                    props["aqhi"] = None
-    
+
             features.append({
                 "type": "Feature",
                 "geometry": {
@@ -284,7 +272,9 @@ if __name__ == "__main__":
                     "coordinates": [lon, lat]
                 },
                 "properties": props
-            })
+            })    
+    
+
     
     geojson = {
         "type": "FeatureCollection",
