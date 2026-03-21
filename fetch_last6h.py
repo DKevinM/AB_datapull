@@ -220,43 +220,63 @@ if __name__ == "__main__":
 
 
 
+
     # ------------------ WRITE GEOJSON ------------------
     geojson_path = out_dir / "stations.geojson"
-
     features = []
-
     if not combined_df.empty:
-
-        # Get latest value per station per parameter
         combined_df["ReadingDate"] = pd.to_datetime(combined_df["ReadingDate"], errors="coerce")
-
+        # ----------------------------
+        # FIX 1 — APPLY UNIT CONVERSION
+        # ----------------------------
+        convert_params = [
+            "Ozone","Total Oxides of Nitrogen","Hydrogen Sulphide",
+            "Total Reduced Sulphur","Sulphur Dioxide",
+            "Nitric Oxide","Nitrogen Dioxide"
+        ]
+        combined_df.loc[
+            combined_df["ParameterName"].isin(convert_params),
+            "Value"
+        ] *= 1000
+        # ----------------------------
+        # FIX 2 — REMOVE NaN
+        # ----------------------------
+        combined_df["Value"] = pd.to_numeric(combined_df["Value"], errors="coerce")
+        combined_df = combined_df.dropna(subset=["Value"])
+        # ----------------------------
+        # FIX 3 — GET LATEST PER PARAM
+        # ----------------------------
         latest = (
             combined_df.sort_values("ReadingDate")
             .groupby(["StationName", "ParameterName"], as_index=False)
             .last()
         )
-
-        # Build per-station records
+        # ----------------------------
+        # BUILD FEATURES
+        # ----------------------------
         for station, group in latest.groupby("StationName"):
-
             lat = float(group["Latitude"].iloc[0])
             lon = float(group["Longitude"].iloc[0])
-
             props = {
-                "stationName": station,
-                "aqhi": None
+                "stationName": station
             }
-
-            # add parameters
             for _, row in group.iterrows():
                 param = row["ParameterName"]
-                val = row["Value"]
-
+                val = float(row["Value"])
                 props[param] = val
-
-                if param == "AQHI":
-                    props["aqhi"] = val
-
+    
+            # ----------------------------
+            # FIX 4 — DERIVE AQHI (fallback)
+            # ----------------------------
+            if "AQHI" in props:
+                props["aqhi"] = props["AQHI"]
+            else:
+                pm = props.get("Fine Particulate Matter")
+                if pm is not None:
+                    props["aqhi"] = min(10, max(1, int(pm / 10) + 1))
+                else:
+                    props["aqhi"] = None
+    
             features.append({
                 "type": "Feature",
                 "geometry": {
@@ -265,15 +285,15 @@ if __name__ == "__main__":
                 },
                 "properties": props
             })
-
+    
     geojson = {
         "type": "FeatureCollection",
         "features": features
     }
-
+    
     with open(geojson_path, "w") as f:
-        json.dump(geojson, f)
-
+        json.dump(geojson, f, allow_nan=False)  # CRITICAL
+    
     print(f">>> Wrote {len(features)} features to {geojson_path}")
 
 
