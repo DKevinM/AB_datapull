@@ -1,17 +1,50 @@
+#!/usr/bin/env python3
 """Fetch AQHI data"""
-import pandas as pd
-from config.settings import AQHI_LOOKBACK_HOURS, OUTPUT_DIR
+import sys
+from pathlib import Path
+
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from config.settings import OUTPUT_DIR
 from src.utils.logger import setup_logger
 from src.ingestion.aqhi_client import AQHIClient
 
 logger = setup_logger(__name__)
 
 def main():
-    logger.info(f"Fetching AQHI data (last {AQHI_LOOKBACK_HOURS}h)...")
+    """Fetch AQHI stations and measurements"""
+    logger.info("=" * 60)
+    logger.info("Starting AQHI data fetch...")
     
     client = AQHIClient()
-    stations = client.fetch_stations()
-    logger.info(f"Found {len(stations)} stations")
+    stations_df = client.fetch_stations()
+    
+    all_measurements = []
+    for idx, row in stations_df.iterrows():
+        station_name = row['Name']
+        try:
+            meas_df = client.fetch_measurements(station_name)
+            if not meas_df.empty:
+                meas_df['Latitude'] = row['Latitude']
+                meas_df['Longitude'] = row['Longitude']
+                all_measurements.append(meas_df)
+        except Exception as e:
+            logger.warning(f"Failed to fetch {station_name}: {e}")
+    
+    if all_measurements:
+        combined_df = pd.concat(all_measurements, ignore_index=True)
+        output_file = OUTPUT_DIR / "aqhi_raw.csv"
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        combined_df.to_csv(output_file, index=False)
+        logger.info(f"✓ Saved {len(combined_df)} records to {output_file}")
+    else:
+        logger.warning("No data fetched")
+    
+    logger.info("=" * 60)
+
+if __name__ == "__main__":
+    main()
 
 
 # scripts/fetch_aqhi.py
