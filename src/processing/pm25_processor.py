@@ -1,4 +1,78 @@
 # processing/pm25_processor.py
+
+"""PM2.5 processing: dual-channel selection & RH correction"""
+import pandas as pd
+import numpy as np
+from src.utils.logger import setup_logger
+from config.settings import PM25_OUTLIER_THRESHOLD
+
+logger = setup_logger(__name__)
+
+class PM25Processor:
+    """Handle PM2.5 dual-channel selection and corrections"""
+    
+    @staticmethod
+    def get_best_pm(a, b, avg):
+        """Select best PM2.5 value from dual channels"""
+        if pd.isna(a) and not pd.isna(b) and b <= PM25_OUTLIER_THRESHOLD:
+            return b
+        if pd.isna(b) and not pd.isna(a) and a <= PM25_OUTLIER_THRESHOLD:
+            return a
+        if a > PM25_OUTLIER_THRESHOLD and b <= PM25_OUTLIER_THRESHOLD:
+            return b
+        if b > PM25_OUTLIER_THRESHOLD and a <= PM25_OUTLIER_THRESHOLD:
+            return a
+        if not pd.isna(a) and not pd.isna(b):
+            diff = abs(a - b)
+            if diff > 50 and diff <= 500:
+                return min(a, b)
+            elif diff > 500:
+                return None
+            elif diff <= 50 and not pd.isna(avg) and avg >= 0:
+                return avg
+        return avg
+    
+    @staticmethod
+    def correct_pm25(pm, rh):
+        """Apply RH correction"""
+        if pd.isna(pm):
+            return None
+        if pd.isna(rh):
+            rh = 50
+        
+        if rh < 30:
+            return pm / (1 + 0.24 / (100 / 30 - 1))
+        elif rh > 70:
+            return pm / (1 + 0.24 / (100 / 70 - 1))
+        else:
+            return pm / (1 + 0.24 / (100 / rh - 1))
+    
+    def process_batch(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Process all rows"""
+        logger.info(f"Processing {len(df)} PM2.5 records...")
+        
+        result = df.copy()
+        
+        result["pm_raw"] = result.apply(
+            lambda x: self.get_best_pm(
+                x.get("pm2.5_atm_a"), 
+                x.get("pm2.5_atm_b"), 
+                x.get("pm2.5_atm")
+            ),
+            axis=1
+        )
+        
+        result["pm_corrected"] = result.apply(
+            lambda x: self.correct_pm25(x["pm_raw"], x.get("humidity")),
+            axis=1
+        )
+        
+        logger.info(f"Processed {len(result)} records")
+        return result
+        
+
+
+
 class PM25Processor:
     """Dual-channel PM2.5 selection + RH correction"""
     
