@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Fetch AQHI data"""
 import sys
 from pathlib import Path
-
-# Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+import pandas as pd
 from config.settings import OUTPUT_DIR
 from src.utils.logger import setup_logger
 from src.ingestion.aqhi_client import AQHIClient
