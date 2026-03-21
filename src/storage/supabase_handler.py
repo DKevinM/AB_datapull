@@ -1,4 +1,35 @@
 # storage/supabase_handler.py
+
+"""Supabase database operations"""
+from supabase import create_client
+from src.utils.logger import setup_logger
+from config.settings import SUPABASE_URL, SUPABASE_KEY
+
+logger = setup_logger(__name__)
+
+class SupabaseHandler:
+    """Handle Supabase database operations"""
+    
+    def __init__(self):
+        self.client = create_client(SUPABASE_URL, SUPABASE_KEY)
+    
+    def upsert_sensor_readings(self, records: list[dict], batch_size=5000):
+        """Batch upsert sensor readings"""
+        logger.info(f"Upserting {len(records)} records...")
+        
+        for i in range(0, len(records), batch_size):
+            chunk = records[i:i + batch_size]
+            try:
+                response = self.client.table("sensor_readings").upsert(chunk).execute()
+                logger.info(f"Upserted batch {i//batch_size + 1}")
+            except Exception as e:
+                logger.error(f"Upsert failed for batch {i//batch_size + 1}: {e}")
+                raise
+        
+        logger.info("All records upserted successfully")
+
+
+
 class SupabaseHandler:
     """Database operations"""
     
