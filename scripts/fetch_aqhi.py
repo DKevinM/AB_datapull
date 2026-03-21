@@ -1,3 +1,19 @@
+"""Fetch AQHI data"""
+import pandas as pd
+from config.settings import AQHI_LOOKBACK_HOURS, OUTPUT_DIR
+from src.utils.logger import setup_logger
+from src.ingestion.aqhi_client import AQHIClient
+
+logger = setup_logger(__name__)
+
+def main():
+    logger.info(f"Fetching AQHI data (last {AQHI_LOOKBACK_HOURS}h)...")
+    
+    client = AQHIClient()
+    stations = client.fetch_stations()
+    logger.info(f"Found {len(stations)} stations")
+
+
 # scripts/fetch_aqhi.py
 """
 Pull AQHI stations & measurements, store raw data
@@ -139,3 +155,11 @@ def main():
         alert(f"Data stale: {age_hours:.1f} hours old")
     else:
         logger.info(f"✓ Data fresh ({age_hours:.1f}h old)")
+
+
+    output_file = OUTPUT_DIR / "aqhi_raw.csv"
+    df.to_csv(output_file, index=False)
+    logger.info(f"Wrote to {output_file}")
+
+if __name__ == "__main__":
+    main()
