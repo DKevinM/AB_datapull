@@ -1,4 +1,28 @@
 # api/queries.py
+
+"""Supabase read queries"""
+from src.utils.logger import setup_logger
+from config.settings import SUPABASE_URL, SUPABASE_KEY
+from supabase import create_client
+
+logger = setup_logger(__name__)
+
+class SupabaseQueries:
+    def __init__(self):
+        self.client = create_client(SUPABASE_URL, SUPABASE_KEY)
+    
+    def get_latest_sensors(self, region: str, limit=500):
+        """Get latest reading per sensor"""
+        response = self.client.table("sensor_readings")\
+            .select("*")\
+            .eq("province", region)\
+            .order("recorded_at", desc=True)\
+            .limit(limit)\
+            .execute()
+        return response.data
+        
+
+
 class SupabaseQueries:
     """Read-only queries for frontend"""
     
