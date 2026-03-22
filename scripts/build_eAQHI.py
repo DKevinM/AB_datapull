@@ -8,14 +8,20 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import os
+import sys
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from config.settings import OUTPUT_DIR, DATA_DIR
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = ROOT / "data"
 
-LAST6H_CSV = DATA_DIR / "last6h.csv"
+# Read AQHI station data from the pipeline's live output (written by fetch_aqhi.py)
+LAST6H_CSV = OUTPUT_DIR / "aqhi_raw.csv"
+# Read PurpleAir data from the pipeline's live output (written by fetch_purpleair.py)
+PURPLE_JSON = OUTPUT_DIR / "purpleair_ab_live.json"
+# History file for 3-hour averages (optional — falls back to current reading if absent)
 PURPLE_HISTORY = DATA_DIR / "AB_PA_history.csv"
-PURPLE_JSON = DATA_DIR / "AB_PM25_map.json"
 OUTPUT_JSON = DATA_DIR / "eAQHI_map.json"
 
 # settings
@@ -85,7 +91,7 @@ def normalize_purple_records(records):
     for rec in records:
         lat = rec.get("lat", rec.get("Latitude", rec.get("latitude")))
         lon = rec.get("lon", rec.get("Longitude", rec.get("longitude")))
-        pm = rec.get("pm_corr", rec.get("PM2.5", rec.get("pm25")))
+        pm = rec.get("pm_corr", rec.get("pm_corrected", rec.get("PM2.5", rec.get("pm25"))))
         sensor_index = rec.get("sensor_index", rec.get("sensor"))
         name = rec.get("name", rec.get("label", "PurpleAir"))
 
@@ -357,7 +363,7 @@ def main():
     required = {"StationName", "ParameterName", "ReadingDate", "Value", "Latitude", "Longitude"}
     missing = required - set(last6h.columns)
     if missing:
-        raise ValueError(f"last6h.csv is missing required columns: {sorted(missing)}")
+        raise ValueError(f"aqhi_raw.csv is missing required columns: {sorted(missing)}")
 
 
     if purple_df.empty:

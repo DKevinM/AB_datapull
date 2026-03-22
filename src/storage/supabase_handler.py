@@ -35,6 +35,18 @@ class SupabaseHandler:
         logger.info(f"All {total} records upserted successfully")
         return total
     
+    def upsert_aqhi_readings(self, records: list[dict]) -> int:
+        """Upsert AQHI station readings."""
+        if not records:
+            logger.warning("No AQHI records to upsert")
+            return 0
+        logger.info(f"Upserting {len(records)} AQHI records...")
+        self.client.table("aqhi_readings").upsert(
+            records, on_conflict="station_name,province,recorded_at"
+        ).execute()
+        logger.info(f"Upserted {len(records)} AQHI records")
+        return len(records)
+
     def upsert_stations(self, records: list[dict]) -> int:
         """Upsert AQHI station metadata."""
         if not records:

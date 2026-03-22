@@ -48,8 +48,19 @@ def main():
     # Upsert to Supabase
     try:
         handler = SupabaseHandler()
-        records = processed.to_dict("records")
-        total = handler.upsert_sensor_readings(records)
+        records = []
+        for _, row in processed.iterrows():
+            records.append({
+                "station_name": str(row["StationName"]),
+                "province": "AB",
+                "recorded_at": pd.Timestamp(row["ReadingDate"]).isoformat() if pd.notna(row.get("ReadingDate")) else None,
+                "aqhi": float(row["AQHI"]) if pd.notna(row.get("AQHI")) else None,
+                "latitude": float(row["Latitude"]) if pd.notna(row.get("Latitude")) else None,
+                "longitude": float(row["Longitude"]) if pd.notna(row.get("Longitude")) else None,
+                "source_mode": str(row.get("source_mode", "")),
+            })
+        records = [r for r in records if r["recorded_at"] is not None]
+        total = handler.upsert_aqhi_readings(records)
         logger.info(f"Upserted {total} AQHI records to Supabase")
     except Exception as e:
         logger.error(f"Supabase upsert failed: {e}")

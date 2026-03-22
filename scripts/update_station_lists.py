@@ -14,7 +14,7 @@ import requests
 import pandas as pd
 import geopandas as gpd
 
-from config.settings import OUTPUT_DIR, SHAPEFILES, SENSOR_LISTS
+from config.settings import DATA_DIR, OUTPUT_DIR, SHAPEFILES, SENSOR_LISTS
 from src.utils.logger import setup_logger
 
 logger = setup_logger(__name__)
@@ -36,7 +36,7 @@ def update_aqhi_stations() -> pd.DataFrame:
     df = df.drop_duplicates(subset=["Name"])
 
     # Save locally
-    out_path = Path("data") / "station_list.csv"
+    out_path = DATA_DIR / "station_list.csv"
     df.to_csv(out_path, index=False)
     logger.info(f"Saved {len(df)} AQHI stations to {out_path}")
     return df

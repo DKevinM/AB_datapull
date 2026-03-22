@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import pandas as pd
 import geopandas as gpd
 
-from config.settings import OUTPUT_DIR, SHAPEFILES, SENSOR_LISTS, PURPLEAIR_MAX_DATA_AGE_HOURS
+from config.settings import OUTPUT_DIR, DATA_DIR, SHAPEFILES, SENSOR_LISTS, PURPLEAIR_MAX_DATA_AGE_HOURS
 from src.utils.logger import setup_logger
 from src.ingestion.purpleair_client import PurpleAirClient
 from src.processing.pm25_processor import PM25Processor
@@ -27,7 +27,7 @@ logger = setup_logger(__name__)
 
 def load_channel_override(province: str) -> dict:
     """Load channel-override CSV for the given province if it exists."""
-    override_path = Path("data") / "channel_override.csv"
+    override_path = DATA_DIR / "channel_override.csv"
     if not override_path.exists():
         return {}
     try:
@@ -43,7 +43,7 @@ def load_channel_override(province: str) -> dict:
 
 def load_dead_list() -> set:
     """Load sensor IDs that are known dead/offline."""
-    dead_path = Path("data") / "dead_list.csv"
+    dead_path = DATA_DIR / "dead_list.csv"
     if not dead_path.exists():
         return set()
     try:
@@ -160,32 +160,6 @@ def main():
         output_json, orient="records", indent=2
     )
     logger.info(f"Saved {len(processed)} processed sensors to {output_json}")
-
-    # Push to Supabase
-    try:
-        from src.storage.supabase_handler import SupabaseHandler
-        handler = SupabaseHandler()
-
-        hourly_ts = now_utc.replace(minute=0, second=0, microsecond=0)
-        records = []
-        for _, row in processed.iterrows():
-            records.append({
-                "sensor_index": int(row["sensor_index"]) if pd.notna(row.get("sensor_index")) else None,
-                "province": province,
-                "recorded_at": hourly_ts.isoformat(),
-                "pm25_atm_a": float(row["pm2.5_atm_a"]) if pd.notna(row.get("pm2.5_atm_a")) else None,
-                "pm25_atm_b": float(row["pm2.5_atm_b"]) if pd.notna(row.get("pm2.5_atm_b")) else None,
-                "humidity": float(row["humidity"]) if pd.notna(row.get("humidity")) else None,
-                "pm_raw": float(row["pm_raw"]) if pd.notna(row.get("pm_raw")) else None,
-                "pm_corrected": float(row["pm_corrected"]) if pd.notna(row.get("pm_corrected")) else None,
-                "pm_method": str(row["pm_method"]) if pd.notna(row.get("pm_method")) else None,
-            })
-        records = [r for r in records if r["sensor_index"] is not None]
-        total = handler.upsert_sensor_readings(records)
-        logger.info(f"Upserted {total} sensor readings to Supabase")
-    except Exception as e:
-        logger.error(f"Supabase upsert failed: {e}")
-
     logger.info("=" * 60)
 
 
