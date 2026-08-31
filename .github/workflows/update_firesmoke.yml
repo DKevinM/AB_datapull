@@ -1,0 +1,48 @@
+name: Update FireSmoke
+
+permissions:
+  contents: write
+
+on:
+#  schedule:
+#    - cron: '0 */2 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnetcdf-dev libhdf5-dev
+
+      - name: Install packages
+        run: |
+          pip install requests xarray numpy pillow matplotlib urllib3 netCDF4
+
+      - name: Download FireSmoke
+        run: |
+          timeout 300 python scripts/fetch_firesmoke.py
+
+      - name: Commit and push outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add data/output/*.geojson
+          git add -f data/output/*.png
+
+          git status
+
+          git commit -m "Update FireSmoke layers" || echo "No changes to commit"
+
+          git push

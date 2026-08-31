@@ -1,0 +1,57 @@
+name: Fetch Last 6h Data
+
+on:
+#  schedule:
+#    - cron: '*/20 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: last6h-update
+  cancel-in-progress: true
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pandas requests
+
+      - name: Run fetch_last6h.py
+        run: python fetch_last6h.py
+
+      - name: Commit updated data files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # stage changes FIRST
+          git add data/last6h.csv
+          git add data/stations.geojson
+
+          # commit FIRST (this fixes your error)
+          git commit -m "chore: update AQHI data (csv + geojson)" || echo "No changes"          
+
+          # THEN rebase safely
+          git pull --rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} main
+      
+          # push
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main        
+
+#      - name: Trigger AQHI forecast
+#        run: |
+#          curl -X POST https://api.github.com/repos/DKevinM/AQHI.forecast/dispatches \
+#            -H "Accept: application/vnd.github+json" \
+#            -H "Authorization: Bearer ${{ secrets.AQHI_TOKEN }}" \
+#            -d '{"event_type":"run_aqhi"}'          

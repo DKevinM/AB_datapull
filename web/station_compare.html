@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Station + Parameter Viewer — RAW DATA (Level 0) not for reporting purposes</title>
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.5/dist/umd/supabase.min.js"></script>
+
+  <!-- Choices.js -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h2, h3 { margin-top: 0; }
+    label { margin-right: 12px; }
+
+    #controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    #plot {
+      width: 100%;
+      height: 600px;
+      margin-top: 20px;
+    }
+    
+    /* ONE rule to rule them all */
+    .fixed-choices {
+      width: 750px;
+      min-width: 750px;
+      max-width: 750px;
+    }
+    
+    /* Force Choices to obey wrapper */
+    .fixed-choices .choices {
+      width: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+    }
+    
+    /* Prevent inner collapse */
+    .fixed-choices .choices__inner {
+      display: block !important;
+      width: 100% !important;
+    }
+
+    
+    .notice {
+      background: #fff3cd;
+      border: 1px solid #f9d9a7;
+      color: #5c3d00;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin: 0 0 16px 0;
+      font-weight: 600;
+    }
+
+    button {
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 14px;
+    }    
+    
+    .back-link {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #0645ad;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: underline;
+      margin-bottom: 12px;
+    }
+    .back-link:hover { color: #0b0080; }
+  </style>
+</head>
+
+<body>
+  <button id="closeBtn">← Back to AQHI Map</button>
+
+  <div class="notice">Raw Data (Level 0) not for reporting purposes</div>
+
+  <div id="viewingStation" style="margin-bottom:10px; font-weight:600;"></div>
+
+  <h2>Station Compare (raw)</h2>
+
+  <div id="controls">
+    <div>
+      <h3>Select Stations - click on box below to pick stations to display</h3>
+      <div class="fixed-choices">
+        <select id="stationDropdown" multiple></select>
+      </div>
+    </div>
+    
+    <div>
+      <h3>Select Parameters - click on box below to pick parameters to display</h3>
+      <div class="fixed-choices">
+        <select id="parameterDropdown" multiple></select>
+      </div>
+    </div>
+
+
+    <div>
+      <h3>Select Date Range</h3>
+      <label>Start Date: <input type="date" id="startDate" /></label>
+      <label>End Date: <input type="date" id="endDate" /></label>
+    </div>
+  </div>
+
+  <div id="plot"></div>
+
+  <script type="module">
+    // -----------------------------
+    // Close/back button
+    // -----------------------------
+    document.getElementById("closeBtn").addEventListener("click", () => {
+      window.close();
+      setTimeout(() => window.history.back(), 100);
+    });
+
+    function getQueryParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    // -----------------------------
+    // Supabase client
+    // -----------------------------
+    const SUPABASE_URL = "https://zcunoncbyitfsilrhymv.supabase.co";
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjdW5vbmNieWl0ZnNpbHJoeW12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3Mjk3NDYsImV4cCI6MjA2NzMwNTc0Nn0._z_tqm_5UIBkWfMa7HAJrUOA-0t9vOaBVV48-74esWQ";
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // -----------------------------
+    // Lookups
+    // -----------------------------
+    const unitsLookup = {
+      "AQHI": " ", "Ozone": "ppb", "Total Oxides of Nitrogen": "ppb",
+      "Hydrogen Sulphide": "ppb", "Total Reduced Sulphur": "ppb", "Sulphur Dioxide": "ppb",
+      "Fine Particulate Matter": "µg/m³", "Total Hydrocarbons": "ppm", "Carbon Monoxide": "ppm",
+      "Wind Direction": "degrees", "Relative Humidity": "%", "Outdoor Temperature": "°C",
+      "Nitric Oxide": "ppb", "Wind Speed": "km/hr", "Non-methane Hydrocarbons": "ppm",
+      "Nitrogen Dioxide": "ppb", "Methane": "ppm"
+    };
+
+    const shortLookup = {
+      "AQHI": "AQHI", "Ozone": "O3", "Total Oxides of Nitrogen": "NOX",
+      "Hydrogen Sulphide": "H2S", "Total Reduced Sulphur": "TRS", "Sulphur Dioxide": "SO2",
+      "Fine Particulate Matter": "PM2.5", "Total Hydrocarbons": "THC", "Carbon Monoxide": "CO",
+      "Wind Direction": "wd", "Relative Humidity": "RH", "Outdoor Temperature": "ET",
+      "Nitric Oxide": "NO", "Wind Speed": "ws", "Non-methane Hydrocarbons": "NMHC",
+      "Nitrogen Dioxide": "NO2", "Methane": "CH4"
+    };
+
+    function toEdmontonString(ts) {
+      return new Date(ts).toLocaleString("en-CA", {
+        timeZone: "America/Edmonton",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      });
+    }
+
+    function setDefaultDates(daysBack = 7) {
+      const now = new Date();
+      const start = new Date(now);
+      start.setDate(start.getDate() - daysBack);
+      startEl.valueAsDate = start;
+      endEl.valueAsDate = now;
+    }
+
+    // -----------------------------
+    // DOM
+    // -----------------------------
+    const stationDropdown = document.getElementById("stationDropdown");
+    const parameterDropdown = document.getElementById("parameterDropdown");
+    const startEl = document.getElementById("startDate");
+    const endEl = document.getElementById("endDate");
+
+    let stations = [];
+    let parameters = [];
+    let stationChoices = null;
+    let paramChoices = null;
+
+    // -----------------------------
+    // Load lists + init Choices
+    // -----------------------------
+    async function init() {
+      // 1) load distinct stations + params (cheap-ish approach)
+      const { data: stationData, error: stationErr } = await supabase
+        .from("station_list")
+        .select("StationName");
+      
+      if (stationErr) console.error(stationErr);
+      
+      stations = [...new Set(
+        (stationData || []).map(d => d.StationName)
+      )].sort();
+      
+      console.log("Stations:", stations);
+
+
+      const { data: paramData, error: paramErr } = await supabase
+        .from("parameter_list")
+        .select("ParameterName");
+      
+      if (paramErr) console.error(paramErr);
+      
+      parameters = [...new Set(
+        (paramData || []).map(d => d.ParameterName)
+      )].sort();
+      
+      console.log("Parameters:", parameters);
+
+      
+      // 2) populate selects
+      stations.forEach(station => {
+        const opt = document.createElement("option");
+        opt.value = station;
+        opt.textContent = station;
+        stationDropdown.appendChild(opt);
+      });
+
+      parameters.forEach(param => {
+        const opt = document.createElement("option");
+        opt.value = param;
+        opt.textContent = param;
+        parameterDropdown.appendChild(opt);
+      });
+
+      // 3) Choices
+      stationChoices = new Choices(stationDropdown, { removeItemButton: true });
+      paramChoices = new Choices(parameterDropdown, { removeItemButton: true });
+
+      // 4) URL behavior
+      const stationFromURL = getQueryParam("station");
+      if (stationFromURL) {
+        const match = stations.find(s => s === stationFromURL);
+        if (match) {
+          document.getElementById("viewingStation").textContent = `Viewing station: ${match}`;
+          stationChoices.removeActiveItems();
+          stationChoices.setChoiceByValue([match]);
+
+          // default param + dates ONLY when launched from map
+          // default param logic
+          let defaultParam = "Outdoor Temperature";
+          
+          // fallback if not available
+          if (!parameters.includes(defaultParam)) {
+            defaultParam = parameters[0];
+          }
+          
+          // apply selection
+          paramChoices.removeActiveItems();
+          paramChoices.setChoiceByValue([defaultParam]);
+          
+          setDefaultDates(7);
+
+          await fetchAndPlot();
+          return;
+        } else {
+          Plotly.newPlot("plot", [], { title: `Station not found: ${stationFromURL}` });
+          return;
+        }
+      }
+
+      // Opened directly: no defaults
+      Plotly.newPlot("plot", [], {
+        title: "Click a station on the map to view historical data",
+        xaxis: { title: "Time", type: "date" },
+        yaxis: { title: "Value" }
+      });
+    }
+
+    // -----------------------------
+    // Fetch + plot
+    // -----------------------------
+    async function fetchAndPlot() {
+      const selectedStations = Array.from(stationDropdown.selectedOptions).map(opt => opt.value);
+      const selectedParams = Array.from(parameterDropdown.selectedOptions).map(opt => opt.value);
+
+      if (selectedStations.length === 0 || selectedParams.length === 0) {
+        Plotly.newPlot("plot", [], {
+          title: "Select station(s) and parameter(s)",
+          xaxis: { title: "Time", type: "date" },
+          yaxis: { title: "Value" }
+        });
+        return;
+      }
+
+      if (!startEl.value || !endEl.value) {
+        Plotly.newPlot("plot", [], { title: "Select a date range" });
+        return;
+      }
+
+      const start = new Date(startEl.value);
+      const end = new Date(endEl.value);
+      if (isNaN(start) || isNaN(end)) {
+        Plotly.newPlot("plot", [], { title: "Invalid date range" });
+        return;
+      }
+
+      const endExclusive = new Date(end);
+      endExclusive.setDate(endExclusive.getDate() + 1);
+
+      const startISO = start.toISOString();
+      const endISO = endExclusive.toISOString();
+
+      const traces = [];
+
+      for (const station of selectedStations) {
+        for (const param of selectedParams) {
+          const { data, error } = await supabase
+            .from("aqhi_data")
+            .select("StationName,ParameterName,ReadingDate,Value")
+            .eq("StationName", station)
+            .eq("ParameterName", param)
+            .gte("ReadingDate", startISO)
+            .lt("ReadingDate", endISO)
+            .order("ReadingDate", { ascending: true });
+
+          if (error) {
+            console.error(`Query error for ${station}/${param}:`, error);
+            continue;
+          }
+          if (!data || data.length === 0) continue;
+
+          traces.push({
+            x: data.map(d => new Date(d.ReadingDate)),
+            y: data.map(d => Number(d.Value)),
+            mode: "lines+markers",
+            name: `${shortLookup[param] || param} (${station})`,
+            text: data.map(d => `${station}: ${d.Value} ${unitsLookup[param] || ""} @ ${toEdmontonString(d.ReadingDate)}`),
+            hovertemplate: "%{text}<extra></extra>"
+          });
+        }
+      }
+
+      if (traces.length === 0) {
+        Plotly.newPlot("plot", [], { title: "No data for selection in this date range" });
+        return;
+      }
+
+      Plotly.newPlot("plot", traces, {
+        title: "Station Parameters — raw",
+        xaxis: { title: "Time", type: "date" },
+        yaxis: { title: "Value" },
+        margin: { t: 120 },
+        hovermode: "x unified",
+        legend: {
+          orientation: "h",
+          xanchor: "center",
+          x: 0.5,
+          yanchor: "top",
+          y: -0.2,
+          font: { size: 9 },
+          itemwidth: 60
+        },
+        annotations: [
+          {
+            text: "RAW DATA — for review only",
+            xref: "paper",
+            yref: "paper",
+            x: 0,
+            y: 1.18,
+            showarrow: false,
+            font: { size: 14, color: "#b00020" },
+            align: "left"
+          }
+        ]
+      });
+    }
+
+    // events
+    stationDropdown.addEventListener("change", fetchAndPlot);
+    parameterDropdown.addEventListener("change", fetchAndPlot);
+    startEl.addEventListener("change", fetchAndPlot);
+    endEl.addEventListener("change", fetchAndPlot);
+
+    await init();
+  </script>
+</body>
+</html>

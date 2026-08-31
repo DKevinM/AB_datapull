@@ -1,0 +1,37 @@
+name: Update ACA PurpleAir PM2.5 Data
+
+on:
+#  schedule:
+#    - cron: '*/30 * * * *'  # every hour at 00 minutes
+  workflow_dispatch:      # allow manual runs from GitHub UI
+
+jobs:
+  update-purpleair:
+    runs-on: ubuntu-latest
+
+    env:
+      PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pytz pandas requests
+
+      - name: Run PurpleAir PM2.5 script
+        run: python ACA_PA_latest.py
+
+      - name: Commit and push updated JSON
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add data/ACA_PM25_map.json
+          git commit -m "Hourly update: ACA_PM25_map.json" || echo "No changes to commit"
+          git push
