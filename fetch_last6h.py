@@ -175,7 +175,65 @@ def probe_last6h_any() -> pd.DataFrame:
     return pd.DataFrame()
 
 # ------------------ Main ------------------
+def already_current(out_path, now=None):
+    """Checks the EXISTING last6h.csv (no network call) to decide whether
+    this run needs to hit the government API at all.
+
+    Government data is 'Hour Ending' - a reading timestamped e.g. 11:00
+    covers 10:00-11:00 and is normally published somewhere between ~10 and
+    ~35 min after the hour turns over (observed empirically 2026-08-31).
+    Comparing against 'the next hour we're waiting for' (not just 'now
+    floored to the hour') means this stays correct even if we're behind by
+    more than one hour, not just the most recent one.
+
+    Backoff: if the next-needed hour is still missing more than 60 min
+    after it should have appeared, that's not normal lag anymore - it's a
+    likely government-side outage. Falls back to the original twice-hourly
+    cadence (:10/:30) instead of continuing to hit their API every run, so
+    a real outage doesn't turn into hammering their server while it's down.
+
+    Returns (skip: bool, reason: str).
+    """
+    now = now or datetime.now(AB_TZ)
+
+    if not out_path.exists():
+        return False, "no existing file - must fetch"
+
+    try:
+        existing = pd.read_csv(out_path)
+        have_hour = pd.to_datetime(existing["ReadingDate"], errors="coerce", utc=True).max()
+    except Exception as e:
+        return False, f"couldn't read existing file ({e}) - must fetch"
+
+    if pd.isna(have_hour):
+        return False, "existing file has no valid ReadingDate - must fetch"
+
+    have_hour = have_hour.tz_convert(AB_TZ)
+    next_expected = have_hour + timedelta(hours=1)
+
+    if now < next_expected:
+        return True, f"already have the current hour ({have_hour.strftime('%H:%M')})"
+
+    gap_minutes = (now - next_expected).total_seconds() / 60
+
+    if gap_minutes <= 60:
+        return False, f"missing {next_expected.strftime('%H:%M')}, {gap_minutes:.0f}min overdue - normal lag, fetching"
+
+    # Backoff: only actually fetch on the original :10/:30 cadence once a
+    # gap has run past an hour - anything else is a wasted hit during what
+    # looks like a real outage.
+    if now.minute in (10, 30) or (now.minute in (11, 31)):
+        return False, f"missing {next_expected.strftime('%H:%M')}, {gap_minutes:.0f}min overdue (backoff mode) - trying on :10/:30 tick"
+    return True, f"missing {next_expected.strftime('%H:%M')}, {gap_minutes:.0f}min overdue (backoff mode) - skipping this off-cycle tick"
+
+
 if __name__ == "__main__":
+    _out_path = Path("data") / "last6h.csv"
+    _skip, _reason = already_current(_out_path)
+    print(f"[precheck] {_reason}")
+    if _skip:
+        raise SystemExit(0)
+
     stations_df = fetch_station_list()
     print(f">>> Fetched {len(stations_df)} stations.")
 
