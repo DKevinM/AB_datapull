@@ -201,7 +201,18 @@ def already_current(out_path, now=None):
 
     try:
         existing = pd.read_csv(out_path)
-        have_hour = pd.to_datetime(existing["ReadingDate"], errors="coerce", utc=True).max()
+        existing["ReadingDate"] = pd.to_datetime(existing["ReadingDate"], errors="coerce", utc=True)
+        # The government publishes a row's timestamp before its Value - a
+        # blank-Value row for the new hour lands within minutes of the hour
+        # turning over, well before the real reading does (observed
+        # 2026-09-01). Using ANY row's timestamp here (blank or not) made
+        # this think the new hour was already "current" the moment that
+        # placeholder appeared, skipping every fetch until the NEXT hour
+        # rolled over - missing the entire window where the real value was
+        # actually available. Only rows with an actual value count toward
+        # "current".
+        populated = existing[existing["Value"].notna()]
+        have_hour = (populated if not populated.empty else existing)["ReadingDate"].max()
     except Exception as e:
         return False, f"couldn't read existing file ({e}) - must fetch"
 
