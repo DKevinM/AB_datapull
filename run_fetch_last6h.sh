@@ -32,8 +32,13 @@ mkdir -p "$(dirname "$LOCKFILE")"
           # actively misleading users on displayed data age. jsdelivr caches
           # @main aggressively too, but exposes a real purge API - call it
           # every push so staleness here stays bounded to this request
-          # instead of an unpredictable multi-hour edge lag.
-          curl -s -o /dev/null "https://purge.jsdelivr.net/gh/DKevinM/AB_datapull@main/data/last6h.csv" || true
+          # instead of an unpredictable multi-hour edge lag. Logged (was
+          # -o /dev/null until 2026-09-01) - a purge that silently failed
+          # was indistinguishable in the log from one that succeeded but
+          # just hadn't propagated to every edge yet, which cost real time
+          # tracking down a live staleness report.
+          PURGE_RESULT=$(curl -s --max-time 15 "https://purge.jsdelivr.net/gh/DKevinM/AB_datapull@main/data/last6h.csv" || echo '{"status":"curl_failed"}')
+          echo "jsdelivr purge: $PURGE_RESULT"
           break
       fi
       echo "push rejected (attempt $attempt/3); rebasing onto latest and retrying..."
