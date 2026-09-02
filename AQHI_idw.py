@@ -10,8 +10,8 @@ AB_TZ = ZoneInfo("America/Edmonton")
 # ---------- Helpers ----------
 def health_canada_aqhi(no2_ppb, o3_ppb, pm25_ugm3):
     return (1000.0 / 10.4) * (
-        np.exp(0.000537 * no2_ppb) +
-        np.exp(0.000871 * o3_ppb) +
+        np.exp(0.000871 * no2_ppb) +
+        np.exp(0.000537 * o3_ppb) +
         np.exp(0.000487 * pm25_ugm3) - 3.0
     )
 
