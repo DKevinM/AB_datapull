@@ -6,6 +6,46 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -111.078872,
+          55.63233
+        ]
+      },
+      "properties": {
+        "StationName": "Conklin Community",
+        "ReadingDate": "2026-09-04T22:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.82365667819977,
+        "forecast_spatial_weight": 0.25,
+        "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.17269,
+          55.62141
+        ]
+      },
+      "properties": {
+        "StationName": "Stony Mountain",
+        "ReadingDate": "2026-09-04T22:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.71510326862335,
+        "forecast_spatial_weight": 0.25,
+        "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -111.47637,
           56.75135
         ]
@@ -16,47 +56,7 @@
         "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
         "AQHI": 1.0,
         "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.4137,
-        "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -111.39047,
-          56.73344
-        ]
-      },
-      "properties": {
-        "StationName": "Fort McMurray Athabasca Valley",
-        "ReadingDate": "2026-09-04T22:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.12190401554108,
-        "forecast_spatial_weight": 0.4137,
-        "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -111.1764,
-          58.7084
-        ]
-      },
-      "properties": {
-        "StationName": "Fort Chipewyan",
-        "ReadingDate": "2026-09-04T22:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.3509886264801,
-        "forecast_spatial_weight": 0.4137,
+        "forecast_spatial_weight": 0.25,
         "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
         "missing_feature_count": 0
       }
@@ -76,7 +76,7 @@
         "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
         "AQHI": 1.0,
         "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.4137,
+        "forecast_spatial_weight": 0.25,
         "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
         "missing_feature_count": 0
       }
@@ -86,37 +86,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -111.64262,
-          57.14908
+          -111.1764,
+          58.7084
         ]
       },
       "properties": {
-        "StationName": "Fort McKay South",
+        "StationName": "Fort Chipewyan",
         "ReadingDate": "2026-09-04T22:00:00+00:00",
         "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
         "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.01176404953003,
-        "forecast_spatial_weight": 0.4137,
-        "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -111.078872,
-          55.63233
-        ]
-      },
-      "properties": {
-        "StationName": "Conklin Community",
-        "ReadingDate": "2026-09-04T22:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.82377576828003,
-        "forecast_spatial_weight": 0.4137,
+        "AQHI_forecast_3h": 1.35094547271729,
+        "forecast_spatial_weight": 0.25,
         "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
         "missing_feature_count": 0
       }
@@ -135,8 +115,8 @@
         "ReadingDate": "2026-09-04T22:00:00+00:00",
         "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
         "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.03992819786072,
-        "forecast_spatial_weight": 0.4137,
+        "AQHI_forecast_3h": 1.03990435600281,
+        "forecast_spatial_weight": 0.25,
         "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
         "missing_feature_count": 0
       }
@@ -146,17 +126,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -111.17269,
-          55.62141
+          -111.64262,
+          57.14908
         ]
       },
       "properties": {
-        "StationName": "Stony Mountain",
+        "StationName": "Fort McKay South",
         "ReadingDate": "2026-09-04T22:00:00+00:00",
         "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.71519136428833,
-        "forecast_spatial_weight": 0.4137,
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.01173281669617,
+        "forecast_spatial_weight": 0.25,
         "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
         "missing_feature_count": 0
       }
@@ -166,18 +146,38 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -112.925851,
-          53.805629
+          -111.39047,
+          56.73344
         ]
       },
       "properties": {
-        "StationName": "Bruderheim",
-        "ReadingDate": "2026-09-04T23:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T02:00:00+00:00",
+        "StationName": "Fort McMurray Athabasca Valley",
+        "ReadingDate": "2026-09-04T22:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T01:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.12182140350342,
+        "forecast_spatial_weight": 0.25,
+        "met_forecast_time_utc": "2026-09-05T01:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.452637,
+          54.604935
+        ]
+      },
+      "properties": {
+        "StationName": "Tamarack",
+        "ReadingDate": "2026-09-05T00:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
         "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.92292284965515,
-        "forecast_spatial_weight": 0.5804,
-        "met_forecast_time_utc": "2026-09-05T02:00:00+00:00",
+        "AQHI_forecast_3h": 2.12449884414673,
+        "forecast_spatial_weight": 0.5814,
+        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
         "missing_feature_count": 0
       }
     },
@@ -192,371 +192,11 @@
       },
       "properties": {
         "StationName": "Sherwood Park",
-        "ReadingDate": "2026-09-04T23:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T02:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.39377045631409,
-        "forecast_spatial_weight": 0.5804,
-        "met_forecast_time_utc": "2026-09-05T02:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -113.105857,
-          53.951834
-        ]
-      },
-      "properties": {
-        "StationName": "Redwater",
-        "ReadingDate": "2026-09-04T23:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T02:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.6698579788208,
-        "forecast_spatial_weight": 0.5804,
-        "met_forecast_time_utc": "2026-09-05T02:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -112.86806,
-          53.68236
-        ]
-      },
-      "properties": {
-        "StationName": "Elk Island",
-        "ReadingDate": "2026-09-04T23:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T02:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.35873115062714,
-        "forecast_spatial_weight": 0.5804,
-        "met_forecast_time_utc": "2026-09-05T02:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -114.2015721,
-          53.30156091
-        ]
-      },
-      "properties": {
-        "StationName": "Genesee",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.80948,
-          54.395492
-        ]
-      },
-      "properties": {
-        "StationName": "Fox Creek",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -112.800586,
-          49.716184
-        ]
-      },
-      "properties": {
-        "StationName": "Lethbridge",
         "ReadingDate": "2026-09-05T00:00:00+00:00",
         "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
         "AQHI": 2.0,
-        "AQHI_forecast_3h": 2.12194728851318,
-        "forecast_spatial_weight": 0.6873,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -118.8075,
-          55.176667
-        ]
-      },
-      "properties": {
-        "StationName": "Grande Prairie - Henry Pirker",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.13099205493927,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -118.0914761,
-          52.8734191
-        ]
-      },
-      "properties": {
-        "StationName": "Jasper",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.162094,
-          58.521452
-        ]
-      },
-      "properties": {
-        "StationName": "High Level (Airpointer)",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.43702936172485,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -113.327174,
-          53.827241
-        ]
-      },
-      "properties": {
-        "StationName": "Gibbons",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.07140624523163,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -119.086667,
-          55.752778
-        ]
-      },
-      "properties": {
-        "StationName": "Happy Valley",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.47861361503601,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -112.778004,
-          53.757334
-        ]
-      },
-      "properties": {
-        "StationName": "Lamont",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.72644197940826,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -114.037677,
-          51.268227
-        ]
-      },
-      "properties": {
-        "StationName": "Airdrie",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.0892778635025,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -112.642376,
-          49.4621
-        ]
-      },
-      "properties": {
-        "StationName": "Raymond (Airpointer)",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.79136514663696,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -119.3968,
-          55.1963
-        ]
-      },
-      "properties": {
-        "StationName": "Beaverlodge",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.6610780954361,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -114.139072,
-          51.082631
-        ]
-      },
-      "properties": {
-        "StationName": "Calgary Varsity",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.2380051612854,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -113.969792,
-          50.955118
-        ]
-      },
-      "properties": {
-        "StationName": "Calgary Southeast",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.49703407287598,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.0913947,
-          53.1325994
-        ]
-      },
-      "properties": {
-        "StationName": "Steeper",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -114.008836,
-          51.030789
-        ]
-      },
-      "properties": {
-        "StationName": "Calgary Central Inglewood",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.28131318092346,
-        "forecast_spatial_weight": 0.7471,
+        "AQHI_forecast_3h": 1.50287544727325,
+        "forecast_spatial_weight": 0.5814,
         "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
         "missing_feature_count": 0
       }
@@ -575,148 +215,8 @@
         "ReadingDate": "2026-09-05T00:00:00+00:00",
         "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
         "AQHI": 2.0,
-        "AQHI_forecast_3h": 2.00393462181091,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -113.1444,
-          53.5545
-        ]
-      },
-      "properties": {
-        "StationName": "Ardrossan",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.6318838596344,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.395877,
-          53.593824
-        ]
-      },
-      "properties": {
-        "StationName": "Edson",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.5846086,
-          53.3927365
-        ]
-      },
-      "properties": {
-        "StationName": "Hinton-Hillcrest",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -113.760702,
-          53.498049
-        ]
-      },
-      "properties": {
-        "StationName": "Enoch",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.19742834568024,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -111.863622,
-          50.558872
-        ]
-      },
-      "properties": {
-        "StationName": "Brooks Meadowplace",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 2.35673689842224,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -110.681328,
-          50.049003
-        ]
-      },
-      "properties": {
-        "StationName": "Medicine Hat - Crescent Heights",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 3.0,
-        "AQHI_forecast_3h": 2.39148378372192,
-        "forecast_spatial_weight": 0.7471,
-        "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
-        "missing_feature_count": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -110.452637,
-          54.604935
-        ]
-      },
-      "properties": {
-        "StationName": "Tamarack",
-        "ReadingDate": "2026-09-05T00:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 2.12462162971497,
-        "forecast_spatial_weight": 0.7471,
+        "AQHI_forecast_3h": 2.00383448600769,
+        "forecast_spatial_weight": 0.5814,
         "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
         "missing_feature_count": 0
       }
@@ -735,8 +235,8 @@
         "ReadingDate": "2026-09-05T00:00:00+00:00",
         "forecast_valid_time_utc": "2026-09-05T03:00:00+00:00",
         "AQHI": 3.0,
-        "AQHI_forecast_3h": 2.11070561408997,
-        "forecast_spatial_weight": 0.7471,
+        "AQHI_forecast_3h": 2.11029076576233,
+        "forecast_spatial_weight": 0.5814,
         "met_forecast_time_utc": "2026-09-05T03:00:00+00:00",
         "missing_feature_count": 0
       }
@@ -746,17 +246,237 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5439834,
-          53.42723159
+          -113.1444,
+          53.5545
         ]
       },
       "properties": {
-        "StationName": "Hinton-Drinnan",
+        "StationName": "Ardrossan",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.30511033535004,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.8075,
+          55.176667
+        ]
+      },
+      "properties": {
+        "StationName": "Grande Prairie - Henry Pirker",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.06738936901093,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.327174,
+          53.827241
+        ]
+      },
+      "properties": {
+        "StationName": "Gibbons",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.04369342327118,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.0914761,
+          52.8734191
+        ]
+      },
+      "properties": {
+        "StationName": "Jasper",
         "ReadingDate": "2026-09-05T01:00:00+00:00",
         "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
         "AQHI": 1.0,
         "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.9137,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.162094,
+          58.521452
+        ]
+      },
+      "properties": {
+        "StationName": "High Level (Airpointer)",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.57604897022247,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.800586,
+          49.716184
+        ]
+      },
+      "properties": {
+        "StationName": "Lethbridge",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 2.11686778068542,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.681328,
+          50.049003
+        ]
+      },
+      "properties": {
+        "StationName": "Medicine Hat - Crescent Heights",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 3.0,
+        "AQHI_forecast_3h": 2.45752382278442,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.642376,
+          49.4621
+        ]
+      },
+      "properties": {
+        "StationName": "Raymond (Airpointer)",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.85045492649078,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.969792,
+          50.955118
+        ]
+      },
+      "properties": {
+        "StationName": "Calgary Southeast",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.52113497257233,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.79354,
+          52.298677
+        ]
+      },
+      "properties": {
+        "StationName": "Red Deer - Riverside",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.00927817821503,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.139072,
+          51.082631
+        ]
+      },
+      "properties": {
+        "StationName": "Calgary Varsity",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.10248446464539,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.0913947,
+          53.1325994
+        ]
+      },
+      "properties": {
+        "StationName": "Steeper",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.0,
+        "forecast_spatial_weight": 0.748,
         "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
         "missing_feature_count": 0
       }
@@ -776,8 +496,228 @@
         "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
         "AQHI": 1.0,
         "AQHI_forecast_3h": 1.0,
-        "forecast_spatial_weight": 0.9137,
+        "forecast_spatial_weight": 0.748,
         "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.925851,
+          53.805629
+        ]
+      },
+      "properties": {
+        "StationName": "Bruderheim",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.25772130489349,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.2015721,
+          53.30156091
+        ]
+      },
+      "properties": {
+        "StationName": "Genesee",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.0,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.105857,
+          53.951834
+        ]
+      },
+      "properties": {
+        "StationName": "Redwater",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.18284869194031,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.86806,
+          53.68236
+        ]
+      },
+      "properties": {
+        "StationName": "Elk Island",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.40165460109711,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.760702,
+          53.498049
+        ]
+      },
+      "properties": {
+        "StationName": "Enoch",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.0,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.778004,
+          53.757334
+        ]
+      },
+      "properties": {
+        "StationName": "Lamont",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.60626268386841,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.395877,
+          53.593824
+        ]
+      },
+      "properties": {
+        "StationName": "Edson",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.0,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.3968,
+          55.1963
+        ]
+      },
+      "properties": {
+        "StationName": "Beaverlodge",
+        "ReadingDate": "2026-09-05T01:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.45237851142883,
+        "forecast_spatial_weight": 0.748,
+        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.008836,
+          51.030789
+        ]
+      },
+      "properties": {
+        "StationName": "Calgary Central Inglewood",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.11280798912048,
+        "forecast_spatial_weight": 0.9147,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.80948,
+          54.395492
+        ]
+      },
+      "properties": {
+        "StationName": "Fox Creek",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.0,
+        "forecast_spatial_weight": 0.8415,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.086667,
+          55.752778
+        ]
+      },
+      "properties": {
+        "StationName": "Happy Valley",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 1.43668115139008,
+        "forecast_spatial_weight": 0.8415,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
         "missing_feature_count": 0
       }
     },
@@ -792,12 +732,32 @@
       },
       "properties": {
         "StationName": "Edmonton East",
-        "ReadingDate": "2026-09-05T01:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.24803125858307,
-        "forecast_spatial_weight": 0.9137,
-        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.0,
+        "forecast_spatial_weight": 0.9147,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.5439834,
+          53.42723159
+        ]
+      },
+      "properties": {
+        "StationName": "Hinton-Drinnan",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.0,
+        "forecast_spatial_weight": 0.9147,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
         "missing_feature_count": 0
       }
     },
@@ -812,12 +772,12 @@
       },
       "properties": {
         "StationName": "Edmonton McCauley",
-        "ReadingDate": "2026-09-05T01:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
-        "AQHI": 2.0,
-        "AQHI_forecast_3h": 1.27857613563538,
-        "forecast_spatial_weight": 0.9137,
-        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.03152573108673,
+        "forecast_spatial_weight": 0.9147,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
         "missing_feature_count": 0
       }
     },
@@ -832,12 +792,72 @@
       },
       "properties": {
         "StationName": "St. Albert",
-        "ReadingDate": "2026-09-05T01:00:00+00:00",
-        "forecast_valid_time_utc": "2026-09-05T04:00:00+00:00",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
         "AQHI": 1.0,
-        "AQHI_forecast_3h": 1.17169952392578,
-        "forecast_spatial_weight": 0.8406,
-        "met_forecast_time_utc": "2026-09-05T04:00:00+00:00",
+        "AQHI_forecast_3h": 1.24315142631531,
+        "forecast_spatial_weight": 0.8415,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.863622,
+          50.558872
+        ]
+      },
+      "properties": {
+        "StationName": "Brooks Meadowplace",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
+        "AQHI": 2.0,
+        "AQHI_forecast_3h": 2.12688493728638,
+        "forecast_spatial_weight": 0.9147,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.5846086,
+          53.3927365
+        ]
+      },
+      "properties": {
+        "StationName": "Hinton-Hillcrest",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.0,
+        "forecast_spatial_weight": 0.9147,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
+        "missing_feature_count": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.037677,
+          51.268227
+        ]
+      },
+      "properties": {
+        "StationName": "Airdrie",
+        "ReadingDate": "2026-09-05T02:00:00+00:00",
+        "forecast_valid_time_utc": "2026-09-05T05:00:00+00:00",
+        "AQHI": 1.0,
+        "AQHI_forecast_3h": 1.09004938602448,
+        "forecast_spatial_weight": 0.9147,
+        "met_forecast_time_utc": "2026-09-05T05:00:00+00:00",
         "missing_feature_count": 0
       }
     }
