@@ -14,35 +14,40 @@
 # Run right after fetch_firesmoke.py (same cron cycle, see
 # run_firesmoke.sh) so it always reads that run's fresh geojson output.
 
+import csv
 import json
-import os
 import sys
 from pathlib import Path
 
-import requests
 from shapely.geometry import shape, Point
 from shapely.strtree import STRtree
 
 DATA_DIR = Path("data/output")
+LAST6H_PATH = Path("data/last6h.csv")
 HORIZONS = ["now", "6h", "12h", "24h"]
 OUT_PATH = DATA_DIR / "station_smoke_forecast.json"
 
 
 def load_stations():
-    base_url = os.environ["SUPABASE_URL"].rstrip("/")
-    key = os.environ["SUPABASE_SERVICE_KEY"]
-    headers = {"apikey": key, "Authorization": f"Bearer {key}"}
-    r = requests.get(
-        f"{base_url}/rest/v1/stations",
-        headers=headers,
-        params={"select": "StationName,Latitude,Longitude"},
-        timeout=30,
-    )
-    r.raise_for_status()
-    return [
-        s for s in r.json()
-        if s.get("Latitude") is not None and s.get("Longitude") is not None
-    ]
+    # Reads the same last6h.csv LiveMap itself reads for its station
+    # list (js/data.js), not the separate Supabase `stations` table -
+    # that table is populated from Alberta's official Stations OData
+    # endpoint and doesn't include every station last6h.csv does (e.g.
+    # "Olds Sensor", "Bremner" - community/ancillary sensors, not part
+    # of the official registry). Sourcing from last6h.csv guarantees a
+    # forecast entry for every station name LiveMap can actually show.
+    seen = {}
+    with open(LAST6H_PATH, encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            name = row.get("StationName")
+            lat, lon = row.get("Latitude"), row.get("Longitude")
+            if not name or name in seen or not lat or not lon:
+                continue
+            try:
+                seen[name] = {"StationName": name, "Latitude": float(lat), "Longitude": float(lon)}
+            except ValueError:
+                continue
+    return list(seen.values())
 
 
 def load_grid(horizon):
@@ -65,10 +70,17 @@ def lookup(tree, values, lon, lat):
     # grid cell edges and station coordinates), while "intersects" is
     # exactly the right test anyway for "which grid cell is this point
     # in," boundary-inclusive.
+    #
+    # A miss here isn't "unknown" - fetch_firesmoke.py drops any cell
+    # below 0.1 ug/m3 before writing the geojson (keeps the 100k+-feature
+    # file from being even bigger with meaningless near-zero background),
+    # so no matching cell means genuinely clean air, not missing data.
+    # All AB/SK stations sit well inside the smoke model's domain, so
+    # that's the only reason a miss happens here.
     pt = Point(lon, lat)
     idx = tree.query(pt, predicate="intersects")
     if len(idx) == 0:
-        return None
+        return "<0.1"
     return round(float(values[idx[0]]), 2)
 
 
