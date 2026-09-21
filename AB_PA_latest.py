@@ -481,8 +481,19 @@ def main():
 
     
     # Save as JSON for Leaflet or web app
+    # Real bug, found + fixed 2026-09-21: assigning the formatted string
+    # straight back into result["last_seen"] (still dtype datetime64[UTC]
+    # at this point) made pandas silently re-parse it as a Timestamp -
+    # and since the column's dtype says UTC, it re-interpreted the
+    # already-Edmonton-local string AS IF it were UTC, subtracting
+    # Edmonton's UTC-6 offset a second time. Net effect: every sensor's
+    # last_seen was stuck exactly ~6h behind real time, drifting forward
+    # in lockstep with wall-clock (not a frozen/cached value, which is
+    # what made this easy to mistake for an API/caching issue at first).
+    # Assigning a plain list (not a Series) forces a real object/string
+    # dtype with no dtype-preserving re-coercion.
     ab_tz = pytz.timezone("America/Edmonton")
-    result.loc[:, "last_seen"] = result["last_seen"].dt.tz_convert(ab_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
+    result["last_seen"] = result["last_seen"].dt.tz_convert(ab_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p').tolist()
     
     # Ensure data directory exists
     os.makedirs("data", exist_ok=True)
