@@ -27,17 +27,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.2,
+    "pm25_est": 0.04,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T16:32:02.504977+00:00",
+    "timestamp_utc": "2026-09-26T17:01:55.347026+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 172951,
         "name": "Goldstick Park",
         "distance_km": 2.1137463525439864,
-        "pm_corr": 0.3935030141
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 277939,
@@ -49,13 +49,13 @@
         "sensor_index": 104266,
         "name": "AQSU-AC77",
         "distance_km": 4.252411004120132,
-        "pm_corr": 0.2155824508
+        "pm_corr": 0.141980046
       },
       {
         "sensor_index": 91713,
         "name": "AQSU-2B6D",
         "distance_km": 4.268694862369488,
-        "pm_corr": 0.1486584482
+        "pm_corr": 0.0743292241
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -67,11 +67,11 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.0,
+    "pm25_est": 0.19,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T16:32:02.498390+00:00",
-    "purpleair_sensor_count": 3,
+    "timestamp_utc": "2026-09-26T17:01:55.338204+00:00",
+    "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 288726,
@@ -83,7 +83,13 @@
         "sensor_index": 182585,
         "name": "HAMP-Josephburg",
         "distance_km": 10.144085281465612,
-        "pm_corr": 0.0
+        "pm_corr": 0.3250478011
+      },
+      {
+        "sensor_index": 52941,
+        "name": "ACA_CD Nova",
+        "distance_km": 15.804302854861211,
+        "pm_corr": 0.4838709677
       },
       {
         "sensor_index": 179927,
@@ -104,7 +110,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T16:32:02.491976+00:00",
+    "timestamp_utc": "2026-09-26T17:01:55.329679+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -132,7 +138,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T16:32:02.542685+00:00",
+    "timestamp_utc": "2026-09-26T17:01:55.398996+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -154,7 +160,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T16:32:02.547679+00:00",
+    "timestamp_utc": "2026-09-26T17:01:55.405815+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -182,7 +188,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T16:32:02.516294+00:00",
+    "timestamp_utc": "2026-09-26T17:01:55.363382+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -210,7 +216,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T16:32:02.523247+00:00",
+    "timestamp_utc": "2026-09-26T17:01:55.371831+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -244,7 +250,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T16:32:02.527945+00:00",
+    "timestamp_utc": "2026-09-26T17:01:55.378662+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -263,29 +269,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.21,
+    "pm25_est": 0.0,
     "o3_3h": 22.0,
     "no2_3h": 3.3,
     "timestamp_utc": "2026-09-26T16:00:00+00:00",
-    "purpleair_sensor_count": 4,
+    "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 27707,
         "name": "ACA_Woodcroft",
         "distance_km": 0.04028650927563372,
-        "pm_corr": 0.2361018084
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 123383,
         "name": "ACA_Westmount",
         "distance_km": 2.228645047662615,
         "pm_corr": 0.0
-      },
-      {
-        "sensor_index": 54145,
-        "name": "HouseYEG",
-        "distance_km": 2.5982174146185013,
-        "pm_corr": 0.3968253968
       },
       {
         "sensor_index": 219323,
