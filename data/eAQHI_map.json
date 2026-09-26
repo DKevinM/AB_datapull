@@ -6,7 +6,7 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.16,
+    "pm25_est": 0.08,
     "o3_3h": 18.0,
     "no2_3h": 1.0,
     "timestamp_utc": "2026-09-26T09:00:00+00:00",
@@ -16,7 +16,7 @@
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 0.1612903226
+        "pm_corr": 0.0806451613
       }
     ]
   },
@@ -27,10 +27,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.0,
+    "pm25_est": 0.22,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T09:31:52.825527+00:00",
+    "timestamp_utc": "2026-09-26T10:03:49.786126+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
@@ -49,13 +49,13 @@
         "sensor_index": 104266,
         "name": "AQSU-AC77",
         "distance_km": 4.252411004120132,
-        "pm_corr": 0.0
+        "pm_corr": 0.7692307692
       },
       {
         "sensor_index": 91713,
         "name": "AQSU-2B6D",
         "distance_km": 4.268694862369488,
-        "pm_corr": 0.0
+        "pm_corr": 0.5128205128
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -67,29 +67,35 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.03,
+    "pm25_est": 0.47,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T09:31:52.819803+00:00",
-    "purpleair_sensor_count": 3,
+    "timestamp_utc": "2026-09-26T10:03:49.780805+00:00",
+    "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 288726,
         "name": "HAMP-Partridge Hill",
         "distance_km": 9.332812093814322,
-        "pm_corr": 0.0641025641
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 182585,
         "name": "HAMP-Josephburg",
         "distance_km": 10.144085281465612,
-        "pm_corr": 0.0
+        "pm_corr": 1.0060514372
+      },
+      {
+        "sensor_index": 52941,
+        "name": "ACA_CD Nova",
+        "distance_km": 15.804302854861211,
+        "pm_corr": 0.7258064516
       },
       {
         "sensor_index": 179927,
         "name": "Aspen Trails",
         "distance_km": 15.869461412965022,
-        "pm_corr": 0.0
+        "pm_corr": 0.1923076923
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -101,23 +107,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.12,
+    "pm25_est": 0.25,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T09:31:52.813944+00:00",
+    "timestamp_utc": "2026-09-26T10:03:49.775336+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 101383,
         "name": "LICA - Lac La Biche",
         "distance_km": 1.671585581145567,
-        "pm_corr": 0.0691699605
+        "pm_corr": 0.1282051282
       },
       {
         "sensor_index": 309766,
         "name": "Alberta Parks - Lakeland",
         "distance_km": 5.137997684866026,
-        "pm_corr": 0.2941176471
+        "pm_corr": 0.6389102072
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -132,7 +138,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T09:31:52.859130+00:00",
+    "timestamp_utc": "2026-09-26T10:03:49.820684+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -148,26 +154,26 @@
     "station": "Poacher\u2019s Landing Station 2",
     "lat": 54.945787,
     "lon": -112.816501,
-    "AQHI": 2,
+    "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 11.05,
+    "pm25_est": 0.06,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T09:31:52.863697+00:00",
+    "timestamp_utc": "2026-09-26T10:03:49.825616+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79371,
         "name": "ACA_Poachers Landing",
         "distance_km": 0.004930675992396872,
-        "pm_corr": 11.9230769231
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 223767,
         "name": "ACA_O\u2019Morrow",
         "distance_km": 4.985152657784274,
-        "pm_corr": 2.3717948718
+        "pm_corr": 0.7051282051
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -182,7 +188,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T09:31:52.835927+00:00",
+    "timestamp_utc": "2026-09-26T10:03:49.796933+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -210,7 +216,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T09:31:52.841952+00:00",
+    "timestamp_utc": "2026-09-26T10:03:49.802992+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -244,7 +250,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-26T09:31:52.846516+00:00",
+    "timestamp_utc": "2026-09-26T10:03:49.807832+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -263,7 +269,7 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.0,
+    "pm25_est": 0.04,
     "o3_3h": 15.3,
     "no2_3h": 2.0,
     "timestamp_utc": "2026-09-26T09:00:00+00:00",
@@ -279,13 +285,13 @@
         "sensor_index": 54145,
         "name": "HouseYEG",
         "distance_km": 2.5982174146185013,
-        "pm_corr": 0.0
+        "pm_corr": 0.0682182986
       },
       {
         "sensor_index": 219323,
         "name": "bill gilhespy complex",
         "distance_km": 5.173924589531456,
-        "pm_corr": 0.0
+        "pm_corr": 0.0662251656
       }
     ]
   }
