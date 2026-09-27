@@ -1,5 +1,26 @@
 [
   {
+    "station": "Breton",
+    "lat": 53.090278,
+    "lon": -114.460556,
+    "AQHI": 1,
+    "AQHI_type": "estimated",
+    "pm25_source": "PurpleAir",
+    "pm25_est": 0.08,
+    "o3_3h": 26.3,
+    "no2_3h": 0.7,
+    "timestamp_utc": "2026-09-27T00:00:00+00:00",
+    "purpleair_sensor_count": 1,
+    "purpleair_sensors": [
+      {
+        "sensor_index": 49843,
+        "name": "WCAS_Breton",
+        "distance_km": 2.7912544038525637,
+        "pm_corr": 0.0806451613
+      }
+    ]
+  },
+  {
     "station": "Carrot Creek",
     "lat": 53.621062,
     "lon": -115.869155,
@@ -27,17 +48,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.18,
+    "pm25_est": 0.04,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-27T00:30:07.012855+00:00",
-    "purpleair_sensor_count": 4,
+    "timestamp_utc": "2026-09-27T01:02:09.027862+00:00",
+    "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 172951,
         "name": "Goldstick Park",
         "distance_km": 2.1137463525439864,
-        "pm_corr": 0.0
+        "pm_corr": 0.0830258303
       },
       {
         "sensor_index": 277939,
@@ -46,16 +67,10 @@
         "pm_corr": 0.0
       },
       {
-        "sensor_index": 104266,
-        "name": "AQSU-AC77",
-        "distance_km": 4.252411004120132,
-        "pm_corr": 0.4800783801
-      },
-      {
         "sensor_index": 91713,
         "name": "AQSU-2B6D",
         "distance_km": 4.268694862369488,
-        "pm_corr": 0.568833652
+        "pm_corr": 0.0
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -70,15 +85,9 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-27T00:30:07.004985+00:00",
-    "purpleair_sensor_count": 3,
+    "timestamp_utc": "2026-09-27T01:02:09.021015+00:00",
+    "purpleair_sensor_count": 4,
     "purpleair_sensors": [
-      {
-        "sensor_index": 186143,
-        "name": "AE-Fort Saskatchewan (south)",
-        "distance_km": 2.882403363078847,
-        "pm_corr": 0.0
-      },
       {
         "sensor_index": 288726,
         "name": "HAMP-Partridge Hill",
@@ -89,6 +98,18 @@
         "sensor_index": 182585,
         "name": "HAMP-Josephburg",
         "distance_km": 10.144085281465612,
+        "pm_corr": 0.0
+      },
+      {
+        "sensor_index": 52941,
+        "name": "ACA_CD Nova",
+        "distance_km": 15.804302854861211,
+        "pm_corr": 0.0
+      },
+      {
+        "sensor_index": 179927,
+        "name": "Aspen Trails",
+        "distance_km": 15.869461412965022,
         "pm_corr": 0.0
       }
     ],
@@ -104,7 +125,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-27T00:30:06.999097+00:00",
+    "timestamp_utc": "2026-09-27T01:02:09.014824+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -132,7 +153,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-27T00:30:07.055333+00:00",
+    "timestamp_utc": "2026-09-27T01:02:09.062276+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -151,17 +172,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.12,
+    "pm25_est": 0.35,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-27T00:30:07.059617+00:00",
+    "timestamp_utc": "2026-09-27T01:02:09.066534+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79371,
         "name": "ACA_Poachers Landing",
         "distance_km": 0.004930675992396872,
-        "pm_corr": 0.1303616484
+        "pm_corr": 0.3846153846
       },
       {
         "sensor_index": 223767,
@@ -179,10 +200,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.0,
+    "pm25_est": 0.12,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-27T00:30:07.026562+00:00",
+    "timestamp_utc": "2026-09-27T01:02:09.039969+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -195,7 +216,7 @@
         "sensor_index": 33137,
         "name": "PRAMP - Nampa",
         "distance_km": 19.63110909615097,
-        "pm_corr": 0.0
+        "pm_corr": 0.4722036169
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -207,10 +228,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.07,
+    "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-27T00:30:07.034295+00:00",
+    "timestamp_utc": "2026-09-27T01:02:09.045614+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -229,7 +250,7 @@
         "sensor_index": 217749,
         "name": "PRAMP - Good Shepherd School",
         "distance_km": 19.05748653058344,
-        "pm_corr": 0.2656675749
+        "pm_corr": 0.0
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -244,7 +265,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-09-27T00:30:07.040499+00:00",
+    "timestamp_utc": "2026-09-27T01:02:09.049847+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -267,7 +288,7 @@
     "o3_3h": 20.7,
     "no2_3h": 6.0,
     "timestamp_utc": "2026-09-27T00:00:00+00:00",
-    "purpleair_sensor_count": 4,
+    "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 27707,
@@ -285,12 +306,6 @@
         "sensor_index": 54145,
         "name": "HouseYEG",
         "distance_km": 2.5982174146185013,
-        "pm_corr": 0.0
-      },
-      {
-        "sensor_index": 219323,
-        "name": "bill gilhespy complex",
-        "distance_km": 5.173924589531456,
         "pm_corr": 0.0
       }
     ]
