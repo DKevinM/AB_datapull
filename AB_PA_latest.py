@@ -7,6 +7,10 @@ from datetime import datetime, timezone, timedelta
 from supabase import create_client, Client
 import sys
 
+# Region: AB (default) or BC (150 km border band, see PA_BC_pull.py).
+# Selects data/{REGION}_PA_sensors.csv in, data/{REGION}_PM25_map.json out.
+REGION = sys.argv[1].upper() if len(sys.argv) > 1 else "AB"
+
 # Robust PM2.5 calculation (R logic ported) - ADD THESE FUNCTIONS
 def get_best_pm(a, b, avg):
     if pd.isna(a) and not pd.isna(b) and b <= 2000:
@@ -187,7 +191,7 @@ def push_to_supabase(df_result):
             
             record = {
                 "sensor_index": int(row["sensor_index"]),
-                "province": "AB",
+                "province": REGION,
                 "recorded_at": hourly_timestamp.isoformat(),
             
                 # Raw channels
@@ -247,13 +251,13 @@ def main():
     
     # Load your static sensor list from CSV
     try:
-        sensor_df = pd.read_csv("data/AB_PA_sensors.csv")
+        sensor_df = pd.read_csv(f"data/{REGION}_PA_sensors.csv")
         sensor_df["sensor_index"] = pd.to_numeric(sensor_df["sensor_index"], errors="coerce")
         sensor_df = sensor_df.dropna(subset=["sensor_index"])
         sensor_df["sensor_index"] = sensor_df["sensor_index"].astype("int64")
         print(f"Loaded {len(sensor_df)} sensors from CSV")
     except FileNotFoundError:
-        print("Error: data/AB_PA_sensors.csv not found")
+        print(f"Error: data/{REGION}_PA_sensors.csv not found")
         sys.exit(1)
 
         
@@ -497,8 +501,8 @@ def main():
     
     # Ensure data directory exists
     os.makedirs("data", exist_ok=True)
-    result.to_json("data/AB_PM25_map.json", orient="records", indent=2)
-    print(f"Final data saved for {len(result)} sensors to data/AB_PM25_map.json")
+    result.to_json(f"data/{REGION}_PM25_map.json", orient="records", indent=2)
+    print(f"Final data saved for {len(result)} sensors to data/{REGION}_PM25_map.json")
 
     print("Pushing data to Supabase...")
     push_to_supabase(result)
