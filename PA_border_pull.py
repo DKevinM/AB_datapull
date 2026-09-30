@@ -1,30 +1,44 @@
-# PA_BC_pull.py
-# Pull outdoor PurpleAir sensors in BC within BC_BUFFER_KM of the Alberta
-# border and save as CSV (companion to PA_AB_pull.py).
+# PA_border_pull.py
+# Pull outdoor PurpleAir sensors within BUFFER_KM of the Alberta border in a
+# neighbouring jurisdiction and save as CSV (companion to PA_AB_pull.py).
 #
-# Added 2026-09-30: BC border band so upwind smoke from the Elk Valley,
-# Golden/Revelstoke, Valemount and the Peace shows up before it reaches AB.
-# Sizing at the time (outdoor sensors): 100 km = 34, 150 km = 85,
-# 200 km = 178, 250 km = 262. To widen the band, change BC_BUFFER_KM only.
+#   python PA_border_pull.py BC   -> data/BC_PA_sensors.csv
+#   python PA_border_pull.py NT   -> data/NT_PA_sensors.csv
+#
+# Added 2026-09-30 (BC first, NWT same day) so upwind smoke from the Elk
+# Valley, Golden/Revelstoke, Valemount, the Peace and the Hay River / Fort
+# Smith area shows up before it reaches AB. BC sizing at the time (outdoor
+# sensors): 100 km = 34, 150 km = 85, 200 km = 178, 250 km = 262.
+# SK is NOT pulled here: SK_datapull already collects all of SK (Supabase
+# province='SK'); build_pa_regional_aqhi.py cuts the same band from its file.
+# To widen a band, change BUFFER_KM only.
 
 import os
+import sys
 import requests
 import pandas as pd
 import geopandas as gpd
 
 from supabase import create_client
 
-BC_BUFFER_KM = 150
+BUFFER_KM = 150
+
+REGION = sys.argv[1].upper() if len(sys.argv) > 1 else "BC"
+if REGION not in ("BC", "NT"):
+    sys.exit(f"Unknown region {REGION} (use BC or NT)")
 
 # 1) Alberta boundary, buffered in a metric CRS (Canada Atlas Lambert)
 ab = gpd.read_file("data/Alberta.shp")
 ab_m = ab.to_crs(epsg=3978).geometry.union_all()
-band_m = ab_m.buffer(BC_BUFFER_KM * 1000)
+band_m = ab_m.buffer(BUFFER_KM * 1000)
 band_ll = gpd.GeoSeries([band_m], crs=3978).to_crs(epsg=4326)
 
-# 2) bbox of the buffered area, clipped to the BC side (west of 114W)
+# 2) bbox of the buffered area, clipped to the region's side of AB
 minx, miny, maxx, maxy = band_ll.total_bounds
-maxx = -114.0
+if REGION == "BC":
+    maxx = -114.0
+else:
+    miny = 60.0
 
 # 3) Call PurpleAir /v1/sensors endpoint
 url = "https://api.purpleair.com/v1/sensors"
@@ -60,8 +74,9 @@ df["age_days"] = (now_utc - df["last_seen_utc"]).dt.total_seconds() / 86400
 df["active_30d"] = df["age_days"] <= 30
 df["active_7d"] = df["age_days"] <= 7
 
-# 5) Keep BC only: inside the buffer, outside Alberta, 49-60N, west of 114W
-#    (east of AB is SK at 110W, south of 49N is the US, north of 60N is NWT/YT)
+# 5) Keep the region only: inside the buffer and outside Alberta, then
+#    BC = 49-60N west of 114W (east of AB is SK at 110W, south of 49N is the US)
+#    NT = north of 60N (everything north of AB within 150 km is NWT)
 gdf = gpd.GeoDataFrame(
     df,
     geometry=gpd.points_from_xy(df.longitude, df.latitude),
@@ -70,22 +85,22 @@ gdf = gpd.GeoDataFrame(
 
 gdf["border_km"] = (gdf.geometry.distance(ab_m) / 1000).round(1)
 
-bc = gdf[
-    gdf.geometry.within(band_m)
-    & ~gdf.geometry.intersects(ab_m)
-    & gdf["latitude"].between(49, 60, inclusive="left")
-    & (gdf["longitude"] < -114)
-].copy()
-bc["province"] = "BC"
+in_band = gdf.geometry.within(band_m) & ~gdf.geometry.intersects(ab_m)
+if REGION == "BC":
+    in_region = gdf["latitude"].between(49, 60, inclusive="left") & (gdf["longitude"] < -114)
+else:
+    in_region = gdf["latitude"] >= 60
+band = gdf[in_band & in_region].copy()
+band["province"] = REGION
 
-bc_no_geom = pd.DataFrame(bc.drop(columns="geometry"))
+band_no_geom = pd.DataFrame(band.drop(columns="geometry"))
 
 # Save only recently active sensors for downstream live PurpleAir pulls
-bc_live = bc_no_geom[bc_no_geom["active_30d"] == True].copy()
-bc_live.to_csv("data/BC_PA_sensors.csv", index=False)
+band_live = band_no_geom[band_no_geom["active_30d"] == True].copy()
+band_live.to_csv(f"data/{REGION}_PA_sensors.csv", index=False)
 
 print(f"Total sensors from API: {len(gdf)}")
-print(f"BC sensors within {BC_BUFFER_KM} km of AB: {len(bc)} ({len(bc_live)} active 30d)")
+print(f"{REGION} sensors within {BUFFER_KM} km of AB: {len(band)} ({len(band_live)} active 30d)")
 
 # 6) Push sensor metadata into Supabase
 supabase = create_client(
@@ -93,7 +108,7 @@ supabase = create_client(
     os.getenv("SUPABASE_SERVICE_KEY")
 )
 
-payload = bc_no_geom[[
+payload = band_no_geom[[
     "sensor_index",
     "name",
     "latitude",
@@ -107,7 +122,7 @@ payload = bc_no_geom[[
     "province"
 ]].copy()
 
-# No BC networks yet; PA_AB_pull's name matching would mis-tag "Rogers Pass" as PAS
+# No border networks yet; PA_AB_pull's name matching would mis-tag "Rogers Pass" as PAS
 payload["network"] = "OTHER"
 
 payload["last_seen_utc"] = payload["last_seen_utc"].dt.strftime("%Y-%m-%dT%H:%M:%SZ")

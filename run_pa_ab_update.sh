@@ -39,12 +39,15 @@ mkdir -p "$(dirname "$LOCKFILE")"
 
   python AB_PA_latest.py
   python scripts/build_eAQHI.py
-  # BC 150 km border band (PA_BC_pull.py) - map/Supabase only, kept out of AB products; never blocks AB
+  # 150 km border bands (PA_border_pull.py) - map/Supabase only, kept out of AB products; never block AB
   python AB_PA_latest.py BC || echo "WARN: BC PurpleAir pull failed"
+  python AB_PA_latest.py NT || echo "WARN: NT PurpleAir pull failed"
+  # Full-formula AQHI per sensor (PM2.5 + RDAQA O3/NO2), adds aqhi_rg to the map JSONs
+  python scripts/build_pa_regional_aqhi.py || echo "WARN: regional-gas AQHI build failed"
 
   git add data/AB_PM25_map.json
   git add data/eAQHI_map.json
-  git add data/BC_PM25_map.json 2>/dev/null || true
+  git add data/BC_PM25_map.json data/NT_PM25_map.json data/SK_band_PM25_map.json 2>/dev/null || true
 
   if git diff --cached --quiet; then
       echo "No changes to commit."
