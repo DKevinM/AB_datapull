@@ -319,7 +319,8 @@ def main():
     url = "https://api.purpleair.com/v1/sensors"
     headers = {"X-API-Key": api_key}
     params = {
-        "fields": "sensor_index,last_seen,humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b",
+        "fields": "sensor_index,last_seen,humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b,"
+                  "pm2.5_10minute_a,pm2.5_10minute_b,pm2.5_60minute_a,pm2.5_60minute_b",
         "show_only": sensor_id_str
     }
     
@@ -430,55 +431,89 @@ def main():
         return avg, "fallback"
     
     
-    # Apply selection
-    df[["pm_raw", "pm_method"]] = df.apply(
-        lambda x: pd.Series(select_pm(x)),
-        axis=1
-    )
+    # -------- Averaging window (changed 2026-09-30) --------
+    # PurpleAir's instant pm2.5_atm_* is a ~2-minute reading, so one run could
+    # catch a short local puff (Fort St John 212631: 0 -> 523 -> 3 ug/m3 within
+    # 20 min) and hold it on the map for 30 min and in that hour's Supabase row.
+    # Now: map = per-channel 10-minute average, Supabase hourly = per-channel
+    # 60-minute average (the hourly value the AQHI's 3 h mean expects). Both are
+    # ATM-basis like pm2.5_atm_* (pm2.5_a == pm2.5_atm_a for 100% of 3,492
+    # sensors checked), so the selection/RH/QA chain below is unchanged.
+    # Validated: drafts/regional_gas_eaqhi/test4_results.txt - regional-gas
+    # AQHI within +/-1 of official 98.87% (snapshot) -> 99.04% (hourly avg).
+    # Fault guard: a channel stuck at PurpleAir's ~3333 fault code gets an
+    # average that looks plausible (179513: raw 3333/3333 for hours, 10-min
+    # average 257/315 -> would pass QA as 224 ug/m3). If either instant
+    # channel is at fault level, keep the instant values for that sensor so
+    # the checks below reject it exactly as before.
+    FAULT_LEVEL = 1000
+
+    def with_window(frame, minutes):
+        f = frame.copy()
+        inst_a = pd.to_numeric(f["pm2.5_atm_a"], errors="coerce")
+        inst_b = pd.to_numeric(f["pm2.5_atm_b"], errors="coerce")
+        faulty = (inst_a >= FAULT_LEVEL) | (inst_b >= FAULT_LEVEL)
+        for ch, inst in (("a", inst_a), ("b", inst_b)):
+            avg_col = pd.to_numeric(f[f"pm2.5_{minutes}minute_{ch}"], errors="coerce")
+            f[f"pm2.5_atm_{ch}"] = avg_col.fillna(inst).where(~faulty, inst)  # instant if no average yet
+        f["pm2.5_atm"] = f[["pm2.5_atm_a", "pm2.5_atm_b"]].mean(axis=1).where(~faulty, f["pm2.5_atm"])
+        return f
+
+    def process(df):
+        # Apply selection
+        df[["pm_raw", "pm_method"]] = df.apply(
+            lambda x: pd.Series(select_pm(x)),
+            axis=1
+        )
     
-    # Apply RH correction
-    df["pm_corr"] = df.apply(
-        lambda x: correct_pm25(x["pm_raw"], x["humidity"]),
-        axis=1
-    )
+        # Apply RH correction
+        df["pm_corr"] = df.apply(
+            lambda x: correct_pm25(x["pm_raw"], x["humidity"]),
+            axis=1
+        )
     
-    # -------- QA / Ceiling Logic For Map + Model --------
-    quality = df.apply(
-        lambda x: assess_pm_quality(
-            pm_raw=x["pm_raw"],
-            pm_corr=x["pm_corr"],
-            a=x["pm2.5_atm_a"],
-            b=x["pm2.5_atm_b"],
-            method=x["pm_method"],
-            humidity=x["humidity"]
-        ),
-        axis=1
-    )
+        # -------- QA / Ceiling Logic For Map + Model --------
+        quality = df.apply(
+            lambda x: assess_pm_quality(
+                pm_raw=x["pm_raw"],
+                pm_corr=x["pm_corr"],
+                a=x["pm2.5_atm_a"],
+                b=x["pm2.5_atm_b"],
+                method=x["pm_method"],
+                humidity=x["humidity"]
+            ),
+            axis=1
+        )
     
-    quality_df = pd.DataFrame(list(quality))
-    df = pd.concat([df.reset_index(drop=True), quality_df.reset_index(drop=True)], axis=1)
+        quality_df = pd.DataFrame(list(quality))
+        df = pd.concat([df.reset_index(drop=True), quality_df.reset_index(drop=True)], axis=1)
     
-    # Keep original corrected value for Supabase/audit
-    df["pm_corr_original"] = df["pm_corr"]
+        # Keep original corrected value for Supabase/audit
+        df["pm_corr_original"] = df["pm_corr"]
     
-    # IMPORTANT:
-    # Map-facing value.
-    # If use_for_map is FALSE, pm_corr becomes None.
-    # This prevents bogus high values from turning the map red.
-    df["pm_corr"] = df.apply(
-        lambda x: x["pm_corr_clean"] if x["use_for_map"] else None,
-        axis=1
-    )
+        # IMPORTANT:
+        # Map-facing value.
+        # If use_for_map is FALSE, pm_corr becomes None.
+        # This prevents bogus high values from turning the map red.
+        df["pm_corr"] = df.apply(
+            lambda x: x["pm_corr_clean"] if x["use_for_map"] else None,
+            axis=1
+        )
     
-    # Optional colour field for the JSON/map
-    df["color"] = df.apply(
-        lambda x: get_color(x["pm_corr"], x["name"]),
-        axis=1
-    )
+        # Optional colour field for the JSON/map
+        df["color"] = df.apply(
+            lambda x: get_color(x["pm_corr"], x["name"]),
+            axis=1
+        )
     
-    print("PurpleAir QA summary:")
-    print(df["quality_flag"].value_counts(dropna=False))
-    
+
+        print("PurpleAir QA summary:")
+        print(df["quality_flag"].value_counts(dropna=False))
+        return df
+
+    df_hourly = process(with_window(df, 60))   # -> Supabase sensor_readings
+    df = process(with_window(df, 10))          # -> map JSON
+
     # Clean result
     result = df.copy()
 
@@ -504,8 +539,8 @@ def main():
     result.to_json(f"data/{REGION}_PM25_map.json", orient="records", indent=2)
     print(f"Final data saved for {len(result)} sensors to data/{REGION}_PM25_map.json")
 
-    print("Pushing data to Supabase...")
-    push_to_supabase(result)
+    print("Pushing data to Supabase (60-minute averages)...")
+    push_to_supabase(df_hourly)
 
 
 
