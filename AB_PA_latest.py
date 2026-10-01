@@ -91,12 +91,13 @@ def assess_pm_quality(pm_raw, pm_corr, a, b, method, humidity=None):
         else:
             rel_diff = 0
 
-        # Strong channel mismatch
-        if diff_ab > 50 and rel_diff > 0.61:
-            flags.append("channel_disagreement")
-            pm_corr_clean = None
+        # Channel mismatch (changed 2026-10-01): select_pm already fell back to
+        # the LOWER channel, which matched co-located station PM2.5 about as
+        # well as healthy hours (~1.8 ug/m3 median error, test5), so keep it
+        # on the map but out of the model.
+        if (diff_ab > 10 and rel_diff > 0.61) or diff_ab > 50:
+            flags.append("channel_disagreement_lower_used")
             use_for_model = False
-            use_for_map = False
 
     # High humidity caution
     if pd.notna(humidity) and humidity > 90:
@@ -415,8 +416,17 @@ def main():
             if diff > 500:
                 return None, "extreme_diff"
     
-            # Moderate divergence → choose LOWER (safer than max)
-            if diff > 50:
+            # Divergence → choose LOWER (changed 2026-10-01 from diff > 50 only).
+            # drafts/regional_gas_eaqhi/test5_results.txt, 44,675 co-located
+            # hours: averaging with |A-B| 10-20 gave 4.9 ug/m3 median error and
+            # 20-50 gave 10.1 (vs 1.6 when channels agree); the lower channel
+            # alone gave ~1.8. 5 ug/m3 (EPA/Barkjohn) flagged 17% of hours.
+            mean_ab = (a + b) / 2
+            rel = diff / mean_ab if mean_ab > 0 else 0
+            # This includes a lower channel at ~0: in 567 such hours the
+            # station read 1.9 median (>5 only 3%), so the ~0 channel was
+            # right and the high one was the fault. (Not tested in heavy smoke.)
+            if (diff > 10 and rel > 0.61) or diff > 50:
                 return min(a, b), "min_ab"
     
             # Small diff → use average
