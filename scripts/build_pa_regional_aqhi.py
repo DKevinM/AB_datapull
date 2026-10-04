@@ -19,10 +19,23 @@
 # stations). Using RDAQA NO2 instead of a fixed rural background away from
 # stations is the one untested substitution; it is needed for BC/SK/NWT.
 #
+# Local PM2.5 override (added 2026-10-04): the formula alone under-calls in
+# smoke, because Alberta's published AQHI switches to a PM2.5 override then.
+# drafts/regional_gas_eaqhi/test6b_results.txt, 7 co-located sites, official
+# AQHI >= 7 (130 h): formula 26.9% within +/-1, PM-only 59.2%. So aqhi_rg is
+# max(formula, PM-only floor(pm/10)+1) - but only after the local PM reading
+# passes a sanity check (see question_pm_override), so one faulty sensor (the
+# Jasper 2026-09-21 spike kind) can't paint a dot red on its own:
+#   - sensors within NEIGHBOUR_KM: at least one must also read high
+#   - no sensors nearby: a sudden jump must persist one full hourly reading
+# A questioned override is not applied (the formula value stands), is marked
+# aqhi_override="questioned" with the reason in aqhi_check, and newly
+# questioned sensors are written to sitrep_alerts.log.
+#
 # Adds fields to data/{AB,BC,NT}_PM25_map.json in place and writes
 # data/SK_band_PM25_map.json (SK_datapull sensors within 150 km of AB):
 #   aqhi_rg, aqhi_rg_raw, aqhi_method, pm25_3h, o3_ppb, no2_ppb, no2_source,
-#   gas_hour_utc
+#   gas_hour_utc, aqhi_pm_only, aqhi_override, aqhi_check
 
 import glob
 import json
@@ -48,6 +61,17 @@ SK_BAND_KM = 150            # match PA_border_pull.py BUFFER_KM
 NO2_STATION_KM = 25.0
 RDAQA_MAX_AGE_H = 6
 GAS_HOURS = 3
+
+# PM override sanity check (question_pm_override)
+QUESTION_MIN_PM = 30.0       # below this the override is at most AQHI 3 - not worth questioning
+NEIGHBOUR_KM = 30.0
+NEIGHBOUR_CONFIRM_FRAC = 0.3  # a neighbour confirms if it reads >= 30% of this sensor...
+NEIGHBOUR_CONFIRM_MIN = 20.0  # ...and at least 20 ug/m3
+JUMP_FACTOR = 3.0             # "sudden jump" = now > 3 x last hourly reading + 20
+JUMP_ADD = 20.0
+HIST_HOURS = 6
+ALERTS_LOG = Path("/opt/airquality/logs/sitrep_alerts.log")
+QUESTION_STATE = Path("/opt/airquality/logs/pa_override_questioned_state.json")
 
 # Copied from dk_LIFX/update_light_pa.py MONTHLY_AQHI_CORRECTION (fit
 # 2026-09-02 on 8 co-located pairs) - keep the two in step.
@@ -117,13 +141,14 @@ def load_sk_band():
     return [r for r, k in zip(recs, keep) if k]
 
 
-def fetch_pm_3h(sensor_ids):
-    """Mean of the last GAS_HOURS hourly map-clean PM2.5 values per sensor."""
+def fetch_pm_hist(sensor_ids):
+    """Last HIST_HOURS hourly map-clean PM2.5 values per sensor, as
+    {sensor_index: pd.Series indexed by hour, oldest first}."""
     url = os.getenv("SUPABASE_URL")
     key = os.getenv("SUPABASE_SERVICE_KEY")
     if not url or not key or not sensor_ids:
         return {}
-    start = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0) - timedelta(hours=GAS_HOURS - 1)
+    start = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0) - timedelta(hours=HIST_HOURS - 1)
     headers = {"apikey": key, "Authorization": f"Bearer {key}"}
     rows = []
     ids = sorted(set(int(s) for s in sensor_ids))
@@ -152,7 +177,63 @@ def fetch_pm_3h(sensor_ids):
     df = pd.DataFrame(rows)
     df = df[df["use_for_map"] == True]
     df["pm"] = pd.to_numeric(df["pm_corrected_clean"], errors="coerce")
-    return df.dropna(subset=["pm"]).groupby("sensor_index")["pm"].mean().to_dict()
+    df["t"] = pd.to_datetime(df["recorded_at"], utc=True)
+    df = df.dropna(subset=["pm"]).sort_values("t")
+    return {int(k): g.set_index("t")["pm"] for k, g in df.groupby("sensor_index")}
+
+
+def pm_3h_means(hist):
+    """Mean of the last GAS_HOURS hourly values per sensor (same window as before)."""
+    start = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0) - timedelta(hours=GAS_HOURS - 1)
+    out = {}
+    for k, ser in hist.items():
+        recent = ser[ser.index >= start]
+        if len(recent):
+            out[k] = float(recent.mean())
+    return out
+
+
+def question_pm_override(i, pm_now, recs, lats, lons, live_pm, hist):
+    """Return None if the local PM reading can be trusted to override the
+    formula, else a short reason it is questioned."""
+    if pm_now < QUESTION_MIN_PM:
+        return None
+    d = haversine_km(lats[i], lons[i], lats, lons)
+    nb = (d <= NEIGHBOUR_KM) & np.isfinite(live_pm)
+    nb[i] = False
+    if nb.any():
+        need = max(NEIGHBOUR_CONFIRM_FRAC * pm_now, NEIGHBOUR_CONFIRM_MIN)
+        if (live_pm[nb] >= need).any():
+            return None
+        return (f"PM {pm_now:.0f} but {int(nb.sum())} sensor(s) within {NEIGHBOUR_KM:.0f} km "
+                f"read at most {np.nanmax(live_pm[nb]):.0f}")
+    ser = hist.get(int(recs[i]["sensor_index"]))
+    if ser is None or ser.empty:
+        return f"PM {pm_now:.0f}, no nearby sensor and no recent history to confirm it"
+    last = float(ser.iloc[-1])
+    if pm_now > JUMP_FACTOR * last + JUMP_ADD:
+        return (f"PM jumped to {pm_now:.0f} from {last:.0f} at the last hourly reading, "
+                f"no sensor within {NEIGHBOUR_KM:.0f} km to confirm - held until it persists")
+    return None
+
+
+def alert_new_questions(questioned):
+    """Write newly questioned sensors (and ones that cleared) to sitrep_alerts.log."""
+    try:
+        prev = set(json.loads(QUESTION_STATE.read_text()))
+    except Exception:
+        prev = set()
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    lines = [f"{now} ALERT pa_pm_override: sensor {sid} ({name}) questioned - {why}; "
+             f"PM override NOT applied, map shows the formula value"
+             for sid, (name, why) in questioned.items() if str(sid) not in prev]
+    cleared = sorted(prev - {str(s) for s in questioned})
+    if cleared:
+        lines.append(f"{now} ALERT pa_pm_override: resolved - no longer questioned: {', '.join(cleared)}")
+    if lines:
+        with open(ALERTS_LOG, "a") as f:
+            f.write("\n".join(lines) + "\n")
+    QUESTION_STATE.write_text(json.dumps(sorted(str(s) for s in questioned)))
 
 
 def rdaqa_hours():
@@ -220,7 +301,14 @@ def main():
     lons = np.array([float(r["longitude"]) for r in all_recs])
     lats = np.array([float(r["latitude"]) for r in all_recs])
 
-    pm3 = fetch_pm_3h([r["sensor_index"] for r in all_recs])
+    hist = fetch_pm_hist([r["sensor_index"] for r in all_recs])
+    pm3 = pm_3h_means(hist)
+    live_pm = np.array([
+        float(r["pm_corr"]) if r.get("pm_corr") is not None and r.get("use_for_map") is not False
+        and np.isfinite(float(r["pm_corr"])) else np.nan
+        for r in all_recs
+    ])
+    questioned = {}
 
     # RDAQA 3 h means at every sensor
     hours = rdaqa_hours()
@@ -240,7 +328,8 @@ def main():
 
     stations = station_no2_3h()
     month_offset = MONTHLY_AQHI_CORRECTION.get(now.month, 0.0)
-    counts = {"regional_gas": 0, "pm_seasonal": 0, "no_pm": 0, "no2_station": 0}
+    counts = {"regional_gas": 0, "pm_seasonal": 0, "no_pm": 0, "no2_station": 0,
+              "pm_override": 0, "pm_override_questioned": 0}
 
     for i, rec in enumerate(all_recs):
         pm_now = rec.get("pm_corr")
@@ -261,9 +350,21 @@ def main():
                 no2_src = f"station:{stations['StationName'].iloc[j]} ({d[j]:.1f} km)"
                 counts["no2_station"] += 1
 
+        pm_only = math.floor(float(pm_now) / 10) + 1
+        override = check = None
         if np.isfinite(o3_i) and np.isfinite(no2_i):
             raw = aqhi_raw(o3_i, no2_i, pm)
             method = "regional_gas"
+            if pm_only > round(raw):
+                check = question_pm_override(i, float(pm_now), all_recs, lats, lons, live_pm, hist)
+                if check is None:
+                    raw = float(pm_only)
+                    override = "applied"
+                    counts["pm_override"] += 1
+                else:
+                    override = "questioned"
+                    counts["pm_override_questioned"] += 1
+                    questioned[int(rec["sensor_index"])] = (rec.get("name"), check)
         else:
             raw = math.floor(pm / 10) + 1 + month_offset
             method = "pm_seasonal"
@@ -280,7 +381,17 @@ def main():
             no2_ppb=round(float(no2_i), 1) if np.isfinite(no2_i) else None,
             no2_source=no2_src,
             gas_hour_utc=gas_hour if method == "regional_gas" else None,
+            aqhi_pm_only=pm_only,
+            aqhi_override=override,
+            aqhi_check=check,
         )
+
+    try:
+        alert_new_questions(questioned)
+    except Exception as e:
+        print(f"WARN: could not write override alerts: {e}")
+    for sid, (name, why) in questioned.items():
+        print(f"Questioned PM override: {sid} ({name}): {why}")
 
     for region, (path, recs) in region_data.items():
         if recs:
