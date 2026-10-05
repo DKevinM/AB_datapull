@@ -1,0 +1,91 @@
+{
+  "generated_utc": "2026-10-05T16:04:47+00:00",
+  "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
+  "towns": [
+    {
+      "name": "Jasper",
+      "label": "Jasper",
+      "lat": 52.8737,
+      "lon": -118.0814,
+      "sensors_configured": [
+        91675,
+        156679
+      ],
+      "sensors_used": [
+        91675,
+        156679
+      ],
+      "eaqhi": 2,
+      "warning": null,
+      "status": "ok",
+      "method": "regional_gas",
+      "o3_ppb": 17.3,
+      "no2_ppb": 11.3,
+      "formula": 2,
+      "pm_only": 1,
+      "set_by_local_pm": false,
+      "how": "PurpleAir + regional O3 17 / NO2 11 ppb",
+      "pm25": 2.9,
+      "pm25_3h": 4.7,
+      "reading_time_utc": "2026-10-05T16:02+00:00"
+    },
+    {
+      "name": "Barrhead",
+      "label": "Barrhead",
+      "lat": 54.1236,
+      "lon": -114.402,
+      "sensors_configured": [
+        197345,
+        249951
+      ],
+      "sensors_used": [
+        197345,
+        249951
+      ],
+      "eaqhi": 1,
+      "warning": null,
+      "status": "ok",
+      "method": "regional_gas",
+      "o3_ppb": 15.3,
+      "no2_ppb": 3.7,
+      "formula": 1,
+      "pm_only": 1,
+      "set_by_local_pm": false,
+      "how": "PurpleAir + regional O3 15 / NO2 4 ppb",
+      "pm25": 5.3,
+      "pm25_3h": 6.5,
+      "reading_time_utc": "2026-10-05T16:02+00:00"
+    },
+    {
+      "name": "Pembina",
+      "label": "Evansburg / Entwistle",
+      "lat": 53.5963,
+      "lon": -114.9901,
+      "sensors_configured": [
+        83971,
+        91545,
+        166965,
+        249949
+      ],
+      "sensors_used": [
+        83971,
+        91545,
+        166965,
+        249949
+      ],
+      "eaqhi": 2,
+      "warning": null,
+      "status": "ok",
+      "method": "regional_gas",
+      "o3_ppb": 17.8,
+      "no2_ppb": 4.2,
+      "formula": 2,
+      "pm_only": 1,
+      "set_by_local_pm": false,
+      "how": "PurpleAir + regional O3 18 / NO2 4 ppb",
+      "pm25": 4.1,
+      "pm25_3h": 5.2,
+      "reading_time_utc": "2026-10-05T16:02+00:00"
+    }
+  ]
+}
