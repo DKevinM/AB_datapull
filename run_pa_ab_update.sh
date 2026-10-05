@@ -48,6 +48,7 @@ mkdir -p "$(dirname "$LOCKFILE")"
   git add data/AB_PM25_map.json
   git add data/eAQHI_map.json
   git add data/BC_PM25_map.json data/NT_PM25_map.json data/SK_band_PM25_map.json 2>/dev/null || true
+  git add data/community_eaqhi.json 2>/dev/null || true
 
   if git diff --cached --quiet; then
       echo "No changes to commit."

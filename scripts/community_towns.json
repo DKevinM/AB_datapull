@@ -1,0 +1,8 @@
+{
+  "_readme": "Towns that get one estimated AQHI (eAQHI) from their own PurpleAir sensors. build_pa_regional_aqhi.py writes data/community_eaqhi.json from this every 30 min; the LiveMap town diamonds, the LIFX bulbs (lifx_lights, source pa_community) and the dk_LIFX page all read that one file. lat/lon = where the map diamond goes. Only list sensors IN the town (Jasper's SkyTram upper terminal and Barrhead's Neerlandia sensor are left out on purpose). Added 2026-10-05.",
+  "towns": [
+    {"name": "Jasper", "label": "Jasper", "lat": 52.8737, "lon": -118.0814, "sensors": [91675, 156679]},
+    {"name": "Barrhead", "label": "Barrhead", "lat": 54.1236, "lon": -114.4020, "sensors": [197345, 249951]},
+    {"name": "Pembina", "label": "Evansburg / Entwistle", "lat": 53.5963, "lon": -114.9901, "sensors": [83971, 91545, 166965, 249949]}
+  ]
+}

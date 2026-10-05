@@ -400,6 +400,16 @@ def main():
     with open(DATA_DIR / "SK_band_PM25_map.json", "w") as f:
         json.dump(sk_band, f, indent=2)
 
+    # One eAQHI per town (Jasper, Barrhead, Pembina...) - the single source
+    # for the map town diamonds, the LIFX bulbs and the dk_LIFX page.
+    try:
+        from community_eaqhi import write_community_eaqhi
+        towns = write_community_eaqhi(all_recs, DATA_DIR / "community_eaqhi.json")
+        print("Towns: " + "; ".join(f"{t['name']} {t['eaqhi']}" + (f" [{t['warning']}]" if t["warning"] else "")
+                                    for t in towns["towns"]))
+    except Exception as e:
+        print(f"WARN: community eAQHI failed: {e}")
+
     sizes = {r: len(v[1]) for r, v in region_data.items()}
     sizes["SK_band"] = len(sk_band)
     print(f"Sensors: {sizes}; RDAQA hours used: {[h[0] for h in hours] if o3 is not None else 'none'}")
