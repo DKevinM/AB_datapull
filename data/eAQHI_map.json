@@ -30,7 +30,7 @@
     "pm25_est": 3.89,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-06T14:01:59.246610+00:00",
+    "timestamp_utc": "2026-10-06T14:13:15.028913+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
@@ -91,7 +91,7 @@
     "pm25_est": 1.85,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-06T14:01:59.240782+00:00",
+    "timestamp_utc": "2026-10-06T14:13:15.021677+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -125,7 +125,7 @@
     "pm25_est": 0.04,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-06T14:01:59.234132+00:00",
+    "timestamp_utc": "2026-10-06T14:13:15.014452+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -153,7 +153,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-06T14:01:59.279964+00:00",
+    "timestamp_utc": "2026-10-06T14:13:15.064352+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -175,7 +175,7 @@
     "pm25_est": 0.66,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-06T14:01:59.284484+00:00",
+    "timestamp_utc": "2026-10-06T14:13:15.068692+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -203,7 +203,7 @@
     "pm25_est": 1.58,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-06T14:01:59.256582+00:00",
+    "timestamp_utc": "2026-10-06T14:13:15.039768+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -231,7 +231,7 @@
     "pm25_est": 0.16,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-06T14:01:59.262085+00:00",
+    "timestamp_utc": "2026-10-06T14:13:15.046856+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -265,7 +265,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-06T14:01:59.266659+00:00",
+    "timestamp_utc": "2026-10-06T14:13:15.051507+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -276,5 +276,19 @@
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
+  },
+  {
+    "station": "Wabamun",
+    "lat": 53.559462,
+    "lon": -114.465275,
+    "AQHI": 1,
+    "AQHI_type": "mds_direct",
+    "pm25_source": "MDS",
+    "pm25_est": 1.91,
+    "o3_3h": 13.7,
+    "no2_3h": 4.3,
+    "timestamp_utc": "2026-10-06T12:30:00+00:00",
+    "offline_reason": "missing from government feed \u2014 using airshed's own MDS telemetry instead",
+    "mds_only_station": true
   }
 ]
