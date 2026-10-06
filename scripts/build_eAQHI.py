@@ -607,7 +607,7 @@ def push_estimates_to_supabase(results):
 
     records = []
     for r in results:
-        if r.get("AQHI") is None:
+        if r.get("AQHI") is None or r.get("mds_only_station"):
             continue
         reading_date = pd.Timestamp(r["timestamp_utc"]).floor("h").isoformat().replace("+00:00", "Z")
         records.append({"StationName": r["station"], "ParameterName": "AQHI", "ReadingDate": reading_date, "Value": r["AQHI"]})
@@ -676,10 +676,10 @@ def main():
     # (real sensor data via a second independent pipe) before falling back
     # to a PurpleAir-only estimate.
     roster = fetch_station_roster()
+    mds_wide = fetch_mds_wide_table()
+    mds_by_station = {name: g for name, g in mds_wide.groupby("StationName")} if not mds_wide.empty else {}
     if roster:
         offline = get_offline_stations(wide, roster)
-        mds_wide = fetch_mds_wide_table()
-        mds_by_station = {name: g for name, g in mds_wide.groupby("StationName")} if not mds_wide.empty else {}
         for s in offline:
             result = None
             mds_df = mds_by_station.get(s["station"])
@@ -689,6 +689,20 @@ def main():
                 result = build_offline_station_result(s["station"], s["lat"], s["lon"], purple_df)
             if result is not None:
                 results.append(result)
+
+    # Stations that exist only in the airshed's MDS feed - not on the
+    # government roster at all (e.g. Wabamun, collected as backup until
+    # Alberta publishes it, 2026-10-06). Once the government feed starts
+    # reporting the station it drops out of here on its own.
+    roster_names = {s["station"] for s in roster}
+    reporting = set(wide["StationName"].unique()) if not wide.empty else set()
+    for name, mds_df in mds_by_station.items():
+        if name in reporting or name in roster_names:
+            continue
+        result = build_mds_direct_result(name, mds_df, purple_df)
+        if result is not None:
+            result["mds_only_station"] = True   # map only - kept out of aqhi_data
+            results.append(result)
 
     results = sorted(results, key=lambda x: x["station"])
 
