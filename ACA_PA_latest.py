@@ -60,6 +60,14 @@ def get_color(pm, name):
 # Load your static sensor list
 sensor_df = pd.read_csv("data/ACA_sensors.csv")
 sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
+
+# Same dead list as AB_PA_latest.py, so one file takes a broken sensor
+# off both the AB and ACA maps.
+try:
+    dead_ids = set(pd.read_csv("data/dead_list.csv")["sensor_index"].dropna().astype(int))
+    sensor_ids = [s for s in sensor_ids if s not in dead_ids]
+except FileNotFoundError:
+    pass
 sensor_id_str = ",".join(map(str, sensor_ids))
 
 # Build API call
