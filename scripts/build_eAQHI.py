@@ -508,6 +508,91 @@ def build_offline_station_result(station_name, lat, lon, purple_df):
     }
 
 
+def fetch_mds_station_hours(station_names, hours_back=6):
+    """
+    Hourly averages of EVERY parameter for the given MDS-only stations
+    (e.g. Wabamun), for a popup that shows the station's latest hour the
+    way a government station's would. MDS rows are half-hour interval
+    starts; the government's hour-ending H matches the mean of the H-1:00
+    and H-0:30 stamps (checked against Meadows, 2026-10-06). Wind
+    direction is a vector mean. Returns {station: DataFrame indexed by
+    hour-end UTC, one column per parameter plus <param>_n (half-hours used)}.
+    """
+    url = os.environ.get("SUPABASE_URL")
+    key = os.environ.get("SUPABASE_SERVICE_KEY")
+    if not url or not key or not station_names:
+        return {}
+    since = (pd.Timestamp.now(tz="UTC") - pd.Timedelta(hours=hours_back)).isoformat()
+    names = ",".join('"%s"' % n.replace('"', '') for n in station_names)
+    try:
+        r = requests.get(f"{url.rstrip('/')}/rest/v1/api_measurements",
+                         headers={"apikey": key, "Authorization": f"Bearer {key}"},
+                         params={"StationName": f"in.({names})", "reading_time": f"gte.{since}",
+                                 "select": "StationName,parameter_code,value,reading_time", "limit": "5000"},
+                         timeout=30)
+        r.raise_for_status()
+        rows = r.json()
+    except Exception as ex:
+        print(f"Could not fetch MDS hourly detail ({type(ex).__name__}: {ex}); popup keeps the 3h summary.")
+        return {}
+    if not rows:
+        return {}
+    df = pd.DataFrame(rows)
+    df["reading_time"] = pd.to_datetime(df["reading_time"], utc=True, errors="coerce")
+    df["value"] = pd.to_numeric(df["value"], errors="coerce")
+    df = df.dropna(subset=["reading_time", "value"])
+    df["hour_end"] = df["reading_time"].dt.floor("h") + pd.Timedelta(hours=1)
+
+    out = {}
+    for name, g in df.groupby("StationName"):
+        cols = {}
+        for p, gp in g.groupby("parameter_code"):
+            by_hour = gp.groupby("hour_end")["value"]
+            if p == "WD":
+                rad = np.deg2rad(gp["value"])
+                tmp = pd.DataFrame({"hour_end": gp["hour_end"], "s": np.sin(rad), "c": np.cos(rad)}).groupby("hour_end").mean()
+                cols[p] = (np.rad2deg(np.arctan2(tmp["s"], tmp["c"])) % 360)
+            else:
+                cols[p] = by_hour.mean()
+            cols[p + "_n"] = by_hour.count()
+        out[name] = pd.DataFrame(cols).sort_index()
+    return out
+
+
+def apply_latest_hour(result, hours_df):
+    """
+    Attach the station's latest complete hour (both half-hours in) to an
+    mds_direct result and recompute AQHI the standard way: 3-hour mean of
+    HOURLY O3/NO2/PM2.5 ending at that hour. Leaves the result unchanged if
+    there isn't a complete hour or a pollutant is missing for all 3 hours
+    (e.g. inside the nightly gas-analyzer calibration).
+    """
+    if hours_df is None or hours_df.empty:
+        return result
+    n_cols = [c for c in hours_df.columns if c.endswith("_n")]
+    complete = hours_df[hours_df[n_cols].max(axis=1) >= 2]
+    if complete.empty:
+        return result
+    hour_end = complete.index.max()
+    latest = hours_df.loc[hour_end]
+    window = hours_df.loc[hour_end - pd.Timedelta(hours=2): hour_end]
+    means = {p: window[p].mean() if p in window else np.nan for p in ("O3", "NO2", "PM25")}
+    if all(np.isfinite(v) for v in means.values()):
+        result["AQHI"] = compute_aqhi(o3_ppb=means["O3"], no2_ppb=means["NO2"], pm25_ugm3=means["PM25"])
+        result["o3_3h"] = round(float(means["O3"]), 1)
+        result["no2_3h"] = round(float(means["NO2"]), 1)
+        result["pm25_est"] = round(float(means["PM25"]), 2)
+        result["pm25_source"] = "MDS"
+        result["aqhi_method"] = "3h mean of hourly values"
+    result["timestamp_utc"] = hour_end.isoformat()
+    result["latest_hour"] = {
+        "hour_end_utc": hour_end.isoformat(),
+        "values": {p: round(float(latest[p]), 1) for p in hours_df.columns
+                   if not p.endswith("_n") and pd.notna(latest[p])},
+    }
+    return result
+
+
 def build_mds_direct_result(station_name, mds_station_df, purple_df):
     """
     Real reading from the airshed's own MDS telemetry, for a station that's
@@ -696,12 +781,13 @@ def main():
     # reporting the station it drops out of here on its own.
     roster_names = {s["station"] for s in roster}
     reporting = set(wide["StationName"].unique()) if not wide.empty else set()
-    for name, mds_df in mds_by_station.items():
-        if name in reporting or name in roster_names:
-            continue
-        result = build_mds_direct_result(name, mds_df, purple_df)
+    mds_only = [n for n in mds_by_station if n not in reporting and n not in roster_names]
+    hours_by_station = fetch_mds_station_hours(mds_only)
+    for name in mds_only:
+        result = build_mds_direct_result(name, mds_by_station[name], purple_df)
         if result is not None:
             result["mds_only_station"] = True   # map only - kept out of aqhi_data
+            result = apply_latest_hour(result, hours_by_station.get(name))
             results.append(result)
 
     results = sorted(results, key=lambda x: x["station"])
