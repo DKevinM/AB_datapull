@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-07T22:30:12+00:00",
+  "generated_utc": "2026-10-07T23:00:13+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -15,19 +15,19 @@
         91675,
         156679
       ],
-      "eaqhi": 1,
+      "eaqhi": 2,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 14.5,
+      "o3_ppb": 21.6,
       "no2_ppb": 4.0,
-      "formula": 1,
+      "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 14 / NO2 4 ppb",
+      "how": "PurpleAir + regional O3 22 / NO2 4 ppb",
       "pm25": 1.7,
       "pm25_3h": 1.8,
-      "reading_time_utc": "2026-10-07T22:28+00:00"
+      "reading_time_utc": "2026-10-07T22:58+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 30.0,
-      "no2_ppb": 1.0,
+      "o3_ppb": 35.1,
+      "no2_ppb": 0.6,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 30 / NO2 1 ppb",
-      "pm25": 3.3,
+      "how": "PurpleAir + regional O3 35 / NO2 1 ppb",
+      "pm25": 2.9,
       "pm25_3h": 3.4,
-      "reading_time_utc": "2026-10-07T22:29+00:00"
+      "reading_time_utc": "2026-10-07T22:59+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 30.1,
-      "no2_ppb": 1.1,
+      "o3_ppb": 36.3,
+      "no2_ppb": 0.9,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 30 / NO2 1 ppb",
+      "how": "PurpleAir + regional O3 36 / NO2 1 ppb",
       "pm25": 1.0,
-      "pm25_3h": 1.2,
-      "reading_time_utc": "2026-10-07T22:29+00:00"
+      "pm25_3h": 1.1,
+      "reading_time_utc": "2026-10-07T22:59+00:00"
     }
   ]
 }
