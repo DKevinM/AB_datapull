@@ -6,7 +6,7 @@
     "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 8.47,
+    "pm25_est": 7.34,
     "o3_3h": 19.3,
     "no2_3h": 3.0,
     "timestamp_utc": "2026-10-08T07:00:00+00:00",
@@ -16,7 +16,7 @@
         "sensor_index": 49843,
         "name": "WCAS_Breton",
         "distance_km": 2.7912544038525637,
-        "pm_corr": 8.4677419355
+        "pm_corr": 7.3387096774
       }
     ]
   },
@@ -27,35 +27,29 @@
     "AQHI": 3,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 10.21,
+    "pm25_est": 7.74,
     "o3_3h": 15.7,
     "no2_3h": 16.3,
     "timestamp_utc": "2026-10-08T07:00:00+00:00",
-    "purpleair_sensor_count": 4,
+    "purpleair_sensor_count": 3,
     "purpleair_sensors": [
-      {
-        "sensor_index": 320320,
-        "name": "Remington YMCA",
-        "distance_km": 2.607172399745752,
-        "pm_corr": 14.6691176471
-      },
       {
         "sensor_index": 57797,
         "name": "Douglasdale",
         "distance_km": 2.6206506342105347,
-        "pm_corr": 9.8640819964
+        "pm_corr": 7.6674500588
       },
       {
         "sensor_index": 310819,
         "name": "Research Centre",
         "distance_km": 2.9738897839213645,
-        "pm_corr": 7.1774193548
+        "pm_corr": 7.5806451613
       },
       {
         "sensor_index": 320322,
         "name": "Riverbend Community Centre",
         "distance_km": 3.7837690360634695,
-        "pm_corr": 8.104534005
+        "pm_corr": 8.0555555556
       }
     ]
   },
@@ -66,7 +60,7 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 2.86,
+    "pm25_est": 3.15,
     "o3_3h": 18.3,
     "no2_3h": 3.0,
     "timestamp_utc": "2026-10-08T07:00:00+00:00",
@@ -76,7 +70,7 @@
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 2.8629032258
+        "pm_corr": 3.1451612903
       }
     ]
   },
@@ -87,29 +81,35 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.88,
+    "pm25_est": 0.77,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-08T07:33:11.243851+00:00",
-    "purpleair_sensor_count": 3,
+    "timestamp_utc": "2026-10-08T08:02:53.286008+00:00",
+    "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 172951,
         "name": "Goldstick Park",
         "distance_km": 2.1137463525439864,
-        "pm_corr": 0.7731958763
+        "pm_corr": 0.8426183844
       },
       {
         "sensor_index": 277939,
         "name": "Goldbar",
         "distance_km": 2.427827848296649,
-        "pm_corr": 0.8868378812
+        "pm_corr": 0.9891653291
+      },
+      {
+        "sensor_index": 123395,
+        "name": "ACA_Belmont",
+        "distance_km": 3.0599867876304265,
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 323188,
         "name": "AQSU-1759",
         "distance_km": 4.246648190146098,
-        "pm_corr": 1.0906040268
+        "pm_corr": 1.3133154259
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -121,23 +121,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.55,
+    "pm25_est": 0.52,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-08T07:33:11.233451+00:00",
+    "timestamp_utc": "2026-10-08T08:02:53.279858+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 101383,
         "name": "LICA - Lac La Biche",
         "distance_km": 1.671585581145567,
-        "pm_corr": 0.3786057692
+        "pm_corr": 0.3365384615
       },
       {
         "sensor_index": 309766,
         "name": "Alberta Parks - Lakeland",
         "distance_km": 5.137997684866026,
-        "pm_corr": 1.0583778966
+        "pm_corr": 1.0866261398
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -149,17 +149,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.08,
+    "pm25_est": 0.12,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-08T07:33:11.290826+00:00",
+    "timestamp_utc": "2026-10-08T08:02:53.321229+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 33111,
         "name": "PRAMP - Three Creeks",
         "distance_km": 9.629113412928339,
-        "pm_corr": 0.0780189959
+        "pm_corr": 0.1159793814
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -171,23 +171,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.98,
+    "pm25_est": 1.1,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-08T07:33:11.295177+00:00",
+    "timestamp_utc": "2026-10-08T08:02:53.325912+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79371,
         "name": "ACA_Poachers Landing",
         "distance_km": 0.004930675992396872,
-        "pm_corr": 1.0515021459
+        "pm_corr": 1.1764705882
       },
       {
         "sensor_index": 223767,
         "name": "ACA_O\u2019Morrow",
         "distance_km": 4.985152657784274,
-        "pm_corr": 0.2319587629
+        "pm_corr": 0.3148024113
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -199,23 +199,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 1.21,
+    "pm25_est": 1.24,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-08T07:33:11.261956+00:00",
+    "timestamp_utc": "2026-10-08T08:02:53.297509+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 216463,
         "name": "PRAMP - Reno",
         "distance_km": 6.955990242163416,
-        "pm_corr": 0.8870967742
+        "pm_corr": 0.8467741935
       },
       {
         "sensor_index": 33137,
         "name": "PRAMP - Nampa",
         "distance_km": 19.63110909615097,
-        "pm_corr": 2.106545961
+        "pm_corr": 2.3363509749
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -227,29 +227,29 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.63,
+    "pm25_est": 0.72,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-08T07:33:11.270886+00:00",
+    "timestamp_utc": "2026-10-08T08:02:53.303688+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 33111,
         "name": "PRAMP - Three Creeks",
         "distance_km": 10.95201901010693,
-        "pm_corr": 0.0780189959
+        "pm_corr": 0.1159793814
       },
       {
         "sensor_index": 216477,
         "name": "PRAMP - Northern Sunrise County",
         "distance_km": 15.657706479115374,
-        "pm_corr": 1.212006079
+        "pm_corr": 1.2537993921
       },
       {
         "sensor_index": 217749,
         "name": "PRAMP - Good Shepherd School",
         "distance_km": 19.05748653058344,
-        "pm_corr": 0.873015873
+        "pm_corr": 1.1018084394
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -261,17 +261,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.08,
+    "pm25_est": 0.12,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-08T07:33:11.275691+00:00",
+    "timestamp_utc": "2026-10-08T08:02:53.308210+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 33111,
         "name": "PRAMP - Three Creeks",
         "distance_km": 1.4625864311454575,
-        "pm_corr": 0.0780189959
+        "pm_corr": 0.1159793814
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
