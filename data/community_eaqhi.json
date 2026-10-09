@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-09T20:30:11+00:00",
+  "generated_utc": "2026-10-09T21:00:13+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -18,15 +18,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 23.5,
+      "o3_ppb": 18.1,
       "no2_ppb": 2.7,
       "formula": 1,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 24 / NO2 3 ppb",
-      "pm25": 0.0,
-      "pm25_3h": 0.4,
-      "reading_time_utc": "2026-10-09T20:28+00:00"
+      "how": "PurpleAir + regional O3 18 / NO2 3 ppb",
+      "pm25": 0.1,
+      "pm25_3h": 0.3,
+      "reading_time_utc": "2026-10-09T20:58+00:00"
     },
     {
       "name": "Barrhead",
@@ -45,15 +45,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 21.1,
-      "no2_ppb": 1.6,
+      "o3_ppb": 19.1,
+      "no2_ppb": 1.8,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 21 / NO2 2 ppb",
-      "pm25": 8.6,
-      "pm25_3h": 11.8,
-      "reading_time_utc": "2026-10-09T20:29+00:00"
+      "how": "PurpleAir + regional O3 19 / NO2 2 ppb",
+      "pm25": 8.9,
+      "pm25_3h": 10.9,
+      "reading_time_utc": "2026-10-09T20:59+00:00"
     },
     {
       "name": "Pembina",
@@ -72,19 +72,19 @@
         166965,
         249949
       ],
-      "eaqhi": 1,
+      "eaqhi": 2,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 15.3,
-      "no2_ppb": 4.3,
+      "o3_ppb": 14.1,
+      "no2_ppb": 4.7,
       "formula": 1,
-      "pm_only": 1,
-      "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 15 / NO2 4 ppb",
-      "pm25": 9.6,
-      "pm25_3h": 6.4,
-      "reading_time_utc": "2026-10-09T20:29+00:00"
+      "pm_only": 2,
+      "set_by_local_pm": true,
+      "how": "PurpleAir + regional O3 14 / NO2 5 ppb, set by local PM2.5",
+      "pm25": 10.3,
+      "pm25_3h": 7.4,
+      "reading_time_utc": "2026-10-09T20:59+00:00"
     }
   ]
 }
