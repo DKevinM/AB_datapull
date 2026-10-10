@@ -9,7 +9,7 @@
     "pm25_est": 0.0,
     "o3_3h": 14.7,
     "no2_3h": 1.0,
-    "timestamp_utc": "2026-10-10T12:00:00+00:00",
+    "timestamp_utc": "2026-10-10T13:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -29,8 +29,8 @@
     "pm25_source": "PurpleAir",
     "pm25_est": 0.04,
     "o3_3h": 14.3,
-    "no2_3h": 0.3,
-    "timestamp_utc": "2026-10-10T12:00:00+00:00",
+    "no2_3h": 0.7,
+    "timestamp_utc": "2026-10-10T13:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -51,7 +51,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T13:02:14.676736+00:00",
+    "timestamp_utc": "2026-10-10T13:30:05.499630+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
@@ -112,7 +112,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T13:02:14.670713+00:00",
+    "timestamp_utc": "2026-10-10T13:30:05.493067+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -140,7 +140,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T13:02:14.710437+00:00",
+    "timestamp_utc": "2026-10-10T13:30:05.538872+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -159,23 +159,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.98,
+    "pm25_est": 1.22,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T13:02:14.714933+00:00",
+    "timestamp_utc": "2026-10-10T13:30:05.543104+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79371,
         "name": "ACA_Poachers Landing",
         "distance_km": 0.004930675992396872,
-        "pm_corr": 0.9615384615
+        "pm_corr": 1.2179487179
       },
       {
         "sensor_index": 223767,
         "name": "ACA_O\u2019Morrow",
         "distance_km": 4.985152657784274,
-        "pm_corr": 1.1538461538
+        "pm_corr": 1.2820512821
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -190,7 +190,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T13:02:14.687084+00:00",
+    "timestamp_utc": "2026-10-10T13:30:05.513107+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -215,10 +215,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.0,
+    "pm25_est": 0.01,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T13:02:14.692718+00:00",
+    "timestamp_utc": "2026-10-10T13:30:05.521303+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -231,7 +231,7 @@
         "sensor_index": 216477,
         "name": "PRAMP - Northern Sunrise County",
         "distance_km": 15.657706479115374,
-        "pm_corr": 0.0
+        "pm_corr": 0.0320512821
       },
       {
         "sensor_index": 217749,
@@ -252,7 +252,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T13:02:14.697314+00:00",
+    "timestamp_utc": "2026-10-10T13:30:05.526350+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -263,5 +263,35 @@
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
+  },
+  {
+    "station": "Wabamun",
+    "lat": 53.559462,
+    "lon": -114.465275,
+    "AQHI": 1,
+    "AQHI_type": "mds_direct",
+    "pm25_source": "MDS",
+    "pm25_est": 0.25,
+    "o3_3h": 17.4,
+    "no2_3h": 0.2,
+    "timestamp_utc": "2026-10-10T12:00:00+00:00",
+    "offline_reason": "missing from government feed \u2014 using airshed's own MDS telemetry instead",
+    "mds_only_station": true,
+    "aqhi_method": "3h mean of hourly values",
+    "latest_hour": {
+      "hour_end_utc": "2026-10-10T12:00:00+00:00",
+      "values": {
+        "ET": 0.8,
+        "NO": 0.0,
+        "NO2": 0.4,
+        "NOX": 0.0,
+        "O3": 17.0,
+        "PM25": 0.2,
+        "RH": 94.5,
+        "SO2": 1.1,
+        "WD": 344.2,
+        "WS": 10.8
+      }
+    }
   }
 ]
