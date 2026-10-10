@@ -27,7 +27,7 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.0,
+    "pm25_est": 0.04,
     "o3_3h": 14.3,
     "no2_3h": 0.3,
     "timestamp_utc": "2026-10-10T10:00:00+00:00",
@@ -37,7 +37,7 @@
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 0.0
+        "pm_corr": 0.0403225806
       }
     ]
   },
@@ -51,7 +51,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T11:02:30.747926+00:00",
+    "timestamp_utc": "2026-10-10T11:30:10.188651+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
@@ -112,7 +112,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T11:02:30.741549+00:00",
+    "timestamp_utc": "2026-10-10T11:30:10.181916+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -140,7 +140,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T11:02:30.781505+00:00",
+    "timestamp_utc": "2026-10-10T11:30:10.225795+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -162,7 +162,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T11:02:30.785983+00:00",
+    "timestamp_utc": "2026-10-10T11:30:10.230360+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -190,7 +190,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T11:02:30.758497+00:00",
+    "timestamp_utc": "2026-10-10T11:30:10.200353+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -215,10 +215,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.02,
+    "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T11:02:30.764497+00:00",
+    "timestamp_utc": "2026-10-10T11:30:10.206809+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -231,7 +231,7 @@
         "sensor_index": 216477,
         "name": "PRAMP - Northern Sunrise County",
         "distance_km": 15.657706479115374,
-        "pm_corr": 0.0641025641
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 217749,
@@ -252,7 +252,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T11:02:30.768741+00:00",
+    "timestamp_utc": "2026-10-10T11:30:10.212164+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -271,26 +271,26 @@
     "AQHI": 1,
     "AQHI_type": "mds_direct",
     "pm25_source": "MDS",
-    "pm25_est": 0.23,
-    "o3_3h": 16.5,
-    "no2_3h": 0.2,
-    "timestamp_utc": "2026-10-10T09:00:00+00:00",
+    "pm25_est": 0.25,
+    "o3_3h": 17.1,
+    "no2_3h": 0.1,
+    "timestamp_utc": "2026-10-10T10:00:00+00:00",
     "offline_reason": "missing from government feed \u2014 using airshed's own MDS telemetry instead",
     "mds_only_station": true,
     "aqhi_method": "3h mean of hourly values",
     "latest_hour": {
-      "hour_end_utc": "2026-10-10T09:00:00+00:00",
+      "hour_end_utc": "2026-10-10T10:00:00+00:00",
       "values": {
-        "ET": 0.9,
+        "ET": 1.0,
         "NO": 0.0,
-        "NO2": 0.1,
+        "NO2": 0.0,
         "NOX": 0.0,
-        "O3": 17.4,
-        "PM25": 0.3,
-        "RH": 95.3,
-        "SO2": 0.8,
-        "WD": 348.3,
-        "WS": 10.3
+        "O3": 17.9,
+        "PM25": 0.2,
+        "RH": 94.4,
+        "SO2": 1.1,
+        "WD": 353.7,
+        "WS": 10.2
       }
     }
   }
