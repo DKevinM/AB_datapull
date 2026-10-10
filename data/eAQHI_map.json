@@ -6,7 +6,7 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.89,
+    "pm25_est": 1.05,
     "o3_3h": 16.0,
     "no2_3h": 1.3,
     "timestamp_utc": "2026-10-10T04:00:00+00:00",
@@ -16,7 +16,7 @@
         "sensor_index": 49843,
         "name": "WCAS_Breton",
         "distance_km": 2.7912544038525637,
-        "pm_corr": 0.8870967742
+        "pm_corr": 1.0483870968
       }
     ]
   },
@@ -48,23 +48,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.46,
+    "pm25_est": 0.96,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T05:04:56.922559+00:00",
+    "timestamp_utc": "2026-10-10T05:30:08.733803+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 172951,
         "name": "Goldstick Park",
         "distance_km": 2.1137463525439864,
-        "pm_corr": 0.7061276287
+        "pm_corr": 1.3379260334
       },
       {
         "sensor_index": 277939,
         "name": "Goldbar",
         "distance_km": 2.427827848296649,
-        "pm_corr": 0.4487179487
+        "pm_corr": 0.8333333333
       },
       {
         "sensor_index": 123395,
@@ -76,7 +76,7 @@
         "sensor_index": 323188,
         "name": "AQSU-1759",
         "distance_km": 4.246648190146098,
-        "pm_corr": 0.608974359
+        "pm_corr": 1.7628205128
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -112,7 +112,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T05:04:56.913230+00:00",
+    "timestamp_utc": "2026-10-10T05:30:08.726379+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -140,7 +140,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T05:04:56.975234+00:00",
+    "timestamp_utc": "2026-10-10T05:30:08.771522+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -159,23 +159,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.35,
+    "pm25_est": 0.29,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T05:04:56.981692+00:00",
+    "timestamp_utc": "2026-10-10T05:30:08.775773+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79371,
         "name": "ACA_Poachers Landing",
         "distance_km": 0.004930675992396872,
-        "pm_corr": 0.0641025641
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 223767,
         "name": "ACA_O\u2019Morrow",
         "distance_km": 4.985152657784274,
-        "pm_corr": 3.1730769231
+        "pm_corr": 3.141025641
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -190,7 +190,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T05:04:56.939729+00:00",
+    "timestamp_utc": "2026-10-10T05:30:08.746477+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -218,7 +218,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T05:04:56.948530+00:00",
+    "timestamp_utc": "2026-10-10T05:30:08.753156+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -252,7 +252,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T05:04:56.955445+00:00",
+    "timestamp_utc": "2026-10-10T05:30:08.758784+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -271,26 +271,26 @@
     "AQHI": 1,
     "AQHI_type": "mds_direct",
     "pm25_source": "MDS",
-    "pm25_est": 5.66,
-    "o3_3h": 17.5,
-    "no2_3h": 1.5,
-    "timestamp_utc": "2026-10-10T03:00:00+00:00",
+    "pm25_est": 1.59,
+    "o3_3h": 18.7,
+    "no2_3h": 1.0,
+    "timestamp_utc": "2026-10-10T04:00:00+00:00",
     "offline_reason": "missing from government feed \u2014 using airshed's own MDS telemetry instead",
     "mds_only_station": true,
     "aqhi_method": "3h mean of hourly values",
     "latest_hour": {
-      "hour_end_utc": "2026-10-10T03:00:00+00:00",
+      "hour_end_utc": "2026-10-10T04:00:00+00:00",
       "values": {
-        "ET": 5.2,
+        "ET": 3.3,
         "NO": 0.0,
-        "NO2": 1.1,
-        "NOX": 0.3,
-        "O3": 17.5,
+        "NO2": 0.4,
+        "NOX": 0.0,
+        "O3": 22.9,
         "PM25": 0.4,
-        "RH": 94.7,
-        "SO2": 0.9,
-        "WD": 326.3,
-        "WS": 13.4
+        "RH": 94.8,
+        "SO2": 1.0,
+        "WD": 353.9,
+        "WS": 12.4
       }
     }
   }
