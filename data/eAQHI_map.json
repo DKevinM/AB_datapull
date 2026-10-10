@@ -6,17 +6,17 @@
     "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 12.5,
+    "pm25_est": 12.02,
     "o3_3h": 18.0,
-    "no2_3h": 2.7,
-    "timestamp_utc": "2026-10-09T23:00:00+00:00",
+    "no2_3h": 3.0,
+    "timestamp_utc": "2026-10-10T00:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 49843,
         "name": "WCAS_Breton",
         "distance_km": 2.7912544038525637,
-        "pm_corr": 12.5
+        "pm_corr": 12.0161290323
       }
     ]
   },
@@ -27,17 +27,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.04,
+    "pm25_est": 0.12,
     "o3_3h": 13.7,
     "no2_3h": 1.7,
-    "timestamp_utc": "2026-10-09T23:00:00+00:00",
+    "timestamp_utc": "2026-10-10T00:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 0.0403225806
+        "pm_corr": 0.1209677419
       }
     ]
   },
@@ -45,38 +45,32 @@
     "station": "Edmonton-Beverly",
     "lat": 53.56693,
     "lon": -113.39849,
-    "AQHI": 1,
+    "AQHI": 2,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 9.38,
+    "pm25_est": 12.19,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T00:03:51.458726+00:00",
-    "purpleair_sensor_count": 4,
+    "timestamp_utc": "2026-10-10T00:30:09.204533+00:00",
+    "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 172951,
         "name": "Goldstick Park",
         "distance_km": 2.1137463525439864,
-        "pm_corr": 9.587628866
+        "pm_corr": 11.3659793814
       },
       {
         "sensor_index": 277939,
         "name": "Goldbar",
         "distance_km": 2.427827848296649,
-        "pm_corr": 12.7072141213
-      },
-      {
-        "sensor_index": 123395,
-        "name": "ACA_Belmont",
-        "distance_km": 3.0599867876304265,
-        "pm_corr": 2.5
+        "pm_corr": 11.8280632411
       },
       {
         "sensor_index": 323188,
         "name": "AQSU-1759",
         "distance_km": 4.246648190146098,
-        "pm_corr": 12.7072141213
+        "pm_corr": 14.4565217391
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -88,17 +82,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.05,
+    "pm25_est": 0.02,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T00:03:51.451488+00:00",
+    "timestamp_utc": "2026-10-10T00:30:09.197779+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 101383,
         "name": "LICA - Lac La Biche",
         "distance_km": 1.671585581145567,
-        "pm_corr": 0.0641025641
+        "pm_corr": 0.0320512821
       },
       {
         "sensor_index": 309766,
@@ -119,7 +113,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T00:03:51.492644+00:00",
+    "timestamp_utc": "2026-10-10T00:30:09.243828+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -138,10 +132,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.23,
+    "pm25_est": 0.27,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T00:03:51.497346+00:00",
+    "timestamp_utc": "2026-10-10T00:30:09.249422+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -154,7 +148,7 @@
         "sensor_index": 223767,
         "name": "ACA_O\u2019Morrow",
         "distance_km": 4.985152657784274,
-        "pm_corr": 2.5320512821
+        "pm_corr": 3.0128205128
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -169,7 +163,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T00:03:51.469794+00:00",
+    "timestamp_utc": "2026-10-10T00:30:09.215937+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -194,10 +188,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.44,
+    "pm25_est": 0.54,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T00:03:51.475352+00:00",
+    "timestamp_utc": "2026-10-10T00:30:09.224828+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -210,13 +204,13 @@
         "sensor_index": 216477,
         "name": "PRAMP - Northern Sunrise County",
         "distance_km": 15.657706479115374,
-        "pm_corr": 0.0641025641
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 217749,
         "name": "PRAMP - Good Shepherd School",
         "distance_km": 19.05748653058344,
-        "pm_corr": 1.6666666667
+        "pm_corr": 2.1474358974
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -231,7 +225,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T00:03:51.479714+00:00",
+    "timestamp_utc": "2026-10-10T00:30:09.230352+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -250,26 +244,26 @@
     "AQHI": 2,
     "AQHI_type": "mds_direct",
     "pm25_source": "MDS",
-    "pm25_est": 7.87,
-    "o3_3h": 18.0,
-    "no2_3h": 4.2,
-    "timestamp_utc": "2026-10-09T22:00:00+00:00",
+    "pm25_est": 9.36,
+    "o3_3h": 18.1,
+    "no2_3h": 3.6,
+    "timestamp_utc": "2026-10-09T23:00:00+00:00",
     "offline_reason": "missing from government feed \u2014 using airshed's own MDS telemetry instead",
     "mds_only_station": true,
     "aqhi_method": "3h mean of hourly values",
     "latest_hour": {
-      "hour_end_utc": "2026-10-09T22:00:00+00:00",
+      "hour_end_utc": "2026-10-09T23:00:00+00:00",
       "values": {
-        "ET": 8.5,
+        "ET": 8.6,
         "NO": 0.0,
-        "NO2": 3.4,
-        "NOX": 2.7,
-        "O3": 18.5,
-        "PM25": 9.2,
-        "RH": 83.0,
-        "SO2": 1.0,
-        "WD": 331.6,
-        "WS": 6.9
+        "NO2": 2.9,
+        "NOX": 2.1,
+        "O3": 18.4,
+        "PM25": 9.8,
+        "RH": 83.6,
+        "SO2": 0.8,
+        "WD": 321.8,
+        "WS": 5.9
       }
     }
   }
