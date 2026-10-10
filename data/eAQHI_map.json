@@ -7,9 +7,9 @@
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
     "pm25_est": 0.0,
-    "o3_3h": 16.3,
+    "o3_3h": 16.0,
     "no2_3h": 0.7,
-    "timestamp_utc": "2026-10-10T08:00:00+00:00",
+    "timestamp_utc": "2026-10-10T09:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -51,7 +51,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T09:02:10.250923+00:00",
+    "timestamp_utc": "2026-10-10T09:32:10.276936+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -83,9 +83,9 @@
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
     "pm25_est": 0.0,
-    "o3_3h": 22.3,
+    "o3_3h": 21.7,
     "no2_3h": 0.0,
-    "timestamp_utc": "2026-10-10T08:00:00+00:00",
+    "timestamp_utc": "2026-10-10T09:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -106,7 +106,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T09:02:10.244290+00:00",
+    "timestamp_utc": "2026-10-10T09:32:10.270696+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -134,7 +134,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T09:02:10.283489+00:00",
+    "timestamp_utc": "2026-10-10T09:32:10.308982+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -156,7 +156,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T09:02:10.287778+00:00",
+    "timestamp_utc": "2026-10-10T09:32:10.313226+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -184,7 +184,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T09:02:10.261102+00:00",
+    "timestamp_utc": "2026-10-10T09:32:10.286856+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -212,7 +212,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T09:02:10.266638+00:00",
+    "timestamp_utc": "2026-10-10T09:32:10.292133+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -246,7 +246,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-10T09:02:10.270795+00:00",
+    "timestamp_utc": "2026-10-10T09:32:10.296492+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -265,25 +265,25 @@
     "AQHI": 1,
     "AQHI_type": "mds_direct",
     "pm25_source": "MDS",
-    "pm25_est": 0.27,
-    "o3_3h": 17.7,
-    "no2_3h": 0.4,
-    "timestamp_utc": "2026-10-10T07:00:00+00:00",
+    "pm25_est": 0.25,
+    "o3_3h": 16.4,
+    "no2_3h": 0.3,
+    "timestamp_utc": "2026-10-10T08:00:00+00:00",
     "offline_reason": "missing from government feed \u2014 using airshed's own MDS telemetry instead",
     "mds_only_station": true,
     "aqhi_method": "3h mean of hourly values",
     "latest_hour": {
-      "hour_end_utc": "2026-10-10T07:00:00+00:00",
+      "hour_end_utc": "2026-10-10T08:00:00+00:00",
       "values": {
         "ET": 0.7,
         "NO": 0.0,
-        "NO2": 0.4,
+        "NO2": 0.3,
         "NOX": 0.0,
-        "O3": 16.0,
+        "O3": 16.2,
         "PM25": 0.2,
         "RH": 96.4,
-        "SO2": 0.8,
-        "WD": 334.0,
+        "SO2": 1.0,
+        "WD": 335.9,
         "WS": 9.2
       }
     }
