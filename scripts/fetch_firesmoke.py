@@ -77,12 +77,25 @@ else:
     cols = pm.shape[2]
     
 
-# approximate geographic bounds of the grid
-lon_min, lon_max = -145, -85
-lat_min, lat_max = 35, 75
+# Grid geometry comes from the file itself (IOAPI attributes). Until 2026-10-14
+# this was a hard-coded "approximate" box (-145..-85, 35..75) that put every
+# smoke cell 450-1000 km from its true location.
+if int(ds.attrs.get("GDTYP", 1)) != 1:
+    raise SystemExit(f"Unexpected FireSmoke grid type GDTYP={ds.attrs.get('GDTYP')} (expected 1 = lat/lon)")
+lon_min = float(ds.attrs["XORIG"])
+lat_min = float(ds.attrs["YORIG"])
+lon_step = float(ds.attrs["XCELL"])
+lat_step = float(ds.attrs["YCELL"])
+assert int(ds.attrs["NCOLS"]) == cols and int(ds.attrs["NROWS"]) == rows, "grid attrs disagree with PM25 shape"
+lon_max = lon_min + lon_step * cols
+lat_max = lat_min + lat_step * rows
+print(f"FireSmoke grid: lon {lon_min}..{lon_max:.2f}, lat {lat_min}..{lat_max:.2f}, {lon_step} x {lat_step} deg")
 
-lon_step = (lon_max - lon_min) / cols
-lat_step = (lat_max - lat_min) / rows
+# Forecast frames are relative to NOW, not to the model start (which can be
+# several hours old): "now" = the model hour nearest the current clock.
+_now_utc = datetime.utcnow()
+hour0 = max(0, int(round((_now_utc - smoke_time).total_seconds() / 3600)))
+print(f"Model start {smoke_time} UTC, now {_now_utc:%Y-%m-%d %H:%M} UTC -> 'now' = model hour {hour0}")
 
 
 
@@ -126,6 +139,7 @@ norm = mcolors.PowerNorm(
 
 for name, t in forecast_hours.items():
 
+    t = hour0 + t
     forecast_time = smoke_time + timedelta(hours=t)
     print("Processing:", name, forecast_time)
 
@@ -205,75 +219,43 @@ for name, t in forecast_hours.items():
 
 png_hours = list(range(0, 25, 2))
 
+# The maps (LiveMap, SK_Air_Map) draw every frame with L.imageOverlay over the
+# fixed box [LAT_MIN, LON_MIN]..[LAT_MAX, LON_MAX]. Leaflet stretches an image
+# linearly in Web Mercator, so each output row is sampled at the latitude that
+# Mercator row really represents. (Before 2026-10-14 each frame was cropped to
+# its own smoke extent and equirectangular, so it landed somewhere else again.)
+PNG_W = 1200
+_merc = lambda la: np.log(np.tan(np.pi / 4 + np.radians(la) / 2))
+_y_top, _y_bot = _merc(LAT_MAX), _merc(LAT_MIN)
+PNG_H = int(round(PNG_W * (_y_top - _y_bot) / np.radians(LON_MAX - LON_MIN)))
+_px_lon = LON_MIN + (np.arange(PNG_W) + 0.5) / PNG_W * (LON_MAX - LON_MIN)
+_px_lat = np.degrees(2 * np.arctan(np.exp(_y_top - (np.arange(PNG_H) + 0.5) / PNG_H * (_y_top - _y_bot))) - np.pi / 2)
+_ci = np.floor((_px_lon - lon_min) / lon_step).astype(int)
+_rj = np.floor((_px_lat - lat_min) / lat_step).astype(int)       # IOAPI row 0 = southern edge
+_ok = (_rj[:, None] >= 0) & (_rj[:, None] < rows) & (_ci[None, :] >= 0) & (_ci[None, :] < cols)
+_ci, _rj = np.clip(_ci, 0, cols - 1), np.clip(_rj, 0, rows - 1)
+
 for t in png_hours:
 
     print(f"Building PNG frame: {t:02d}h")
 
-    if t >= pm.shape[0]:
+    k = hour0 + t
+    if k >= pm.shape[0]:
         print(f"Skipping PNG {t:02d}h")
         continue
 
     if "LAY" in pm.dims:
-        grid = pm.isel(TSTEP=t, LAY=0).values
+        grid = pm.isel(TSTEP=k, LAY=0).values
     else:
-        grid = pm.isel(TSTEP=t).values
+        grid = pm.isel(TSTEP=k).values
 
-    grid[grid < 0.1] = np.nan
+    sampled = np.where(_ok, grid[_rj[:, None], _ci[None, :]], np.nan)
+    sampled[sampled < 0.1] = np.nan
 
-    grid_ds = grid[::STEP, ::STEP]
-
-    region_mask_ds = region_mask[::STEP, ::STEP]
-
-    masked_grid = np.where(region_mask_ds, grid_ds, np.nan)
-
-    # Find rows/columns containing valid smoke
-    valid = ~np.isnan(masked_grid)
-    
-    if not np.any(valid):
-        print(f"No valid smoke for {t:02d}h")
-        continue
-    
-    rows = np.where(valid.any(axis=1))[0]
-    cols = np.where(valid.any(axis=0))[0]
-    
-    rmin, rmax = rows[0], rows[-1]
-    cmin, cmax = cols[0], cols[-1]
-    
-    # Crop image
-    masked_grid = masked_grid[rmin:rmax+1, cmin:cmax+1]
-    
-    # Geographic bounds of cropped image
-    crop_lat_min = lat_ds[rmin]
-    crop_lat_max = lat_ds[rmax] + lat_step * STEP
-    crop_lon_min = lon_ds[cmin]
-    crop_lon_max = lon_ds[cmax] + lon_step * STEP
-    
-    print(
-        f"PNG bounds: "
-        f"{crop_lat_min:.4f}, {crop_lon_min:.4f} -> "
-        f"{crop_lat_max:.4f}, {crop_lon_max:.4f}"
-    )
-    
-    alpha_mask = ~np.isnan(masked_grid)
-    
-    safe_grid = np.nan_to_num(masked_grid, nan=0.0)
-
-    rgba = cmap(norm(safe_grid))
-
+    alpha_mask = ~np.isnan(sampled)
+    rgba = cmap(norm(np.nan_to_num(sampled, nan=0.0)))
     rgba[..., 3] = np.where(alpha_mask, rgba[..., 3], 0)
-
-    img = (rgba * 255).astype(np.uint8)
-
-    img = np.flipud(img)
-
-    image = Image.fromarray(img, mode="RGBA")
-
-    UPSCALE = 3
-
-    image = image.resize(
-        (image.width * UPSCALE, image.height * UPSCALE),
-        resample=Image.BICUBIC
-    )
+    image = Image.fromarray((rgba * 255).astype(np.uint8), mode="RGBA")   # row 0 = north already
 
     png_out = DATA_DIR / f"firesmoke_{t:02d}h.png"
 
