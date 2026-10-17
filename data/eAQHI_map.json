@@ -6,17 +6,17 @@
     "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.65,
-    "o3_3h": 31.3,
+    "pm25_est": 0.73,
+    "o3_3h": 26.7,
     "no2_3h": 1.0,
-    "timestamp_utc": "2026-10-17T09:00:00+00:00",
+    "timestamp_utc": "2026-10-17T10:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 49843,
         "name": "WCAS_Breton",
         "distance_km": 2.7912544038525637,
-        "pm_corr": 0.6451612903
+        "pm_corr": 0.7258064516
       }
     ]
   },
@@ -27,17 +27,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 1.33,
-    "o3_3h": 11.3,
-    "no2_3h": 5.0,
-    "timestamp_utc": "2026-10-17T09:00:00+00:00",
+    "pm25_est": 1.25,
+    "o3_3h": 13.3,
+    "no2_3h": 4.3,
+    "timestamp_utc": "2026-10-17T10:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 1.3306451613
+        "pm_corr": 1.25
       }
     ]
   },
@@ -48,29 +48,35 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 3.48,
+    "pm25_est": 2.72,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-17T10:00:39.899968+00:00",
-    "purpleair_sensor_count": 3,
+    "timestamp_utc": "2026-10-17T10:30:05.691659+00:00",
+    "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 172951,
         "name": "Goldstick Park",
         "distance_km": 2.1137463525439864,
-        "pm_corr": 3.9717425432
+        "pm_corr": 4.0433403805
       },
       {
         "sensor_index": 277939,
         "name": "Goldbar",
         "distance_km": 2.427827848296649,
-        "pm_corr": 3.1552587646
+        "pm_corr": 2.8923205342
+      },
+      {
+        "sensor_index": 123395,
+        "name": "ACA_Belmont",
+        "distance_km": 3.0599867876304265,
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 323188,
         "name": "AQSU-1759",
         "distance_km": 4.246648190146098,
-        "pm_corr": 3.0375647668
+        "pm_corr": 3.5204081633
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -82,23 +88,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 1.08,
+    "pm25_est": 1.1,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-17T10:00:39.893985+00:00",
+    "timestamp_utc": "2026-10-17T10:30:05.685356+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 101383,
         "name": "LICA - Lac La Biche",
         "distance_km": 1.671585581145567,
-        "pm_corr": 0.8938814532
+        "pm_corr": 0.9069695084
       },
       {
         "sensor_index": 309766,
         "name": "Alberta Parks - Lakeland",
         "distance_km": 5.137997684866026,
-        "pm_corr": 1.6383989145
+        "pm_corr": 1.7063492063
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -113,7 +119,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-17T10:00:39.932855+00:00",
+    "timestamp_utc": "2026-10-17T10:30:05.726598+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -132,10 +138,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 2.28,
+    "pm25_est": 2.31,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-17T10:00:39.937312+00:00",
+    "timestamp_utc": "2026-10-17T10:30:05.731436+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -148,7 +154,7 @@
         "sensor_index": 223767,
         "name": "ACA_O\u2019Morrow",
         "distance_km": 4.985152657784274,
-        "pm_corr": 1.4119804401
+        "pm_corr": 1.6473105134
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -160,23 +166,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 3.16,
+    "pm25_est": 5.37,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-17T10:00:39.910179+00:00",
+    "timestamp_utc": "2026-10-17T10:30:05.702373+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 216463,
         "name": "PRAMP - Reno",
         "distance_km": 6.955990242163416,
-        "pm_corr": 3.7534818942
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 33137,
         "name": "PRAMP - Nampa",
         "distance_km": 19.63110909615097,
-        "pm_corr": 1.4865844815
+        "pm_corr": 20.5147058824
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -188,10 +194,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.19,
+    "pm25_est": 0.21,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-17T10:00:39.915651+00:00",
+    "timestamp_utc": "2026-10-17T10:30:05.707827+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -204,13 +210,13 @@
         "sensor_index": 216477,
         "name": "PRAMP - Northern Sunrise County",
         "distance_km": 15.657706479115374,
-        "pm_corr": 0.3510854817
+        "pm_corr": 0.3148024113
       },
       {
         "sensor_index": 217749,
         "name": "PRAMP - Good Shepherd School",
         "distance_km": 19.05748653058344,
-        "pm_corr": 0.3225806452
+        "pm_corr": 0.4291044776
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -225,7 +231,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-17T10:00:39.919993+00:00",
+    "timestamp_utc": "2026-10-17T10:30:05.711938+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
