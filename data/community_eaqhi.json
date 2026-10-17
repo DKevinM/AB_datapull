@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-16T23:31:38+00:00",
+  "generated_utc": "2026-10-17T00:00:11+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -18,15 +18,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 34.6,
+      "o3_ppb": 38.2,
       "no2_ppb": 2.3,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 35 / NO2 2 ppb",
-      "pm25": 1.7,
-      "pm25_3h": 2.0,
-      "reading_time_utc": "2026-10-16T23:30+00:00"
+      "how": "PurpleAir + regional O3 38 / NO2 2 ppb",
+      "pm25": 3.3,
+      "pm25_3h": 1.9,
+      "reading_time_utc": "2026-10-16T23:58+00:00"
     },
     {
       "name": "Barrhead",
@@ -45,15 +45,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 22.2,
-      "no2_ppb": 3.0,
+      "o3_ppb": 29.5,
+      "no2_ppb": 2.6,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 22 / NO2 3 ppb",
-      "pm25": 4.6,
-      "pm25_3h": 4.1,
-      "reading_time_utc": "2026-10-16T23:29+00:00"
+      "how": "PurpleAir + regional O3 30 / NO2 3 ppb",
+      "pm25": 5.8,
+      "pm25_3h": 4.0,
+      "reading_time_utc": "2026-10-16T23:59+00:00"
     },
     {
       "name": "Pembina",
@@ -72,19 +72,19 @@
         166965,
         249949
       ],
-      "eaqhi": 1,
+      "eaqhi": 2,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 21.3,
+      "o3_ppb": 28.3,
       "no2_ppb": 2.6,
-      "formula": 1,
+      "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 21 / NO2 3 ppb",
-      "pm25": 1.7,
-      "pm25_3h": 1.9,
-      "reading_time_utc": "2026-10-16T23:31+00:00"
+      "how": "PurpleAir + regional O3 28 / NO2 3 ppb",
+      "pm25": 2.3,
+      "pm25_3h": 1.7,
+      "reading_time_utc": "2026-10-16T23:59+00:00"
     }
   ]
 }
