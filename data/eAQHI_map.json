@@ -6,17 +6,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 1.69,
-    "o3_3h": 16.7,
-    "no2_3h": 3.0,
-    "timestamp_utc": "2026-10-19T06:00:00+00:00",
+    "pm25_est": 2.42,
+    "o3_3h": 13.7,
+    "no2_3h": 3.7,
+    "timestamp_utc": "2026-10-19T07:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 49843,
         "name": "WCAS_Breton",
         "distance_km": 2.7912544038525637,
-        "pm_corr": 1.6935483871
+        "pm_corr": 2.4193548387
       }
     ]
   },
@@ -27,17 +27,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.2,
-    "o3_3h": 11.3,
-    "no2_3h": 8.0,
-    "timestamp_utc": "2026-10-19T07:00:00+00:00",
+    "pm25_est": 0.52,
+    "o3_3h": 9.3,
+    "no2_3h": 6.7,
+    "timestamp_utc": "2026-10-19T08:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 0.2016129032
+        "pm_corr": 0.5241935484
       }
     ]
   },
@@ -45,32 +45,38 @@
     "station": "Edmonton-Beverly",
     "lat": 53.56693,
     "lon": -113.39849,
-    "AQHI": 1,
+    "AQHI": 2,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 6.31,
+    "pm25_est": 10.24,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-19T08:00:35.053838+00:00",
-    "purpleair_sensor_count": 3,
+    "timestamp_utc": "2026-10-19T08:30:07.436416+00:00",
+    "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 172951,
         "name": "Goldstick Park",
         "distance_km": 2.1137463525439864,
-        "pm_corr": 7.609223301
+        "pm_corr": 4.6278317152
       },
       {
         "sensor_index": 277939,
         "name": "Goldbar",
         "distance_km": 2.427827848296649,
-        "pm_corr": 7.0084007467
+        "pm_corr": 20.896656535
       },
       {
         "sensor_index": 123395,
         "name": "ACA_Belmont",
         "distance_km": 3.0599867876304265,
-        "pm_corr": 3.5483870968
+        "pm_corr": 3.4677419355
+      },
+      {
+        "sensor_index": 323188,
+        "name": "AQSU-1759",
+        "distance_km": 4.246648190146098,
+        "pm_corr": 12.2919010124
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -85,7 +91,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-19T08:00:35.044711+00:00",
+    "timestamp_utc": "2026-10-19T08:30:07.429738+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -113,14 +119,14 @@
     "pm25_est": 0.04,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-19T08:00:35.101907+00:00",
+    "timestamp_utc": "2026-10-19T08:30:07.474230+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 33111,
         "name": "PRAMP - Three Creeks",
         "distance_km": 9.629113412928339,
-        "pm_corr": 0.0367647059
+        "pm_corr": 0.0375536481
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -135,7 +141,7 @@
     "pm25_est": 0.06,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-19T08:00:35.109030+00:00",
+    "timestamp_utc": "2026-10-19T08:30:07.479621+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -160,23 +166,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.92,
+    "pm25_est": 1.19,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-19T08:00:35.068327+00:00",
+    "timestamp_utc": "2026-10-19T08:30:07.448264+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 216463,
         "name": "PRAMP - Reno",
         "distance_km": 6.955990242163416,
-        "pm_corr": 0.6958762887
+        "pm_corr": 0.8043175487
       },
       {
         "sensor_index": 33137,
         "name": "PRAMP - Nampa",
         "distance_km": 19.63110909615097,
-        "pm_corr": 1.5463917526
+        "pm_corr": 2.2597493036
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -188,29 +194,29 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.85,
+    "pm25_est": 1.17,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-19T08:00:35.076310+00:00",
+    "timestamp_utc": "2026-10-19T08:30:07.455054+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 33111,
         "name": "PRAMP - Three Creeks",
         "distance_km": 10.95201901010693,
-        "pm_corr": 0.0367647059
+        "pm_corr": 0.0375536481
       },
       {
         "sensor_index": 216477,
         "name": "PRAMP - Northern Sunrise County",
         "distance_km": 15.657706479115374,
-        "pm_corr": 1.8803069889
+        "pm_corr": 2.4397186872
       },
       {
         "sensor_index": 217749,
         "name": "PRAMP - Good Shepherd School",
         "distance_km": 19.05748653058344,
-        "pm_corr": 1.0051546392
+        "pm_corr": 1.5931545519
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -225,14 +231,14 @@
     "pm25_est": 0.04,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-19T08:00:35.082790+00:00",
+    "timestamp_utc": "2026-10-19T08:30:07.460554+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 33111,
         "name": "PRAMP - Three Creeks",
         "distance_km": 1.4625864311454575,
-        "pm_corr": 0.0367647059
+        "pm_corr": 0.0375536481
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
