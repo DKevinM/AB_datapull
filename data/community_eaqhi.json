@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T00:33:00+00:00",
+  "generated_utc": "2026-10-20T01:02:23+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -12,22 +12,21 @@
         156679
       ],
       "sensors_used": [
-        91675,
         156679
       ],
       "eaqhi": 2,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 21.1,
+      "o3_ppb": 23.7,
       "no2_ppb": 4.0,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 21 / NO2 4 ppb",
-      "pm25": 0.7,
-      "pm25_3h": 2.4,
-      "reading_time_utc": "2026-10-20T00:31+00:00"
+      "how": "PurpleAir + regional O3 24 / NO2 4 ppb",
+      "pm25": 0.6,
+      "pm25_3h": 0.9,
+      "reading_time_utc": "2026-10-20T01:01+00:00"
     },
     {
       "name": "Barrhead",
@@ -42,19 +41,19 @@
         197345,
         249951
       ],
-      "eaqhi": 1,
+      "eaqhi": 2,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 18.7,
-      "no2_ppb": 3.2,
-      "formula": 1,
+      "o3_ppb": 23.1,
+      "no2_ppb": 2.8,
+      "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 19 / NO2 3 ppb",
-      "pm25": 1.5,
-      "pm25_3h": 1.8,
-      "reading_time_utc": "2026-10-20T00:32+00:00"
+      "how": "PurpleAir + regional O3 23 / NO2 3 ppb",
+      "pm25": 2.4,
+      "pm25_3h": 1.7,
+      "reading_time_utc": "2026-10-20T01:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +76,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 24.3,
-      "no2_ppb": 1.7,
+      "o3_ppb": 27.6,
+      "no2_ppb": 1.6,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 24 / NO2 2 ppb",
-      "pm25": 0.6,
-      "pm25_3h": 2.1,
-      "reading_time_utc": "2026-10-20T00:31+00:00"
+      "how": "PurpleAir + regional O3 28 / NO2 2 ppb",
+      "pm25": 0.8,
+      "pm25_3h": 2.0,
+      "reading_time_utc": "2026-10-20T01:01+00:00"
     }
   ]
 }
