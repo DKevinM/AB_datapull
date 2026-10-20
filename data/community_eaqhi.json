@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T02:31:37+00:00",
+  "generated_utc": "2026-10-20T03:02:55+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -12,21 +12,22 @@
         156679
       ],
       "sensors_used": [
+        91675,
         156679
       ],
       "eaqhi": 2,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 25.2,
+      "o3_ppb": 26.8,
       "no2_ppb": 3.0,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 25 / NO2 3 ppb",
-      "pm25": 0.5,
-      "pm25_3h": 0.8,
-      "reading_time_utc": "2026-10-20T02:29+00:00"
+      "how": "PurpleAir + regional O3 27 / NO2 3 ppb",
+      "pm25": 0.9,
+      "pm25_3h": 2.0,
+      "reading_time_utc": "2026-10-20T03:01+00:00"
     },
     {
       "name": "Barrhead",
@@ -45,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 24.0,
-      "no2_ppb": 2.8,
+      "o3_ppb": 23.3,
+      "no2_ppb": 2.7,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 24 / NO2 3 ppb",
+      "how": "PurpleAir + regional O3 23 / NO2 3 ppb",
       "pm25": 4.8,
-      "pm25_3h": 2.0,
-      "reading_time_utc": "2026-10-20T02:30+00:00"
+      "pm25_3h": 2.7,
+      "reading_time_utc": "2026-10-20T03:01+00:00"
     },
     {
       "name": "Pembina",
@@ -76,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 29.1,
+      "o3_ppb": 28.6,
       "no2_ppb": 1.6,
       "formula": 2,
-      "pm_only": 1,
+      "pm_only": 2,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 29 / NO2 2 ppb",
-      "pm25": 6.5,
-      "pm25_3h": 2.2,
-      "reading_time_utc": "2026-10-20T02:29+00:00"
+      "pm25": 10.6,
+      "pm25_3h": 3.1,
+      "reading_time_utc": "2026-10-20T03:01+00:00"
     }
   ]
 }
