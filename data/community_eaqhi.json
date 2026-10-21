@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T09:00:13+00:00",
+  "generated_utc": "2026-10-21T09:32:06+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -20,14 +20,14 @@
       "status": "ok",
       "method": "regional_gas",
       "o3_ppb": 20.1,
-      "no2_ppb": 16.0,
+      "no2_ppb": 12.7,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 20 / NO2 16 ppb",
-      "pm25": 0.8,
+      "how": "PurpleAir + regional O3 20 / NO2 13 ppb",
+      "pm25": 0.7,
       "pm25_3h": 2.2,
-      "reading_time_utc": "2026-10-21T08:59+00:00"
+      "reading_time_utc": "2026-10-21T09:31+00:00"
     },
     {
       "name": "Barrhead",
@@ -42,19 +42,19 @@
         197345,
         249951
       ],
-      "eaqhi": 2,
+      "eaqhi": 3,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
       "o3_ppb": 20.4,
       "no2_ppb": 5.4,
       "formula": 2,
-      "pm_only": 1,
-      "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 20 / NO2 5 ppb",
-      "pm25": 9.4,
+      "pm_only": 3,
+      "set_by_local_pm": true,
+      "how": "PurpleAir + regional O3 20 / NO2 5 ppb, set by local PM2.5",
+      "pm25": 21.3,
       "pm25_3h": 6.5,
-      "reading_time_utc": "2026-10-21T08:59+00:00"
+      "reading_time_utc": "2026-10-21T09:31+00:00"
     },
     {
       "name": "Pembina",
@@ -70,22 +70,21 @@
       "sensors_used": [
         83971,
         91545,
-        166965,
-        249949
+        166965
       ],
       "eaqhi": 2,
-      "warning": null,
+      "warning": "sensor(s) 249949 (42) rejected vs town median 2",
       "status": "ok",
       "method": "regional_gas",
       "o3_ppb": 22.2,
-      "no2_ppb": 4.6,
+      "no2_ppb": 4.8,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 22 / NO2 5 ppb",
-      "pm25": 5.9,
-      "pm25_3h": 3.1,
-      "reading_time_utc": "2026-10-21T08:59+00:00"
+      "pm25": 1.4,
+      "pm25_3h": 1.8,
+      "reading_time_utc": "2026-10-21T09:31+00:00"
     }
   ]
 }
