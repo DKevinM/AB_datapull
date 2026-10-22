@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-22T16:30:11+00:00",
+  "generated_utc": "2026-10-22T17:01:59+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 10.0,
-      "no2_ppb": 8.1,
+      "o3_ppb": 8.3,
+      "no2_ppb": 9.0,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 10 / NO2 8 ppb",
-      "pm25": 8.3,
-      "pm25_3h": 8.1,
-      "reading_time_utc": "2026-10-22T16:28+00:00"
+      "how": "PurpleAir + regional O3 8 / NO2 9 ppb",
+      "pm25": 8.0,
+      "pm25_3h": 8.5,
+      "reading_time_utc": "2026-10-22T17:00+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 8.7,
-      "no2_ppb": 5.2,
-      "formula": 1,
+      "o3_ppb": 8.1,
+      "no2_ppb": 6.2,
+      "formula": 2,
       "pm_only": 2,
-      "set_by_local_pm": true,
-      "how": "PurpleAir + regional O3 9 / NO2 5 ppb, set by local PM2.5",
-      "pm25": 13.1,
-      "pm25_3h": 12.7,
-      "reading_time_utc": "2026-10-22T16:29+00:00"
+      "set_by_local_pm": false,
+      "how": "PurpleAir + regional O3 8 / NO2 6 ppb",
+      "pm25": 11.6,
+      "pm25_3h": 14.4,
+      "reading_time_utc": "2026-10-22T17:01+00:00"
     },
     {
       "name": "Pembina",
@@ -73,19 +73,19 @@
         166965,
         249949
       ],
-      "eaqhi": 2,
+      "eaqhi": 1,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 14.0,
-      "no2_ppb": 5.3,
-      "formula": 2,
+      "o3_ppb": 12.2,
+      "no2_ppb": 5.5,
+      "formula": 1,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 14 / NO2 5 ppb",
-      "pm25": 5.2,
+      "how": "PurpleAir + regional O3 12 / NO2 5 ppb",
+      "pm25": 6.0,
       "pm25_3h": 7.6,
-      "reading_time_utc": "2026-10-22T16:29+00:00"
+      "reading_time_utc": "2026-10-22T17:00+00:00"
     }
   ]
 }
