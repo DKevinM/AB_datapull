@@ -6,17 +6,17 @@
     "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.73,
-    "o3_3h": 29.7,
+    "pm25_est": 0.4,
+    "o3_3h": 30.0,
     "no2_3h": 1.0,
-    "timestamp_utc": "2026-10-23T22:00:00+00:00",
+    "timestamp_utc": "2026-10-23T23:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 49843,
         "name": "WCAS_Breton",
         "distance_km": 2.7912544038525637,
-        "pm_corr": 0.7258064516
+        "pm_corr": 0.4032258065
       }
     ]
   },
@@ -27,23 +27,23 @@
     "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 2.48,
-    "o3_3h": 28.0,
+    "pm25_est": 1.48,
+    "o3_3h": 28.3,
     "no2_3h": 1.3,
-    "timestamp_utc": "2026-10-23T22:00:00+00:00",
+    "timestamp_utc": "2026-10-23T23:00:00+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 2.5
+        "pm_corr": 1.4919354839
       },
       {
         "sensor_index": 296007,
         "name": "WCAS_Peers",
         "distance_km": 9.53338382316543,
-        "pm_corr": 2.1551724138
+        "pm_corr": 1.1778846154
       }
     ]
   },
@@ -54,10 +54,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.14,
+    "pm25_est": 0.18,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-23T23:02:05.831908+00:00",
+    "timestamp_utc": "2026-10-23T23:30:10.891635+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
@@ -70,7 +70,7 @@
         "sensor_index": 277939,
         "name": "Goldbar",
         "distance_km": 2.427827848296649,
-        "pm_corr": 0.1159793814
+        "pm_corr": 0.2340569878
       },
       {
         "sensor_index": 123395,
@@ -82,7 +82,7 @@
         "sensor_index": 24513,
         "name": "AQSU-D341",
         "distance_km": 4.630883683158629,
-        "pm_corr": 0.3447075209
+        "pm_corr": 0.3830083565
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -97,7 +97,7 @@
     "pm25_est": 5.6,
     "o3_3h": 0.0,
     "no2_3h": 0.0,
-    "timestamp_utc": "2026-10-23T20:30:00+00:00",
+    "timestamp_utc": "2026-10-23T21:30:00+00:00",
     "offline_reason": "missing from government feed \u2014 using airshed's own MDS telemetry instead"
   },
   {
@@ -107,17 +107,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.36,
+    "pm25_est": 0.94,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-23T23:02:05.823232+00:00",
+    "timestamp_utc": "2026-10-23T23:30:10.877146+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 101383,
         "name": "LICA - Lac La Biche",
         "distance_km": 1.671585581145567,
-        "pm_corr": 0.4807692308
+        "pm_corr": 1.25
       },
       {
         "sensor_index": 309766,
@@ -138,7 +138,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-23T23:02:05.863746+00:00",
+    "timestamp_utc": "2026-10-23T23:30:10.928539+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -160,7 +160,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-23T23:02:05.867925+00:00",
+    "timestamp_utc": "2026-10-23T23:30:10.932631+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -188,7 +188,7 @@
     "pm25_est": 0.01,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-23T23:02:05.841169+00:00",
+    "timestamp_utc": "2026-10-23T23:30:10.905869+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -201,7 +201,7 @@
         "sensor_index": 33137,
         "name": "PRAMP - Nampa",
         "distance_km": 19.63110909615097,
-        "pm_corr": 0.0400065317
+        "pm_corr": 0.0403225806
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -216,7 +216,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-23T23:02:05.846759+00:00",
+    "timestamp_utc": "2026-10-23T23:30:10.911309+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -250,7 +250,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-23T23:02:05.850976+00:00",
+    "timestamp_utc": "2026-10-23T23:30:10.915726+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
