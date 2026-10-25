@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-25T03:30:11+00:00",
+  "generated_utc": "2026-10-25T04:03:22+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 31.7,
-      "no2_ppb": 0.5,
+      "o3_ppb": 30.5,
+      "no2_ppb": 1.0,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 32 / NO2 0 ppb",
-      "pm25": 2.7,
-      "pm25_3h": 2.4,
-      "reading_time_utc": "2026-10-25T03:28+00:00"
+      "how": "PurpleAir + regional O3 30 / NO2 1 ppb",
+      "pm25": 0.9,
+      "pm25_3h": 2.7,
+      "reading_time_utc": "2026-10-25T04:02+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 31.8,
-      "no2_ppb": 0.4,
+      "o3_ppb": 29.3,
+      "no2_ppb": 0.7,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 32 / NO2 0 ppb",
-      "pm25": 4.3,
-      "pm25_3h": 3.6,
-      "reading_time_utc": "2026-10-25T03:29+00:00"
+      "how": "PurpleAir + regional O3 29 / NO2 1 ppb",
+      "pm25": 5.9,
+      "pm25_3h": 4.1,
+      "reading_time_utc": "2026-10-25T04:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 29.6,
-      "no2_ppb": 0.9,
+      "o3_ppb": 27.9,
+      "no2_ppb": 1.0,
       "formula": 2,
-      "pm_only": 2,
+      "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 30 / NO2 1 ppb",
-      "pm25": 10.9,
-      "pm25_3h": 3.5,
-      "reading_time_utc": "2026-10-25T03:29+00:00"
+      "how": "PurpleAir + regional O3 28 / NO2 1 ppb",
+      "pm25": 8.3,
+      "pm25_3h": 4.8,
+      "reading_time_utc": "2026-10-25T04:02+00:00"
     }
   ]
 }
