@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-26T14:02:45+00:00",
+  "generated_utc": "2026-10-26T14:32:01+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -25,9 +25,9 @@
       "pm_only": 1,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 9 / NO2 9 ppb",
-      "pm25": 1.8,
+      "pm25": 2.1,
       "pm25_3h": 1.2,
-      "reading_time_utc": "2026-10-26T14:01+00:00"
+      "reading_time_utc": "2026-10-26T14:31+00:00"
     },
     {
       "name": "Barrhead",
@@ -52,9 +52,9 @@
       "pm_only": 1,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 24 / NO2 1 ppb",
-      "pm25": 5.5,
+      "pm25": 5.7,
       "pm25_3h": 5.4,
-      "reading_time_utc": "2026-10-26T14:01+00:00"
+      "reading_time_utc": "2026-10-26T14:31+00:00"
     },
     {
       "name": "Pembina",
@@ -78,14 +78,14 @@
       "status": "ok",
       "method": "regional_gas",
       "o3_ppb": 21.1,
-      "no2_ppb": 1.5,
+      "no2_ppb": 1.8,
       "formula": 1,
       "pm_only": 1,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 21 / NO2 2 ppb",
-      "pm25": 2.2,
+      "pm25": 2.7,
       "pm25_3h": 1.1,
-      "reading_time_utc": "2026-10-26T14:01+00:00"
+      "reading_time_utc": "2026-10-26T14:31+00:00"
     }
   ]
 }
