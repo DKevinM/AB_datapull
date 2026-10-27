@@ -3,13 +3,13 @@
     "station": "Breton",
     "lat": 53.090278,
     "lon": -114.460556,
-    "AQHI": 1,
+    "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
     "pm25_est": 17.02,
-    "o3_3h": 6.0,
-    "no2_3h": 4.3,
-    "timestamp_utc": "2026-10-27T19:00:00+00:00",
+    "o3_3h": 8.7,
+    "no2_3h": 4.7,
+    "timestamp_utc": "2026-10-27T20:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -27,23 +27,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 6.12,
-    "o3_3h": 6.3,
-    "no2_3h": 5.3,
-    "timestamp_utc": "2026-10-27T19:00:00+00:00",
+    "pm25_est": 5.72,
+    "o3_3h": 9.7,
+    "no2_3h": 4.3,
+    "timestamp_utc": "2026-10-27T20:00:00+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 6.0483870968
+        "pm_corr": 5.564516129
       },
       {
         "sensor_index": 296007,
         "name": "WCAS_Peers",
         "distance_km": 9.53338382316543,
-        "pm_corr": 7.5421266705
+        "pm_corr": 8.6991574666
       }
     ]
   },
@@ -54,35 +54,35 @@
     "AQHI": 2,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 14.97,
+    "pm25_est": 15.78,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-27T20:03:45.627827+00:00",
+    "timestamp_utc": "2026-10-27T20:31:49.225374+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 277939,
         "name": "Goldbar",
         "distance_km": 2.427827848296649,
-        "pm_corr": 14.6056925308
+        "pm_corr": 20.8493473532
       },
       {
         "sensor_index": 123395,
         "name": "ACA_Belmont",
         "distance_km": 3.0599867876304265,
-        "pm_corr": 15.564516129
+        "pm_corr": 9.8387096774
       },
       {
         "sensor_index": 24513,
         "name": "AQSU-D341",
         "distance_km": 4.630883683158629,
-        "pm_corr": 12.863086233
+        "pm_corr": 12.791225416
       },
       {
         "sensor_index": 188593,
         "name": "EDTNAB_Miller",
         "distance_km": 4.966578821023322,
-        "pm_corr": 17.0372596154
+        "pm_corr": 18.2572115385
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -97,7 +97,7 @@
     "pm25_est": 5.6,
     "o3_3h": 0.0,
     "no2_3h": 0.0,
-    "timestamp_utc": "2026-10-27T17:30:00+00:00",
+    "timestamp_utc": "2026-10-27T18:30:00+00:00",
     "offline_reason": "missing from government feed \u2014 using airshed's own MDS telemetry instead"
   },
   {
@@ -107,23 +107,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 3.17,
+    "pm25_est": 3.12,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-27T20:03:45.618309+00:00",
+    "timestamp_utc": "2026-10-27T20:31:49.213123+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 101383,
         "name": "LICA - Lac La Biche",
         "distance_km": 1.671585581145567,
-        "pm_corr": 3.0514705882
+        "pm_corr": 3.0173378076
       },
       {
         "sensor_index": 309766,
         "name": "Alberta Parks - Lakeland",
         "distance_km": 5.137997684866026,
-        "pm_corr": 3.5180412371
+        "pm_corr": 3.4173819742
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -135,23 +135,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 1.83,
+    "pm25_est": 2.3,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-27T20:03:45.671977+00:00",
+    "timestamp_utc": "2026-10-27T20:31:49.265364+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79371,
         "name": "ACA_Poachers Landing",
         "distance_km": 0.004930675992396872,
-        "pm_corr": 1.8675889328
+        "pm_corr": 2.4209486166
       },
       {
         "sensor_index": 223767,
         "name": "ACA_O\u2019Morrow",
         "distance_km": 4.985152657784274,
-        "pm_corr": 1.49049217
+        "pm_corr": 1.0906040268
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -163,10 +163,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.23,
+    "pm25_est": 0.17,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-27T20:03:45.641627+00:00",
+    "timestamp_utc": "2026-10-27T20:31:49.238823+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -179,7 +179,7 @@
         "sensor_index": 33137,
         "name": "PRAMP - Nampa",
         "distance_km": 19.63110909615097,
-        "pm_corr": 0.8938814532
+        "pm_corr": 0.6549118388
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -191,23 +191,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 1.26,
+    "pm25_est": 0.85,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-27T20:03:45.647513+00:00",
+    "timestamp_utc": "2026-10-27T20:31:49.245283+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 216477,
         "name": "PRAMP - Northern Sunrise County",
         "distance_km": 15.657706479115374,
-        "pm_corr": 0.6139798489
+        "pm_corr": 0.9481953951
       },
       {
         "sensor_index": 217749,
         "name": "PRAMP - Good Shepherd School",
         "distance_km": 19.05748653058344,
-        "pm_corr": 2.0569436374
+        "pm_corr": 0.7241480611
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
