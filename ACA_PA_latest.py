@@ -1,45 +1,29 @@
-import os
-import requests
-import pandas as pd
 import json
-import pytz
-from datetime import datetime, timezone, timedelta
+import os
+import sys
+from datetime import datetime, timezone
+
+import pandas as pd
+
+# ACA PurpleAir map file (data/ACA_PM25_map.json), rebuilt 2026-10-27 to follow the AB rules (Kevin).
+#
+# It used to pull PurpleAir itself with an old rule ported from R: at |A-B| 50-500 it took the HIGHER
+# channel (a channel faulting at 300 next to a good 5 showed 300), no channel_override, no ceiling. Now it
+# takes the ACA sensors straight from data/AB_PM25_map.json, which AB_PA_latest.py builds every 30 min with
+# the agreed rules: per-channel 10-min averages with the fault guard, lower channel at (|A-B| > 10 and > 61%)
+# or > 50, channel_override.csv, dead_list.csv, the same RH correction and the QA ceilings. One set of rules,
+# one PurpleAir call. Sensors the AB pipeline marks use_for_map=false are left out, as before (the old file
+# only listed sensors with a usable reading).
+#
+# Output format is unchanged (sensor_index, name, latitude, longitude, humidity, pm_corr, color, last_seen),
+# and so is ACA's styling: sensors without "ACA" in the name are drawn grey.
+# Side effect of the switch: indoor sensors drop out (the AB list is outdoor only) - e.g. 279217, now
+# "MacEwan University 1", indoors at 82 F / 13% RH, was being shown as outdoor air.
+
+AB_MAP = "data/AB_PM25_map.json"
+MAX_AGE_MIN = 90            # refuse to republish if the AB file hasn't been rebuilt for this long
 
 
-# Robust PM2.5 calculation (R logic ported)
-def get_best_pm(a, b, avg):
-    if pd.isna(a) and not pd.isna(b) and b <= 2000:
-        return b
-    if pd.isna(b) and not pd.isna(a) and a <= 2000:
-        return a
-    if a > 2000 and b <= 2000:
-        return b
-    if b > 2000 and a <= 2000:
-        return a
-    if not pd.isna(a) and not pd.isna(b):
-        diff = abs(a - b)
-        if diff > 50 and diff <= 500:
-            return max(a, b)
-        elif diff > 500:
-            return None
-        elif diff <= 50 and not pd.isna(avg) and avg >= 0:
-            return avg
-    return avg
-
-
-# Apply RH correction
-def correct_pm25(pm, rh):
-    if pd.isna(pm): return None
-    if pd.isna(rh): rh = 50
-    if rh < 30:
-        return pm / (1 + 0.24 / (100 / 30 - 1))
-    elif rh > 70:
-        return pm / (1 + 0.24 / (100 / 70 - 1))
-    else:
-        return pm / (1 + 0.24 / (100 / rh - 1))
-
-
-# Color assignment
 def get_color(pm, name):
     if "ACA" not in str(name):
         return "#808080"  # gray for non-ACA sensors
@@ -55,60 +39,18 @@ def get_color(pm, name):
     elif pm > 20: return "#016797"
     elif pm > 10: return "#0099cb"
     else: return "#01cbff"
-        
-
-# Load your static sensor list
-sensor_df = pd.read_csv("data/ACA_sensors.csv")
-sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
-
-# Same dead list as AB_PA_latest.py, so one file takes a broken sensor
-# off both the AB and ACA maps.
-try:
-    dead_ids = set(pd.read_csv("data/dead_list.csv")["sensor_index"].dropna().astype(int))
-    sensor_ids = [s for s in sensor_ids if s not in dead_ids]
-except FileNotFoundError:
-    pass
-sensor_id_str = ",".join(map(str, sensor_ids))
-
-# Build API call
-url = "https://api.purpleair.com/v1/sensors"
-headers = {"X-API-Key": os.getenv("PURPLEAIR_API_KEY")}
-params = {
-    "fields": "sensor_index,last_seen,humidity,pm2.5_atm,pm2.5_atm_a,pm2.5_atm_b",
-    "show_only": sensor_id_str
-}
 
 
-response = requests.get(url, headers=headers, params=params)
-data = response.json()
-fields = data["fields"]
-rows = data["data"]
-df_live = pd.DataFrame(rows, columns=fields)
+age_min = (datetime.now(timezone.utc).timestamp() - os.path.getmtime(AB_MAP)) / 60
+if age_min > MAX_AGE_MIN:
+    sys.exit(f"ERROR: {AB_MAP} is {age_min:.0f} min old - not republishing stale ACA data")
 
-
-# Merge with static sensor metadata
-df = pd.merge(sensor_df, df_live, on="sensor_index", how="inner")
-
-
-# Filter out sensors older than 3 hours
-now = datetime.now(timezone.utc)
-df["last_seen"] = pd.to_datetime(df["last_seen"], unit="s", utc=True)
-df = df[df["last_seen"] >= (now - timedelta(hours=3))]
-
-
-df["pm_raw"] = df.apply(lambda x: get_best_pm(x["pm2.5_atm_a"], x["pm2.5_atm_b"], x["pm2.5_atm"]), axis=1)
-
-df["pm_corr"] = df.apply(lambda x: correct_pm25(x["pm_raw"], x["humidity"]), axis=1)
+aca = pd.read_csv("data/ACA_sensors.csv")
+aca_ids = set(aca["sensor_index"].dropna().astype(int))
+ab = pd.DataFrame(json.load(open(AB_MAP)))
+df = ab[ab["sensor_index"].astype(int).isin(aca_ids) & (ab["use_for_map"] != False) & ab["pm_corr"].notna()].copy()
 
 df["color"] = df.apply(lambda x: get_color(x["pm_corr"], x["name"]), axis=1)
-
-# Clean result
-result = df[[
-    "sensor_index", "name", "latitude", "longitude",
-    "humidity", "pm_corr", "color", "last_seen"
-]]
-
-# Save as JSON for Leaflet or web app
-ab_tz = pytz.timezone("America/Edmonton")
-result["last_seen"] = result["last_seen"].dt.tz_convert(ab_tz).dt.strftime('%Y-%m-%d %I:%M:%S %p')
+result = df[["sensor_index", "name", "latitude", "longitude", "humidity", "pm_corr", "color", "last_seen"]]
 result.to_json("data/ACA_PM25_map.json", orient="records", indent=2)
+print(f"ACA map: {len(result)} sensors (of {len(aca_ids)} on the ACA list) from {AB_MAP}, {age_min:.0f} min old")
