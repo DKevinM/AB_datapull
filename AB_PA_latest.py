@@ -160,6 +160,143 @@ def get_color(pm, name):
 
 
 
+# The PurpleAir rules, at module level since 2026-10-27 so other pullers (ACA reads our output;
+# winnipeg_beach_sitrep/fetch_purpleair_mb.py imports these) use the SAME code, not a copy:
+# with_window (10/60-min averages + fault guard) -> process (select_pm channel rules + RH
+# correction + assess_pm_quality + colour). channel_override = {sensor_index: "A"|"B"|"OFF"}.
+# -------- PM Selection With Override + Safer Diff Logic --------
+def select_pm(row, channel_override):
+    sid = row["sensor_index"]
+
+    a = row["pm2.5_atm_a"]
+    b = row["pm2.5_atm_b"]
+    avg = row["pm2.5_atm"]
+
+    # 1️⃣ Forced OFF
+    if sid in channel_override and channel_override[sid] == "OFF":
+        return None, "off"
+
+    # 2️⃣ Forced channel
+    if sid in channel_override:
+        if channel_override[sid] == "A":
+            return a, "forced_A"
+        if channel_override[sid] == "B":
+            return b, "forced_B"
+
+    # 3️⃣ Automatic logic
+    if pd.notna(a) and pd.notna(b):
+        diff = abs(a - b)
+
+        # Extreme divergence → reject
+        if diff > 500:
+            return None, "extreme_diff"
+
+        # Divergence → choose LOWER (changed 2026-10-01 from diff > 50 only).
+        # drafts/regional_gas_eaqhi/test5_results.txt, 44,675 co-located
+        # hours: averaging with |A-B| 10-20 gave 4.9 ug/m3 median error and
+        # 20-50 gave 10.1 (vs 1.6 when channels agree); the lower channel
+        # alone gave ~1.8. 5 ug/m3 (EPA/Barkjohn) flagged 17% of hours.
+        mean_ab = (a + b) / 2
+        rel = diff / mean_ab if mean_ab > 0 else 0
+        # This includes a lower channel at ~0: in 567 such hours the
+        # station read 1.9 median (>5 only 3%), so the ~0 channel was
+        # right and the high one was the fault. (Not tested in heavy smoke.)
+        if (diff > 10 and rel > 0.61) or diff > 50:
+            return min(a, b), "min_ab"
+
+        # Small diff → use average
+        return avg, "avg"
+
+    # 4️⃣ One channel missing
+    if pd.isna(a) and pd.notna(b):
+        return b, "b_only"
+    if pd.isna(b) and pd.notna(a):
+        return a, "a_only"
+
+    return avg, "fallback"
+
+
+# -------- Averaging window (changed 2026-09-30) --------
+# PurpleAir's instant pm2.5_atm_* is a ~2-minute reading, so one run could
+# catch a short local puff (Fort St John 212631: 0 -> 523 -> 3 ug/m3 within
+# 20 min) and hold it on the map for 30 min and in that hour's Supabase row.
+# Now: map = per-channel 10-minute average, Supabase hourly = per-channel
+# 60-minute average (the hourly value the AQHI's 3 h mean expects). Both are
+# ATM-basis like pm2.5_atm_* (pm2.5_a == pm2.5_atm_a for 100% of 3,492
+# sensors checked), so the selection/RH/QA chain below is unchanged.
+# Validated: drafts/regional_gas_eaqhi/test4_results.txt - regional-gas
+# AQHI within +/-1 of official 98.87% (snapshot) -> 99.04% (hourly avg).
+# Fault guard: a channel stuck at PurpleAir's ~3333 fault code gets an
+# average that looks plausible (179513: raw 3333/3333 for hours, 10-min
+# average 257/315 -> would pass QA as 224 ug/m3). If either instant
+# channel is at fault level, keep the instant values for that sensor so
+# the checks below reject it exactly as before.
+FAULT_LEVEL = 1000
+
+def with_window(frame, minutes):
+    f = frame.copy()
+    inst_a = pd.to_numeric(f["pm2.5_atm_a"], errors="coerce")
+    inst_b = pd.to_numeric(f["pm2.5_atm_b"], errors="coerce")
+    faulty = (inst_a >= FAULT_LEVEL) | (inst_b >= FAULT_LEVEL)
+    for ch, inst in (("a", inst_a), ("b", inst_b)):
+        avg_col = pd.to_numeric(f[f"pm2.5_{minutes}minute_{ch}"], errors="coerce")
+        f[f"pm2.5_atm_{ch}"] = avg_col.fillna(inst).where(~faulty, inst)  # instant if no average yet
+    f["pm2.5_atm"] = f[["pm2.5_atm_a", "pm2.5_atm_b"]].mean(axis=1).where(~faulty, f["pm2.5_atm"])
+    return f
+
+def process(df, channel_override):
+    # Apply selection
+    df[["pm_raw", "pm_method"]] = df.apply(
+        lambda x: pd.Series(select_pm(x, channel_override)),
+        axis=1
+    )
+
+    # Apply RH correction
+    df["pm_corr"] = df.apply(
+        lambda x: correct_pm25(x["pm_raw"], x["humidity"]),
+        axis=1
+    )
+
+    # -------- QA / Ceiling Logic For Map + Model --------
+    quality = df.apply(
+        lambda x: assess_pm_quality(
+            pm_raw=x["pm_raw"],
+            pm_corr=x["pm_corr"],
+            a=x["pm2.5_atm_a"],
+            b=x["pm2.5_atm_b"],
+            method=x["pm_method"],
+            humidity=x["humidity"]
+        ),
+        axis=1
+    )
+
+    quality_df = pd.DataFrame(list(quality))
+    df = pd.concat([df.reset_index(drop=True), quality_df.reset_index(drop=True)], axis=1)
+
+    # Keep original corrected value for Supabase/audit
+    df["pm_corr_original"] = df["pm_corr"]
+
+    # IMPORTANT:
+    # Map-facing value.
+    # If use_for_map is FALSE, pm_corr becomes None.
+    # This prevents bogus high values from turning the map red.
+    df["pm_corr"] = df.apply(
+        lambda x: x["pm_corr_clean"] if x["use_for_map"] else None,
+        axis=1
+    )
+
+    # Optional colour field for the JSON/map
+    df["color"] = df.apply(
+        lambda x: get_color(x["pm_corr"], x["name"]),
+        axis=1
+    )
+
+
+    print("PurpleAir QA summary:")
+    print(df["quality_flag"].value_counts(dropna=False))
+    return df
+
+
 def push_to_supabase(df_result):
     """Push sensor data to Supabase database"""
     try:
@@ -389,140 +526,9 @@ def main():
     print(f"After time filter: {len(df)} sensors")
 
 
-    # -------- PM Selection With Override + Safer Diff Logic --------
-    def select_pm(row):
-        sid = row["sensor_index"]
-    
-        a = row["pm2.5_atm_a"]
-        b = row["pm2.5_atm_b"]
-        avg = row["pm2.5_atm"]
-    
-        # 1️⃣ Forced OFF
-        if sid in channel_override and channel_override[sid] == "OFF":
-            return None, "off"
-    
-        # 2️⃣ Forced channel
-        if sid in channel_override:
-            if channel_override[sid] == "A":
-                return a, "forced_A"
-            if channel_override[sid] == "B":
-                return b, "forced_B"
-    
-        # 3️⃣ Automatic logic
-        if pd.notna(a) and pd.notna(b):
-            diff = abs(a - b)
-    
-            # Extreme divergence → reject
-            if diff > 500:
-                return None, "extreme_diff"
-    
-            # Divergence → choose LOWER (changed 2026-10-01 from diff > 50 only).
-            # drafts/regional_gas_eaqhi/test5_results.txt, 44,675 co-located
-            # hours: averaging with |A-B| 10-20 gave 4.9 ug/m3 median error and
-            # 20-50 gave 10.1 (vs 1.6 when channels agree); the lower channel
-            # alone gave ~1.8. 5 ug/m3 (EPA/Barkjohn) flagged 17% of hours.
-            mean_ab = (a + b) / 2
-            rel = diff / mean_ab if mean_ab > 0 else 0
-            # This includes a lower channel at ~0: in 567 such hours the
-            # station read 1.9 median (>5 only 3%), so the ~0 channel was
-            # right and the high one was the fault. (Not tested in heavy smoke.)
-            if (diff > 10 and rel > 0.61) or diff > 50:
-                return min(a, b), "min_ab"
-    
-            # Small diff → use average
-            return avg, "avg"
-    
-        # 4️⃣ One channel missing
-        if pd.isna(a) and pd.notna(b):
-            return b, "b_only"
-        if pd.isna(b) and pd.notna(a):
-            return a, "a_only"
-    
-        return avg, "fallback"
-    
-    
-    # -------- Averaging window (changed 2026-09-30) --------
-    # PurpleAir's instant pm2.5_atm_* is a ~2-minute reading, so one run could
-    # catch a short local puff (Fort St John 212631: 0 -> 523 -> 3 ug/m3 within
-    # 20 min) and hold it on the map for 30 min and in that hour's Supabase row.
-    # Now: map = per-channel 10-minute average, Supabase hourly = per-channel
-    # 60-minute average (the hourly value the AQHI's 3 h mean expects). Both are
-    # ATM-basis like pm2.5_atm_* (pm2.5_a == pm2.5_atm_a for 100% of 3,492
-    # sensors checked), so the selection/RH/QA chain below is unchanged.
-    # Validated: drafts/regional_gas_eaqhi/test4_results.txt - regional-gas
-    # AQHI within +/-1 of official 98.87% (snapshot) -> 99.04% (hourly avg).
-    # Fault guard: a channel stuck at PurpleAir's ~3333 fault code gets an
-    # average that looks plausible (179513: raw 3333/3333 for hours, 10-min
-    # average 257/315 -> would pass QA as 224 ug/m3). If either instant
-    # channel is at fault level, keep the instant values for that sensor so
-    # the checks below reject it exactly as before.
-    FAULT_LEVEL = 1000
 
-    def with_window(frame, minutes):
-        f = frame.copy()
-        inst_a = pd.to_numeric(f["pm2.5_atm_a"], errors="coerce")
-        inst_b = pd.to_numeric(f["pm2.5_atm_b"], errors="coerce")
-        faulty = (inst_a >= FAULT_LEVEL) | (inst_b >= FAULT_LEVEL)
-        for ch, inst in (("a", inst_a), ("b", inst_b)):
-            avg_col = pd.to_numeric(f[f"pm2.5_{minutes}minute_{ch}"], errors="coerce")
-            f[f"pm2.5_atm_{ch}"] = avg_col.fillna(inst).where(~faulty, inst)  # instant if no average yet
-        f["pm2.5_atm"] = f[["pm2.5_atm_a", "pm2.5_atm_b"]].mean(axis=1).where(~faulty, f["pm2.5_atm"])
-        return f
-
-    def process(df):
-        # Apply selection
-        df[["pm_raw", "pm_method"]] = df.apply(
-            lambda x: pd.Series(select_pm(x)),
-            axis=1
-        )
-    
-        # Apply RH correction
-        df["pm_corr"] = df.apply(
-            lambda x: correct_pm25(x["pm_raw"], x["humidity"]),
-            axis=1
-        )
-    
-        # -------- QA / Ceiling Logic For Map + Model --------
-        quality = df.apply(
-            lambda x: assess_pm_quality(
-                pm_raw=x["pm_raw"],
-                pm_corr=x["pm_corr"],
-                a=x["pm2.5_atm_a"],
-                b=x["pm2.5_atm_b"],
-                method=x["pm_method"],
-                humidity=x["humidity"]
-            ),
-            axis=1
-        )
-    
-        quality_df = pd.DataFrame(list(quality))
-        df = pd.concat([df.reset_index(drop=True), quality_df.reset_index(drop=True)], axis=1)
-    
-        # Keep original corrected value for Supabase/audit
-        df["pm_corr_original"] = df["pm_corr"]
-    
-        # IMPORTANT:
-        # Map-facing value.
-        # If use_for_map is FALSE, pm_corr becomes None.
-        # This prevents bogus high values from turning the map red.
-        df["pm_corr"] = df.apply(
-            lambda x: x["pm_corr_clean"] if x["use_for_map"] else None,
-            axis=1
-        )
-    
-        # Optional colour field for the JSON/map
-        df["color"] = df.apply(
-            lambda x: get_color(x["pm_corr"], x["name"]),
-            axis=1
-        )
-    
-
-        print("PurpleAir QA summary:")
-        print(df["quality_flag"].value_counts(dropna=False))
-        return df
-
-    df_hourly = process(with_window(df, 60))   # -> Supabase sensor_readings
-    df = process(with_window(df, 10))          # -> map JSON
+    df_hourly = process(with_window(df, 60), channel_override)   # -> Supabase sensor_readings
+    df = process(with_window(df, 10), channel_override)          # -> map JSON
 
     # Clean result
     result = df.copy()
