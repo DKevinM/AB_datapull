@@ -114,12 +114,14 @@ def fetch_sensor_historical_data(
         records = []
         meta = sensor_metadata.get(sensor_id, {})
 
+        # read by name - PurpleAir sends its own "fields" order with each response
+        col = {f: i for i, f in enumerate(data["fields"])}
         for row in data["data"]:
-            timestamp = datetime.fromtimestamp(row[0], tz=timezone.utc).isoformat()
-            humidity = row[1]
-            avg = row[2]
-            a = row[3]
-            b = row[4]
+            timestamp = datetime.fromtimestamp(row[col["time_stamp"]], tz=timezone.utc).isoformat()
+            humidity = row[col["humidity"]]
+            avg = row[col["pm2.5_atm"]]
+            a = row[col["pm2.5_atm_a"]]
+            b = row[col["pm2.5_atm_b"]]
 
             # Channel override logic
             if sensor_id in channel_override and channel_override[sensor_id] == "OFF":
