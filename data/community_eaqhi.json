@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-28T01:31:52+00:00",
+  "generated_utc": "2026-10-28T02:03:55+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 16.8,
-      "no2_ppb": 3.7,
+      "o3_ppb": 16.4,
+      "no2_ppb": 3.8,
       "formula": 1,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 17 / NO2 4 ppb",
-      "pm25": 4.9,
-      "pm25_3h": 4.1,
-      "reading_time_utc": "2026-10-28T01:31+00:00"
+      "how": "PurpleAir + regional O3 16 / NO2 4 ppb",
+      "pm25": 4.2,
+      "pm25_3h": 4.2,
+      "reading_time_utc": "2026-10-28T02:02+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 8.1,
+      "o3_ppb": 9.2,
       "no2_ppb": 4.8,
       "formula": 2,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 8 / NO2 5 ppb",
-      "pm25": 15.6,
-      "pm25_3h": 16.1,
-      "reading_time_utc": "2026-10-28T01:31+00:00"
+      "how": "PurpleAir + regional O3 9 / NO2 5 ppb",
+      "pm25": 14.8,
+      "pm25_3h": 15.9,
+      "reading_time_utc": "2026-10-28T02:02+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 12.2,
+      "o3_ppb": 12.6,
       "no2_ppb": 2.9,
-      "formula": 1,
+      "formula": 2,
       "pm_only": 2,
-      "set_by_local_pm": true,
-      "how": "PurpleAir + regional O3 12 / NO2 3 ppb, set by local PM2.5",
-      "pm25": 16.1,
-      "pm25_3h": 13.3,
-      "reading_time_utc": "2026-10-28T01:31+00:00"
+      "set_by_local_pm": false,
+      "how": "PurpleAir + regional O3 13 / NO2 3 ppb",
+      "pm25": 14.9,
+      "pm25_3h": 13.7,
+      "reading_time_utc": "2026-10-28T02:03+00:00"
     }
   ]
 }
