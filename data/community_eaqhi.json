@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-28T03:31:54+00:00",
+  "generated_utc": "2026-10-28T04:02:05+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 16.7,
-      "no2_ppb": 3.8,
+      "o3_ppb": 16.5,
+      "no2_ppb": 4.4,
       "formula": 1,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 17 / NO2 4 ppb",
+      "how": "PurpleAir + regional O3 16 / NO2 4 ppb",
       "pm25": 4.6,
-      "pm25_3h": 4.3,
-      "reading_time_utc": "2026-10-28T03:31+00:00"
+      "pm25_3h": 4.5,
+      "reading_time_utc": "2026-10-28T04:00+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 10.9,
-      "no2_ppb": 4.3,
+      "o3_ppb": 12.8,
+      "no2_ppb": 3.5,
       "formula": 2,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 11 / NO2 4 ppb",
-      "pm25": 12.5,
-      "pm25_3h": 15.5,
-      "reading_time_utc": "2026-10-28T03:31+00:00"
+      "how": "PurpleAir + regional O3 13 / NO2 4 ppb",
+      "pm25": 11.8,
+      "pm25_3h": 14.7,
+      "reading_time_utc": "2026-10-28T04:00+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 12.7,
-      "no2_ppb": 2.7,
+      "o3_ppb": 12.9,
+      "no2_ppb": 2.3,
       "formula": 2,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 13 / NO2 3 ppb",
-      "pm25": 14.2,
-      "pm25_3h": 14.2,
-      "reading_time_utc": "2026-10-28T03:31+00:00"
+      "how": "PurpleAir + regional O3 13 / NO2 2 ppb",
+      "pm25": 12.9,
+      "pm25_3h": 14.3,
+      "reading_time_utc": "2026-10-28T04:01+00:00"
     }
   ]
 }
