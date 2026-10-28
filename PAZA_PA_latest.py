@@ -27,7 +27,8 @@ def get_best_pm(a, b, avg):
 def correct_pm25(pm, rh):
     if pd.isna(pm): return None
     if pd.isna(rh): rh = 50
-    return pm / (1 + 0.24 / (100/max(min(rh,99.9),0.1) - 1))
+    rh = min(max(rh, 30), 70)   # same 30-70% clamp as AB_PA_latest.py
+    return pm / (1 + 0.24 / (100 / rh - 1))
 
 def get_color(pm, name):
     if pd.isna(pm): return "#808080"
