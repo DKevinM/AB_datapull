@@ -43,7 +43,7 @@
         "sensor_index": 296007,
         "name": "WCAS_Peers",
         "distance_km": 9.53338382316543,
-        "pm_corr": 2.5746268657
+        "pm_corr": 2.5661559889
       }
     ]
   },
@@ -54,17 +54,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.49,
+    "pm25_est": 0.55,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-29T03:02:34.465597+00:00",
-    "purpleair_sensor_count": 3,
+    "timestamp_utc": "2026-10-29T03:30:07.365258+00:00",
+    "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 172951,
         "name": "Goldstick Park",
         "distance_km": 2.1137463525439864,
-        "pm_corr": 0.7135193133
+        "pm_corr": 0.5946337926
+      },
+      {
+        "sensor_index": 277939,
+        "name": "Goldbar",
+        "distance_km": 2.427827848296649,
+        "pm_corr": 0.7845104334
       },
       {
         "sensor_index": 123395,
@@ -76,7 +82,7 @@
         "sensor_index": 24513,
         "name": "AQSU-D341",
         "distance_km": 4.630883683158629,
-        "pm_corr": 0.7284768212
+        "pm_corr": 0.8147603028
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -91,7 +97,7 @@
     "pm25_est": 5.6,
     "o3_3h": 0.0,
     "no2_3h": 0.0,
-    "timestamp_utc": "2026-10-29T00:30:00+00:00",
+    "timestamp_utc": "2026-10-29T01:30:00+00:00",
     "offline_reason": "missing from government feed \u2014 using airshed's own MDS telemetry instead"
   },
   {
@@ -101,23 +107,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.72,
+    "pm25_est": 0.7,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-29T03:02:34.455159+00:00",
+    "timestamp_utc": "2026-10-29T03:30:07.355067+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 101383,
         "name": "LICA - Lac La Biche",
         "distance_km": 1.671585581145567,
-        "pm_corr": 0.586627418
+        "pm_corr": 0.5540370059
       },
       {
         "sensor_index": 309766,
         "name": "Alberta Parks - Lakeland",
         "distance_km": 5.137997684866026,
-        "pm_corr": 1.1138426626
+        "pm_corr": 1.1397058824
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -132,7 +138,7 @@
     "pm25_est": 0.18,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-29T03:02:34.502272+00:00",
+    "timestamp_utc": "2026-10-29T03:30:07.398877+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -157,10 +163,10 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.21,
+    "pm25_est": 0.41,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-29T03:02:34.475656+00:00",
+    "timestamp_utc": "2026-10-29T03:30:07.376011+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -173,7 +179,7 @@
         "sensor_index": 33137,
         "name": "PRAMP - Nampa",
         "distance_km": 19.63110909615097,
-        "pm_corr": 0.7954545455
+        "pm_corr": 1.5563241107
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -188,7 +194,7 @@
     "pm25_est": 0.04,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-10-29T03:02:34.480465+00:00",
+    "timestamp_utc": "2026-10-29T03:30:07.380475+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
