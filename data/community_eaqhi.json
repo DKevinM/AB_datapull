@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-01T08:31:46+00:00",
+  "generated_utc": "2026-11-01T09:02:31+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 17.3,
-      "no2_ppb": 9.2,
+      "o3_ppb": 15.4,
+      "no2_ppb": 9.4,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 17 / NO2 9 ppb",
-      "pm25": 5.2,
+      "how": "PurpleAir + regional O3 15 / NO2 9 ppb",
+      "pm25": 5.0,
       "pm25_3h": 5.0,
-      "reading_time_utc": "2026-11-01T07:31+00:00"
+      "reading_time_utc": "2026-11-01T08:01+00:00"
     },
     {
       "name": "Barrhead",
@@ -42,19 +42,19 @@
         197345,
         249951
       ],
-      "eaqhi": 3,
+      "eaqhi": 4,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 3.9,
-      "no2_ppb": 10.6,
+      "o3_ppb": 4.8,
+      "no2_ppb": 8.8,
       "formula": 2,
-      "pm_only": 3,
+      "pm_only": 4,
       "set_by_local_pm": true,
-      "how": "PurpleAir + regional O3 4 / NO2 11 ppb, set by local PM2.5",
-      "pm25": 29.4,
-      "pm25_3h": 26.4,
-      "reading_time_utc": "2026-11-01T07:29+00:00"
+      "how": "PurpleAir + regional O3 5 / NO2 9 ppb, set by local PM2.5",
+      "pm25": 30.7,
+      "pm25_3h": 27.2,
+      "reading_time_utc": "2026-11-01T08:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 11.5,
-      "no2_ppb": 3.4,
+      "o3_ppb": 12.8,
+      "no2_ppb": 3.0,
       "formula": 1,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 12 / NO2 3 ppb",
-      "pm25": 6.4,
-      "pm25_3h": 11.5,
-      "reading_time_utc": "2026-11-01T07:30+00:00"
+      "how": "PurpleAir + regional O3 13 / NO2 3 ppb",
+      "pm25": 5.6,
+      "pm25_3h": 10.5,
+      "reading_time_utc": "2026-11-01T08:02+00:00"
     }
   ]
 }
