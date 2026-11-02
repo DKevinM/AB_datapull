@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-02T18:31:56+00:00",
+  "generated_utc": "2026-11-02T19:02:18+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 19.8,
-      "no2_ppb": 6.8,
+      "o3_ppb": 17.1,
+      "no2_ppb": 7.3,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 20 / NO2 7 ppb",
-      "pm25": 5.2,
-      "pm25_3h": 4.3,
-      "reading_time_utc": "2026-11-02T17:30+00:00"
+      "how": "PurpleAir + regional O3 17 / NO2 7 ppb",
+      "pm25": 4.0,
+      "pm25_3h": 4.4,
+      "reading_time_utc": "2026-11-02T18:01+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 13.9,
-      "no2_ppb": 6.8,
+      "o3_ppb": 13.2,
+      "no2_ppb": 7.5,
       "formula": 2,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 14 / NO2 7 ppb",
-      "pm25": 16.8,
-      "pm25_3h": 21.7,
-      "reading_time_utc": "2026-11-02T17:31+00:00"
+      "how": "PurpleAir + regional O3 13 / NO2 8 ppb",
+      "pm25": 15.5,
+      "pm25_3h": 20.8,
+      "reading_time_utc": "2026-11-02T18:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 20.6,
-      "no2_ppb": 2.2,
+      "o3_ppb": 18.3,
+      "no2_ppb": 3.9,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 21 / NO2 2 ppb",
-      "pm25": 3.4,
-      "pm25_3h": 10.1,
-      "reading_time_utc": "2026-11-02T17:31+00:00"
+      "how": "PurpleAir + regional O3 18 / NO2 4 ppb",
+      "pm25": 3.6,
+      "pm25_3h": 8.4,
+      "reading_time_utc": "2026-11-02T18:01+00:00"
     }
   ]
 }
