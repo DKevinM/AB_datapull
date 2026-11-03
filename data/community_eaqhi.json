@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-03T15:30:13+00:00",
+  "generated_utc": "2026-11-03T16:02:52+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 26.4,
-      "no2_ppb": 7.9,
+      "o3_ppb": 26.1,
+      "no2_ppb": 8.5,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 26 / NO2 8 ppb",
-      "pm25": 5.8,
-      "pm25_3h": 3.5,
-      "reading_time_utc": "2026-11-03T15:29+00:00"
+      "pm25": 6.0,
+      "pm25_3h": 4.1,
+      "reading_time_utc": "2026-11-03T16:02+00:00"
     },
     {
       "name": "Barrhead",
@@ -42,19 +42,19 @@
         197345,
         249951
       ],
-      "eaqhi": 2,
+      "eaqhi": 3,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 19.1,
-      "no2_ppb": 6.3,
+      "o3_ppb": 19.9,
+      "no2_ppb": 6.4,
       "formula": 2,
-      "pm_only": 2,
-      "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 19 / NO2 6 ppb",
-      "pm25": 15.5,
-      "pm25_3h": 15.9,
-      "reading_time_utc": "2026-11-03T15:29+00:00"
+      "pm_only": 3,
+      "set_by_local_pm": true,
+      "how": "PurpleAir + regional O3 20 / NO2 6 ppb, set by local PM2.5",
+      "pm25": 20.4,
+      "pm25_3h": 16.0,
+      "reading_time_utc": "2026-11-03T16:02+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 25.7,
-      "no2_ppb": 3.9,
+      "o3_ppb": 30.2,
+      "no2_ppb": 3.5,
       "formula": 3,
       "pm_only": 3,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 26 / NO2 4 ppb",
-      "pm25": 25.8,
-      "pm25_3h": 25.9,
-      "reading_time_utc": "2026-11-03T15:29+00:00"
+      "how": "PurpleAir + regional O3 30 / NO2 4 ppb",
+      "pm25": 23.6,
+      "pm25_3h": 26.5,
+      "reading_time_utc": "2026-11-03T16:01+00:00"
     }
   ]
 }
