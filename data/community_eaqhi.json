@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-03T19:31:52+00:00",
+  "generated_utc": "2026-11-03T20:02:11+00:00",
   "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 16.5,
-      "no2_ppb": 11.6,
+      "o3_ppb": 15.2,
+      "no2_ppb": 10.8,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 16 / NO2 12 ppb",
-      "pm25": 6.0,
-      "pm25_3h": 5.6,
-      "reading_time_utc": "2026-11-03T19:30+00:00"
+      "how": "PurpleAir + regional O3 15 / NO2 11 ppb",
+      "pm25": 5.7,
+      "pm25_3h": 5.8,
+      "reading_time_utc": "2026-11-03T20:00+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 17.6,
-      "no2_ppb": 8.0,
+      "o3_ppb": 16.8,
+      "no2_ppb": 8.5,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 18 / NO2 8 ppb",
-      "pm25": 9.9,
-      "pm25_3h": 16.6,
-      "reading_time_utc": "2026-11-03T19:31+00:00"
+      "how": "PurpleAir + regional O3 17 / NO2 8 ppb",
+      "pm25": 8.4,
+      "pm25_3h": 15.2,
+      "reading_time_utc": "2026-11-03T20:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 28.1,
-      "no2_ppb": 7.0,
+      "o3_ppb": 25.7,
+      "no2_ppb": 7.3,
       "formula": 3,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 28 / NO2 7 ppb",
-      "pm25": 8.6,
-      "pm25_3h": 20.9,
-      "reading_time_utc": "2026-11-03T19:31+00:00"
+      "how": "PurpleAir + regional O3 26 / NO2 7 ppb",
+      "pm25": 7.2,
+      "pm25_3h": 17.8,
+      "reading_time_utc": "2026-11-03T20:01+00:00"
     }
   ]
 }
