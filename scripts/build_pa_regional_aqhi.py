@@ -23,7 +23,9 @@
 # smoke, because Alberta's published AQHI switches to a PM2.5 override then.
 # drafts/regional_gas_eaqhi/test6b_results.txt, 7 co-located sites, official
 # AQHI >= 7 (130 h): formula 26.9% within +/-1, PM-only 59.2%. So aqhi_rg is
-# max(formula, PM-only floor(pm/10)+1) - but only after the local PM reading
+# raised to Alberta's published smoke rule, ceil(pm now / 10) when that is 7+
+# (community_eaqhi.smoke_rule; until 2026-11-03 it was floor(pm/10)+1 at any
+# PM, which over-called by ~1 at PM 30-60) - but only after the local PM reading
 # passes a sanity check (see question_pm_override), so one faulty sensor (the
 # Jasper 2026-09-21 spike kind) can't paint a dot red on its own:
 #   - sensors within NEIGHBOUR_KM: at least one must also read high
@@ -50,6 +52,8 @@ import numpy as np
 import pandas as pd
 import rasterio
 import requests
+
+from community_eaqhi import smoke_rule
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
@@ -351,14 +355,15 @@ def main():
                 counts["no2_station"] += 1
 
         pm_only = math.floor(float(pm_now) / 10) + 1
+        pm_smoke = smoke_rule(float(pm_now))
         override = check = None
         if np.isfinite(o3_i) and np.isfinite(no2_i):
             raw = aqhi_raw(o3_i, no2_i, pm)
             method = "regional_gas"
-            if pm_only > round(raw):
+            if pm_smoke is not None and pm_smoke > round(raw):
                 check = question_pm_override(i, float(pm_now), all_recs, lats, lons, live_pm, hist)
                 if check is None:
-                    raw = float(pm_only)
+                    raw = float(pm_smoke)
                     override = "applied"
                     counts["pm_override"] += 1
                 else:

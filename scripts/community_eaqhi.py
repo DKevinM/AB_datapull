@@ -9,8 +9,11 @@
 # pa_community) and the dk_LIFX status page all read that file.
 #
 # Rule = the LiveMap dot rule applied to the town average:
-#   max(AQHI formula on the town's 3 h PM2.5 + regional O3/NO2,
-#       PM-only floor(PM2.5 now / 10) + 1)
+#   AQHI formula on the town's 3 h PM2.5 + regional O3/NO2, raised to
+#   ceil(PM2.5 now / 10) only when that is 7+ (PM2.5 > 60) - Alberta's
+#   published smoke rule (eaqhi_methods analysis/a1, 99.98% of 655k station-
+#   hours). Before 2026-11-03 this was max(formula, floor(PM/10)+1) at every
+#   PM level, which over-called by ~1 at PM 30-60.
 # Fault handling before averaging:
 #   3+ sensors: drop any reading more than max(30, 3 x median) from the
 #               median (dk_LIFX / Pembina paper Section 3.5 rule)
@@ -31,6 +34,13 @@ TOWNS_FILE = Path(__file__).resolve().parent / "community_towns.json"
 AB_TZ = ZoneInfo("America/Edmonton")   # last_seen in the map records is AB local time
 OUTLIER_ABS = 30.0
 OUTLIER_REL = 3.0
+SMOKE_RULE_MIN = 7   # Alberta only lets the 1 h PM2.5 set the AQHI at 7+
+
+
+def smoke_rule(pm_now):
+    """Alberta's PM2.5 smoke rule: ceil(PM2.5 / 10) if that is 7+, else None."""
+    v = math.ceil(pm_now / 10)
+    return v if v >= SMOKE_RULE_MIN else None
 
 
 def aqhi_formula(o3_ppb, no2_ppb, pm25):
@@ -92,8 +102,9 @@ def town_eaqhi(town, by_id):
         no2 = sum(g[1] for g in gases) / len(gases)
         formula = round(aqhi_formula(o3, no2, pm3))
         questioned = len(recs) == 1 and recs[0].get("aqhi_override") == "questioned"
-        aqhi = formula if questioned else max(formula, pm_only)
-        local_pm = (pm_only > formula) and not questioned
+        pm_smoke = smoke_rule(pm_now)
+        local_pm = pm_smoke is not None and pm_smoke > formula and not questioned
+        aqhi = pm_smoke if local_pm else formula
         out.update(method="regional_gas", o3_ppb=round(o3, 1), no2_ppb=round(no2, 1),
                    formula=formula, pm_only=pm_only, set_by_local_pm=local_pm,
                    how=(f"PurpleAir + regional O3 {o3:.0f} / NO2 {no2:.0f} ppb"
@@ -118,7 +129,7 @@ def write_community_eaqhi(all_recs, out_path):
     by_id = {int(r["sensor_index"]): r for r in all_recs if r.get("sensor_index") is not None}
     result = {
         "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "rule": "max(AQHI formula on town 3h PM2.5 + regional O3/NO2, floor(PM2.5/10)+1); see scripts/community_eaqhi.py",
+        "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
         "towns": [town_eaqhi(t, by_id) for t in towns],
     }
     Path(out_path).write_text(json.dumps(result, indent=2))
