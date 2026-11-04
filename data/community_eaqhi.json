@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-04T23:00:15+00:00",
+  "generated_utc": "2026-11-04T23:31:51+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -25,9 +25,9 @@
       "pm_only": 1,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 30 / NO2 4 ppb",
-      "pm25": 6.2,
+      "pm25": 7.9,
       "pm25_3h": 7.4,
-      "reading_time_utc": "2026-11-04T22:58+00:00"
+      "reading_time_utc": "2026-11-04T23:30+00:00"
     },
     {
       "name": "Barrhead",
@@ -52,9 +52,9 @@
       "pm_only": 2,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 21 / NO2 5 ppb",
-      "pm25": 11.1,
+      "pm25": 16.9,
       "pm25_3h": 10.4,
-      "reading_time_utc": "2026-11-04T22:59+00:00"
+      "reading_time_utc": "2026-11-04T23:31+00:00"
     },
     {
       "name": "Pembina",
@@ -83,9 +83,9 @@
       "pm_only": 1,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 26 / NO2 4 ppb",
-      "pm25": 0.3,
+      "pm25": 0.9,
       "pm25_3h": 2.2,
-      "reading_time_utc": "2026-11-04T22:59+00:00"
+      "reading_time_utc": "2026-11-04T23:31+00:00"
     }
   ]
 }
