@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-04T19:31:51+00:00",
+  "generated_utc": "2026-11-04T20:01:08+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 16.8,
-      "no2_ppb": 9.0,
+      "o3_ppb": 19.2,
+      "no2_ppb": 8.1,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 17 / NO2 9 ppb",
-      "pm25": 7.5,
+      "how": "PurpleAir + regional O3 19 / NO2 8 ppb",
+      "pm25": 6.9,
       "pm25_3h": 9.0,
-      "reading_time_utc": "2026-11-04T19:30+00:00"
+      "reading_time_utc": "2026-11-04T20:00+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 12.5,
-      "no2_ppb": 8.8,
+      "o3_ppb": 12.2,
+      "no2_ppb": 8.4,
       "formula": 2,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 12 / NO2 9 ppb",
-      "pm25": 12.1,
-      "pm25_3h": 16.0,
-      "reading_time_utc": "2026-11-04T19:30+00:00"
+      "how": "PurpleAir + regional O3 12 / NO2 8 ppb",
+      "pm25": 10.8,
+      "pm25_3h": 14.9,
+      "reading_time_utc": "2026-11-04T20:00+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 9.2,
-      "no2_ppb": 11.8,
+      "o3_ppb": 10.7,
+      "no2_ppb": 9.9,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 9 / NO2 12 ppb",
-      "pm25": 2.0,
-      "pm25_3h": 6.7,
-      "reading_time_utc": "2026-11-04T19:30+00:00"
+      "how": "PurpleAir + regional O3 11 / NO2 10 ppb",
+      "pm25": 1.4,
+      "pm25_3h": 5.6,
+      "reading_time_utc": "2026-11-04T20:00+00:00"
     }
   ]
 }
