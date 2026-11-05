@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-05T07:31:53+00:00",
+  "generated_utc": "2026-11-05T08:02:39+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -15,19 +15,19 @@
         91675,
         156679
       ],
-      "eaqhi": 3,
+      "eaqhi": 2,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 30.0,
-      "no2_ppb": 8.2,
-      "formula": 3,
+      "o3_ppb": 29.0,
+      "no2_ppb": 7.9,
+      "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 30 / NO2 8 ppb",
-      "pm25": 5.9,
+      "how": "PurpleAir + regional O3 29 / NO2 8 ppb",
+      "pm25": 5.8,
       "pm25_3h": 6.2,
-      "reading_time_utc": "2026-11-05T07:30+00:00"
+      "reading_time_utc": "2026-11-05T08:00+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 20.7,
-      "no2_ppb": 12.9,
+      "o3_ppb": 22.1,
+      "no2_ppb": 10.7,
       "formula": 3,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 21 / NO2 13 ppb",
-      "pm25": 10.2,
-      "pm25_3h": 12.1,
-      "reading_time_utc": "2026-11-05T07:31+00:00"
+      "how": "PurpleAir + regional O3 22 / NO2 11 ppb",
+      "pm25": 10.6,
+      "pm25_3h": 11.7,
+      "reading_time_utc": "2026-11-05T08:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 27.2,
-      "no2_ppb": 4.6,
+      "o3_ppb": 25.5,
+      "no2_ppb": 5.1,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 27 / NO2 5 ppb",
-      "pm25": 5.7,
-      "pm25_3h": 4.0,
-      "reading_time_utc": "2026-11-05T07:31+00:00"
+      "how": "PurpleAir + regional O3 26 / NO2 5 ppb",
+      "pm25": 7.3,
+      "pm25_3h": 4.4,
+      "reading_time_utc": "2026-11-05T08:01+00:00"
     }
   ]
 }
