@@ -117,7 +117,9 @@ def fetch_sensor_historical_data(
         # read by name - PurpleAir sends its own "fields" order with each response
         col = {f: i for i, f in enumerate(data["fields"])}
         for row in data["data"]:
-            timestamp = datetime.fromtimestamp(row[col["time_stamp"]], tz=timezone.utc).isoformat()
+            # /history time_stamp is the START of the hour; sensor_readings is hour-ending (+1 h), as in
+            # scripts/backfill_sensor_readings_hourly.py
+            timestamp = (datetime.fromtimestamp(row[col["time_stamp"]], tz=timezone.utc) + timedelta(hours=1)).isoformat()
             humidity = row[col["humidity"]]
             avg = row[col["pm2.5_atm"]]
             a = row[col["pm2.5_atm_a"]]
