@@ -12,6 +12,8 @@ import argparse
 from datetime import datetime, timedelta, timezone
 from supabase import create_client, Client
 import time
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+from pa_exclusions import test_box_mask
 
 
 # Load channel override
@@ -258,6 +260,8 @@ def main():
             sensor_df = sensor_df[~sensor_df["sensor_index"].isin(dead_ids)]
         except FileNotFoundError:
             print("No dead_list.csv found")
+
+        sensor_df = sensor_df[~test_box_mask(sensor_df)]
 
         sensor_ids = sensor_df["sensor_index"].dropna().astype(int).tolist()
         print(f"{len(sensor_ids)} sensors after dead filter")

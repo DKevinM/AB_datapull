@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 import json
 import pytz
+from pa_exclusions import test_box_mask
 from datetime import datetime, timezone, timedelta
 from supabase import create_client, Client
 import sys
@@ -417,6 +418,12 @@ def main():
         print("Warning: data/dead_list.csv not found, proceeding with all sensors")
     except Exception as e:
         print(f"Warning: Error reading dead_list.csv: {e}, proceeding with all sensors")
+
+    # Test units on a known rack stay off, even new ones not yet on the dead list.
+    in_box = test_box_mask(sensor_df)
+    if in_box.any():
+        print(f"Removed {int(in_box.sum())} sensors in a test box: {sensor_df.loc[in_box, 'sensor_index'].tolist()}")
+    sensor_df = sensor_df[~in_box]
 
 
     channel_override = {}
