@@ -6,7 +6,7 @@
     "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.0,
+    "pm25_est": 0.05,
     "o3_3h": 38.0,
     "no2_3h": 1.0,
     "timestamp_utc": "2026-11-07T20:00:00+00:00",
@@ -16,7 +16,7 @@
         "sensor_index": 223771,
         "name": "WCAS_Breton",
         "distance_km": 0.006670677929748395,
-        "pm_corr": 0.0
+        "pm_corr": 0.0453367876
       }
     ]
   },
@@ -57,7 +57,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-07T21:03:13.714678+00:00",
+    "timestamp_utc": "2026-11-07T21:30:26.671098+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
@@ -97,7 +97,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-07T21:03:13.707605+00:00",
+    "timestamp_utc": "2026-11-07T21:30:26.665473+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -128,23 +128,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.22,
+    "pm25_est": 0.43,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-07T21:03:13.701664+00:00",
+    "timestamp_utc": "2026-11-07T21:30:26.658836+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 156679,
         "name": "WCAS_Jasper4 (AQSU - D978)",
         "distance_km": 0.5670470991175799,
-        "pm_corr": 0.0449260042
+        "pm_corr": 0.5230596175
       },
       {
         "sensor_index": 91675,
         "name": "WCAS_Jasper1(AQSU-2F3F)",
         "distance_km": 1.152370175664921,
-        "pm_corr": 0.6260010678
+        "pm_corr": 0.3467879477
       },
       {
         "sensor_index": 309986,
@@ -165,7 +165,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-07T21:03:13.695109+00:00",
+    "timestamp_utc": "2026-11-07T21:30:26.652277+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -193,7 +193,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-07T21:03:13.719622+00:00",
+    "timestamp_utc": "2026-11-07T21:30:26.676254+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -212,23 +212,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.27,
+    "pm25_est": 0.5,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-07T21:03:13.752969+00:00",
+    "timestamp_utc": "2026-11-07T21:30:26.709887+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79371,
         "name": "ACA_Poachers Landing",
         "distance_km": 0.004930675992396872,
-        "pm_corr": 0.0780189959
+        "pm_corr": 0.4761904762
       },
       {
         "sensor_index": 223767,
         "name": "ACA_O\u2019Morrow",
         "distance_km": 4.985152657784274,
-        "pm_corr": 2.1849719975
+        "pm_corr": 0.7151442308
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -243,7 +243,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-07T21:03:13.727745+00:00",
+    "timestamp_utc": "2026-11-07T21:30:26.684073+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
@@ -268,29 +268,29 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 1.08,
+    "pm25_est": 0.97,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-07T21:03:13.690346+00:00",
+    "timestamp_utc": "2026-11-07T21:30:26.646504+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 310819,
         "name": "Research Centre",
         "distance_km": 2.307643933408288,
-        "pm_corr": 1.1290322581
+        "pm_corr": 0.9677419355
       },
       {
         "sensor_index": 320322,
         "name": "Riverbend Community Centre",
         "distance_km": 3.0460482879676105,
-        "pm_corr": 1.042746114
+        "pm_corr": 0.9974093264
       },
       {
         "sensor_index": 267739,
         "name": "Twintree",
         "distance_km": 4.547042377081452,
-        "pm_corr": 1.0483870968
+        "pm_corr": 0.9274193548
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -305,7 +305,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-07T21:03:13.732476+00:00",
+    "timestamp_utc": "2026-11-07T21:30:26.688511+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
