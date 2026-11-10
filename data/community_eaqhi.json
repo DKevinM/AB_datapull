@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-10T22:30:13+00:00",
+  "generated_utc": "2026-11-10T23:02:23+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 24.4,
-      "no2_ppb": 5.3,
+      "o3_ppb": 28.5,
+      "no2_ppb": 3.9,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 24 / NO2 5 ppb",
-      "pm25": 1.0,
-      "pm25_3h": 1.8,
-      "reading_time_utc": "2026-11-10T22:28+00:00"
+      "how": "PurpleAir + regional O3 28 / NO2 4 ppb",
+      "pm25": 1.2,
+      "pm25_3h": 1.5,
+      "reading_time_utc": "2026-11-10T23:00+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 9.9,
-      "no2_ppb": 6.5,
+      "o3_ppb": 11.0,
+      "no2_ppb": 5.9,
       "formula": 1,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 10 / NO2 6 ppb",
-      "pm25": 6.4,
-      "pm25_3h": 6.2,
-      "reading_time_utc": "2026-11-10T22:29+00:00"
+      "how": "PurpleAir + regional O3 11 / NO2 6 ppb",
+      "pm25": 5.8,
+      "pm25_3h": 5.9,
+      "reading_time_utc": "2026-11-10T23:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 9.3,
-      "no2_ppb": 5.2,
+      "o3_ppb": 13.3,
+      "no2_ppb": 4.5,
       "formula": 1,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 9 / NO2 5 ppb",
-      "pm25": 3.0,
+      "how": "PurpleAir + regional O3 13 / NO2 4 ppb",
+      "pm25": 2.5,
       "pm25_3h": 3.1,
-      "reading_time_utc": "2026-11-10T22:29+00:00"
+      "reading_time_utc": "2026-11-10T23:01+00:00"
     }
   ]
 }
