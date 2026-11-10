@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-10T10:31:50+00:00",
+  "generated_utc": "2026-11-10T11:02:08+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 39.8,
-      "no2_ppb": 5.2,
+      "o3_ppb": 38.9,
+      "no2_ppb": 5.6,
       "formula": 3,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 40 / NO2 5 ppb",
-      "pm25": 1.1,
-      "pm25_3h": 0.7,
-      "reading_time_utc": "2026-11-10T10:30+00:00"
+      "how": "PurpleAir + regional O3 39 / NO2 6 ppb",
+      "pm25": 2.9,
+      "pm25_3h": 0.9,
+      "reading_time_utc": "2026-11-10T11:00+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 14.1,
-      "no2_ppb": 18.2,
+      "o3_ppb": 13.1,
+      "no2_ppb": 18.6,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 14 / NO2 18 ppb",
-      "pm25": 5.3,
+      "how": "PurpleAir + regional O3 13 / NO2 19 ppb",
+      "pm25": 4.3,
       "pm25_3h": 4.1,
-      "reading_time_utc": "2026-11-10T10:29+00:00"
+      "reading_time_utc": "2026-11-10T11:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 23.5,
-      "no2_ppb": 6.1,
+      "o3_ppb": 22.9,
+      "no2_ppb": 5.1,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 24 / NO2 6 ppb",
-      "pm25": 3.6,
-      "pm25_3h": 2.2,
-      "reading_time_utc": "2026-11-10T10:31+00:00"
+      "how": "PurpleAir + regional O3 23 / NO2 5 ppb",
+      "pm25": 3.7,
+      "pm25_3h": 2.5,
+      "reading_time_utc": "2026-11-10T11:01+00:00"
     }
   ]
 }
