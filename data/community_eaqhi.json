@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-13T04:30:13+00:00",
+  "generated_utc": "2026-11-13T05:02:12+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 40.7,
-      "no2_ppb": 1.9,
+      "o3_ppb": 38.9,
+      "no2_ppb": 2.2,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 41 / NO2 2 ppb",
+      "how": "PurpleAir + regional O3 39 / NO2 2 ppb",
       "pm25": 3.1,
-      "pm25_3h": 3.6,
-      "reading_time_utc": "2026-11-13T04:28+00:00"
+      "pm25_3h": 3.5,
+      "reading_time_utc": "2026-11-13T05:00+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 6.3,
-      "no2_ppb": 8.6,
+      "o3_ppb": 2.1,
+      "no2_ppb": 11.1,
       "formula": 2,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 6 / NO2 9 ppb",
-      "pm25": 14.1,
-      "pm25_3h": 14.2,
-      "reading_time_utc": "2026-11-13T04:29+00:00"
+      "how": "PurpleAir + regional O3 2 / NO2 11 ppb",
+      "pm25": 15.3,
+      "pm25_3h": 14.1,
+      "reading_time_utc": "2026-11-13T05:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 8.4,
-      "no2_ppb": 8.2,
+      "o3_ppb": 5.8,
+      "no2_ppb": 11.1,
       "formula": 2,
-      "pm_only": 1,
+      "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 8 / NO2 8 ppb",
-      "pm25": 9.4,
-      "pm25_3h": 8.1,
-      "reading_time_utc": "2026-11-13T04:29+00:00"
+      "how": "PurpleAir + regional O3 6 / NO2 11 ppb",
+      "pm25": 12.7,
+      "pm25_3h": 9.0,
+      "reading_time_utc": "2026-11-13T05:01+00:00"
     }
   ]
 }
