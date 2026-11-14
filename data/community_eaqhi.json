@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-14T08:30:11+00:00",
+  "generated_utc": "2026-11-14T09:02:30+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -15,19 +15,19 @@
         91675,
         156679
       ],
-      "eaqhi": 2,
+      "eaqhi": 1,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 11.0,
-      "no2_ppb": 7.4,
-      "formula": 2,
+      "o3_ppb": 10.8,
+      "no2_ppb": 6.7,
+      "formula": 1,
       "pm_only": 1,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 11 / NO2 7 ppb",
-      "pm25": 4.9,
-      "pm25_3h": 8.1,
-      "reading_time_utc": "2026-11-14T08:29+00:00"
+      "pm25": 4.2,
+      "pm25_3h": 7.8,
+      "reading_time_utc": "2026-11-14T09:01+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 3.3,
-      "no2_ppb": 4.2,
+      "o3_ppb": 3.0,
+      "no2_ppb": 3.9,
       "formula": 1,
       "pm_only": 3,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 3 / NO2 4 ppb",
-      "pm25": 25.1,
-      "pm25_3h": 17.5,
-      "reading_time_utc": "2026-11-14T08:29+00:00"
+      "pm25": 28.6,
+      "pm25_3h": 19.8,
+      "reading_time_utc": "2026-11-14T09:00+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 0.5,
-      "no2_ppb": 10.4,
+      "o3_ppb": 1.1,
+      "no2_ppb": 9.1,
       "formula": 2,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 0 / NO2 10 ppb",
+      "how": "PurpleAir + regional O3 1 / NO2 9 ppb",
       "pm25": 14.3,
-      "pm25_3h": 22.6,
-      "reading_time_utc": "2026-11-14T08:29+00:00"
+      "pm25_3h": 20.9,
+      "reading_time_utc": "2026-11-14T09:01+00:00"
     }
   ]
 }
