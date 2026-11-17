@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-17T21:31:52+00:00",
+  "generated_utc": "2026-11-17T22:03:15+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 29.9,
-      "no2_ppb": 7.0,
+      "o3_ppb": 30.6,
+      "no2_ppb": 6.2,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 30 / NO2 7 ppb",
-      "pm25": 2.8,
+      "how": "PurpleAir + regional O3 31 / NO2 6 ppb",
+      "pm25": 4.1,
       "pm25_3h": 2.0,
-      "reading_time_utc": "2026-11-17T21:30+00:00"
+      "reading_time_utc": "2026-11-17T22:01+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 12.2,
-      "no2_ppb": 7.8,
+      "o3_ppb": 15.3,
+      "no2_ppb": 7.1,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 12 / NO2 8 ppb",
-      "pm25": 5.6,
-      "pm25_3h": 7.1,
-      "reading_time_utc": "2026-11-17T21:29+00:00"
+      "how": "PurpleAir + regional O3 15 / NO2 7 ppb",
+      "pm25": 5.4,
+      "pm25_3h": 6.3,
+      "reading_time_utc": "2026-11-17T22:01+00:00"
     },
     {
       "name": "Pembina",
@@ -73,19 +73,19 @@
         166965,
         249949
       ],
-      "eaqhi": 1,
+      "eaqhi": 2,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 13.8,
-      "no2_ppb": 7.5,
-      "formula": 1,
+      "o3_ppb": 15.7,
+      "no2_ppb": 7.1,
+      "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 14 / NO2 8 ppb",
-      "pm25": 2.0,
-      "pm25_3h": 3.1,
-      "reading_time_utc": "2026-11-17T21:31+00:00"
+      "how": "PurpleAir + regional O3 16 / NO2 7 ppb",
+      "pm25": 3.4,
+      "pm25_3h": 2.8,
+      "reading_time_utc": "2026-11-17T22:02+00:00"
     }
   ]
 }
