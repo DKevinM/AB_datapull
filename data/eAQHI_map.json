@@ -6,17 +6,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.28,
-    "o3_3h": 20.0,
-    "no2_3h": 3.0,
-    "timestamp_utc": "2026-11-17T06:00:00+00:00",
+    "pm25_est": 0.2,
+    "o3_3h": 19.3,
+    "no2_3h": 2.7,
+    "timestamp_utc": "2026-11-17T07:00:00+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 223771,
         "name": "WCAS_Breton",
         "distance_km": 0.006670677929748395,
-        "pm_corr": 0.2754521098
+        "pm_corr": 0.1950474898
       }
     ]
   },
@@ -27,23 +27,23 @@
     "AQHI": 2,
     "AQHI_type": "estimated",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.51,
-    "o3_3h": 28.3,
-    "no2_3h": 3.0,
-    "timestamp_utc": "2026-11-17T06:00:00+00:00",
+    "pm25_est": 0.27,
+    "o3_3h": 28.0,
+    "no2_3h": 2.7,
+    "timestamp_utc": "2026-11-17T07:00:00+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79495,
         "name": "WCAS_CarrotCreek",
         "distance_km": 0.18366817097794014,
-        "pm_corr": 0.0403225806
+        "pm_corr": 0.0
       },
       {
         "sensor_index": 296007,
         "name": "WCAS_Peers",
         "distance_km": 9.53338382316543,
-        "pm_corr": 9.4552896725
+        "pm_corr": 5.3181393902
       }
     ]
   },
@@ -54,29 +54,29 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 2.57,
+    "pm25_est": 2.37,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.550788+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.213753+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 172951,
         "name": "Goldstick Park",
         "distance_km": 2.1137463525439864,
-        "pm_corr": 2.8017241379
+        "pm_corr": 2.5142126208
       },
       {
         "sensor_index": 277939,
         "name": "Goldbar",
         "distance_km": 2.427827848296649,
-        "pm_corr": 2.4784894837
+        "pm_corr": 2.3972275335
       },
       {
         "sensor_index": 24513,
         "name": "AQSU-D341",
         "distance_km": 4.630883683158629,
-        "pm_corr": 2.240365774
+        "pm_corr": 2.0003265839
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -88,17 +88,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.33,
+    "pm25_est": 0.58,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.545191+00:00",
-    "purpleair_sensor_count": 3,
+    "timestamp_utc": "2026-11-17T07:30:07.206953+00:00",
+    "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 197407,
         "name": "ACA_EnochSE (AQSU-AD04)",
         "distance_km": 5.08195577844465,
-        "pm_corr": 0.2142649622
+        "pm_corr": 0.1277908343
+      },
+      {
+        "sensor_index": 53297,
+        "name": "ACA_Secord",
+        "distance_km": 6.175803990509924,
+        "pm_corr": 1.4112903226
       },
       {
         "sensor_index": 28587,
@@ -110,7 +116,7 @@
         "sensor_index": 324264,
         "name": "ED44",
         "distance_km": 8.11436550844607,
-        "pm_corr": 0.8454692557
+        "pm_corr": 0.7970027248
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -122,23 +128,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.43,
+    "pm25_est": 0.44,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.539630+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.199119+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
         "sensor_index": 156679,
         "name": "WCAS_Jasper4 (AQSU - D978)",
         "distance_km": 0.5670470991175799,
-        "pm_corr": 0.0
+        "pm_corr": 0.0420673077
       },
       {
         "sensor_index": 91675,
         "name": "WCAS_Jasper1(AQSU-2F3F)",
         "distance_km": 1.152370175664921,
-        "pm_corr": 1.4016801493
+        "pm_corr": 1.3604542626
       },
       {
         "sensor_index": 309986,
@@ -156,23 +162,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.24,
+    "pm25_est": 0.58,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.533855+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.189331+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 101383,
         "name": "LICA - Lac La Biche",
         "distance_km": 1.671585581145567,
-        "pm_corr": 0.0
+        "pm_corr": 0.0787006028
       },
       {
         "sensor_index": 309766,
         "name": "Alberta Parks - Lakeland",
         "distance_km": 5.137997684866026,
-        "pm_corr": 0.9837575352
+        "pm_corr": 2.124916276
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -184,17 +190,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.24,
+    "pm25_est": 0.16,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.555417+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.219629+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
         "sensor_index": 198809,
         "name": "WCAS_Lakeview(AQSU-5203)",
         "distance_km": 12.298066592979152,
-        "pm_corr": 0.2419354839
+        "pm_corr": 0.1625239006
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -209,7 +215,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.586245+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.257886+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
@@ -228,23 +234,23 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 1.92,
+    "pm25_est": 1.98,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.591320+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.262776+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 79371,
         "name": "ACA_Poachers Landing",
         "distance_km": 0.004930675992396872,
-        "pm_corr": 2.0171149144
+        "pm_corr": 2.1147672552
       },
       {
         "sensor_index": 223767,
         "name": "ACA_O\u2019Morrow",
         "distance_km": 4.985152657784274,
-        "pm_corr": 0.9451901566
+        "pm_corr": 0.6617647059
       }
     ],
     "offline_reason": "no fresh reading of any parameter \u2014 station appears fully offline"
@@ -256,17 +262,17 @@
     "AQHI": 1,
     "AQHI_type": "estimated_pm25_only",
     "pm25_source": "PurpleAir",
-    "pm25_est": 0.06,
+    "pm25_est": 0.03,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.563718+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.229538+00:00",
     "purpleair_sensor_count": 2,
     "purpleair_sensors": [
       {
         "sensor_index": 216463,
         "name": "PRAMP - Reno",
         "distance_km": 6.955990242163416,
-        "pm_corr": 0.0806451613
+        "pm_corr": 0.0403225806
       },
       {
         "sensor_index": 33137,
@@ -287,14 +293,14 @@
     "pm25_est": 0.03,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.529036+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.181944+00:00",
     "purpleair_sensor_count": 4,
     "purpleair_sensors": [
       {
         "sensor_index": 57797,
         "name": "Douglasdale",
         "distance_km": 1.9183606563029703,
-        "pm_corr": 0.0453367876
+        "pm_corr": 0.045133438
       },
       {
         "sensor_index": 310819,
@@ -327,7 +333,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.569275+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.237326+00:00",
     "purpleair_sensor_count": 3,
     "purpleair_sensors": [
       {
@@ -361,7 +367,7 @@
     "pm25_est": 0.0,
     "o3_3h": null,
     "no2_3h": null,
-    "timestamp_utc": "2026-11-17T07:09:32.573616+00:00",
+    "timestamp_utc": "2026-11-17T07:30:07.241891+00:00",
     "purpleair_sensor_count": 1,
     "purpleair_sensors": [
       {
