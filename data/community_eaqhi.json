@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-23T14:31:42+00:00",
+  "generated_utc": "2026-11-23T15:02:13+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 14.5,
-      "no2_ppb": 9.3,
+      "o3_ppb": 14.4,
+      "no2_ppb": 9.5,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 14 / NO2 9 ppb",
-      "pm25": 2.8,
+      "how": "PurpleAir + regional O3 14 / NO2 10 ppb",
+      "pm25": 3.8,
       "pm25_3h": 1.3,
-      "reading_time_utc": "2026-11-23T14:31+00:00"
+      "reading_time_utc": "2026-11-23T15:01+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 30.9,
-      "no2_ppb": 0.5,
+      "o3_ppb": 30.8,
+      "no2_ppb": 0.4,
       "formula": 3,
       "pm_only": 3,
       "set_by_local_pm": false,
       "how": "PurpleAir + regional O3 31 / NO2 0 ppb",
-      "pm25": 26.6,
-      "pm25_3h": 19.0,
-      "reading_time_utc": "2026-11-23T14:30+00:00"
+      "pm25": 27.4,
+      "pm25_3h": 21.0,
+      "reading_time_utc": "2026-11-23T15:01+00:00"
     },
     {
       "name": "Pembina",
@@ -73,19 +73,19 @@
         166965,
         249949
       ],
-      "eaqhi": 3,
+      "eaqhi": 2,
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 31.4,
-      "no2_ppb": 0.7,
-      "formula": 3,
+      "o3_ppb": 30.1,
+      "no2_ppb": 0.6,
+      "formula": 2,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 31 / NO2 1 ppb",
+      "how": "PurpleAir + regional O3 30 / NO2 1 ppb",
       "pm25": 18.6,
-      "pm25_3h": 17.2,
-      "reading_time_utc": "2026-11-23T14:31+00:00"
+      "pm25_3h": 17.6,
+      "reading_time_utc": "2026-11-23T15:01+00:00"
     }
   ]
 }
