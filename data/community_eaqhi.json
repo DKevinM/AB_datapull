@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-25T02:39:40+00:00",
+  "generated_utc": "2026-11-25T03:02:51+00:00",
   "rule": "AQHI formula on town 3h PM2.5 + regional O3/NO2, raised to ceil(PM2.5/10) when that is 7+ (Alberta smoke rule); see scripts/community_eaqhi.py",
   "towns": [
     {
@@ -19,15 +19,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 31.6,
-      "no2_ppb": 6.6,
+      "o3_ppb": 33.1,
+      "no2_ppb": 7.3,
       "formula": 2,
       "pm_only": 1,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 32 / NO2 7 ppb",
+      "how": "PurpleAir + regional O3 33 / NO2 7 ppb",
       "pm25": 0.7,
       "pm25_3h": 1.0,
-      "reading_time_utc": "2026-11-25T02:38+00:00"
+      "reading_time_utc": "2026-11-25T03:02+00:00"
     },
     {
       "name": "Barrhead",
@@ -46,15 +46,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 11.3,
-      "no2_ppb": 10.1,
+      "o3_ppb": 8.5,
+      "no2_ppb": 11.9,
       "formula": 3,
       "pm_only": 3,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 11 / NO2 10 ppb",
-      "pm25": 22.1,
-      "pm25_3h": 26.9,
-      "reading_time_utc": "2026-11-25T02:39+00:00"
+      "how": "PurpleAir + regional O3 8 / NO2 12 ppb",
+      "pm25": 22.5,
+      "pm25_3h": 25.7,
+      "reading_time_utc": "2026-11-25T03:01+00:00"
     },
     {
       "name": "Pembina",
@@ -77,15 +77,15 @@
       "warning": null,
       "status": "ok",
       "method": "regional_gas",
-      "o3_ppb": 14.0,
-      "no2_ppb": 7.7,
+      "o3_ppb": 10.4,
+      "no2_ppb": 9.0,
       "formula": 2,
       "pm_only": 2,
       "set_by_local_pm": false,
-      "how": "PurpleAir + regional O3 14 / NO2 8 ppb",
-      "pm25": 19.9,
-      "pm25_3h": 13.9,
-      "reading_time_utc": "2026-11-25T02:38+00:00"
+      "how": "PurpleAir + regional O3 10 / NO2 9 ppb",
+      "pm25": 15.1,
+      "pm25_3h": 15.4,
+      "reading_time_utc": "2026-11-25T03:02+00:00"
     }
   ]
 }
