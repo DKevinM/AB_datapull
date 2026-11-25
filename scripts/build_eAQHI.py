@@ -269,7 +269,15 @@ def get_offline_stations(wide, roster):
     to get_station_candidates' permanent PM2.5-sensor-gap case.
     """
     reporting = set(wide["StationName"].unique()) if not wide.empty else set()
-    return [s for s in roster if s["station"] not in reporting]
+    # E-BAM 7-day rule (Kevin 2026-11-25): a long-dead E-BAM is off the maps, so no PurpleAir stand-in either
+    try:
+        import sys
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        from ebam_status import off_map
+        gone = off_map()
+    except Exception:
+        gone = set()
+    return [s for s in roster if s["station"] not in reporting and s["station"] not in gone]
 
 
 def fetch_mds_wide_table(hours_back=3):

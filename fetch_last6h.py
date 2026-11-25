@@ -281,6 +281,16 @@ if __name__ == "__main__":
     if not combined_df.empty:
         print(">>> Sample rows:\n", combined_df.head().to_string(index=False))
 
+    # E-BAM 7-day rule (Kevin 2026-11-25): an E-BAM with no real reading for over 7 days comes off every
+    # map. Only blank rows are dropped (see ebam_status.py); everything else passes through untouched.
+    if not combined_df.empty:
+        from ebam_status import update as ebam_update
+        _ebam_off = ebam_update(combined_df)
+        if _ebam_off:
+            _drop = combined_df["StationName"].isin(_ebam_off)
+            print(f">>> E-BAM 7-day rule: dropped {int(_drop.sum())} blank rows for {sorted(_ebam_off & set(combined_df.loc[_drop, 'StationName']))}")
+            combined_df = combined_df[~_drop]
+
     # Write CSV (name kept the same)
     out_dir = Path("data"); out_dir.mkdir(exist_ok=True)
     out_path = out_dir / "last6h.csv"
